@@ -3,10 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
+    /**
+     * @return Application|Factory|View|\Illuminate\Foundation\Application
+     */
     public function index()
     {
         $roles = Role::all();
@@ -18,7 +25,11 @@ class RoleController extends Controller
         return view('roles.createForm');
     }
 
-    public function store(Request $request)
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function store(Request $request): RedirectResponse
     {
         $data = $request->validate([
             'name' => 'required|max:12|unique:roles',
@@ -30,12 +41,20 @@ class RoleController extends Controller
         return redirect()->route('roles.index')->with('success', 'Role berhasil ditambahkan');
     }
 
+    /**
+     * @return Application|Factory|View|\Illuminate\Foundation\Application
+     */
     public function updateForm()
     {
         return view('roles.updateForm');
     }
 
-    public function update(Request $request, Role $role)
+    /**
+     * @param Request $request
+     * @param Role $role
+     * @return RedirectResponse
+     */
+    public function update(Request $request, Role $role): RedirectResponse
     {
         $data = $request->validate([
             'name' => 'required|max:12',
@@ -47,7 +66,11 @@ class RoleController extends Controller
         return redirect()->route('roles.index')->with('success', 'Role berhasil diupdate');
     }
 
-    public function delete(Role $role)
+    /**
+     * @param Role $role
+     * @return RedirectResponse
+     */
+    public function delete(Role $role): RedirectResponse
     {
         $role->delete();
         return redirect()->route('roles.index')->with('success', 'Role berhasil dihapus');

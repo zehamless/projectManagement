@@ -23,6 +23,9 @@ class RoleTest extends TestCase
         ]);
     }
 
+    /**
+     * @return void
+     */
     public function test_update(): void
     {
         $this->test_store();
