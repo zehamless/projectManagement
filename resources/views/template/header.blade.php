@@ -3,13 +3,13 @@
     <head>
 
         <meta charset="utf-8" />
-        <title>Dashboard | Adminto - Responsive Admin Dashboard Template</title>
+        <title>Project Management</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
         <meta content="Coderthemes" name="author" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="{{ asset('templateAdmin/Admin/dist/assets/images/favicon.ico') }}">
+        <link rel="shortcut icon" href="{{ asset('images/logo_trafindo_only.png') }}">
 
         <!-- App css -->
 
@@ -250,18 +250,18 @@
                     <div class="logo-box">
                         <a href="index.html" class="logo logo-light text-center">
                             <span class="logo-sm">
-                                <img src="{{ asset('templateAdmin/Admin/dist/assets/images/logo-sm.png') }}" alt="" height="22">
+                                <img src="{{ asset('images/logo_trafindo_only.png') }}" alt="" height="30">
                             </span>
                             <span class="logo-lg">
-                                <img src="{{ asset('templateAdmin/Admin/dist/assets/images/logo-light.png') }}" alt="" height="16">
+                                <img src="{{ asset('images/logo_trafindo_full.png') }}" alt="" height="40">
                             </span>
                         </a>
                         <a href="index.html" class="logo logo-dark text-center">
                             <span class="logo-sm">
-                                <img src="{{ asset('templateAdmin/Admin/dist/assets/images/logo-sm.png') }}" alt="" height="22">
+                                <img src="{{ asset('images/logo_trafindo_only.png') }}" alt="" height="30">
                             </span>
                             <span class="logo-lg">
-                                <img src="{{ asset('templateAdmin/Admin/dist/assets/images/logo-dark.png') }}" alt="" height="16">
+                                <img src="{{ asset('images/logo_trafindo_full.png') }}" alt="" height="40">
                             </span>
                         </a>
                     </div>

@@ -2,15 +2,8 @@
 <footer class="footer">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6">
-                <script>document.write(new Date().getFullYear())</script> &copy; Adminto theme by <a href="">Coderthemes</a> 
-            </div>
-            <div class="col-md-6">
-                <div class="text-md-end footer-links d-none d-sm-block">
-                    <a href="javascript:void(0);">About Us</a>
-                    <a href="javascript:void(0);">Help</a>
-                    <a href="javascript:void(0);">Contact Us</a>
-                </div>
+            <div class="col text-end">
+                2023 &copy; Created by <a href="https://www.trafoindonesia.com/">PT Trafindo Prima Perkasa</a> 
             </div>
         </div>
     </div>
