@@ -39,7 +39,7 @@ class CustomerController extends Controller
     $customer->company = $request->input('company');
     $customer->save();
 
-    return redirect()->route('customer.index')
+    return redirect()->route('customer_companies.index')
         ->with('success', 'Data customer berhasil ditambahkan.');
 }
 
@@ -70,9 +70,9 @@ class CustomerController extends Controller
     }
 
     // Menghapus data dari database
-    public function destroy(Customer $customerCompany)
+    public function destroy(Customer $customer)
     {
-        $customerCompany->delete();
+        $customer->delete();
 
         return redirect()->route('customer.index')
             ->with('success', 'Data customer berhasil dihapus.');
