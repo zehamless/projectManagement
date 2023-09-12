@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -28,6 +29,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::prefix('customer')->group(function () {
+    Route::get('/index', [CustomerController::class, 'index'])->name('customer.index');
+    Route::get('/index/create', [CustomerController::class, 'create'])->name('customer.create');
+    Route::post('/index/store', [CustomerController::class, 'store'])->name('customer.store');
+    Route::get('/index/show', [CustomerController::class, 'show'])->name('customer.show');
+    Route::get('/index/edit', [CustomerController::class, 'edit'])->name('customer.edit');
 });
 
 //contoh route (post(/admin/roles)
