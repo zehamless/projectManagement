@@ -11,12 +11,14 @@ class ProjectController extends Controller
     // Menampilkan daftar project
     public function index()
     {
-        $projects = Project::select('po', 'label', 'location', 'project_manager', 'start_date', 'end_date', 'preliminary_cost', 'po_amount', 'expense_budget')
-        ->join('customers', 'projects.customer_id', '=', 'customers.id')
-        ->select('customers.id', 'customers.companyName')
-        ->get();
+        $projects = Project::select('po', 'so', 'label', 'location', 'project_manager', 'sales_executive', 'start_date', 'end_date', 'preliminary_cost', 'po_amount', 'expense_budget', 'customers.id as customer_id', 'customers.companyName')
+            ->join('customers', 'projects.customer_id', '=', 'customers.id')
+            ->get();
 
-        return view('projects');
+
+        return view('projects',  [
+            'projects' => $projects,
+        ]);
     }
 
     // Menampilkan form untuk membuat project baru
