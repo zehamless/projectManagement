@@ -30,6 +30,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
+Route::get('/projects', function(){
+    return view('projects');
+});
+
 //contoh route (post(/admin/roles)
 Route::prefix('admin')->group(function () {
     Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
