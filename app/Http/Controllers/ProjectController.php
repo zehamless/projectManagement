@@ -24,7 +24,7 @@ class ProjectController extends Controller
                     })
                     ->orWhere('project_manager', 'like', "%$search%")
                     ->orWhere('sales_executive', 'like', "%$search%")
-                    ->orWhere('so_number', 'like', "%$search%");
+                    ->orWhere('so', 'like', "%$search%");
             });
         }
 
@@ -44,14 +44,30 @@ class ProjectController extends Controller
     {
         // Validasi data input dari form
         $validatedData = $request->validate([
-            // Definisikan aturan validasi di sini sesuai dengan kebutuhan Anda
+            'po' => 'required|string',
+            'customer_id' => 'required|string',
+            'label' => 'required|string',
+            'location' => 'required|string',
+            'project_manager' => 'required|string',
+            'sales_executive' => 'required|string',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after:start_date',
+            'preliminary_cost' => 'required|numeric',
+            'po_amount' => 'required|numeric',
+            'expense_budget' => 'nullable|numeric',
+            'so' => 'nullable|string',
+            'memo' => 'nullable|required_without_all:so|string',
+        ], [
+            'memo.required_without_all' => 'Memo harus diisi jika SO Number tidak diisi.',
         ]);
+
 
         // Simpan data ke dalam database
         Project::create($validatedData);
 
-        return redirect('/projects')->with('success', 'Project berhasil dibuat.');
+        return dd("Berhasil");
     }
+
 
     // Menampilkan detail project
     public function show($id)
