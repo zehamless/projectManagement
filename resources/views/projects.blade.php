@@ -48,10 +48,10 @@
                                 class="mdi mdi-plus"></i> Create Project</a>
                     </div>
                     <div class="col-sm-5">
-                        <form class="app-search">
+                        <form class="app-search" action="{{route('projects.index')}}">
                             <div class="app-search-box">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search..." id="top-search">
+                                    <input type="text" class="form-control" name="search" placeholder="Search..." id="top-search">
                                     <button class="btn input-group-text" type="submit">
                                         <i class="fe-search"></i>
                                     </button>
