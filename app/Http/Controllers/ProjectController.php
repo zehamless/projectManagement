@@ -9,16 +9,28 @@ use Illuminate\Http\Request;
 class ProjectController extends Controller
 {
     // Menampilkan daftar project
-    public function index()
+    public function index(Request $request)
     {
-        $projects = Project::select('po', 'so', 'label', 'location', 'project_manager', 'sales_executive', 'start_date', 'end_date', 'preliminary_cost', 'po_amount', 'expense_budget', 'customers.id as customer_id', 'customers.companyName')
-            ->join('customers', 'projects.customer_id', '=', 'customers.id')
-            ->get();
+        $query = Project::select('po', 'so', 'label', 'location', 'project_manager', 'sales_executive', 'start_date', 'end_date', 'preliminary_cost', 'po_amount', 'expense_budget', 'customers.id as customer_id', 'customers.companyName')
+            ->join('customers', 'projects.customer_id', '=', 'customers.id');
 
+        if ($request->has('search')) {
+            $search = $request->input('search');
 
-        return view('projects',  [
-            'projects' => $projects,
-        ]);
+            $query->where(function ($query) use ($search) {
+                $query->where('label', 'like', "%$search%")
+                    ->orWhereHas('customer', function ($query) use ($search) {
+                        $query->where('companyName', 'like', "%$search%");
+                    })
+                    ->orWhere('project_manager', 'like', "%$search%")
+                    ->orWhere('sales_executive', 'like', "%$search%")
+                    ->orWhere('so_number', 'like', "%$search%");
+            });
+        }
+
+        $projects = $query->get();
+
+        return view('/projects', compact('projects'));
     }
 
     // Menampilkan form untuk membuat project baru
