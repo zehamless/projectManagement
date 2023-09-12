@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -16,6 +17,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::group(['prefix' => 'projects'], function () {
+    // Menampilkan daftar project
+    Route::get('/', [ProjectController::class, 'index'])->name('projects.index');
+    // Menampilkan form untuk membuat project baru
+    Route::get('/create', [ProjectController::class, 'create'])->name('projects.create');
+    // Menyimpan project baru ke dalaFm database
+    Route::post('/', [ProjectController::class, 'store'])->name('projects.store');
+    // Menampilkan detail project
+    Route::get('/detail/{id}', [ProjectController::class, 'show'])->name('projects.show');
+
+    // Menampilkan form untuk mengedit project
+    Route::get('/{id}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
+
+    // Mengupdate project ke dalam database
+    Route::put('/{id}', [ProjectController::class, 'update'])->name('projects.update');
+
+    // Menghapus project dari database
+    Route::delete('/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
+});
+
 Route::get('/', function () {
     return view('testPage.index');
 });
@@ -30,24 +51,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
-Route::get('/projects', function(){
-    return view('projects');
-});
-
-//contoh route (post(/admin/roles)
-Route::prefix('admin')->group(function () {
-    Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
-    Route::get('/roles/create', [RoleController::class, 'createForm'])->name('roles.createForm');
-    Route::post('/roles', [RoleController::class, 'store'])->name('roles.store');
-    Route::get('/roles/{role}/edit', [RoleController::class, 'updateForm'])->name('roles.updateForm');
-    Route::patch('/roles/{role}', [RoleController::class, 'update'])->name('roles.update');
-    Route::delete('/roles/{role}', [RoleController::class, 'delete'])->name('roles.delete');
-    Route::get('/users', [UserController::class, 'index'])->name('users.index');
-    Route::get('/users/create', [UserController::class, 'createForm'])->name('users.createForm');
-    Route::post('/users', [UserController::class, 'store'])->name('users.store');
-    Route::get('/users/{user}/edit', [UserController::class, 'updateForm'])->name('users.updateForm');
-    Route::patch('/users/{user}', [UserController::class, 'update'])->name('users.update');
-    Route::delete('/users/{user}', [UserController::class, 'delete'])->name('users.delete');
-});
 require __DIR__.'/auth.php';
