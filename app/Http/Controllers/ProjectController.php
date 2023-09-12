@@ -16,7 +16,7 @@ class ProjectController extends Controller
         ->select('customers.id', 'customers.companyName')
         ->get();
 
-        return dd($projects);
+        return view('projects');
     }
 
     // Menampilkan form untuk membuat project baru
