@@ -66,4 +66,8 @@ Route::prefix('admin')->group(function () {
     Route::patch('/users/{user}', [UserController::class, 'update'])->name('users.update');
     Route::delete('/users/{user}', [UserController::class, 'delete'])->name('users.delete');
 });
+
+Route::get('/detailProjects', function () {
+    return view('detailProjects');
+});
 require __DIR__.'/auth.php';
