@@ -161,7 +161,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div><!-- end col -->
 
             </div>
@@ -185,20 +185,6 @@
                                     <!-- item-->
                                     <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
                                 </div>
-                            </div>
-
-                            <h4 class="header-title mt-0">Daily Sales</h4>
-
-                            <div class="widget-chart text-center">
-                                <div id="morris-donut-example" dir="ltr" style="height: 245px;" class="morris-chart"></div>
-                                <ul class="list-inline chart-detail-list mb-0">
-                                    <li class="list-inline-item">
-                                        <h5 style="color: #ff8acc;"><i class="fa fa-circle me-1"></i>Series A</h5>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <h5 style="color: #5b69bc;"><i class="fa fa-circle me-1"></i>Series B</h5>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
                     </div>
@@ -269,9 +255,9 @@
                                     <small class="text-warning"><b>Admin</b></small>
                                 </div>
                             </div>
-                        </div>   
+                        </div>
                     </div>
-                    
+
                 </div><!-- end col -->
 
                 <div class="col-xl-3 col-md-6">
@@ -289,7 +275,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div><!-- end col -->
 
                 <div class="col-xl-3 col-md-6">
@@ -307,7 +293,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div><!-- end col -->
 
                 <div class="col-xl-3 col-md-6">
@@ -325,7 +311,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div><!-- end col -->
 
             </div>
@@ -355,7 +341,7 @@
                             <h4 class="header-title mb-3">Inbox</h4>
 
                             <div class="inbox-widget">
-                                
+
                                 <div class="inbox-item">
                                     <a href="#">
                                         <div class="inbox-item-img"><img src="{{ asset('templateAdmin/Admin/dist/assets/images/users/user-1.jpg') }}" class="rounded-circle" alt=""></div>
@@ -364,7 +350,7 @@
                                         <p class="inbox-item-date">13:40 PM</p>
                                     </a>
                                 </div>
-                                
+
                                 <div class="inbox-item">
                                     <a href="#">
                                         <div class="inbox-item-img"><img src="{{ asset('templateAdmin/Admin/dist/assets/images/users/user-2.jpg') }}" class="rounded-circle" alt=""></div>
@@ -403,7 +389,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div><!-- end col -->
 
                 <div class="col-xl-8">
@@ -494,14 +480,14 @@
                                     </tbody>
                                 </table>
                             </div>
-                        </div> 
+                        </div>
                     </div>
-                    
+
                 </div><!-- end col -->
 
             </div>
-            <!-- end row -->       
-            
+            <!-- end row -->
+
         </div> <!-- container-fluid -->
 
     </div> <!-- content -->

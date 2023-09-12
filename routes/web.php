@@ -38,7 +38,7 @@ Route::group(['prefix' => 'projects'], function () {
 });
 
 Route::get('/', function () {
-    return view('testPage.index');
+    return view('dashboard');
 });
 
 Route::get('/dashboard', function () {
