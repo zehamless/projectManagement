@@ -58,6 +58,8 @@ Route::prefix('customer')->group(function () {
     Route::post('/index/store', [CustomerController::class, 'store'])->name('customer.store');
     Route::get('/index/show', [CustomerController::class, 'show'])->name('customer.show');
     Route::get('/index/edit', [CustomerController::class, 'edit'])->name('customer.edit');
+    Route::get('/index/update', [CustomerController::class, 'update'])->name('customer.update');
+    Route::delete('/index/destroy', [CustomerController::class, 'destroy'])->name('customer.destroy');
 });
 
 //contoh route (post(/admin/roles)
