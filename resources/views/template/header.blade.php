@@ -118,14 +118,14 @@
                         </li>
 
                         <li>
-                            <a href="apps-chat.html">
+                            <a href="{{ url('customer') }}">
                                 <i class="mdi mdi-account-supervisor-outline"></i>
                                 <span> Customers </span>
                             </a>
                         </li>
 
                         <li>
-                            <a href="apps-chat.html">
+                            <a href="{{ url('staff') }}">
                                 <i class="mdi mdi-account-cog-outline"></i>
                                 <span> Staff </span>
                             </a>
