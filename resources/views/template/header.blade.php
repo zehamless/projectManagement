@@ -27,7 +27,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-        
+
 
 </head>
 
@@ -118,14 +118,14 @@
                         </li>
 
                         <li>
-                            <a href="apps-chat.html">
+                            <a href="{{ url('customer') }}">
                                 <i class="mdi mdi-account-supervisor-outline"></i>
                                 <span> Customers </span>
                             </a>
                         </li>
 
                         <li>
-                            <a href="apps-chat.html">
+                            <a href="{{ url('staff') }}">
                                 <i class="mdi mdi-account-cog-outline"></i>
                                 <span> Staff </span>
                             </a>
