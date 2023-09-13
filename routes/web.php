@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RoleController;
@@ -54,4 +55,37 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::prefix('customer')->group(function () {
+    Route::get('/index', [CustomerController::class, 'index'])->name('customer.index');
+    Route::get('/index/create', [CustomerController::class, 'create'])->name('customer.create');
+    Route::post('/index/store', [CustomerController::class, 'store'])->name('customer.store');
+    Route::get('/index/show', [CustomerController::class, 'show'])->name('customer.show');
+    Route::get('/index/edit', [CustomerController::class, 'edit'])->name('customer.edit');
+    Route::get('/index/update', [CustomerController::class, 'update'])->name('customer.update');
+    Route::delete('/index/destroy', [CustomerController::class, 'destroy'])->name('customer.destroy');
+});
+
+//contoh route (post(/admin/roles)
+Route::prefix('admin')->group(function () {
+    Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
+    Route::get('/roles/create', [RoleController::class, 'createForm'])->name('roles.createForm');
+    Route::post('/roles', [RoleController::class, 'store'])->name('roles.store');
+    Route::get('/roles/{role}/edit', [RoleController::class, 'updateForm'])->name('roles.updateForm');
+    Route::patch('/roles/{role}', [RoleController::class, 'update'])->name('roles.update');
+    Route::delete('/roles/{role}', [RoleController::class, 'delete'])->name('roles.delete');
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/users/create', [UserController::class, 'createForm'])->name('users.createForm');
+    Route::post('/users', [UserController::class, 'store'])->name('users.store');
+    Route::get('/users/{user}/edit', [UserController::class, 'updateForm'])->name('users.updateForm');
+    Route::patch('/users/{user}', [UserController::class, 'update'])->name('users.update');
+    Route::delete('/users/{user}', [UserController::class, 'delete'])->name('users.delete');
+});
+
+Route::get('/detailProjects', function () {
+    return view('detailProjects');
+});
+
+Route::get('/admin/olahAkun', function () {
+    return view('admin.olahAkun');
+});
 require __DIR__.'/auth.php';

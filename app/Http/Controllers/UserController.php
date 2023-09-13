@@ -107,7 +107,9 @@ class UserController extends Controller
      */
     public function delete(User $user): RedirectResponse
     {
-        \Storage::delete($user->signature);
+        if ($user->signature){
+            \Storage::delete($user->signature);
+        }
         $user->delete();
         return redirect()->route('users.index')->with('success', 'User berhasil dihapus');
     }
