@@ -14,6 +14,10 @@
     .btn-createAccount:focus {
         color: white;
     }
+
+    .form-label{
+        text-align: start !important;
+    }
 </style>
 
 <div class="content-page">
@@ -24,20 +28,12 @@
 
             <div class="row">
                 <div class="col-sm-7">
-                    <a href="#" class="btn btn-createAccount w-md waves-effect waves-light mb-3 px-4"><i
+                    <a href="{{ url('admin/createAkun') }}"
+                        class="btn btn-createAccount w-md waves-effect waves-light mb-3 px-4"><i
                             class="mdi mdi-plus"></i> Create Account</a>
                 </div>
                 <div class="col-sm-5">
-                    <form class="app-search">
-                        <div class="app-search-box">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search..." id="top-search">
-                                <button class="btn input-group-text" type="submit">
-                                    <i class="fe-search"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+
                 </div><!-- end col-->
             </div>
 
@@ -45,7 +41,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="mt-0 header-title">Customers Table</h4>
+                            <h4 class="mt-0 header-title">Data Akun Table</h4>
                             <p class="text-muted font-14 mb-3">
                             <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
                                 <div class="row">
@@ -98,7 +94,7 @@
                                                         rowspan="1" colspan="1" style="width: auto;"
                                                         aria-label="Salary: activate to sort column ascending">TTD
                                                     </th>
-                                                    <th class="sorting" tabindex="0" aria-controls="datatable"
+                                                    <th class="sorting text-center" tabindex="0" aria-controls="datatable"
                                                         rowspan="1" colspan="1" style="width: auto;"
                                                         aria-label="Salary: activate to sort column ascending">Actions
                                                     </th>
@@ -115,18 +111,104 @@
                                                     <td>2008/11/28</td>
                                                     <td>$162,700</td>
                                                     <td class="text-center">
+                                                        {{-- button --}}
                                                         <div class="btn-group btn-group-sm" style="float: none;">
                                                             <button type="button"
-                                                                class="tabledit-edit-button btn btn-primary waves-effect waves-light"
-                                                                style="background-color: #3E8BFF;">
+                                                                class="tabledit-edit-button btn btn-primary waves-effect waves-light "
+                                                                style="background-color: #3E8BFF;"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#con-close-modal">
                                                                 <span class="mdi mdi-pencil"></span>
                                                             </button>
                                                         </div>
                                                         <div class="btn-group btn-group-sm" style="float: none;">
-                                                            <button type="button" class="tabledit-edit-button btn btn-danger">
+                                                            <button type="button"
+                                                                class="tabledit-edit-button btn btn-danger"
+                                                                id="sa-warning">
                                                                 <span class="mdi mdi-trash-can-outline"></span>
                                                             </button>
                                                         </div>
+
+                                                        {{-- modals --}}
+                                                        <div id="con-close-modal" class="modal fade" tabindex="-1"
+                                                            role="dialog" aria-labelledby="myModalLabel"
+                                                            aria-hidden="true" style="display: none;">
+                                                            <div class="modal-dialog modal-dialog-centered">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h4 class="modal-title">Edit Data Akun</h4>
+                                                                        <button type="button" class="btn-close"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <div class="mb-3 text-start">
+                                                                                    <label for="field-3"
+                                                                                        class="form-label">Email</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        id="field-3"
+                                                                                        placeholder="Address">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-6">
+                                                                                <div class="mb-3 text-start">
+                                                                                    <label for="field-1"
+                                                                                        class="form-label">First Name</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        id="field-1" placeholder="John">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <div class="mb-3 text-start">
+                                                                                    <label for="field-2 "
+                                                                                        class="form-label">Last Name</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        id="field-2" placeholder="Doe">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <div class="mb-3 text-start">
+                                                                                    <label for="field-3"
+                                                                                        class="form-label">Division Date</label>
+                                                                                    <input type="date"
+                                                                                        class="form-control"
+                                                                                        id="field-3"
+                                                                                        placeholder="Tanggal">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <div class="mb-3 text-start">
+                                                                                    <label for="field-3"
+                                                                                        class="form-label">Tanda Tangan</label>
+                                                                                    <input type="file"
+                                                                                        class="form-control"
+                                                                                        id="field-3">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button"
+                                                                            class="btn btn-secondary waves-effect"
+                                                                            data-bs-dismiss="modal">Close</button>
+                                                                        <button type="button"
+                                                                            class="btn btn-info waves-effect waves-light">Save
+                                                                            changes</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div><!-- /.modal -->
                                                     </td>
                                                 </tr>
                                                 <tr class="even">
@@ -140,12 +222,16 @@
                                                         <div class="btn-group btn-group-sm" style="float: none;">
                                                             <button type="button"
                                                                 class="tabledit-edit-button btn btn-primary waves-effect waves-light"
-                                                                style="background-color: #3E8BFF;">
+                                                                style="background-color: #3E8BFF;"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#con-close-modal">
                                                                 <span class="mdi mdi-pencil"></span>
                                                             </button>
                                                         </div>
                                                         <div class="btn-group btn-group-sm" style="float: none;">
-                                                            <button type="button" class="tabledit-edit-button btn btn-danger">
+                                                            <button type="button"
+                                                                class="tabledit-edit-button btn btn-danger"
+                                                                id="sa-warning">
                                                                 <span class="mdi mdi-trash-can-outline"></span>
                                                             </button>
                                                         </div>
@@ -162,12 +248,16 @@
                                                         <div class="btn-group btn-group-sm" style="float: none;">
                                                             <button type="button"
                                                                 class="tabledit-edit-button btn btn-primary waves-effect waves-light"
-                                                                style="background-color: #3E8BFF;">
+                                                                style="background-color: #3E8BFF;"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#con-close-modal">
                                                                 <span class="mdi mdi-pencil"></span>
                                                             </button>
                                                         </div>
                                                         <div class="btn-group btn-group-sm" style="float: none;">
-                                                            <button type="button" class="tabledit-edit-button btn btn-danger">
+                                                            <button type="button"
+                                                                class="tabledit-edit-button btn btn-danger"
+                                                                id="sa-warning">
                                                                 <span class="mdi mdi-trash-can-outline"></span>
                                                             </button>
                                                         </div>
@@ -184,12 +274,16 @@
                                                         <div class="btn-group btn-group-sm" style="float: none;">
                                                             <button type="button"
                                                                 class="tabledit-edit-button btn btn-primary waves-effect waves-light"
-                                                                style="background-color: #3E8BFF;">
+                                                                style="background-color: #3E8BFF;"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#con-close-modal">
                                                                 <span class="mdi mdi-pencil"></span>
                                                             </button>
                                                         </div>
                                                         <div class="btn-group btn-group-sm" style="float: none;">
-                                                            <button type="button" class="tabledit-edit-button btn btn-danger">
+                                                            <button type="button"
+                                                                class="tabledit-edit-button btn btn-danger"
+                                                                id="sa-warning">
                                                                 <span class="mdi mdi-trash-can-outline"></span>
                                                             </button>
                                                         </div>
@@ -206,12 +300,16 @@
                                                         <div class="btn-group btn-group-sm" style="float: none;">
                                                             <button type="button"
                                                                 class="tabledit-edit-button btn btn-primary waves-effect waves-light"
-                                                                style="background-color: #3E8BFF;">
+                                                                style="background-color: #3E8BFF;"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#con-close-modal">
                                                                 <span class="mdi mdi-pencil"></span>
                                                             </button>
                                                         </div>
                                                         <div class="btn-group btn-group-sm" style="float: none;">
-                                                            <button type="button" class="tabledit-edit-button btn btn-danger">
+                                                            <button type="button"
+                                                                class="tabledit-edit-button btn btn-danger"
+                                                                id="sa-warning">
                                                                 <span class="mdi mdi-trash-can-outline"></span>
                                                             </button>
                                                         </div>
@@ -302,4 +400,12 @@
     </script>
     <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/pdfmake/build/pdfmake.min.js') }}"></script>
     <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/pdfmake/build/vfs_fonts.js') }}"></script>
+
+    <!-- Sweet Alerts js -->
+    <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/sweetalert2/sweetalert2.all.min.js') }}"></script>
+
+    <!-- Sweet alert init js-->
+    <script src="{{ asset('templateAdmin/Admin/dist/assets/js/pages/sweet-alerts.init.js') }}"></script>
+
+
     @endsection
