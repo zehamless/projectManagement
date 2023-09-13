@@ -155,7 +155,7 @@
                             </div>
 
                         </div><!-- end col-->
-                    @endforeach;
+                    @endforeach
 
                 </div>
                 <!-- end row -->
