@@ -31,8 +31,8 @@
             <h4 class="font-16 m-0 text-white">Theme Customizer</h4>
         </div>
 
-        <!-- Tab panes -->
-        <div class="tab-content pt-0">
+<!-- Tab panes -->
+<div class="tab-content pt-0">
 
             <div class="tab-pane active" id="settings-tab" role="tabpanel">
 
@@ -195,7 +195,6 @@
 
 <!-- App js-->
 <script src="{{ asset('templateAdmin/Admin/dist/assets/js/app.min.js') }}"></script>
-
 </body>
 
 </html>
