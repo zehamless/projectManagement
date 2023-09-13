@@ -6,22 +6,31 @@
 
             <!-- Start Content-->
             <div class="container-fluid">
-                <div class="d-flex justify-content-between">
-                    <button type="button" class="btn btn-danger waves-effect waves-light fw-bold rounded-3">+ Add
-                        Customer</button>
-                    <form class="app-search">
-                        <div class="app-search-box">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search..." id="top-search">
-                                <button class="btn input-group-text" type="submit">
-                                    <i class="fe-search"></i>
-                                </button>
-                            </div>
+                <div class="content">
+                    <!-- Start Content-->
+                    <div class="container-fluid">
 
+                        <div class="row ">
+                            <div class="col-sm-7">
+                                <a href="#" class="btn btn-createProjects btn-danger w-md waves-effect waves-light mb-2 px-4 "><i class="mdi mdi-plus rounded-15"></i> Add Customer</a>
+                            </div>
+                            <div class="col-sm-5">
+                                <form class="app-search" action="">
+                                    <div class="app-search-box">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="search" placeholder="Search..." id="top-search">
+                                            <button class="btn input-group-text" type="submit">
+                                                <i class="fe-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div><!-- end col-->
                         </div>
-                    </form>
+                        <!-- end row -->
+                    </div> <!-- container-fluid -->
                 </div>
-                <div class="row mt-2">
+                <div class="row mt-1">
                     <div class="col">
                         <div class="card">
                             <div class="card-body">
@@ -120,12 +129,6 @@
                                             <div class="card">
                                                 <div class="card-body">
                                                     <h4 class="mt-0 header-title">Default Example</h4>
-                                                    <p class="text-muted font-14 mb-3">
-                                                        DataTables has most features enabled by default, so all you need to
-                                                        do to use it with your own tables is to call the construction
-                                                        function: <code>$().DataTable();</code>.
-                                                    </p>
-
                                                     <table id="datatable"
                                                         class="table table-bordered dt-responsive table-responsive nowrap">
                                                         <thead>
@@ -223,37 +226,14 @@
                                                             </tr>
                                                         </tbody>
                                                     </table>
-                                                    {{-- <div class="dataTables_info" id="key-table_info" role="status"
-                                                        aria-live="polite">Showing 1 to 10 of 57 entries</div>
-                                                    <nav aria-label="Page navigation example">
-                                                        <ul class="pagination justify-content-end">
-                                                            <li class="page-item disabled">
-                                                                <a class="page-link" href="#"
-                                                                    tabindex="-1">Previous</a>
-                                                            </li>
-                                                            <li class="page-item"><a class="page-link" href="#">1</a>
-                                                            </li>
-                                                            <li class="page-item"><a class="page-link" href="#">2</a>
-                                                            </li>
-                                                            <li class="page-item"><a class="page-link" href="#">3</a>
-                                                            </li>
-                                                            <li class="page-item"><a class="page-link" href="#">4</a>
-                                                            </li>
-                                                            <li class="page-item"><a class="page-link" href="#">5</a>
-                                                            </li>
-                                                            <li class="page-item">
-                                                                <a class="page-link" href="#">Next</a>
-                                                            </li>
-                                                        </ul>
-                                                    </nav> --}}
                                                     <div class="row justify-content-between align-items-center">
                                                         <div class="col-md-6">
-                                                            <div class="dataTables_info" id="key-table_info"
-                                                                role="status" aria-live="polite">
+                                                            <div class="dataTables_info" id="key-table_info" role="status"
+                                                                aria-live="polite">
                                                                 Showing 1 to 10 of 57 entries
                                                             </div>
                                                         </div>
-                                                        
+
                                                         <div class="col-md-6">
                                                             <nav aria-label="Page navigation example">
                                                                 <ul class="pagination justify-content-end">
@@ -294,5 +274,5 @@
 
 
             </div> <!-- content -->
-            <script src="https://kit.fontawesome.com/031855bb65.js" crossorigin="anonymous"></script>
-        @endsection
+        </div>
+    @endsection
