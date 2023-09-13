@@ -281,6 +281,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12 col-md-5">
+                                        
                                         <div class="dataTables_info" id="datatable_info" role="status"
                                             aria-live="polite">Showing 1 to 10 of 57 customers</div>
                                     </div>
