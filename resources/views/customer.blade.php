@@ -253,6 +253,7 @@
                                                                 Showing 1 to 10 of 57 entries
                                                             </div>
                                                         </div>
+                                                        
                                                         <div class="col-md-6">
                                                             <nav aria-label="Page navigation example">
                                                                 <ul class="pagination justify-content-end">
