@@ -145,15 +145,17 @@
                                     </ul>
 
                                     <div class="project-detail">
-                                        <button type="button"
-                                            class="btn btn-danger btn-detail rounded-pill px-3 waves-effect waves-light">Details</button>
+                                        <a href="{{ url('projectDetail') }}">
+                                            <button type="button"
+                                                class="btn btn-danger btn-detail rounded-pill px-3 waves-effect waves-light">Details</button>
+                                        </a>
                                     </div>
 
                                 </div>
                             </div>
 
                         </div><!-- end col-->
-                    @endforeach;
+                    @endforeach
 
                 </div>
                 <!-- end row -->
