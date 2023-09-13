@@ -95,7 +95,19 @@ class ProjectController extends Controller
     {
         // Validasi data input dari form
         $validatedData = $request->validate([
-            // Definisikan aturan validasi di sini sesuai dengan kebutuhan Anda
+            'po' => 'string',
+            'customer_id' => 'string',
+            'label' => 'string',
+            'location' => 'string',
+            'project_manager' => 'string',
+            'sales_executive' => 'string',
+            'start_date' => 'date',
+            'end_date' => 'date|after:start_date',
+            'preliminary_cost' => 'numeric',
+            'po_amount' => 'numeric',
+            'expense_budget' => 'nullable|numeric',
+            'so' => 'nullable|string',
+            'memo' => 'nullable|required_without_all:so|string'
         ]);
 
         // Update data di dalam database
