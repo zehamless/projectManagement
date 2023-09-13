@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col text-end">
-                2023 &copy; Created by <a href="https://www.trafoindonesia.com/">PT Trafindo Prima Perkasa</a> 
+                2023 &copy; Created by <a href="https://www.trafoindonesia.com/">PT Trafindo Prima Perkasa</a>
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@
 </div>
 
 <!-- Tab panes -->
-<div class="tab-content pt-0">  
+<div class="tab-content pt-0">
 
     <div class="tab-pane active" id="settings-tab" role="tabpanel">
 
@@ -185,6 +185,5 @@
 
 <!-- App js-->
 <script src="{{ asset('templateAdmin/Admin/dist/assets/js/app.min.js') }}"></script>
-
 </body>
 </html>
