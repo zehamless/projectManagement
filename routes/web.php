@@ -79,4 +79,8 @@ Route::prefix('admin')->group(function () {
 Route::get('/detailProjects', function () {
     return view('detailProjects');
 });
+
+Route::get('/admin/olahAkun', function () {
+    return view('admin.olahAkun');
+});
 require __DIR__.'/auth.php';
