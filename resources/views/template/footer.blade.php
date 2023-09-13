@@ -31,8 +31,8 @@
             <h4 class="font-16 m-0 text-white">Theme Customizer</h4>
         </div>
 
-<!-- Tab panes -->
-<div class="tab-content pt-0">
+        <!-- Tab panes -->
+        <div class="tab-content pt-0">
 
             <div class="tab-pane active" id="settings-tab" role="tabpanel">
 
@@ -188,7 +188,7 @@
 <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/raphael/raphael.min.js') }}"></script>
 
 <!-- init js -->
-<script src="{{ asset('templateAdmin/Admin/dist/teassets/js/pages/flot.init.js') }}"></script>
+<script src="{{ asset('templateAdmin/Admin/dist/assets/js/pages/flot.init.js') }}"></script>
 
 <!-- Dashboar init js-->
 <script src="{{ asset('templateAdmin/Admin/dist/assets/js/pages/dashboard.init.js') }}"></script>

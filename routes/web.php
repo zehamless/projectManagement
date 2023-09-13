@@ -88,4 +88,8 @@ Route::get('/detailProjects', function () {
 Route::get('/admin/olahAkun', function () {
     return view('admin.olahAkun');
 });
+
+Route::get('/admin/createAkun', function () {
+    return view('admin.createAkun');
+});
 require __DIR__.'/auth.php';
