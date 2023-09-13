@@ -76,7 +76,11 @@ class RoleController extends Controller
         return redirect()->route('roles.index')->with('success', 'Role berhasil dihapus');
     }
 
-    public function showRole(Role $role)
+    /**
+     * @param Role $role
+     * @return Application|Factory|View|\Illuminate\Foundation\Application
+     */
+    public function showRole(Role $role): View|Factory|Application
     {
         $users = $role->hasUsers;
         return view('roles.showRole', compact('role'));
