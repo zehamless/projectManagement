@@ -2,37 +2,50 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Project extends Model
 {
+    use HasUuids;
+    public $incrementing = false;
+    protected $keyType = 'string';
+    public $timestamps = true;
+
     protected $fillable = [
+        'id',
         'customer_id',
-        'customer_contact',
         'po',
+        'memo',
         'label',
         'so',
+        'location',
         'project_manager',
         'sales_executive',
         'start_date',
         'end_date',
         'preliminary_cost',
         'po_amount',
+        'expense_budget',
     ];
 
+    // Definisi relasi dengan Customer
     public function customer()
     {
-        return $this->belongsTo('App\Models\Customer');
+        return $this->belongsTo('App\Models\Customer', 'customer_id');
     }
 
+    // Definisi relasi dengan Project Manager
     public function projectManager()
     {
-        return $this->belongsTo('App\Models\User', 'project_manager_id', 'id');
+        return $this->belongsTo('App\Models\User', 'project_manager_id');
     }
 
+    // Definisi relasi dengan Sales Executive
     public function salesExecutive()
     {
-        return $this->belongsTo('App\Models\User', 'sales_executive_id', 'id');
+        return $this->belongsTo('App\Models\User', 'sales_executive_id');
     }
 }
