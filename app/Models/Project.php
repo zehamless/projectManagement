@@ -43,6 +43,12 @@ class Project extends Model
         return $this->belongsTo('App\Models\User', 'project_manager_id');
     }
 
+    public function milestones()
+    {
+        return $this->hasMany(Milestone::class, 'project_id');
+    }
+
+
     // Definisi relasi dengan Sales Executive
     public function salesExecutive()
     {

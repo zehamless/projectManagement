@@ -26,7 +26,7 @@ Route::group(['prefix' => 'projects'], function () {
     // Menyimpan project baru ke dalaFm database
     Route::post('/', [ProjectController::class, 'store'])->name('projects.store');
     // Menampilkan detail project
-    Route::get('/detail/{id}', [ProjectController::class, 'show'])->name('projects.show');
+    Route::get('/detailProject/{id}', [ProjectController::class, 'show'])->name('projects.show');
 
     // Menampilkan form untuk mengedit project
     Route::get('/{id}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
@@ -81,10 +81,6 @@ Route::prefix('admin')->group(function () {
     Route::delete('/users/{user}', [UserController::class, 'delete'])->name('users.delete');
 });
 
-Route::get('/detailProjects', function () {
-    return view('detailProjects');
-});
-
 Route::get('/admin/olahAkun', function () {
     return view('admin.olahAkun');
 });
@@ -92,4 +88,4 @@ Route::get('/admin/olahAkun', function () {
 Route::get('/admin/createAkun', function () {
     return view('admin.createAkun');
 });
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
