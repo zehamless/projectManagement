@@ -13,7 +13,8 @@ class ProjectController extends Controller
     public function index(Request $request)
     {
         $query = Project::select('po', 'so', 'label', 'location', 'project_manager', 'sales_executive', 'start_date', 'end_date', 'preliminary_cost', 'po_amount', 'expense_budget', 'customers.id as customer_id', 'customers.companyName')
-            ->join('customers', 'projects.customer_id', '=', 'customers.id');
+            ->join('customers', 'projects.customer_id', '=', 'customers.id')
+            ->orderBy('projects.created_at', 'desc');
 
         if ($request->has('search')) {
             $search = $request->input('search');
