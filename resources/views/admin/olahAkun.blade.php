@@ -15,7 +15,7 @@
         color: white;
     }
 
-    .form-label{
+    .form-label {
         text-align: start !important;
     }
 </style>
@@ -94,8 +94,9 @@
                                                         rowspan="1" colspan="1" style="width: auto;"
                                                         aria-label="Salary: activate to sort column ascending">TTD
                                                     </th>
-                                                    <th class="sorting text-center" tabindex="0" aria-controls="datatable"
-                                                        rowspan="1" colspan="1" style="width: auto;"
+                                                    <th class="sorting text-center" tabindex="0"
+                                                        aria-controls="datatable" rowspan="1" colspan="1"
+                                                        style="width: auto;"
                                                         aria-label="Salary: activate to sort column ascending">Actions
                                                     </th>
                                                 </tr>
@@ -158,7 +159,8 @@
                                                                             <div class="col-md-6">
                                                                                 <div class="mb-3 text-start">
                                                                                     <label for="field-1"
-                                                                                        class="form-label">First Name</label>
+                                                                                        class="form-label">First
+                                                                                        Name</label>
                                                                                     <input type="text"
                                                                                         class="form-control"
                                                                                         id="field-1" placeholder="John">
@@ -167,7 +169,8 @@
                                                                             <div class="col-md-6">
                                                                                 <div class="mb-3 text-start">
                                                                                     <label for="field-2 "
-                                                                                        class="form-label">Last Name</label>
+                                                                                        class="form-label">Last
+                                                                                        Name</label>
                                                                                     <input type="text"
                                                                                         class="form-control"
                                                                                         id="field-2" placeholder="Doe">
@@ -178,7 +181,8 @@
                                                                             <div class="col-md-12">
                                                                                 <div class="mb-3 text-start">
                                                                                     <label for="field-3"
-                                                                                        class="form-label">Division Date</label>
+                                                                                        class="form-label">Division
+                                                                                        Date</label>
                                                                                     <input type="date"
                                                                                         class="form-control"
                                                                                         id="field-3"
@@ -190,7 +194,8 @@
                                                                             <div class="col-md-12">
                                                                                 <div class="mb-3 text-start">
                                                                                     <label for="field-3"
-                                                                                        class="form-label">Tanda Tangan</label>
+                                                                                        class="form-label">Tanda
+                                                                                        Tangan</label>
                                                                                     <input type="file"
                                                                                         class="form-control"
                                                                                         id="field-3">
@@ -237,6 +242,7 @@
                                                         </div>
                                                     </td>
                                                 </tr>
+
                                                 <tr class="odd">
                                                     <td class="dtr-control sorting_1" tabindex="0">3</td>
                                                     <td>Junior Technical Author</td>
