@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
@@ -60,7 +61,7 @@ class ProjectController extends Controller
         ], [
             'memo.required_without_all' => 'Memo harus diisi jika SO Number tidak diisi.',
         ]);
-
+        $validatedData['id'] = Str::uuid();
 
         // Simpan data ke dalam database
         Project::create($validatedData);
