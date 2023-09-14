@@ -78,7 +78,7 @@ Route::prefix('customerContact')->group(function () {
      Route::get('/indexcc/edit', [CustomerContactController::class, 'edit'])->name('customerContact.edit');
      Route::get('/indexcc/update', [CustomerContactController::class, 'update'])->name('customerContact.update');
      Route::get('/indexcc/destroy', [CustomerContactController::class, 'destroy'])->name('customerContact.destroy');
-}
+});
 
 //contoh route (post(/admin/roles)
 Route::prefix('admin')->group(function () {
@@ -103,4 +103,8 @@ Route::get('/admin/olahAkun', function () {
 Route::get('/admin/createAkun', function () {
     return view('admin.createAkun');
 });
-require __DIR__ . '/auth.php';
+
+Route::get('createProjects', function () {
+    return view('createProjects');
+});
+require __DIR__.'/auth.php';
