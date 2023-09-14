@@ -17,7 +17,7 @@ class RoleController extends Controller
     public function index()
     {
         $roles = Role::all();
-        return view('roles.index');
+        return view('roles.index', compact('roles'));
     }
 
     public function createForm()
@@ -74,5 +74,15 @@ class RoleController extends Controller
     {
         $role->delete();
         return redirect()->route('roles.index')->with('success', 'Role berhasil dihapus');
+    }
+
+    /**
+     * @param Role $role
+     * @return Application|Factory|View|\Illuminate\Foundation\Application
+     */
+    public function showRole(Role $role): View|Factory|Application
+    {
+        $users = $role->hasUsers;
+        return view('roles.showRole', compact('role'));
     }
 }

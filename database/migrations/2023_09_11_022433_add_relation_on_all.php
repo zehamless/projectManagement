@@ -20,8 +20,8 @@ return new class extends Migration
             $table->foreign('project_id')->references('id')->on('projects')->cascadeOnDelete();
         });
         Schema::table('customer_contacts', function (Blueprint $table) {
-            $table->uuid('customerContact_id')->after('id');
-            $table->foreign('customerContact_id')->references('id')->on('customers')->cascadeOnDelete();
+            $table->uuid('customer_id')->after('id');
+            $table->foreign('customer_id')->references('id')->on('customers')->cascadeOnDelete();
         });
         Schema::table('projects', function (Blueprint $table) {
             $table->uuid('customer_id')->after('id');

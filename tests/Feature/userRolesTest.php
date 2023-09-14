@@ -62,5 +62,14 @@ class userRolesTest extends TestCase
 
     }
 
+    public function test_showRole()
+    {
+        $this->test_attach1Role();
+        $response = $this->get('/admin/roles/1');
+        $response->assertSee([
+            'first_name' => 'John',
+        ]);
+    }
+
 
 }
