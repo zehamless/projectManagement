@@ -13,9 +13,10 @@ class ProjectController extends Controller
     public function index(Request $request)
     {
         $query = Project::select('po', 'so', 'label', 'location', 'project_manager', 'sales_executive', 'start_date', 'end_date', 'preliminary_cost', 'po_amount', 'expense_budget', 'customers.id as customer_id', 'customers.companyName')
-            ->join('customers', 'projects.customer_id', '=', 'customers.id')
             ->orderBy('projects.created_at', 'desc');
 
+        $query = Project::with('customer')
+            ->get();
         if ($request->has('search')) {
             $search = $request->input('search');
 
@@ -30,7 +31,7 @@ class ProjectController extends Controller
             });
         }
 
-        $projects = $query->get();
+        $projects = $query;
 
         return view('/projects', compact('projects'));
     }
@@ -74,16 +75,18 @@ class ProjectController extends Controller
     {
         $project = Project::findOrFail($id);
         // Ambil data proyek, serta data customer_id, customerContact_id, companyName, dan customerContactName
-        $projectData = Project::select('projects.*', 'customers.id as customer_id', 'customer_contacts.id as customerContactId', 'customers.companyName', 'customer_contacts. as contactName')
+        $projectData = Project::select('projects.*', 'customers.id as customer_id', 'customer_contacts.id as customerContactId', 'customers.companyName', 'customer_contacts.name as contactName ')
             ->leftJoin('customers', 'projects.customer_id', '=', 'customers.id')
-            ->leftJoin('customer_contacts', 'customer_contact.customerContact_id', '=', 'customer.id')
+            ->leftJoin('customer_contacts', 'customers.id', '=', 'customer_contacts.customerContact_id')
             ->where('projects.id', $id)
             ->first();
 
 
+
         // Ambil semua Milestone yang terkait dengan proyek ini dan urutkan berdasarkan created_at terbaru
         $milestones = $project->milestones()->orderBy('created_at', 'desc')->get();
-        return view('detailProjects', compact('milestones', 'projectData'));
+        $productionCost = $project->productionCost()->orderBy('created_at', 'desc')->get();
+        return view('detailProjects', compact('milestones', 'projectData', 'productionCost'));
     }
 
 
