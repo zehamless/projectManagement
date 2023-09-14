@@ -11,6 +11,12 @@
 
     }
 
+    .btn-editAccount {
+        background-color: #FF3E3E;
+        border: #FF3E3E;
+        color: white;
+    }
+
     .btn-createAccount:focus {
         color: white;
     }
@@ -151,7 +157,7 @@
                                                                                     <input type="text"
                                                                                         class="form-control"
                                                                                         id="field-3"
-                                                                                        placeholder="Address">
+                                                                                        placeholder="type your email here">
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -163,7 +169,7 @@
                                                                                         Name</label>
                                                                                     <input type="text"
                                                                                         class="form-control"
-                                                                                        id="field-1" placeholder="John">
+                                                                                        id="field-1" placeholder="First">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-6">
@@ -173,7 +179,7 @@
                                                                                         Name</label>
                                                                                     <input type="text"
                                                                                         class="form-control"
-                                                                                        id="field-2" placeholder="Doe">
+                                                                                        id="field-2" placeholder="Last">
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -208,7 +214,7 @@
                                                                             class="btn btn-secondary waves-effect"
                                                                             data-bs-dismiss="modal">Close</button>
                                                                         <button type="button"
-                                                                            class="btn btn-info waves-effect waves-light">Save
+                                                                            class="btn btn-editAccount waves-effect waves-light">Save
                                                                             changes</button>
                                                                     </div>
                                                                 </div>
