@@ -73,9 +73,17 @@ class ProjectController extends Controller
     public function show($id)
     {
         $project = Project::findOrFail($id);
+        // Ambil data proyek, serta data customer_id, customerContact_id, companyName, dan customerContactName
+        $projectData = Project::select('projects.*', 'customers.id as customer_id', 'customer_contacts.id as customerContactId', 'customers.companyName', 'customer_contacts. as contactName')
+            ->leftJoin('customers', 'projects.customer_id', '=', 'customers.id')
+            ->leftJoin('customer_contacts', 'customer_contact.customerContact_id', '=', 'customer.id')
+            ->where('projects.id', $id)
+            ->first();
+
+
         // Ambil semua Milestone yang terkait dengan proyek ini dan urutkan berdasarkan created_at terbaru
         $milestones = $project->milestones()->orderBy('created_at', 'desc')->get();
-        return dd($project, $milestones);
+        return view('detailProjects', compact('milestones', 'projectData'));
     }
 
 
