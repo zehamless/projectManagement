@@ -29,16 +29,16 @@
 <div class="content-page">
     <div class="content">
         @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
         @endif
         <!-- Start Content-->
         <div class="container-fluid">
 
             <div class="row">
                 <div class="col-sm-7">
-                    <a href="{{ url('admin/createAkun') }}"
+                    <a href="{{ url('admin/users/create') }}"
                         class="btn btn-createAccount w-md waves-effect waves-light mb-3 px-4"><i
                             class="mdi mdi-plus"></i> Create Account</a>
                 </div>
@@ -97,6 +97,10 @@
                                                     </th>
                                                     <th class="sorting" tabindex="0" aria-controls="datatable"
                                                         rowspan="1" colspan="1" style="width: auto;"
+                                                        aria-label="Age: activate to sort column ascending">Role
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="datatable"
+                                                        rowspan="1" colspan="1" style="width: auto;"
                                                         aria-label="Start date: activate to sort column ascending">
                                                         Division
                                                         date</th>
@@ -119,6 +123,7 @@
                                                     <td>Accountant</td>
                                                     <td>Tokyo</td>
                                                     <td>33</td>
+                                                    <td>SPV</td>
                                                     <td>2008/11/28</td>
                                                     <td>$162,700</td>
                                                     <td class="text-center">
@@ -173,7 +178,8 @@
                                                                                         Name</label>
                                                                                     <input type="text"
                                                                                         class="form-control"
-                                                                                        id="field-1" placeholder="First">
+                                                                                        id="field-1"
+                                                                                        placeholder="First">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-6">
@@ -231,6 +237,7 @@
                                                     <td>Chief Executive Officer (CEO)</td>
                                                     <td>London</td>
                                                     <td>47</td>
+                                                    <td>Manager</td>
                                                     <td>2009/10/09</td>
                                                     <td>$1,200,000</td>
                                                     <td class="text-center">
@@ -258,6 +265,7 @@
                                                     <td>Junior Technical Author</td>
                                                     <td>San Francisco</td>
                                                     <td>66</td>
+                                                    <td>Tehcnician</td>
                                                     <td>2009/01/12</td>
                                                     <td>$86,000</td>
                                                     <td class="text-center">
@@ -284,6 +292,7 @@
                                                     <td>Software Engineer</td>
                                                     <td>London</td>
                                                     <td>41</td>
+                                                    <td>PM</td>
                                                     <td>2012/10/13</td>
                                                     <td>$132,000</td>
                                                     <td class="text-center">
@@ -310,6 +319,9 @@
                                                     <td>Software Engineer</td>
                                                     <td>San Francisco</td>
                                                     <td>28</td>
+                                                    <td>
+                                                        pm,sv,
+                                                    </td>
                                                     <td>2011/06/07</td>
                                                     <td>$206,850</td>
                                                     <td class="text-center">
@@ -383,45 +395,13 @@
         </div> <!-- container-fluid -->
 
     </div> <!-- content -->
+</div>
+@endsection
 
+@section('pageScript')
+<!-- Sweet Alerts js -->
+<script src="{{ asset('templateAdmin/Admin/dist/assets/libs/sweetalert2/sweetalert2.all.min.js') }}"></script>
 
-    {{-- script load library js --}}
-    <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}">
-    </script>
-    <script
-        src="{{ asset('templateAdmin/Admin/dist/assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}">
-    </script>
-    <script
-        src="{{ asset('templateAdmin/Admin/dist/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js') }}">
-    </script>
-    <script
-        src="{{ asset('templateAdmin/Admin/dist/assets/libs/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js') }}">
-    </script>
-    <script
-        src="{{ asset('templateAdmin/Admin/dist/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js') }}">
-    </script>
-    <script
-        src="{{ asset('templateAdmin/Admin/dist/assets/libs/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js') }}">
-    </script>
-    <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/datatables.net-buttons/js/buttons.html5.min.js') }}">
-    </script>
-    <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/datatables.net-buttons/js/buttons.flash.min.js') }}">
-    </script>
-    <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/datatables.net-buttons/js/buttons.print.min.js') }}">
-    </script>
-    <script
-        src="{{ asset('templateAdmin/Admin/dist/assets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js') }}">
-    </script>
-    <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/datatables.net-select/js/dataTables.select.min.js') }}">
-    </script>
-    <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/pdfmake/build/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/pdfmake/build/vfs_fonts.js') }}"></script>
-
-    <!-- Sweet Alerts js -->
-    <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/sweetalert2/sweetalert2.all.min.js') }}"></script>
-
-    <!-- Sweet alert init js-->
-    <script src="{{ asset('templateAdmin/Admin/dist/assets/js/pages/sweet-alerts.init.js') }}"></script>
-
-
-    @endsection
+<!-- Sweet alert init js-->
+<script src="{{ asset('templateAdmin/Admin/dist/assets/js/pages/sweet-alerts.init.js') }}"></script>
+@endsection

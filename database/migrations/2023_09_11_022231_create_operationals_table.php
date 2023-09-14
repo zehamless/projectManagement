@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('transportation_mode');
             $table->string('vehicle_number');
             $table->string('created_by');
-            $table->string('approved_by');
+            $table->string('approved_by')->nullable();
             $table->timestamps();
         });
     }
