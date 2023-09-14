@@ -26,7 +26,7 @@ Route::group(['prefix' => 'projects'], function () {
     // Menyimpan project baru ke dalaFm database
     Route::post('/', [ProjectController::class, 'store'])->name('projects.store');
     // Menampilkan detail project
-    Route::get('/detailProject/{id}', [ProjectController::class, 'show'])->name('projects.show');
+    Route::get('/detail/{id}', [ProjectController::class, 'show'])->name('projects.show');
 
     // Menampilkan form untuk mengedit project
     Route::get('/{id}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
