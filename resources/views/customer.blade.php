@@ -12,7 +12,7 @@
 
                         <div class="row ">
                             <div class="col-sm-7">
-                                <a href="#"
+                                <a href="{{url('formcustomer')}}"
                                     class="btn btn-createProjects btn-danger w-md waves-effect waves-light mb-2 px-4 "><i
                                         class="mdi mdi-plus rounded-15"></i> Add Customer</a>
                             </div><!-- end col-->
