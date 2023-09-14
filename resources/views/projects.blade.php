@@ -44,7 +44,7 @@
 
                 <div class="row">
                     <div class="col-sm-7">
-                        <a href="#" class="btn btn-createProjects w-md waves-effect waves-light mb-3 px-4"><i
+                        <a href="{{ url('createProjects') }}" class="btn btn-createProjects w-md waves-effect waves-light mb-3 px-4"><i
                                 class="mdi mdi-plus"></i> Create Project</a>
                     </div>
                     <div class="col-sm-5">
