@@ -67,7 +67,7 @@ class ProjectController extends Controller
         // Simpan data ke dalam database
         Project::create($validatedData);
 
-        return dd("Berhasil");
+//        return dd("Berhasil");
     }
 
     public function show($id)

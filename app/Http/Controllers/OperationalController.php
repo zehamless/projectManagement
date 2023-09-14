@@ -24,19 +24,21 @@ class OperationalController extends Controller
             'spk_code' => 'required|string|max:10',
             'spk_number' => 'max:10',
             'type' => 'required',
-            'description' => 'string|ax:255',
-            'transportation' => 'required|string',
+            'description' => 'string|max:255',
+            'transportation_mode' => 'required|string',
             'vehicle_number' => 'required|max:12|string',
             'created_by' => 'required|string',
         ]);
 
+
         $operational = Operational::create([
+            'project_id' => $request->project_id,
             'date' => $request->date,
             'spk_code' => $request->spk_code,
             'spk_number' => $request->spk_number,
             'type' => $request->type,
             'description' => $request->description,
-            'transportation' => $request->transportation,
+            'transportation_mode' => $request->transportation_mode,
             'vehicle_number' => $request->vehicle_number,
             'created_by' => $request->created_by,
         ]);
@@ -56,7 +58,7 @@ class OperationalController extends Controller
             'spk_number' => 'string|max:10',
             'type' => 'string',
             'description' => 'max:255',
-            'transportation' => 'string',
+            'transportation_mode' => 'string',
             'vehicle_number' => 'string|max:12',
         ]);
 

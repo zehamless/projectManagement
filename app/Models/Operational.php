@@ -10,12 +10,13 @@ class Operational extends Model
 {
     use HasFactory, HasUuids;
     protected $fillable = [
+        'project_id',
         'date',
         'spk_code',
         'spk_number',
         'type',
         'description',
-        'transportation',
+        'transportation_mode',
         'vehicle_number',
         'created_by',
         'approved_by',
