@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -19,7 +20,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('users.index');
+        return view('admin.olahAkun');
     }
 
     /**
@@ -27,7 +28,8 @@ class UserController extends Controller
      */
     public function createForm()
     {
-        return view('users.createForm');
+        $roles = Role::all();
+        return view('admin.createAkun', compact('roles'));
     }
 
     /**
@@ -36,7 +38,8 @@ class UserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
+        dd($request->all());
+        $data = $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['nullable', 'string', 'max:255'],
             'division' => ['required', 'string', 'max:255'],
@@ -58,7 +61,7 @@ class UserController extends Controller
             'signature' => $filepath,
             'password' => Hash::make($request->password),
         ]);
-
+//        \Session::flash('success', 'User berhasil ditambahkan');
         return redirect()->route('users.index')->with('success', 'User berhasil ditambahkan');
     }
 
@@ -107,7 +110,7 @@ class UserController extends Controller
      */
     public function delete(User $user): RedirectResponse
     {
-        if ($user->signature){
+        if ($user->signature) {
             \Storage::delete($user->signature);
         }
         $user->delete();
