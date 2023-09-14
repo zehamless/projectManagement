@@ -78,7 +78,7 @@ Route::prefix('customerContact')->group(function () {
      Route::get('/indexcc/edit', [CustomerContactController::class, 'edit'])->name('customerContact.edit');
      Route::get('/indexcc/update', [CustomerContactController::class, 'update'])->name('customerContact.update');
      Route::get('/indexcc/destroy', [CustomerContactController::class, 'destroy'])->name('customerContact.destroy');
-}
+});
 
 //contoh route (post(/admin/roles)
 Route::prefix('admin')->group(function () {
