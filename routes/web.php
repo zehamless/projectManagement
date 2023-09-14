@@ -46,6 +46,9 @@ Route::get('/', function () {
 Route::get('/customer', function () {
     return view('customer');
 });
+Route::get('/formcustomer', function () {
+    return view('formcustomer');
+});
 Route::get('/staff', function () {
     return view('staff');
 });
