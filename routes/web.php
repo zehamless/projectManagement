@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\CustomerContactController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Models\Role;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,6 +46,9 @@ Route::get('/', function () {
 Route::get('/customer', function () {
     return view('customer');
 });
+Route::get('/staff', function () {
+    return view('staff');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -63,6 +68,16 @@ Route::prefix('customer')->group(function () {
     Route::get('/index/edit', [CustomerController::class, 'edit'])->name('customer.edit');
     Route::get('/index/update', [CustomerController::class, 'update'])->name('customer.update');
     Route::delete('/index/destroy', [CustomerController::class, 'destroy'])->name('customer.destroy');
+});
+
+Route::prefix('customerContact')->group(function () {
+     Route::get('/indexcc', [CustomerContactController::class, 'index'])->name('customerContact.index');
+     Route::get('/indexcc/create', [CustomerController::class, 'create'])->name('customerContact.create');
+     Route::post('/indexcc/store', [CustomerController::class, 'store'])->name('customerContact.store');
+     Route::get('/indexcc/show', [CustomerController::class, 'show'])->name('customerContact.show');
+     Route::get('/indexcc/edit', [CustomerContactController::class, 'edit'])->name('customerContact.edit');
+     Route::get('/indexcc/update', [CustomerContactController::class, 'update'])->name('customerContact.update');
+     Route::get('/indexcc/destroy', [CustomerContactController::class, 'destroy'])->name('customerContact.destroy');
 });
 
 //contoh route (post(/admin/roles)
@@ -88,4 +103,8 @@ Route::get('/admin/olahAkun', function () {
 Route::get('/admin/createAkun', function () {
     return view('admin.createAkun');
 });
-require __DIR__ . '/auth.php';
+
+Route::get('createProjects', function () {
+    return view('createProjects');
+});
+require __DIR__.'/auth.php';
