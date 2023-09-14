@@ -48,6 +48,11 @@ class Project extends Model
         return $this->hasMany(Milestone::class, 'project_id');
     }
 
+    public function productionCost()
+    {
+        return $this->hasMany(ProductionCost::class, 'project_id');
+    }
+
 
     // Definisi relasi dengan Sales Executive
     public function salesExecutive()

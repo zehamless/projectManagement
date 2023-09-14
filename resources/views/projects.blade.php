@@ -44,14 +44,16 @@
 
                 <div class="row">
                     <div class="col-sm-7">
-                        <a href="{{ url('createProjects') }}" class="btn btn-createProjects w-md waves-effect waves-light mb-3 px-4"><i
+                        <a href="{{ url('createProjects') }}"
+                            class="btn btn-createProjects w-md waves-effect waves-light mb-3 px-4"><i
                                 class="mdi mdi-plus"></i> Create Project</a>
                     </div>
                     <div class="col-sm-5">
-                        <form class="app-search" action="{{route('projects.index')}}">
+                        <form class="app-search" action="{{ route('projects.index') }}">
                             <div class="app-search-box">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="search" placeholder="Search..." id="top-search">
+                                    <input type="text" class="form-control" name="search" placeholder="Search..."
+                                        id="top-search">
                                     <button class="btn input-group-text" type="submit">
                                         <i class="fe-search"></i>
                                     </button>
@@ -145,7 +147,7 @@
                                     </ul>
 
                                     <div class="project-detail">
-                                        <a href="{{ url('projectDetail') }}">
+                                        <a href="{{ route('projects.show', ['id' => $project->id]) }}">
                                             <button type="button"
                                                 class="btn btn-danger btn-detail rounded-pill px-3 waves-effect waves-light">Details</button>
                                         </a>
