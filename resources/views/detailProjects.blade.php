@@ -1,67 +1,65 @@
 @extends('template.index')
 
 @section('content')
-    <style>
-        tr {
-            vertical-align: middle;
-        }
+<style>
+    tr {
+        vertical-align: middle;
+    }
 
-        .tabledit-edit-button {
-            float: none;
-            color: white;
-            border-radius: 15px !important;
-        }
+    .tabledit-edit-button {
+        float: none;
+        color: white;
+        border-radius: 15px !important;
+    }
 
-        .btn-createItems {
-            border-radius: 10px;
-            background-color: #FF3E3E;
-            border: #FF3E3E;
-            color: white;
-            margin-right: 0;
-            float: right;
-            margin-left: auto;
-        }
+    .btn-createItems {
+        border-radius: 10px;
+        background-color: #FF3E3E;
+        border: #FF3E3E;
+        color: white;
+        margin-right: 0;
+        float: right;
+        margin-left: auto;
+    }
 
-        .btn-createItems:focus {
-            color: white;
-        }
+    .btn-createItems:focus {
+        color: white;
+    }
 
-        .table-title {
-            vertical-align: middle !important;
-        }
+    .table-title {
+        vertical-align: middle !important;
+    }
 
-        .details-text {
-            margin-bottom: unset;
-        }
+    .details-text {
+        margin-bottom: unset;
+    }
 
-        .title-text {
-            margin-bottom: unset;
-            font-weight: 100;
-        }
-    </style>
+    .title-text {
+        margin-bottom: unset;
+        font-weight: 100;
+    }
+</style>
 
-    <div class="content-page">
-        <div class="content">
+<div class="content-page">
+    <div class="content">
 
-            <!-- Start Content-->
-            <div class="container-fluid">
+        <!-- Start Content-->
+        <div class="container-fluid">
 
 
-                <div class="row">
-                    <div class="col-xl-8">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row table-title">
-                                    <div class="col-sm-8">
-                                        <h4 class="mt-0 header-title">Milestone</h4>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <a href="#"
-                                            class="btn btn-createItems w-md waves-effect waves-light mb-3 px-4"><i
-                                                class="mdi mdi-plus"></i>Add Milestone</a>
-                                    </div>
+            <div class="row">
+                <div class="col-xl-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row table-title">
+                                <div class="col-sm-8">
+                                    <h4 class="mt-0 header-title">Milestone</h4>
                                 </div>
-
+                                <div class="col-sm-4">
+                                    <a href="#" class="btn btn-createItems w-md waves-effect waves-light mb-3 px-4"><i
+                                            class="mdi mdi-plus"></i>Add Milestone</a>
+                                </div>
+                            </div>
 
                                 <div class="table-responsive">
                                     <table class="table mb-0">
@@ -122,18 +120,17 @@
                             </div>
                         </div>
 
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row table-title">
-                                    <div class="col-sm-8">
-                                        <h4 class="mt-0 header-title">Production Cost</h4>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <a href="#"
-                                            class="btn btn-createItems w-md waves-effect waves-light mb-3 px-4"><i
-                                                class="mdi mdi-plus"></i>Add Cost</a>
-                                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row table-title">
+                                <div class="col-sm-8">
+                                    <h4 class="mt-0 header-title">Production Cost</h4>
                                 </div>
+                                <div class="col-sm-4">
+                                    <a href="#" class="btn btn-createItems w-md waves-effect waves-light mb-3 px-4"><i
+                                            class="mdi mdi-plus"></i>Add Cost</a>
+                                </div>
+                            </div>
 
                                 <div class="table-responsive">
                                     <table class="table mb-0">
@@ -182,60 +179,59 @@
                             </div>
                         </div>
 
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row table-title">
-                                    <div class="col-sm-8">
-                                        <h4 class="mt-0 header-title">Field Service Log</h4>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <a href="#"
-                                            class="btn btn-createItems w-md waves-effect waves-light mb-3 px-4"><i
-                                                class="mdi mdi-plus"></i>Add Operational</a>
-                                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row table-title">
+                                <div class="col-sm-8">
+                                    <h4 class="mt-0 header-title">Field Service Log</h4>
                                 </div>
-                                <div class="table-responsive">
-                                    <table class="table mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>SPK Number</th>
-                                                <th>Service Date</th>
-                                                <th>Project Label</th>
-                                                <th>Service Type</th>
-                                                <th>SPK Code</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>SPK Number</td>
-                                                <td>Service Date</td>
-                                                <td>Project Label</td>
-                                                <td>Service Type</td>
-                                                <td>SPK Code</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>SPK Number</td>
-                                                <td>Service Date</td>
-                                                <td>Project Label</td>
-                                                <td>Service Type</td>
-                                                <td>SPK Code</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>SPK Number</td>
-                                                <td>Service Date</td>
-                                                <td>Project Label</td>
-                                                <td>Service Type</td>
-                                                <td>SPK Code</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <div class="col-sm-4">
+                                    <a href="#" class="btn btn-createItems w-md waves-effect waves-light mb-3 px-4"><i
+                                            class="mdi mdi-plus"></i>Add Operational</a>
                                 </div>
                             </div>
+                            <div class="table-responsive">
+                                <table class="table mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>SPK Number</th>
+                                            <th>Service Date</th>
+                                            <th>Project Label</th>
+                                            <th>Service Type</th>
+                                            <th>SPK Code</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>SPK Number</td>
+                                            <td>Service Date</td>
+                                            <td>Project Label</td>
+                                            <td>Service Type</td>
+                                            <td>SPK Code</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">2</th>
+                                            <td>SPK Number</td>
+                                            <td>Service Date</td>
+                                            <td>Project Label</td>
+                                            <td>Service Type</td>
+                                            <td>SPK Code</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">3</th>
+                                            <td>SPK Number</td>
+                                            <td>Service Date</td>
+                                            <td>Project Label</td>
+                                            <td>Service Type</td>
+                                            <td>SPK Code</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
+                    </div>
 
                     </div><!-- end col-->
                     <div class="col-xl-4">
@@ -397,24 +393,29 @@
                                 </div>
                             </div>
 
-                        </div>
-                    </div><!-- end col-->
-                </div>
-                <!-- end row -->
+                    </div>
+                </div><!-- end col-->
+            </div>
+            <!-- end row -->
 
-            </div> <!-- container-fluid -->
+        </div> <!-- container-fluid -->
 
-        </div> <!-- content -->
+    </div> <!-- content -->
+</div>
+@endsection
 
-
-        <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/flot-charts/jquery.flot.js') }}"></script>
-        <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/flot-charts/jquery.flot.time.js') }}"></script>
-        <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/jquery.flot.tooltip/js/jquery.flot.tooltip.min.js') }}">
-        </script>
-        <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/flot-charts/jquery.flot.resize.js') }}"></script>
-        <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/flot-charts/jquery.flot.pie.js') }}"></script>
-        <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/flot-charts/jquery.flot.selection.js') }}"></script>
-        <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/flot-charts/jquery.flot.stack.js') }}"></script>
-        <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/flot-orderbars/js/jquery.flot.orderBars.js') }}"></script>
-        <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/flot-charts/jquery.flot.crosshair.js') }}"></script>
-    @endsection
+{{-- script js halaman detail project --}}
+@section('pageScript')
+{{-- donut chart --}}
+<script src="{{ asset('templateAdmin/Admin/dist/assets/libs/flot-charts/jquery.flot.js') }}"></script>
+<script src="{{ asset('templateAdmin/Admin/dist/assets/libs/flot-charts/jquery.flot.time.js') }}"></script>
+<script src="{{ asset('templateAdmin/Admin/dist/assets/libs/jquery.flot.tooltip/js/jquery.flot.tooltip.min.js') }}">
+</script>
+<script src="{{ asset('templateAdmin/Admin/dist/assets/libs/flot-charts/jquery.flot.resize.js') }}"></script>
+<script src="{{ asset('templateAdmin/Admin/dist/assets/libs/flot-charts/jquery.flot.pie.js') }}"></script>
+<script src="{{ asset('templateAdmin/Admin/dist/assets/libs/flot-charts/jquery.flot.selection.js') }}"></script>
+<script src="{{ asset('templateAdmin/Admin/dist/assets/libs/flot-charts/jquery.flot.stack.js') }}"></script>
+<script src="{{ asset('templateAdmin/Admin/dist/assets/libs/flot-orderbars/js/jquery.flot.orderBars.js') }}">
+</script>
+<script src="{{ asset('templateAdmin/Admin/dist/assets/libs/flot-charts/jquery.flot.crosshair.js') }}"></script>
+@endsection
