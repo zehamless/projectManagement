@@ -93,6 +93,10 @@
                                                     </th>
                                                     <th class="sorting" tabindex="0" aria-controls="datatable"
                                                         rowspan="1" colspan="1" style="width: auto;"
+                                                        aria-label="Age: activate to sort column ascending">Role
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="datatable"
+                                                        rowspan="1" colspan="1" style="width: auto;"
                                                         aria-label="Start date: activate to sort column ascending">
                                                         Division
                                                         date</th>
@@ -115,6 +119,7 @@
                                                     <td>Accountant</td>
                                                     <td>Tokyo</td>
                                                     <td>33</td>
+                                                    <td>SPV</td>
                                                     <td>2008/11/28</td>
                                                     <td>$162,700</td>
                                                     <td class="text-center">
@@ -169,7 +174,8 @@
                                                                                         Name</label>
                                                                                     <input type="text"
                                                                                         class="form-control"
-                                                                                        id="field-1" placeholder="First">
+                                                                                        id="field-1"
+                                                                                        placeholder="First">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-6">
@@ -227,6 +233,7 @@
                                                     <td>Chief Executive Officer (CEO)</td>
                                                     <td>London</td>
                                                     <td>47</td>
+                                                    <td>Manager</td>
                                                     <td>2009/10/09</td>
                                                     <td>$1,200,000</td>
                                                     <td class="text-center">
@@ -254,6 +261,7 @@
                                                     <td>Junior Technical Author</td>
                                                     <td>San Francisco</td>
                                                     <td>66</td>
+                                                    <td>Tehcnician</td>
                                                     <td>2009/01/12</td>
                                                     <td>$86,000</td>
                                                     <td class="text-center">
@@ -280,6 +288,7 @@
                                                     <td>Software Engineer</td>
                                                     <td>London</td>
                                                     <td>41</td>
+                                                    <td>PM</td>
                                                     <td>2012/10/13</td>
                                                     <td>$132,000</td>
                                                     <td class="text-center">
@@ -306,6 +315,9 @@
                                                     <td>Software Engineer</td>
                                                     <td>San Francisco</td>
                                                     <td>28</td>
+                                                    <td>
+                                                        pm,sv,
+                                                    </td>
                                                     <td>2011/06/07</td>
                                                     <td>$206,850</td>
                                                     <td class="text-center">
@@ -379,8 +391,6 @@
         </div> <!-- container-fluid -->
 
     </div> <!-- content -->
-
-
     {{-- script load library js --}}
     <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}">
     </script>

@@ -153,6 +153,13 @@
                                 <span> Data Akun </span>
                             </a>
                         </li>
+
+                        <li>
+                            <a href="{{ url('admin/olahAkun') }}">
+                                <i class="mdi mdi-account-question-outline"></i>
+                                <span> Data Role </span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
 
