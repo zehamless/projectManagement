@@ -12,5 +12,9 @@ class Customer extends Model
         'customer_id',
         'company',
     ];
+    public function contacts()
+{
+    return $this->hasMany(CustomerContact::class, 'name', 'companyName');
+}
 
 }
