@@ -70,17 +70,14 @@ class ProjectController extends Controller
         return dd("Berhasil");
     }
 
-
-    // Menampilkan detail project
     public function show($id)
     {
-        try {
-            $project = Project::findOrFailWithModel(Project::class, $id);
-            dd($project);
-        } catch (ModelNotFoundException $e) {
-            return abort(404, 'Data tidak ditemukan');
-        }
+        $project = Project::findOrFail($id);
+        // Ambil semua Milestone yang terkait dengan proyek ini dan urutkan berdasarkan created_at terbaru
+        $milestones = $project->milestones()->orderBy('created_at', 'desc')->get();
+        return dd($project, $milestones);
     }
+
 
 
     // Menampilkan form untuk mengedit project

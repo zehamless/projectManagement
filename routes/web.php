@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\CustomerContactController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Models\Role;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,7 +28,7 @@ Route::group(['prefix' => 'projects'], function () {
     // Menyimpan project baru ke dalaFm database
     Route::post('/', [ProjectController::class, 'store'])->name('projects.store');
     // Menampilkan detail project
-    Route::get('/detail/{id}', [ProjectController::class, 'show'])->name('projects.show');
+    Route::get('/detailProject/{id}', [ProjectController::class, 'show'])->name('projects.show');
 
     // Menampilkan form untuk mengedit project
     Route::get('/{id}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
@@ -43,6 +45,9 @@ Route::get('/', function () {
 });
 Route::get('/customer', function () {
     return view('customer');
+});
+Route::get('/staff', function () {
+    return view('staff');
 });
 
 Route::get('/dashboard', function () {
@@ -65,6 +70,16 @@ Route::prefix('customer')->group(function () {
     Route::delete('/index/destroy', [CustomerController::class, 'destroy'])->name('customer.destroy');
 });
 
+Route::prefix('customerContact')->group(function () {
+     Route::get('/indexcc', [CustomerContactController::class, 'index'])->name('customerContact.index');
+     Route::get('/indexcc/create', [CustomerController::class, 'create'])->name('customerContact.create');
+     Route::post('/indexcc/store', [CustomerController::class, 'store'])->name('customerContact.store');
+     Route::get('/indexcc/show', [CustomerController::class, 'show'])->name('customerContact.show');
+     Route::get('/indexcc/edit', [CustomerContactController::class, 'edit'])->name('customerContact.edit');
+     Route::get('/indexcc/update', [CustomerContactController::class, 'update'])->name('customerContact.update');
+     Route::get('/indexcc/destroy', [CustomerContactController::class, 'destroy'])->name('customerContact.destroy');
+}
+
 //contoh route (post(/admin/roles)
 Route::prefix('admin')->group(function () {
     Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
@@ -79,10 +94,6 @@ Route::prefix('admin')->group(function () {
     Route::get('/users/{user}/edit', [UserController::class, 'updateForm'])->name('users.updateForm');
     Route::patch('/users/{user}', [UserController::class, 'update'])->name('users.update');
     Route::delete('/users/{user}', [UserController::class, 'delete'])->name('users.delete');
-});
-
-Route::get('/detailProjects', function () {
-    return view('detailProjects');
 });
 
 Route::get('/admin/olahAkun', function () {

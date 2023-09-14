@@ -60,6 +60,7 @@
     </div>
 </div>
 
+
 <!-- Plugin js-->
 <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/parsleyjs/parsley.min.js') }}"></script>
 
