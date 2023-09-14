@@ -70,17 +70,14 @@ class ProjectController extends Controller
         return dd("Berhasil");
     }
 
-
-    // Menampilkan detail project
     public function show($id)
     {
-        try {
-            $project = Project::findOrFailWithModel(Project::class, $id);
-            dd($project);
-        } catch (ModelNotFoundException $e) {
-            return abort(404, 'Data tidak ditemukan');
-        }
+        $project = Project::findOrFail($id);
+        // Ambil semua Milestone yang terkait dengan proyek ini dan urutkan berdasarkan created_at terbaru
+        $milestones = $project->milestones()->orderBy('created_at', 'desc')->get();
+        return dd($project, $milestones);
     }
+
 
 
     // Menampilkan form untuk mengedit project
@@ -95,7 +92,19 @@ class ProjectController extends Controller
     {
         // Validasi data input dari form
         $validatedData = $request->validate([
-            // Definisikan aturan validasi di sini sesuai dengan kebutuhan Anda
+            'po' => 'string',
+            'customer_id' => 'string',
+            'label' => 'string',
+            'location' => 'string',
+            'project_manager' => 'string',
+            'sales_executive' => 'string',
+            'start_date' => 'date',
+            'end_date' => 'date|after:start_date',
+            'preliminary_cost' => 'numeric',
+            'po_amount' => 'numeric',
+            'expense_budget' => 'nullable|numeric',
+            'so' => 'nullable|string',
+            'memo' => 'nullable|required_without_all:so|string'
         ]);
 
         // Update data di dalam database
