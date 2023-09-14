@@ -88,6 +88,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/roles/{role}/edit', [RoleController::class, 'updateForm'])->name('roles.updateForm');
     Route::patch('/roles/{role}', [RoleController::class, 'update'])->name('roles.update');
     Route::delete('/roles/{role}', [RoleController::class, 'delete'])->name('roles.delete');
+    Route::get('/roles/{role}', [RoleController::class, 'showRole'])->name('roles.show');
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::get('/users/create', [UserController::class, 'createForm'])->name('users.createForm');
     Route::post('/users', [UserController::class, 'store'])->name('users.store');
