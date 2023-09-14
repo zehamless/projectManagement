@@ -29,16 +29,16 @@
 <div class="content-page">
     <div class="content">
         @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
         @endif
         <!-- Start Content-->
         <div class="container-fluid">
 
             <div class="row">
                 <div class="col-sm-7">
-                    <a href="{{ url('admin/createAkun') }}"
+                    <a href="{{ url('admin/users/create') }}"
                         class="btn btn-createAccount w-md waves-effect waves-light mb-3 px-4"><i
                             class="mdi mdi-plus"></i> Create Account</a>
                 </div>
@@ -395,43 +395,13 @@
         </div> <!-- container-fluid -->
 
     </div> <!-- content -->
-    {{-- script load library js --}}
-    <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}">
-    </script>
-    <script
-        src="{{ asset('templateAdmin/Admin/dist/assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}">
-    </script>
-    <script
-        src="{{ asset('templateAdmin/Admin/dist/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js') }}">
-    </script>
-    <script
-        src="{{ asset('templateAdmin/Admin/dist/assets/libs/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js') }}">
-    </script>
-    <script
-        src="{{ asset('templateAdmin/Admin/dist/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js') }}">
-    </script>
-    <script
-        src="{{ asset('templateAdmin/Admin/dist/assets/libs/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js') }}">
-    </script>
-    <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/datatables.net-buttons/js/buttons.html5.min.js') }}">
-    </script>
-    <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/datatables.net-buttons/js/buttons.flash.min.js') }}">
-    </script>
-    <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/datatables.net-buttons/js/buttons.print.min.js') }}">
-    </script>
-    <script
-        src="{{ asset('templateAdmin/Admin/dist/assets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js') }}">
-    </script>
-    <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/datatables.net-select/js/dataTables.select.min.js') }}">
-    </script>
-    <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/pdfmake/build/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/pdfmake/build/vfs_fonts.js') }}"></script>
+</div>
+@endsection
 
-    <!-- Sweet Alerts js -->
-    <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/sweetalert2/sweetalert2.all.min.js') }}"></script>
+@section('pageScript')
+<!-- Sweet Alerts js -->
+<script src="{{ asset('templateAdmin/Admin/dist/assets/libs/sweetalert2/sweetalert2.all.min.js') }}"></script>
 
-    <!-- Sweet alert init js-->
-    <script src="{{ asset('templateAdmin/Admin/dist/assets/js/pages/sweet-alerts.init.js') }}"></script>
-
-
-    @endsection
+<!-- Sweet alert init js-->
+<script src="{{ asset('templateAdmin/Admin/dist/assets/js/pages/sweet-alerts.init.js') }}"></script>
+@endsection

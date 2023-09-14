@@ -3,7 +3,7 @@
 @section('content')
 
 <style>
-    .btn-saveProjects{
+    .btn-saveProjects {
         background-color: #FF3E3E;
         border: #FF3E3E;
         color: white;
@@ -160,12 +160,9 @@
         </div>
     </div>
 </div>
+@endsection
 
-<!-- Plugin js-->
-<script src="{{ asset('templateAdmin/Admin/dist/assets/libs/parsleyjs/parsley.min.js') }}"></script>
 
-<!-- Validation init js-->
-<script src="{{ asset('templateAdmin/Admin/dist/assets/js/pages/form-validation.init.js') }}"></script>
-
+@section('pageScript')
 
 @endsection
