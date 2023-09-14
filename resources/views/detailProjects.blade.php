@@ -85,12 +85,18 @@
                                                 @foreach ($milestones as $milestone)
                                                     <tr>
                                                         <th scope="row">{{ $index++ }}</th>
-                                                        <td>{{ $milesstone['submitted_date'] }}</td>
-                                                        <td>{{ $milesstone['description'] }}</td>
-                                                        <td>{{ $milesstone['due_date'] }}</td>
+                                                        <td>{{ $milestone['submitted_date'] }}</td>
+                                                        <td>{{ $milestone['description'] }}</td>
+                                                        <td>{{ $milestone['due_date'] }}</td>
                                                         <td class="text-center">
                                                             <span
-                                                                class="badge bg-success">{{ $milesstone['progress'] }}</span>
+                                                                class="badge
+                                                                @if ($milestone['progress'] == 'Completed') bg-success
+                                                                @elseif($milestone['progress'] == 'Planned')
+                                                                bg-primary
+                                                                @elseif($milestone['progress'] == 'On Progress')
+                                                                bg-warning @endif
+                                                            ">{{ $milestone['progress'] }}</span>
                                                         </td>
                                                         <td class="text-center">
                                                             <div class="btn-group btn-group-sm" style="float: none;">
@@ -134,83 +140,42 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Entry Date</th>
                                                 <th>Description</th>
-                                                <th>Due Date</th>
-                                                <th class="text-center">Status</th>
+                                                <th>Amount</th>
                                                 <th class="text-center">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Entry Date</td>
-                                                <td>Description</td>
-                                                <td>Due Date</td>
-                                                <td class="text-center">
-                                                    <span class="badge bg-success">Completed</span>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="btn-group btn-group-sm" style="float: none;">
-                                                        <button type="button"
-                                                            class="tabledit-edit-button btn btn-primary waves-effect waves-light"
-                                                            style="background-color: #3E8BFF;">
-                                                            <span class="mdi mdi-pencil"></span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="btn-group btn-group-sm" style="float: none;">
-                                                        <button type="button" class="tabledit-edit-button btn btn-danger">
-                                                            <span class="mdi mdi-trash-can-outline"></span>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Entry Date</td>
-                                                <td>Description</td>
-                                                <td>Due Date</td>
-                                                <td class="text-center">
-                                                    <span class="badge bg-primary">Planned</span>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="btn-group btn-group-sm" style="float: none;">
-                                                        <button type="button"
-                                                            class="tabledit-edit-button btn btn-primary waves-effect waves-light"
-                                                            style="background-color: #3E8BFF;">
-                                                            <span class="mdi mdi-pencil"></span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="btn-group btn-group-sm" style="float: none;">
-                                                        <button type="button" class="tabledit-edit-button btn btn-danger">
-                                                            <span class="mdi mdi-trash-can-outline"></span>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Entry Date</td>
-                                                <td>Description</td>
-                                                <td>Due Date</td>
-                                                <td class="text-center">
-                                                    <span class="badge bg-warning">On Progress</span>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="btn-group btn-group-sm" style="float: none;">
-                                                        <button type="button"
-                                                            class="tabledit-edit-button btn btn-primary waves-effect waves-light"
-                                                            style="background-color: #3E8BFF;">
-                                                            <span class="mdi mdi-pencil"></span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="btn-group btn-group-sm" style="float: none;">
-                                                        <button type="button" class="tabledit-edit-button btn btn-danger">
-                                                            <span class="mdi mdi-trash-can-outline"></span>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                            @if ($productionCost->isEmpty())
+                                                <tr>
+                                                    <td colspan="4" align="center">Belum ada production cost</td>
+                                                </tr>
+                                            @else
+                                                @php($index = 1)
+                                                @foreach ($productionCost as $cost)
+                                                    <tr>
+                                                        <th scope="row">{{ $index++ }}</th>
+                                                        <td>{{ $cost['description'] }}</td>
+                                                        <td>{{ $cost['amount'] }}</td>
+                                                        <td class="text-center">
+                                                            <div class="btn-group btn-group-sm" style="float: none;">
+                                                                <button type="button"
+                                                                    class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                                                    style="background-color: #3E8BFF;">
+                                                                    <span class="mdi mdi-pencil"></span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="btn-group btn-group-sm" style="float: none;">
+                                                                <button type="button"
+                                                                    class="tabledit-edit-button btn btn-danger">
+                                                                    <span class="mdi mdi-trash-can-outline"></span>
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -276,9 +241,9 @@
                     <div class="col-xl-4">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="mt-0 header-title">{{ $project['label'] }}</h4>
+                                <h4 class="mt-0 header-title">{{ $projectData['label'] }}</h4>
                                 <p class="text-muted font-14 mb-3">
-                                    {{ $project['companyName'] }}
+                                    {{ $projectData['companyName'] }}
                                 </p>
                                 <div class="table-responsive">
                                     <table class="table mb-0">
@@ -288,61 +253,61 @@
                                             <tr>
                                                 <th scope="row">
                                                     <p class="title-text">Purchase Order Number</p>
-                                                    <p class="details-text">{{ $project['po'] }}</p>
+                                                    <p class="details-text">{{ $projectData['po'] }}</p>
                                                 </th>
                                             </tr>
                                             <tr>
                                                 <th scope="row">
                                                     <p class="title-text">Sales Order Number</p>
-                                                    <p class="details-text">{{ $project['so'] }}</p>
+                                                    <p class="details-text">{{ $projectData['so'] }}</p>
                                                 </th>
                                             </tr>
                                             <tr>
                                                 <th scope="row">
                                                     <p class="title-text">Customer Contact Name</p>
-                                                    <p class="details-text">{{ $project['contactName'] }}</p>
+                                                    <p class="details-text">{{ $projectData['contactName'] }}</p>
                                                 </th>
                                             </tr>
                                             <tr>
                                                 <th scope="row">
                                                     <p class="title-text">Project Manager</p>
-                                                    <p class="details-text">{{ $project['project_manager'] }}</p>
+                                                    <p class="details-text">{{ $projectData['project_manager'] }}</p>
                                                 </th>
                                             </tr>
                                             <tr>
                                                 <th scope="row">
                                                     <p class="title-text">Sales Executive</p>
-                                                    <p class="details-text">Tora Sudiro</p>
+                                                    <p class="details-text">{{ $projectData['sales_executive'] }}</p>
                                                 </th>
                                             </tr>
                                             <tr>
                                                 <th scope="row">
                                                     <p class="title-text">Start Date</p>
-                                                    <p class="details-text">05/09/2023</p>
+                                                    <p class="details-text">{{ $projectData['start_date'] }}</p>
                                                 </th>
                                             </tr>
                                             <tr>
                                                 <th scope="row">
                                                     <p class="title-text">End Date</p>
-                                                    <p class="details-text">06/09/2023</p>
+                                                    <p class="details-text">end_date</p>
                                                 </th>
                                             </tr>
                                             <tr>
                                                 <th scope="row">
                                                     <p class="title-text">Preliminary Cost</p>
-                                                    <p class="details-text">Rp. 1.000.000</p>
+                                                    <p class="details-text">{{ $projectData['preliminary_cost'] }}</p>
                                                 </th>
                                             </tr>
                                             <tr>
                                                 <th scope="row">
                                                     <p class="title-text">Purchase Order Amount</p>
-                                                    <p class="details-text">Rp. 12.000.000</p>
+                                                    <p class="details-text">{{ $projectData['po_amount'] }}</p>
                                                 </th>
                                             </tr>
                                             <tr>
                                                 <th scope="row">
                                                     <p class="title-text">Real Cost</p>
-                                                    <p class="details-text">Rp. 0</p>
+                                                    <p class="details-text">{{ $projectData['expense_budget'] }}</p>
                                                 </th>
                                             </tr>
                                             <tr>
