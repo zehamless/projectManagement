@@ -76,7 +76,6 @@ Route::prefix('customer')->group(function () {
 });
 
 Route::prefix('customerContact')->group(function () {
-<<<<<<< HEAD
      Route::get('/', [CustomerContactController::class, 'index'])->name('customerContact.index');
      Route::get('/create', [CustomerController::class, 'create'])->name('customerContact.create');
      Route::post('/store', [CustomerController::class, 'store'])->name('customerContact.store');
@@ -84,15 +83,6 @@ Route::prefix('customerContact')->group(function () {
      Route::get('/edit', [CustomerContactController::class, 'edit'])->name('customerContact.edit');
      Route::get('/update', [CustomerContactController::class, 'update'])->name('customerContact.update');
      Route::get('/delete', [CustomerContactController::class, 'delete'])->name('customerContact.delete');
-=======
-    Route::get('/', [CustomerContactController::class, 'index'])->name('customerContact.index');
-    Route::get('/indexcc/create', [CustomerController::class, 'create'])->name('customerContact.create');
-    Route::post('/indexcc/store', [CustomerController::class, 'store'])->name('customerContact.store');
-    Route::get('/indexcc/show', [CustomerController::class, 'show'])->name('customerContact.show');
-    Route::get('/indexcc/edit', [CustomerContactController::class, 'edit'])->name('customerContact.edit');
-    Route::get('/indexcc/update', [CustomerContactController::class, 'update'])->name('customerContact.update');
-    Route::get('/indexcc/destroy', [CustomerContactController::class, 'destroy'])->name('customerContact.destroy');
->>>>>>> 96059bb4e4c77581c4111311f9ef26a0615b8c5f
 });
 
 //contoh route (post(/admin/roles)
@@ -142,12 +132,4 @@ Route::get('/admin/createAkun', function () {
     return view('admin.createAkun');
 });
 
-<<<<<<< HEAD
-Route::get('createProjects', function () {
-    return view('createProjects');
-});
-require __DIR__.'/auth.php';
-;
-=======
 require __DIR__ . '/auth.php';
->>>>>>> 96059bb4e4c77581c4111311f9ef26a0615b8c5f
