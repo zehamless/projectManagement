@@ -11,6 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
+use Yajra\DataTables\DataTables;
 
 class UserController extends Controller
 {
@@ -19,7 +20,17 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        if (\request()->ajax()) {
+            $users = User::with('hasroles')->get();
+            return \Yajra\DataTables\Facades\DataTables::of($users)
+                ->addIndexColumn()
+                ->addColumn( 'roles', function (User $user) {
+                    return $user->hasroles->map(function (Role $role) {
+                        return $role->name;
+                    })->implode(', ');
+                })
+                ->toJson();
+        }
         return view('admin.olahAkun');
     }
 
