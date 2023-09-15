@@ -140,97 +140,10 @@
                                                         <div class="btn-group btn-group-sm" style="float: none;">
                                                             <button type="button"
                                                                 class="tabledit-edit-button btn btn-danger"
-                                                                id="sa-warning">
+                                                                onclick="deleteConfirmation()">
                                                                 <span class="mdi mdi-trash-can-outline"></span>
                                                             </button>
                                                         </div>
-
-                                                        {{-- modals --}}
-                                                        <div id="con-close-modal" class="modal fade" tabindex="-1"
-                                                            role="dialog" aria-labelledby="myModalLabel"
-                                                            aria-hidden="true" style="display: none;">
-                                                            <div class="modal-dialog modal-dialog-centered">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h4 class="modal-title">Edit Data Akun</h4>
-                                                                        <button type="button" class="btn-close"
-                                                                            data-bs-dismiss="modal"
-                                                                            aria-label="Close"></button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <div class="row">
-                                                                            <div class="col-md-12">
-                                                                                <div class="mb-3 text-start">
-                                                                                    <label for="field-3"
-                                                                                        class="form-label">Email</label>
-                                                                                    <input type="text"
-                                                                                        class="form-control"
-                                                                                        id="field-3"
-                                                                                        placeholder="type your email here">
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                            <div class="col-md-6">
-                                                                                <div class="mb-3 text-start">
-                                                                                    <label for="field-1"
-                                                                                        class="form-label">First
-                                                                                        Name</label>
-                                                                                    <input type="text"
-                                                                                        class="form-control"
-                                                                                        id="field-1"
-                                                                                        placeholder="First">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-md-6">
-                                                                                <div class="mb-3 text-start">
-                                                                                    <label for="field-2 "
-                                                                                        class="form-label">Last
-                                                                                        Name</label>
-                                                                                    <input type="text"
-                                                                                        class="form-control"
-                                                                                        id="field-2" placeholder="Last">
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                            <div class="col-md-12">
-                                                                                <div class="mb-3 text-start">
-                                                                                    <label for="field-3"
-                                                                                        class="form-label">Division
-                                                                                        Date</label>
-                                                                                    <input type="date"
-                                                                                        class="form-control"
-                                                                                        id="field-3"
-                                                                                        placeholder="Tanggal">
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                            <div class="col-md-12">
-                                                                                <div class="mb-3 text-start">
-                                                                                    <label for="field-3"
-                                                                                        class="form-label">Tanda
-                                                                                        Tangan</label>
-                                                                                    <input type="file"
-                                                                                        class="form-control"
-                                                                                        id="field-3">
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button"
-                                                                            class="btn btn-secondary waves-effect"
-                                                                            data-bs-dismiss="modal">Close</button>
-                                                                        <button type="button"
-                                                                            class="btn btn-editAccount waves-effect waves-light">Save
-                                                                            changes</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div><!-- /.modal -->
-                                                    </td>
                                                 </tr>
                                                 <tr class="even">
                                                     <td class="sorting_1 dtr-control">2</td>
@@ -253,7 +166,7 @@
                                                         <div class="btn-group btn-group-sm" style="float: none;">
                                                             <button type="button"
                                                                 class="tabledit-edit-button btn btn-danger"
-                                                                id="sa-warning">
+                                                                onclick="deleteConfirmation()">
                                                                 <span class="mdi mdi-trash-can-outline"></span>
                                                             </button>
                                                         </div>
@@ -281,7 +194,7 @@
                                                         <div class="btn-group btn-group-sm" style="float: none;">
                                                             <button type="button"
                                                                 class="tabledit-edit-button btn btn-danger"
-                                                                id="sa-warning">
+                                                                onclick="deleteConfirmation()">
                                                                 <span class="mdi mdi-trash-can-outline"></span>
                                                             </button>
                                                         </div>
@@ -308,7 +221,7 @@
                                                         <div class="btn-group btn-group-sm" style="float: none;">
                                                             <button type="button"
                                                                 class="tabledit-edit-button btn btn-danger"
-                                                                id="sa-warning">
+                                                                onclick="deleteConfirmation()">
                                                                 <span class="mdi mdi-trash-can-outline"></span>
                                                             </button>
                                                         </div>
@@ -337,13 +250,86 @@
                                                         <div class="btn-group btn-group-sm" style="float: none;">
                                                             <button type="button"
                                                                 class="tabledit-edit-button btn btn-danger"
-                                                                id="sa-warning">
+                                                                onclick="deleteConfirmation()">
                                                                 <span class="mdi mdi-trash-can-outline"></span>
                                                             </button>
                                                         </div>
                                                     </td>
                                                 </tr>
                                             </tbody>
+                                            {{-- modals --}}
+                                            <div id="con-close-modal" class="modal fade" tabindex="-1" role="dialog"
+                                                aria-labelledby="myModalLabel" aria-hidden="true"
+                                                style="display: none;">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Edit Data Akun</h4>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="mb-3 text-start">
+                                                                        <label for="field-3"
+                                                                            class="form-label">Email</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="field-3"
+                                                                            placeholder="type your email here">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="mb-3 text-start">
+                                                                        <label for="field-1" class="form-label">First
+                                                                            Name</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="field-1" placeholder="First">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="mb-3 text-start">
+                                                                        <label for="field-2 " class="form-label">Last
+                                                                            Name</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="field-2" placeholder="Last">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="mb-3 text-start">
+                                                                        <label for="field-3" class="form-label">Division
+                                                                            Date</label>
+                                                                        <input type="date" class="form-control"
+                                                                            id="field-3" placeholder="Tanggal">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="mb-3 text-start">
+                                                                        <label for="field-3" class="form-label">Tanda
+                                                                            Tangan</label>
+                                                                        <input type="file" class="form-control"
+                                                                            id="field-3">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary waves-effect"
+                                                                data-bs-dismiss="modal">Close</button>
+                                                            <button type="button"
+                                                                class="btn btn-editAccount waves-effect waves-light">Save
+                                                                changes</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- /.modal -->
+                                            </td>
                                         </table>
                                     </div>
                                 </div>
@@ -404,4 +390,25 @@
 
 <!-- Sweet alert init js-->
 <script src="{{ asset('templateAdmin/Admin/dist/assets/js/pages/sweet-alerts.init.js') }}"></script>
+
+<script>
+    function deleteConfirmation() {
+            Swal.fire({
+                title: "Are you sure to delete this account?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: !0,
+                confirmButtonColor: "#28bb4b",
+                cancelButtonColor: "#f34e4e",
+                confirmButtonText: "Yes, delete it!",
+            }).then(function (e) {
+                e.value &&
+                    Swal.fire(
+                        "Deleted!",
+                        "Your file has been deleted.",
+                        "success"
+                    );
+            });
+        }
+</script>
 @endsection
