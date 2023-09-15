@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class ProjectController extends Controller
@@ -39,8 +42,29 @@ class ProjectController extends Controller
     // Menampilkan form untuk membuat project baru
     public function create()
     {
-        return view('projects.create');
+        // Mengambil pengguna dengan peran "Project Manager" atau "Sales Executive"
+        $usersWithRoles = DB::table('users')
+            ->join('user_roles', 'users.id', '=', 'user_roles.user_id')
+            ->join('roles', 'user_roles.role_id', '=', 'roles.id')
+            ->whereIn('roles.name', ['Project Manager', 'Sales Executive'])
+            ->select('users.id', 'users.first_name', 'users.last_name', 'roles.name as role') // Menggunakan kolom first_name dan last_name
+            ->distinct()
+            ->get();
+
+        // Mengelompokkan pengguna berdasarkan peran (PM atau SE)
+        $usersByRole = [];
+        foreach ($usersWithRoles as $user) {
+            $role = $user->role;
+            if (!isset($usersByRole[$role])) {
+                $usersByRole[$role] = [];
+            }
+            $fullName = $user->first_name . ' ' . $user->last_name;
+            $usersByRole[$role][] = ['id' => $user->id, 'name' => $fullName];
+        }
+
+        return view('createProjects', compact('usersByRole'));
     }
+
 
     // Menyimpan project baru ke dalam database
     public function store(Request $request)
@@ -68,7 +92,7 @@ class ProjectController extends Controller
         // Simpan data ke dalam database
         Project::create($validatedData);
 
-//        return dd("Berhasil");
+        //        return dd("Berhasil");
     }
 
     public function show($id)
