@@ -51,7 +51,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="userName" class="form-label">Roles<span class="text-danger">*</span></label>
-                                <select id="roles" class="form-control"">
+                                <select id="roles" class="form-control">
                                     @foreach($roles as $role)
                                     <option value=" {{ $role->id }}">{{ $role->name }}</option>
                                     @endforeach

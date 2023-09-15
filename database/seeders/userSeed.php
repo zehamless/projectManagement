@@ -28,6 +28,11 @@ class userSeed extends Seeder
 //            'signature' => $file,
 //        ]);
         //generate user using UserFactory
-        User::factory()->count(50)->create();
+        $this->call(RoleSeeder::class);
+        $users = User::factory()->count(10)->create();
+        //assign role to user
+        foreach ($users as $user) {
+            $user->hasroles()->attach(random_int(1, 3));
+        }
     }
 }
