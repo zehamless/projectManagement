@@ -36,7 +36,7 @@ class ProjectController extends Controller
 
         $projects = $query;
 
-        return view('/projects', compact('projects'));
+        return view('projects', compact('projects'));
     }
 
     // Menampilkan form untuk membuat project baru

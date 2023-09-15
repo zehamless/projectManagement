@@ -81,12 +81,12 @@
                     </a>
                 </li>
 
-                <li>
+                {{-- <li>
                     <a href="{{ url('staff') }}">
                         <i class="mdi mdi-account-cog-outline"></i>
                         <span> Staff </span>
                     </a>
-                </li>
+                </li> --}}
 
                 <li class="menu-title mt-2">Account Management</li>
 
