@@ -124,6 +124,7 @@ Route::prefix('operationalAgenda')->group(function () {
     Route::get('/delete', [OperationalAgendaController::class, 'delete'])->name('operational_agenda.delete');
 });
 
+
 Route::get('/admin/olahAkun', function () {
     return view('admin.olahAkun');
 });
