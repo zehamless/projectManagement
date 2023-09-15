@@ -72,4 +72,5 @@
     });
 </script>
 
+
 @yield('pageScript')

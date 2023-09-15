@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CustomerContactController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\OperationalAgendaController;
 use App\Http\Controllers\OperationalController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
@@ -66,15 +67,24 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('customer')->group(function () {
     Route::get('/', [CustomerController::class, 'index'])->name('customer.index');
-    Route::get('/index/create', [CustomerController::class, 'create'])->name('customer.create');
-    Route::post('/index/store', [CustomerController::class, 'store'])->name('customer.store');
-    Route::get('/index/show', [CustomerController::class, 'show'])->name('customer.show');
-    Route::get('/index/edit', [CustomerController::class, 'edit'])->name('customer.edit');
-    Route::get('/index/update', [CustomerController::class, 'update'])->name('customer.update');
-    Route::delete('/index/destroy', [CustomerController::class, 'destroy'])->name('customer.destroy');
+    Route::get('/create', [CustomerController::class, 'create'])->name('customer.create');
+    Route::post('/store', [CustomerController::class, 'store'])->name('customer.store');
+    Route::get('/show', [CustomerController::class, 'show'])->name('customer.show');
+    Route::get('/edit', [CustomerController::class, 'edit'])->name('customer.edit');
+    Route::get('/update', [CustomerController::class, 'update'])->name('customer.update');
+    Route::delete('/delete', [CustomerController::class, 'delete'])->name('customer.delete');
 });
 
 Route::prefix('customerContact')->group(function () {
+<<<<<<< HEAD
+     Route::get('/', [CustomerContactController::class, 'index'])->name('customerContact.index');
+     Route::get('/create', [CustomerController::class, 'create'])->name('customerContact.create');
+     Route::post('/store', [CustomerController::class, 'store'])->name('customerContact.store');
+     Route::get('/show', [CustomerController::class, 'show'])->name('customerContact.show');
+     Route::get('/edit', [CustomerContactController::class, 'edit'])->name('customerContact.edit');
+     Route::get('/update', [CustomerContactController::class, 'update'])->name('customerContact.update');
+     Route::get('/delete', [CustomerContactController::class, 'delete'])->name('customerContact.delete');
+=======
     Route::get('/', [CustomerContactController::class, 'index'])->name('customerContact.index');
     Route::get('/indexcc/create', [CustomerController::class, 'create'])->name('customerContact.create');
     Route::post('/indexcc/store', [CustomerController::class, 'store'])->name('customerContact.store');
@@ -82,6 +92,7 @@ Route::prefix('customerContact')->group(function () {
     Route::get('/indexcc/edit', [CustomerContactController::class, 'edit'])->name('customerContact.edit');
     Route::get('/indexcc/update', [CustomerContactController::class, 'update'])->name('customerContact.update');
     Route::get('/indexcc/destroy', [CustomerContactController::class, 'destroy'])->name('customerContact.destroy');
+>>>>>>> 96059bb4e4c77581c4111311f9ef26a0615b8c5f
 });
 
 //contoh route (post(/admin/roles)
@@ -113,6 +124,15 @@ Route::prefix('operational')->group(function () {
     Route::post('/approve/{operational}', [OperationalController::class, 'approve'])->name('operational.approve');
 });
 
+Route::prefix('operationalAgenda')->group(function () {
+    Route::get('/', [OperationalAgendaController::class, 'index'])->name('operational_agenda.index');
+    Route::get('/create', [OperationalAgendaController::class, 'create'])->name('operational_agenda.create');
+    Route::post('/store', [OperationalAgendaController::class, 'store'])->name('operational_agenda.store');
+    Route::get('/show', [OperationalAgendaController::class, 'show'])->name('operational_agenda.show');
+    Route::get('/edit', [OperationalAgendaController::class, 'edit'])->name('operational_agenda.edit');
+    Route::get('/update',[OperationalAgendaController::class, 'update'])->name('operational_agenda.update');
+    Route::get('/delete', [OperationalAgendaController::class, 'delete'])->name('operational_agenda.delete');
+});
 
 Route::get('/admin/olahAkun', function () {
     return view('admin.olahAkun');
@@ -122,4 +142,12 @@ Route::get('/admin/createAkun', function () {
     return view('admin.createAkun');
 });
 
+<<<<<<< HEAD
+Route::get('createProjects', function () {
+    return view('createProjects');
+});
+require __DIR__.'/auth.php';
+;
+=======
 require __DIR__ . '/auth.php';
+>>>>>>> 96059bb4e4c77581c4111311f9ef26a0615b8c5f

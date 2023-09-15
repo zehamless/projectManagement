@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\CustomerContact;
+use App\Models\CustomerContact;
 
 class CustomerContactController extends Controller
 {
@@ -56,7 +56,7 @@ class CustomerContactController extends Controller
             ->with('success', 'Customer contact updated successfully.');
     }
 
-    public function destroy(CustomerContact $customerContact)
+    public function delete(CustomerContact $customerContact)
     {
         $customerContact->delete();
 

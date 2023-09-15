@@ -34,3 +34,28 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flot.tooltip/0.9.0/jquery.flot.tooltip.min.js"
     integrity="sha512-oQJB9y5mlxC4Qp62hdJi/J1NzqiGlpprSfkxVNeosn23mVn5JA4Yn+6f26wWOWCDbV9CxgJzFfVv9DNLPmhxQg=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<style>
+    /* navbar styling */
+    li.menuitem-active{
+        background-color: red;
+    }
+
+    li.menuitem-active > a > i {
+        color: white;
+    }
+
+    li.menuitem-active > a > span {
+        font-weight: 800;
+        color: white;
+    }
+
+    li > a > i:hover{
+        color: red;
+    }
+
+    li > a > span:hover{
+        color: red;
+    }
+    /* navbar styling end */
+</style>

@@ -51,7 +51,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="userName" class="form-label">Roles<span class="text-danger">*</span></label>
-                                <select id="roles" class="form-control"">
+                                <select id="select-roles" class="form-control" style="color: black;">
                                     @foreach($roles as $role)
                                     <option value=" {{ $role->id }}">{{ $role->name }}</option>
                                     @endforeach
@@ -79,8 +79,8 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="pass1" class="form-label">Password<span class="text-danger">*</span></label>
-                                <input id="pass1" type="password_confirmation" placeholder="Password" required=""
+                                <label for="pass1" class="form-label">Password Confirmation<span class="text-danger">*</span></label>
+                                <input id="pass1" type="password_confirmation" placeholder="Type your password again" required=""
                                     class="form-control" name="password_confirmation">
                                 @error('password_confirmation')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -99,4 +99,27 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('pageScript')
+<!-- Include jQuery (Select2 requires it) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Include Select2 CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
+<!-- Include Select2 JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#select-roles').select2({
+            // placeholder: 'role',
+            allowClear: true, // Option to clear selection
+            theme: 'classic', // Use a different theme (change CSS classes)
+            multiple: true
+        });
+    });
+
+</script>
 @endsection
