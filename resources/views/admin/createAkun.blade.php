@@ -52,7 +52,6 @@
                             <div class="mb-3">
                                 <label for="userName" class="form-label">Roles<span class="text-danger">*</span></label>
                                 <select id="select-roles" class="form-control" style="color: black;">
-                                    <option value="" disabled selected>--Pilih Role--</option>
                                     @foreach($roles as $role)
                                     <option value=" {{ $role->id }}">{{ $role->name }}</option>
                                     @endforeach
@@ -115,7 +114,7 @@
 <script>
     $(document).ready(function() {
         $('#select-roles').select2({
-            placeholder: 'Pilih Role', // Placeholder text
+            // placeholder: 'role',
             allowClear: true, // Option to clear selection
             theme: 'classic', // Use a different theme (change CSS classes)
             multiple: true
