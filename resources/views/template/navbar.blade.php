@@ -81,17 +81,10 @@
                     </a>
                 </li>
 
-                <li>
-                    <a href="{{ url('staff') }}">
-                        <i class="mdi mdi-account-cog-outline"></i>
-                        <span> Staff </span>
-                    </a>
-                </li>
-
                 <li class="menu-title mt-2">Account Management</li>
 
                 <li>
-                    <a href="{{ url('admin/olahAkun') }}">
+                    <a href="{{ url('admin/users') }}">
                         <i class="mdi mdi-account-group-outline"></i>
                         <span> Data Akun </span>
                     </a>
