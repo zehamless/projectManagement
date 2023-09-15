@@ -82,7 +82,11 @@ class ProjectController extends Controller
             'preliminary_cost' => 'required|numeric',
             'po_amount' => 'required|numeric',
             'expense_budget' => 'nullable|numeric',
-            'so' => 'nullable|string',
+            'so' => [
+                'nullable',
+                'string',
+                'regex:/^(S\d{1}\/\d{2}\/\d{4}|S\d{1}-\d{2}-\d{4}|S\d{1}\/\d{2}\/[A-Z\s]+)$/i',
+            ],
             'memo' => 'nullable|required_without_all:so|string',
         ], [
             'memo.required_without_all' => 'Memo harus diisi jika SO Number tidak diisi.',
@@ -92,7 +96,7 @@ class ProjectController extends Controller
         // Simpan data ke dalam database
         Project::create($validatedData);
 
-        //        return dd("Berhasil");
+        return dd("Berhasil");
     }
 
     public function show($id)
@@ -102,7 +106,7 @@ class ProjectController extends Controller
         // Ambil data proyek, serta data customer_id, customerContact_id, companyName, dan customerContactName
         $projectData = Project::select('projects.*', 'customers.id as customer_id', 'customer_contacts.id as customerContactId', 'customers.companyName', 'customer_contacts.name as contactName')
             ->leftJoin('customers', 'projects.customer_id', '=', 'customers.id')
-            ->leftJoin('customer_contacts', 'customers.id', '=', 'customer_contacts.customerContact_id')
+            ->leftJoin('customer_contacts', 'customers.id', '=', 'customer_contacts.customer_id')
             ->where('projects.id', $id)
             ->first();
 
