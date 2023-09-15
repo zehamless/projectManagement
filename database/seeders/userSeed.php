@@ -15,17 +15,19 @@ class userSeed extends Seeder
      */
     public function run(): void
     {
-        Storage::fake('avatars');
-
-        $file = UploadedFile::fake()->image('avatar.jpg');
-
-        User::create([
-            'first_name' => 'John',
-            'last_name' => 'Doe',
-            'email' => 'johndoe@test.com',
-            'division' => 'IT',
-            'password' => 'password',
-            'signature' => $file,
-        ]);
+//        Storage::fake('avatars');
+//
+//        $file = UploadedFile::fake()->image('avatar.jpg');
+//
+//        User::create([
+//            'first_name' => 'John',
+//            'last_name' => 'Doe',
+//            'email' => 'johndoe@test.com',
+//            'division' => 'IT',
+//            'password' => 'password',
+//            'signature' => $file,
+//        ]);
+        //generate user using UserFactory
+        User::factory()->count(10)->create();
     }
 }
