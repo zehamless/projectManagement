@@ -36,7 +36,7 @@ class ProjectController extends Controller
 
         $projects = $query;
 
-        return view('projects', compact('projects'));
+        return view('projects.projects', compact('projects'));
     }
 
     // Menampilkan form untuk membuat project baru
@@ -62,7 +62,7 @@ class ProjectController extends Controller
             $usersByRole[$role][] = ['id' => $user->id, 'name' => $fullName];
         }
 
-        return view('createProjects', compact('usersByRole'));
+        return view('projects.createProjects', compact('usersByRole'));
     }
 
 
@@ -124,7 +124,7 @@ class ProjectController extends Controller
 
         $productionCost = $project->productionCost()->orderBy('created_at', 'desc')->get();
 
-        return view('detailProjects', compact('milestones', 'projectData', 'productionCost', 'percentageDone'));
+        return view('projects.detailProjects', compact('milestones', 'projectData', 'productionCost', 'percentageDone'));
     }
 
 
@@ -134,7 +134,7 @@ class ProjectController extends Controller
     public function edit($id)
     {
         $project = Project::findOrFail($id);
-        return view('projects.edit', ['project' => $project]);
+        return view('projects.projects.edit', ['project' => $project]);
     }
 
     // Mengupdate project ke dalam database
