@@ -68,26 +68,37 @@ class ProjectController extends Controller
         // Simpan data ke dalam database
         Project::create($validatedData);
 
-        return dd("Berhasil");
+//        return dd("Berhasil");
     }
 
     public function show($id)
     {
         $project = Project::findOrFail($id);
+
         // Ambil data proyek, serta data customer_id, customerContact_id, companyName, dan customerContactName
-        $projectData = Project::select('projects.*', 'customers.id as customer_id', 'customer_contacts.id as customerContactId', 'customers.companyName', 'customer_contacts.name as contactName ')
+        $projectData = Project::select('projects.*', 'customers.id as customer_id', 'customer_contacts.id as customerContactId', 'customers.companyName', 'customer_contacts.name as contactName')
             ->leftJoin('customers', 'projects.customer_id', '=', 'customers.id')
             ->leftJoin('customer_contacts', 'customers.id', '=', 'customer_contacts.customerContact_id')
             ->where('projects.id', $id)
             ->first();
 
-
-
         // Ambil semua Milestone yang terkait dengan proyek ini dan urutkan berdasarkan created_at terbaru
-        $milestones = $project->milestones()->orderBy('created_at', 'desc')->get();
+        $milestones = $project->milestones;
+
+        // Hitung jumlah Milestone "done"
+        $doneMilestones = $milestones->where('progress', 'done')->count();
+
+        // Hitung total jumlah Milestone
+        $totalMilestones = $milestones->count();
+
+        // Hitung persentase "done"
+        $percentageDone = $totalMilestones > 0 ? ($doneMilestones / $totalMilestones) * 100 : 0;
+
         $productionCost = $project->productionCost()->orderBy('created_at', 'desc')->get();
-        return view('detailProjects', compact('milestones', 'projectData', 'productionCost'));
+
+        return view('detailProjects', compact('milestones', 'projectData', 'productionCost', 'percentageDone'));
     }
+
 
 
 

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CustomerContactController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\OperationalController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RoleController;
@@ -46,6 +47,9 @@ Route::get('/', function () {
 Route::get('/customer', function () {
     return view('customer');
 });
+Route::get('/formcustomer', function () {
+    return view('formcustomer');
+});
 Route::get('/staff', function () {
     return view('staff');
 });
@@ -87,8 +91,9 @@ Route::prefix('admin')->group(function () {
     Route::post('/roles', [RoleController::class, 'store'])->name('roles.store');
     Route::get('/roles/{role}/edit', [RoleController::class, 'updateForm'])->name('roles.updateForm');
     Route::patch('/roles/{role}', [RoleController::class, 'update'])->name('roles.update');
-    Route::delete('/roles/{role}', [RoleController::class, 'delete'])->name('roles.delete');
+    Route::delete('/roles', [RoleController::class, 'delete'])->name('roles.delete');
     Route::get('/roles/{role}', [RoleController::class, 'showRole'])->name('roles.show');
+
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::get('/users/create', [UserController::class, 'createForm'])->name('users.createForm');
     Route::post('/users', [UserController::class, 'store'])->name('users.store');
@@ -96,6 +101,18 @@ Route::prefix('admin')->group(function () {
     Route::patch('/users/{user}', [UserController::class, 'update'])->name('users.update');
     Route::delete('/users/{user}', [UserController::class, 'delete'])->name('users.delete');
 });
+
+Route::prefix('operational')->group(function () {
+    Route::get('/', [OperationalController::class, 'index'])->name('operational.index');
+    Route::get('/create', [OperationalController::class, 'createForm'])->name('operational.createForm');
+    Route::post('/store', [OperationalController::class, 'store'])->name('operational.store');
+    Route::get('/show', [OperationalController::class, 'show'])->name('operational.show');
+    Route::get('/{operational}/edit', [OperationalController::class, 'updateForm'])->name('operational.update-form');
+    Route::get('/{operational}', [OperationalController::class, 'update'])->name('operational.update');
+    Route::delete('/{operational}', [OperationalController::class, 'delete'])->name('operational.delete');
+    Route::post('/approve/{operational}', [OperationalController::class, 'approve'])->name('operational.approve');
+});
+
 
 Route::get('/admin/olahAkun', function () {
     return view('admin.olahAkun');
