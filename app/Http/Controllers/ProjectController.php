@@ -39,7 +39,7 @@ class ProjectController extends Controller
     // Menampilkan form untuk membuat project baru
     public function create()
     {
-        return view('projects.create');
+        return view('createProjects');
     }
 
     // Menyimpan project baru ke dalam database
@@ -68,7 +68,7 @@ class ProjectController extends Controller
         // Simpan data ke dalam database
         Project::create($validatedData);
 
-//        return dd("Berhasil");
+        //        return dd("Berhasil");
     }
 
     public function show($id)
