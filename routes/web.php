@@ -61,7 +61,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::prefix('customer')->group(function () {
-    Route::get('/index', [CustomerController::class, 'index'])->name('customer.index');
+    Route::get('/', [CustomerController::class, 'index'])->name('customer.index');
     Route::get('/index/create', [CustomerController::class, 'create'])->name('customer.create');
     Route::post('/index/store', [CustomerController::class, 'store'])->name('customer.store');
     Route::get('/index/show', [CustomerController::class, 'show'])->name('customer.show');
@@ -71,7 +71,7 @@ Route::prefix('customer')->group(function () {
 });
 
 Route::prefix('customerContact')->group(function () {
-     Route::get('/indexcc', [CustomerContactController::class, 'index'])->name('customerContact.index');
+     Route::get('/', [CustomerContactController::class, 'index'])->name('customerContact.index');
      Route::get('/indexcc/create', [CustomerController::class, 'create'])->name('customerContact.create');
      Route::post('/indexcc/store', [CustomerController::class, 'store'])->name('customerContact.store');
      Route::get('/indexcc/show', [CustomerController::class, 'show'])->name('customerContact.show');
