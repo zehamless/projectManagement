@@ -7,11 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class CustomerContact extends Model
 {
-    protected $fillable = ['customerContact_id', 'name', 'phone'];
+    protected $fillable = [
+        'company',
+        'phone'
+    ];
 
     // Definisi relasi dengan model Customer
     public function customer()
     {
-        return $this->belongsTo(Customer::class, 'customerContact_id', 'id');
+        return $this->belongsTo(Customer::class, 'company');
     }
 }
