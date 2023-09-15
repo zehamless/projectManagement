@@ -28,6 +28,6 @@ class userSeed extends Seeder
 //            'signature' => $file,
 //        ]);
         //generate user using UserFactory
-        User::factory()->count(10)->create();
+        User::factory()->count(50)->create();
     }
 }
