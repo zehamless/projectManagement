@@ -18,13 +18,16 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                <form action="#" class="parsley-examples" novalidate="">
+                                <form action="projects.store" method="post" class="parsley-examples" novalidate="">
                                     @csrf
                                     <div class="mb-3">
                                         <label for="emailAddress" class="form-label">Project Name<span
                                                 class="text-danger">*</span></label>
                                         <input type="email" name="email" parsley-trigger="change" required=""
                                             placeholder="Enter email" class="form-control" id="emailAddress">
+                                        @error('label')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">Customers<span
@@ -74,8 +77,9 @@
                                         <div class="col-md-4">
                                             <div class="mb-3">
                                                 <label for="userName" class="form-label">&nbsp;</label>
-                                                <input type="text" name="nick" parsley-trigger="change" required=""
-                                                    placeholder="Sales Order Code" class="form-control" id="userName">
+                                                <input type="text" name="nick" parsley-trigger="change"
+                                                    required="" placeholder="Sales Order Code" class="form-control"
+                                                    id="userName">
                                             </div>
                                         </div>
                                     </div>
