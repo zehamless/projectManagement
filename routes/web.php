@@ -25,7 +25,7 @@ Route::group(['prefix' => 'projects'], function () {
     // Menampilkan daftar project
     Route::get('/', [ProjectController::class, 'index'])->name('projects.index');
     // Menampilkan form untuk membuat project baru
-    Route::get('/create', [ProjectController::class, 'create'])->name('projects.create');
+    Route::get('/createProjects', [ProjectController::class, 'create'])->name('projects.createProjects');
     // Menyimpan project baru ke dalaFm database
     Route::post('/', [ProjectController::class, 'store'])->name('projects.store');
     // Menampilkan detail project
@@ -75,13 +75,13 @@ Route::prefix('customer')->group(function () {
 });
 
 Route::prefix('customerContact')->group(function () {
-     Route::get('/indexcc', [CustomerContactController::class, 'index'])->name('customerContact.index');
-     Route::get('/indexcc/create', [CustomerController::class, 'create'])->name('customerContact.create');
-     Route::post('/indexcc/store', [CustomerController::class, 'store'])->name('customerContact.store');
-     Route::get('/indexcc/show', [CustomerController::class, 'show'])->name('customerContact.show');
-     Route::get('/indexcc/edit', [CustomerContactController::class, 'edit'])->name('customerContact.edit');
-     Route::get('/indexcc/update', [CustomerContactController::class, 'update'])->name('customerContact.update');
-     Route::get('/indexcc/destroy', [CustomerContactController::class, 'destroy'])->name('customerContact.destroy');
+    Route::get('/indexcc', [CustomerContactController::class, 'index'])->name('customerContact.index');
+    Route::get('/indexcc/create', [CustomerController::class, 'create'])->name('customerContact.create');
+    Route::post('/indexcc/store', [CustomerController::class, 'store'])->name('customerContact.store');
+    Route::get('/indexcc/show', [CustomerController::class, 'show'])->name('customerContact.show');
+    Route::get('/indexcc/edit', [CustomerContactController::class, 'edit'])->name('customerContact.edit');
+    Route::get('/indexcc/update', [CustomerContactController::class, 'update'])->name('customerContact.update');
+    Route::get('/indexcc/destroy', [CustomerContactController::class, 'destroy'])->name('customerContact.destroy');
 });
 
 //contoh route (post(/admin/roles)
@@ -122,7 +122,4 @@ Route::get('/admin/createAkun', function () {
     return view('admin.createAkun');
 });
 
-Route::get('createProjects', function () {
-    return view('createProjects');
-});
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
