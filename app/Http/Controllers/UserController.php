@@ -24,7 +24,7 @@ class UserController extends Controller
             $users = User::with('hasroles')->get();
             return \Yajra\DataTables\Facades\DataTables::of($users)
                 ->addIndexColumn()
-                ->addColumn( 'roles', function (User $user) {
+                ->addColumn('roles', function (User $user) {
                     return $user->hasroles->map(function (Role $role) {
                         return $role->name;
                     })->implode(', ');
@@ -49,13 +49,14 @@ class UserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        dd($request->all());
+//        dd($request->all());
         $data = $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['nullable', 'string', 'max:255'],
             'division' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Password::defaults()],
+            'roles' => 'required',
         ]);
 
         $filepath = null;
@@ -72,7 +73,9 @@ class UserController extends Controller
             'signature' => $filepath,
             'password' => Hash::make($request->password),
         ]);
-//        \Session::flash('success', 'User berhasil ditambahkan');
+        foreach ($request->input('roles') as $role) {
+            $user->hasroles()->attach($role);
+        }
         return redirect()->route('users.index')->with('success', 'User berhasil ditambahkan');
     }
 
