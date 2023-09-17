@@ -57,20 +57,23 @@
 <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/pdfmake/build/vfs_fonts.js') }}"></script>
 
 
+<!-- Include jQuery (Select2 requires it) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Include Select2 CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
+<!-- Include Select2 JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+
 <!-- Plugin js-->
 <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/parsleyjs/parsley.min.js') }}"></script>
 
 <!-- Validation init js-->
 <script src="{{ asset('templateAdmin/Admin/dist/assets/js/pages/form-validation.init.js') }}"></script>
 
-{{-- select 2 --}}
-
-<script>
-    $(document).ready(function(){
-        $('#roles').select2({
-        });
-    });
-</script>
-
+<!-- Sweet alert init js-->
+<script src="{{ asset('templateAdmin/Admin/dist/assets/js/pages/sweet-alerts.init.js') }}"></script>
 
 @yield('pageScript')

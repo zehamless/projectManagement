@@ -684,9 +684,4 @@
 @endsection
 
 @section('pageScript')
-<!-- Sweet Alerts js -->
-<script src="{{ asset('templateAdmin/Admin/dist/assets/libs/sweetalert2/sweetalert2.all.min.js') }}"></script>
-
-<!-- Sweet alert init js-->
-<script src="{{ asset('templateAdmin/Admin/dist/assets/js/pages/sweet-alerts.init.js') }}"></script>
 @endsection
