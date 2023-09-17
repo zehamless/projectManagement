@@ -305,10 +305,20 @@
                                         </tr>
                                         <tr>
                                             <th scope="row">
-                                                <p class="title-text">Progress Milestone</p>
-                                                <p class="details-text">
-                                                <div id="donut-chart" style="width: auto; height: auto;">
-                                                </div>
+                                                    <div class="row text-center">
+                                                        <div class="col-md-6">
+                                                            {{-- <div style="width: fit-content; height: fit-content;"> --}}
+                                                                <p class="title-text">Progress Milestone</p>
+                                                                <canvas id="donut-chart"></canvas>
+                                                            {{-- </div> --}}
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            {{-- <div style="width: fit-content; height: fit-content;"> --}}
+                                                                <p class="title-text">Progress Payment</p>
+                                                                <canvas id="donut-chart2"></canvas>
+                                                            {{-- </div> --}}
+                                                        </div>
+                                                    </div>
                                                 </p>
                                             </th>
                                         </tr>
@@ -335,33 +345,77 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.pie.js"></script>
 
-<script>
-// Sample data
-var data = [
-    { label: "Category A", data: 30 },
-    { label: "Category B", data: 40 },
-    { label: "Category C", data: 20 },
-];
+{{-- js flot chart --}}
 
-$(document).ready(function () {
-    $.plot("#donut-chart", data, {
-        series: {
-            pie: {
-                show: true,
-                radius: 1,
-                label: {
-                    show: true,
-                    radius: 3 / 4,
-                    formatter: labelFormatter,
+
+<script>
+    // Sample data
+    var data = [70, 30];
+    // var labels = ["Completed"];
+
+
+    var ctx = document.getElementById("donut-chart").getContext("2d");
+
+    var donutChart = new Chart(ctx, {
+    type: "doughnut", // Specifies the chart type as a donut chart
+    data: {
+        // labels: labels,
+        datasets: [
+        {
+            data: data,
+            backgroundColor: ["#17D72A", "#F3F2F2"], // Customize segment colors
+        },
+        ],
+    },
+    options: {
+        cutout: "70%", // Control the size of the hole in the middle (percentage)
+            elements: {
+                arc: {
+                    borderWidth: 0, // Remove border
+                    borderRadius: 30, // Set border radius to round the edges
                 },
+        },    
+    },
+    });
+
+
+    // Function to format the labels
+    function labelFormatter(label, series) {
+        return `<div style="font-size:8pt; text-align:center; padding:2px; color:white;">${label}<br/>${Math.round(series.percent)}%</div>`;
+    }
+
+</script>
+
+<script>
+    // Sample data
+    var data = [80, 20];
+    // var labels = ["Total"];
+
+
+    var ctx = document.getElementById("donut-chart2").getContext("2d");
+
+    var donutChart = new Chart(ctx, {
+    type: "doughnut", // Specifies the chart type as a donut chart
+    data: {
+        // labels: labels,
+        datasets: [
+        {
+            data: data,
+            backgroundColor: ["#FE3E3E", "#F3F2F2"], // Customize segment colors
+        },
+        ],
+    },
+    options: {
+        cutout: "70%", // Control the size of the hole in the middle (percentage)
+        elements: {
+            arc: {
+                borderWidth: 0, // Remove border
+                borderRadius: 30, // Set border radius to round the edges
             },
         },
-        legend: {
-            show: true,
-            position: "ne",
-        },
+    },
     });
-});
+
 
 // Function to format the labels
 function labelFormatter(label, series) {

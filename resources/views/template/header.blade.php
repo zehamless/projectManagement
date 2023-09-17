@@ -29,6 +29,9 @@
 <link href="{{ asset('templateAdmin/Admin/dist/assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet"
     type="text/css" />
 
+{{-- chart js --}}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
 <!-- icons -->
 <link href="{{ asset('templateAdmin/Admin/dist/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />

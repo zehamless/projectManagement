@@ -17,9 +17,6 @@
 <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/morris.js06/morris.min.js') }}"></script>
 <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/raphael/raphael.min.js') }}"></script>
 
-<!-- init js -->
-<script src="{{ asset('templateAdmin/Admin/dist/assets/js/pages/flot.init.js') }}"></script>
-
 <!-- Dashboar init js-->
 <script src="{{ asset('templateAdmin/Admin/dist/assets/js/pages/dashboard.init.js') }}"></script>
 
