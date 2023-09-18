@@ -140,4 +140,8 @@ Route::get('/projects/createProductionCost', function () {
     return view('projects.createProductionCost');
 });
 
+Route::get('/projects/createOperational', function () {
+    return view('projects.createOperational');
+});
+
 require __DIR__ . '/auth.php';

@@ -183,7 +183,7 @@
                                     <h4 class="mt-0 header-title">Field Service Log</h4>
                                 </div>
                                 <div class="col-sm-4">
-                                    <a href="#" class="btn btn-createItems w-md waves-effect waves-light mb-3 px-4"><i
+                                    <a href="{{ url('projects/createOperational') }}" class="btn btn-createItems w-md waves-effect waves-light mb-3 px-4"><i
                                             class="mdi mdi-plus"></i>Add Operational</a>
                                 </div>
                             </div>
@@ -197,6 +197,7 @@
                                             <th>Project Label</th>
                                             <th>Service Type</th>
                                             <th>SPK Code</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -207,6 +208,7 @@
                                             <td>Project Label</td>
                                             <td>Service Type</td>
                                             <td>SPK Code</td>
+                                            <td></td>
                                         </tr>
                                         <tr>
                                             <th scope="row">2</th>
@@ -215,6 +217,7 @@
                                             <td>Project Label</td>
                                             <td>Service Type</td>
                                             <td>SPK Code</td>
+                                            <td></td>
                                         </tr>
                                         <tr>
                                             <th scope="row">3</th>
@@ -223,6 +226,7 @@
                                             <td>Project Label</td>
                                             <td>Service Type</td>
                                             <td>SPK Code</td>
+                                            <td></td>
                                         </tr>
                                     </tbody>
                                 </table>
