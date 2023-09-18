@@ -20,7 +20,7 @@
                                         <input type="date" name="submitted_date" parsley-trigger="change" required=""
                                             placeholder="Enter user name" class="form-control" id="submitted_date">
                                         @error('submitted_date')
-                                            <p>{{ $message }}</p>
+                                            <p style="color: red;">{{ $message }}</p>
                                         @enderror
                                     </div>
                                     <div class="mb-3">
@@ -29,7 +29,7 @@
                                         <input type="text" name="description" parsley-trigger="change" required=""
                                             placeholder="Enter user name" class="form-control" id="userName">
                                         @error('description')
-                                            <p>{{ $message }}</p>
+                                            <p style="color: red;">{{ $message }}</p>
                                         @enderror
                                     </div>
                                     <div class="mb-3">
@@ -38,7 +38,7 @@
                                         <input type="date" name="due_date" parsley-trigger="change" required=""
                                             placeholder="Enter user name" class="form-control" id="userName">
                                         @error('due_date')
-                                            <p>{{ $message }}</p>
+                                            <p style="color: red;">{{ $message }}</p>
                                         @enderror
                                     </div>
                                     <div class="mb-3">
@@ -50,7 +50,7 @@
                                             <option value="Done">Done</option>
                                         </select>
                                         @error('progress')
-                                            <p>{{ $message }}</p>
+                                            <p style="color: red;">{{ $message }}</p>
                                         @enderror
                                     </div>
                                     <div class="text-end">
