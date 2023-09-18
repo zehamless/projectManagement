@@ -56,4 +56,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class, 'user_roles', 'user_id', 'role_id');
     }
+
+    public function operational(): BelongsToMany
+    {
+        return $this->belongsToMany(operational::class, 'operational_team', 'user_id', 'operational_id');
+    }
 }

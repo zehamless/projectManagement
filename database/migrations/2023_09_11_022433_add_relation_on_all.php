@@ -43,12 +43,6 @@ return new class extends Migration
             $table->uuid('operational_id')->after('id');
             $table->foreign('operational_id')->references('id')->on('operationals')->cascadeOnDelete();
         });
-        Schema::table('operational_team', function (Blueprint $table) {
-            $table->uuid('operational_id')->after('id');
-            $table->uuid('technicianTeam_id')->after('operational_id');
-            $table->foreign('operational_id')->references('id')->on('operationals')->cascadeOnDelete();
-            $table->foreign('technicianTeam_id')->references('id')->on('technician_team')->cascadeOnDelete();
-        });
     }
 
     /**

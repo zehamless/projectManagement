@@ -238,6 +238,7 @@
         $(document).ready(function () {
             var table = $('#datatable').DataTable({
                 processing: true,
+                responsive: true,
                 serverSide: true,
                 ajax: "{{ route('users.index') }}",
                 columns: [

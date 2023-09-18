@@ -12,8 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('operational_team', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('division');
+            $table->foreignUuid('user_id');
+            $table->foreignUuid('operational_id');
+            $table->primary(['user_id', 'operational_id']);
             $table->timestamps();
         });
     }
