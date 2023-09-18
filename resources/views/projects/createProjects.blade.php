@@ -1,13 +1,6 @@
 @extends('template.index')
 
 @section('content')
-<style>
-    .btn-saveProjects {
-        background-color: #FF3E3E;
-        border: #FF3E3E;
-        color: white;
-    }
-</style>
 
 <div class="content-page">
     <div class="content">
@@ -168,7 +161,7 @@
                                         <button type="button" class="btn btn-secondary waves-effect"
                                             onclick="">Cancel</button>
                                     </a>
-                                    <button class="btn btn-saveProjects waves-effect waves-light px-4" type="submit"
+                                    <button class="btn btn-save waves-effect waves-light px-4" type="submit"
                                         onclick="saveConfirmation()">Save</button>
                                 </div>
                             </form>

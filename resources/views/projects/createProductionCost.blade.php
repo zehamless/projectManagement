@@ -14,31 +14,23 @@
                             <form action="" method="post" class="parsley-examples" novalidate="">
                                 @csrf
                                 <div class="mb-3">
-                                    <label for="userName" class="form-label">Entry Date<span
+                                    <label for="userName" class="form-label">Projects<span
                                             class="text-danger">*</span></label>
-                                    <input type="date" name="" parsley-trigger="change" required=""
-                                        placeholder="Enter user name" class="form-control" id="userName">
+                                    <input type="text" name="" parsley-trigger="change" required=""
+                                        value="Project name di generate dari parent" class="form-control" readonly>
                                 </div>
+                                @csrf
                                 <div class="mb-3">
                                     <label for="userName" class="form-label">Description<span
                                             class="text-danger">*</span></label>
                                     <input type="text" name="" parsley-trigger="change" required=""
-                                        placeholder="Enter user name" class="form-control" id="userName">
+                                        placeholder="Enter description" class="form-control" >
                                 </div>
                                 <div class="mb-3">
-                                    <label for="userName" class="form-label">Due Date<span
+                                    <label for="userName" class="form-label">Amount<span
                                             class="text-danger">*</span></label>
-                                    <input type="date" name="nick" parsley-trigger="change" required=""
-                                        placeholder="Enter user name" class="form-control" id="userName">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="project_manager" class="form-label">Status<span
-                                            class="text-danger">*</span></label>
-                                    <select class="form-control" id="project_manager" name="project_manager">
-                                        <option value="">Planned</option>
-                                        <option value="">On Progress</option>
-                                        <option value="">Done</option>
-                                    </select>
+                                    <input type="text" name="" parsley-trigger="change" required=""
+                                        placeholder="Enter amount" class="form-control">
                                 </div>
                                 <div class="text-end">
                                     <a href="{{ url('projects') }}">

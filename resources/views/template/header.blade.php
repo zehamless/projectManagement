@@ -66,4 +66,10 @@
     #sidebar-menu>ul>li>a:active {
         color: red;
     }
+
+    .btn-save {
+        background-color: #FF3E3E;
+        border: #FF3E3E;
+        color: white;
+    }
 </style>

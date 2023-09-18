@@ -136,4 +136,8 @@ Route::get('/projects/createMilestone', function () {
     return view('projects.createMilestone');
 });
 
+Route::get('/projects/createProductionCost', function () {
+    return view('projects.createProductionCost');
+});
+
 require __DIR__ . '/auth.php';
