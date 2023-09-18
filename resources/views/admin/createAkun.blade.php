@@ -79,8 +79,8 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="pass1" class="form-label">Password<span class="text-danger">*</span></label>
-                                <input id="pass1" type="password_confirmation" placeholder="Password" required=""
+                                <label for="pass1" class="form-label">Password Confirmation<span class="text-danger">*</span></label>
+                                <input id="pass1" type="password_confirmation" placeholder="Type your password again" required=""
                                     class="form-control" name="password_confirmation">
                                 @error('password_confirmation')
                                 <div class="alert alert-danger">{{ $message }}</div>

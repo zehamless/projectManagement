@@ -10,14 +10,12 @@ class CustomerController extends Controller
     // Menampilkan daftar data
     public function index()
     {
-        // Mengambil data customer_id dan company dari tabel customer_companies dan companies
-        $customer = Customer::select('customer.customer_id', 'companies.company')
-            ->join('companies', 'customer.company_id', '=', 'companies.id')
-            ->get();
-
-        return view('customer.index', compact('customer'));
+        // Mengambil data customer_id dan company dari tabel customers
+        {
+            $customers = Customer::select('customer_id', 'company')->get();
+            return view('customers.index', compact('customers'));
+        }
     }
-
     // Menampilkan formulir untuk membuat data baru
     public function create()
     {
@@ -70,7 +68,7 @@ class CustomerController extends Controller
     }
 
     // Menghapus data dari database
-    public function destroy(Customer $customer)
+    public function delete(Customer $customer)
     {
         $customer->delete();
 

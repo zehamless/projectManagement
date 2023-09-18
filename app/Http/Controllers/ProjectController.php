@@ -36,7 +36,7 @@ class ProjectController extends Controller
 
         $projects = $query;
 
-        return view('/projects', compact('projects'));
+        return view('projects.projects', compact('projects'));
     }
 
     // Menampilkan form untuk membuat project baru
@@ -62,7 +62,7 @@ class ProjectController extends Controller
             $usersByRole[$role][] = ['id' => $user->id, 'name' => $fullName];
         }
 
-        return view('createProjects', compact('usersByRole'));
+        return view('projects.createProjects', compact('usersByRole'));
     }
 
 
@@ -82,7 +82,11 @@ class ProjectController extends Controller
             'preliminary_cost' => 'required|numeric',
             'po_amount' => 'required|numeric',
             'expense_budget' => 'nullable|numeric',
-            'so' => 'nullable|string',
+            'so' => [
+                'nullable',
+                'string',
+                'regex:/^(S\d{1}\/\d{2}\/\d{4}|S\d{1}-\d{2}-\d{4}|S\d{1}\/\d{2}\/[A-Z\s]+)$/i',
+            ],
             'memo' => 'nullable|required_without_all:so|string',
         ], [
             'memo.required_without_all' => 'Memo harus diisi jika SO Number tidak diisi.',
@@ -92,7 +96,7 @@ class ProjectController extends Controller
         // Simpan data ke dalam database
         Project::create($validatedData);
 
-        //        return dd("Berhasil");
+        return dd("Berhasil");
     }
 
     public function show($id)
@@ -102,7 +106,7 @@ class ProjectController extends Controller
         // Ambil data proyek, serta data customer_id, customerContact_id, companyName, dan customerContactName
         $projectData = Project::select('projects.*', 'customers.id as customer_id', 'customer_contacts.id as customerContactId', 'customers.companyName', 'customer_contacts.name as contactName')
             ->leftJoin('customers', 'projects.customer_id', '=', 'customers.id')
-            ->leftJoin('customer_contacts', 'customers.id', '=', 'customer_contacts.customerContact_id')
+            ->leftJoin('customer_contacts', 'customers.id', '=', 'customer_contacts.customer_id')
             ->where('projects.id', $id)
             ->first();
 
@@ -120,7 +124,7 @@ class ProjectController extends Controller
 
         $productionCost = $project->productionCost()->orderBy('created_at', 'desc')->get();
 
-        return view('detailProjects', compact('milestones', 'projectData', 'productionCost', 'percentageDone'));
+        return view('projects.detailProjects', compact('milestones', 'projectData', 'productionCost', 'percentageDone'));
     }
 
 
@@ -130,7 +134,7 @@ class ProjectController extends Controller
     public function edit($id)
     {
         $project = Project::findOrFail($id);
-        return view('projects.edit', ['project' => $project]);
+        return view('projects.projects.edit', ['project' => $project]);
     }
 
     // Mengupdate project ke dalam database
@@ -157,7 +161,7 @@ class ProjectController extends Controller
         $project = Project::findOrFail($id);
         $project->update($validatedData);
 
-        return redirect('/projects')->with('success', 'Project berhasil diperbarui.');
+        return redirect('/projects/projects')->with('success', 'Project berhasil diperbarui.');
     }
 
     // Menghapus project dari database
@@ -166,6 +170,6 @@ class ProjectController extends Controller
         $project = Project::findOrFail($id);
         $project->delete();
 
-        return redirect('/projects')->with('success', 'Project berhasil dihapus.');
+        return redirect('/projects/projects')->with('success', 'Project berhasil dihapus.');
     }
 }

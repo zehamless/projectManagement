@@ -22,9 +22,16 @@
 <link href="{{ asset('templateAdmin/Admin/dist/assets/libs/datatables.net-select-bs5/css/select.bootstrap5.min.css') }}"
     rel="stylesheet" type="text/css" />
 
+<!-- Plugins dropzone file upload css -->
+<link href="assets/libs/dropzone/min/dropzone.min.css" rel="stylesheet" type="text/css" />
+<link href="assets/libs/dropify/css/dropify.min.css" rel="stylesheet" type="text/css" />
+
 <!-- Sweet Alert-->
 <link href="{{ asset('templateAdmin/Admin/dist/assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet"
     type="text/css" />
+
+{{-- chart js --}}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
 <!-- icons -->
@@ -38,25 +45,34 @@
 
 <style>
     /* navbar styling */
-    li.menuitem-active{
+    li.menuitem-active {
         background-color: red;
     }
 
-    li.menuitem-active > a > i {
+    li.menuitem-active>a>i {
         color: white;
     }
 
-    li.menuitem-active > a > span {
+    li.menuitem-active>a>span {
         font-weight: 800;
         color: white;
     }
 
-    li > a > i:hover{
+    /* navbar styling end */
+
+    #sidebar-menu>ul>li>a:hover {
         color: red;
     }
 
-    li > a > span:hover{
+    #sidebar-menu>ul>li>a:active {
         color: red;
     }
+
     /* navbar styling end */
+</style>
+    .btn-save {
+        background-color: #FF3E3E;
+        border: #FF3E3E;
+        color: white;
+    }
 </style>
