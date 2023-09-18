@@ -55,7 +55,7 @@
 
 
 <!-- Include jQuery (Select2 requires it) -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{{--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>--}}
 
 <!-- Include Select2 CSS -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />

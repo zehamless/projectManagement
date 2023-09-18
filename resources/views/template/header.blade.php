@@ -69,7 +69,7 @@
     }
 
     /* navbar styling end */
-</style>
+
     .btn-save {
         background-color: #FF3E3E;
         border: #FF3E3E;
