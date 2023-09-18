@@ -289,12 +289,9 @@
             }
         });
     }
-
-
 </script>
-<!-- Sweet alert init js-->
-<script src="{{ asset('templateAdmin/Admin/dist/assets/js/pages/sweet-alerts.init.js') }}"></script>
 
+{{--
 <script>
     function deleteConfirmation() {
             Swal.fire({
@@ -314,5 +311,5 @@
                     );
             });
         }
-</script>
+</script> --}}
 @endsection
