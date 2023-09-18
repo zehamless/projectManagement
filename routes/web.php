@@ -77,9 +77,9 @@ Route::prefix('customer')->group(function () {
 
 Route::prefix('customerContact')->group(function () {
     Route::get('/', [CustomerContactController::class, 'index'])->name('customerContact.index');
-    Route::get('/create', [CustomerController::class, 'create'])->name('customerContact.create');
-    Route::post('/store', [CustomerController::class, 'store'])->name('customerContact.store');
-    Route::get('/show', [CustomerController::class, 'show'])->name('customerContact.show');
+    Route::get('/create', [CustomerContactController::class, 'create'])->name('customerContact.create');
+    Route::post('/store', [CustomerContactController::class, 'store'])->name('customerContact.store');
+    Route::get('/show', [CustomerContactController::class, 'show'])->name('customerContact.show');
     Route::get('/edit', [CustomerContactController::class, 'edit'])->name('customerContact.edit');
     Route::get('/update', [CustomerContactController::class, 'update'])->name('customerContact.update');
     Route::get('/delete', [CustomerContactController::class, 'delete'])->name('customerContact.delete');
