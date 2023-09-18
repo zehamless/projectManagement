@@ -11,18 +11,20 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
-use Yajra\DataTables\DataTables;
+use Yajra\DataTables\Facades\DataTables;
+
 
 class UserController extends Controller
 {
     /**
-     * @return Application|Factory|View|\Illuminate\Foundation\Application
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
     public function index()
     {
         if (\request()->ajax()) {
             $users = User::with('hasroles')->get();
-            return \Yajra\DataTables\Facades\DataTables::of($users)
+            return DataTables::of($users)
                 ->addIndexColumn()
                 ->addColumn('roles', function (User $user) {
                     return $user->hasroles->map(function (Role $role) {
@@ -129,5 +131,11 @@ class UserController extends Controller
         }
         $user->delete();
         return redirect()->route('users.index')->with('success', 'User berhasil dihapus');
+    }
+
+    public function show($user)
+    {
+        $users = User::with('hasroles')->where('id', $user)->get();
+        return response()->json($users);
     }
 }
