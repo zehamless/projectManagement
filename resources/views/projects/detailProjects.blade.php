@@ -56,7 +56,8 @@
                                     <h4 class="mt-0 header-title">Milestone</h4>
                                 </div>
                                 <div class="col-sm-4">
-                                    <a href="{{ url('projects/createMilestone') }}" class="btn btn-createItems w-md waves-effect waves-light mb-3 px-4"><i
+                                    <a href="{{ url('projects/createMilestone') }}"
+                                        class="btn btn-createItems w-md waves-effect waves-light mb-3 px-4"><i
                                             class="mdi mdi-plus"></i>Add Milestone</a>
                                 </div>
                             </div>
@@ -125,7 +126,8 @@
                                     <h4 class="mt-0 header-title">Production Cost</h4>
                                 </div>
                                 <div class="col-sm-4">
-                                    <a href="{{ url('projects/createProductionCost') }}" class="btn btn-createItems w-md waves-effect waves-light mb-3 px-4"><i
+                                    <a href="{{ url('projects/createProductionCost') }}"
+                                        class="btn btn-createItems w-md waves-effect waves-light mb-3 px-4"><i
                                             class="mdi mdi-plus"></i>Add Cost</a>
                                 </div>
                             </div>
@@ -183,7 +185,8 @@
                                     <h4 class="mt-0 header-title">Field Service Log</h4>
                                 </div>
                                 <div class="col-sm-4">
-                                    <a href="{{ url('projects/createOperational') }}" class="btn btn-createItems w-md waves-effect waves-light mb-3 px-4"><i
+                                    <a href="{{ url('projects/createOperational') }}"
+                                        class="btn btn-createItems w-md waves-effect waves-light mb-3 px-4"><i
                                             class="mdi mdi-plus"></i>Add Operational</a>
                                 </div>
                             </div>
@@ -208,7 +211,20 @@
                                             <td>Project Label</td>
                                             <td>Service Type</td>
                                             <td>SPK Code</td>
-                                            <td></td>
+                                            <td>
+                                                <div class="btn-group btn-group-sm" style="float: none;">
+                                                    <button type="button"
+                                                        class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                                        style="background-color: #3E8BFF;">
+                                                        <span class="mdi mdi-pencil"></span>
+                                                </button>
+                                                </div>
+                                                <div class="btn-group btn-group-sm" style="float: none;">
+                                                    <button type="button" class="tabledit-edit-button btn btn-danger">
+                                                        <span class="mdi mdi-trash-can-outline"></span>
+                                                    </button>
+                                                </div>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <th scope="row">2</th>
@@ -217,7 +233,20 @@
                                             <td>Project Label</td>
                                             <td>Service Type</td>
                                             <td>SPK Code</td>
-                                            <td></td>
+                                            <td>
+                                                <div class="btn-group btn-group-sm" style="float: none;">
+                                                    <button type="button"
+                                                        class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                                        style="background-color: #3E8BFF;">
+                                                        <span class="mdi mdi-pencil"></span>
+                                                    </button>
+                                                </div>
+                                                <div class="btn-group btn-group-sm" style="float: none;">
+                                                    <button type="button" class="tabledit-edit-button btn btn-danger">
+                                                        <span class="mdi mdi-trash-can-outline"></span>
+                                                    </button>
+                                                </div>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <th scope="row">3</th>
@@ -226,7 +255,20 @@
                                             <td>Project Label</td>
                                             <td>Service Type</td>
                                             <td>SPK Code</td>
-                                            <td></td>
+                                            <td>
+                                                <div class="btn-group btn-group-sm" style="float: none;">
+                                                    <button type="button"
+                                                        class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                                        style="background-color: #3E8BFF;">
+                                                        <span class="mdi mdi-pencil"></span>
+                                                    </button>
+                                                </div>
+                                                <div class="btn-group btn-group-sm" style="float: none;">
+                                                    <button type="button" class="tabledit-edit-button btn btn-danger">
+                                                        <span class="mdi mdi-trash-can-outline"></span>
+                                                    </button>
+                                                </div>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -309,20 +351,22 @@
                                         </tr>
                                         <tr>
                                             <th scope="row">
-                                                    <div class="row text-center">
-                                                        <div class="col-md-6">
-                                                            {{-- <div style="width: fit-content; height: fit-content;"> --}}
-                                                                <p class="title-text">Progress Milestone</p>
-                                                                <canvas id="donut-chart"></canvas>
-                                                            {{-- </div> --}}
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            {{-- <div style="width: fit-content; height: fit-content;"> --}}
-                                                                <p class="title-text">Progress Payment</p>
-                                                                <canvas id="donut-chart2"></canvas>
-                                                            {{-- </div> --}}
-                                                        </div>
+                                                <div class="row text-center">
+                                                    <div class="col-md-6">
+                                                        {{-- <div style="width: fit-content; height: fit-content;"> --}}
+                                                            <p class="title-text">Progress Milestone</p>
+                                                            <canvas id="donut-chart"></canvas>
+                                                            {{--
+                                                        </div> --}}
                                                     </div>
+                                                    <div class="col-md-6">
+                                                        {{-- <div style="width: fit-content; height: fit-content;"> --}}
+                                                            <p class="title-text">Progress Payment</p>
+                                                            <canvas id="donut-chart2"></canvas>
+                                                            {{--
+                                                        </div> --}}
+                                                    </div>
+                                                </div>
                                                 </p>
                                             </th>
                                         </tr>
