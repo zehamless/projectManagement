@@ -29,7 +29,7 @@ class userSeed extends Seeder
         //        ]);
         //generate user using UserFactory
         $this->call(RoleSeeder::class);
-        $users = User::factory()->count(15)->create();
+        $users = User::factory()->count(5)->create();
         //assign role to user
         foreach ($users as $user) {
             $user->hasroles()->attach(random_int(1, 3));
