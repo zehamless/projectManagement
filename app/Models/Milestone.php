@@ -10,4 +10,11 @@ class Milestone extends Model
 {
     use HasFactory;
     use HasUlids;
+
+    protected $fillable = [
+        'submitted_date',
+        'description',
+        'due_date',
+        'progress',
+    ];
 }
