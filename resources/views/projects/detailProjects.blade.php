@@ -56,7 +56,7 @@
                                     <h4 class="mt-0 header-title">Milestone</h4>
                                 </div>
                                 <div class="col-sm-4">
-                                    <a href="#" class="btn btn-createItems w-md waves-effect waves-light mb-3 px-4"><i
+                                    <a href="{{ url('projects/createMilestone') }}" class="btn btn-createItems w-md waves-effect waves-light mb-3 px-4"><i
                                             class="mdi mdi-plus"></i>Add Milestone</a>
                                 </div>
                             </div>

@@ -132,4 +132,8 @@ Route::get('/admin/createAkun', function () {
     return view('admin.createAkun');
 });
 
+Route::get('/projects/createMilestone', function () {
+    return view('projects.createMilestone');
+});
+
 require __DIR__ . '/auth.php';

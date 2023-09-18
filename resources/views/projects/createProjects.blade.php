@@ -173,8 +173,6 @@
                                 </div>
                             </form>
                         </div>
-                        <button class="btn btn-saveProjects waves-effect waves-light px-4" type="submit"
-                                        onclick="saveConfirmation()">Save</button>
                     </div>
                 </div>
             </div>
