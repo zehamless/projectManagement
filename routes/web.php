@@ -46,6 +46,7 @@ Route::group(['prefix' => 'projects'], function () {
 Route::get('/', function () {
     return view('dashboard');
 });
+
 Route::get('/customer', function () {
     return view('customer');
 });
