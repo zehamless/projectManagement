@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Operational;
 use Illuminate\Http\Request;
-use Illuminate\Support\ViewErrorBag;
+use App\OperationalAgenda;
 
 class OperationalAgendaController extends Controller
 {
@@ -85,5 +84,4 @@ class OperationalAgendaController extends Controller
         return redirect()->route('operational_agenda.index')
             ->with('success', 'Data operational agenda berhasil dihapus.');
      }
-
 }

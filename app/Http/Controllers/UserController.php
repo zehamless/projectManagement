@@ -11,18 +11,20 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
-use Yajra\DataTables\DataTables;
+use Yajra\DataTables\Facades\DataTables;
+
 
 class UserController extends Controller
 {
     /**
-     * @return Application|Factory|View|\Illuminate\Foundation\Application
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
     public function index()
     {
         if (\request()->ajax()) {
             $users = User::with('hasroles')->get();
-            return \Yajra\DataTables\Facades\DataTables::of($users)
+            return DataTables::of($users)
                 ->addIndexColumn()
                 ->addColumn('roles', function (User $user) {
                     return $user->hasroles->map(function (Role $role) {
@@ -88,13 +90,11 @@ class UserController extends Controller
         return view('users.updateForm', compact('user'));
     }
 
-    /**
-     * @param Request $request
-     * @param User $user
-     * @return RedirectResponse
-     */
-    public function update(Request $request, User $user): RedirectResponse
+
+    public function update(Request $request, User $user)
     {
+        $users = User::find($user->id);
+//        dd($request->all());
         $request->validate([
             'first_name' => ['string', 'max:255'],
             'last_name' => ['nullable', 'string', 'max:255'],
@@ -108,14 +108,16 @@ class UserController extends Controller
             $filepath = $file->store('public/signatures');
         }
 
-        $user->update([
+       $user = $user->update([
             'first_name' => $request->first_name ?? $user->first_name,
             'last_name' => $request->last_name ?? $user->last_name,
             'email' => $request->email ?? $user->email,
             'division' => $request->division ?? $user->division,
             'signature' => $filepath ?? $user->signature,
         ]);
-        return redirect()->route('users.index')->with('success', 'User berhasil diupdate');
+        $users->hasroles()->sync($request->roles);
+//        return redirect()->route('users.index')->with('success', 'User berhasil diupdate');
+        return session()->flash('success', 'User berhasil diupdate');
     }
 
     /**
@@ -128,6 +130,12 @@ class UserController extends Controller
             \Storage::delete($user->signature);
         }
         $user->delete();
-        return redirect()->route('users.index')->with('success', 'User berhasil dihapus');
+//        return redirect()->route('users.index')->with('success', 'User berhasil dihapus');
+    }
+
+    public function show($user)
+    {
+        $users = User::with('hasroles')->where('id', $user)->get();
+        return response()->json($users);
     }
 }
