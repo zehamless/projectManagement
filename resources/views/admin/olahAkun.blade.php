@@ -24,6 +24,7 @@
         .form-label {
             text-align: start !important;
         }
+
         /*.modal-open .modal {*/
         /*    overflow-y: hidden !important;*/
         /*}*/
@@ -171,7 +172,7 @@
                                                                                    class="form-label">Role</label>
                                                                             <select id="select-roles"
                                                                                     class="form-control" name="roles[]"
-                                                                                    style="color: black;" ></select>
+                                                                                    style="color: black;"></select>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -194,6 +195,7 @@
                                                                         data-bs-dismiss="modal">Close
                                                                 </button>
                                                                 <button type="button"
+                                                                        onclick="updateUser()"
                                                                         class="btn btn-editAccount waves-effect waves-light">
                                                                     Save
                                                                     changes
@@ -397,6 +399,61 @@
                 }
             });
         }
+    </script>
+    <script type="text/javascript">
+        function updateUser() {
+            var userId = $(".tabledit-edit-button").attr('data-id');
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You will not be able to recover this user!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, update it!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    //Modal
+                    var modal = $("#con-close-modal");
+                    var email = modal.find("#email").val();
+                    var first_name = modal.find("#first_name").val();
+                    var last_name = modal.find("#last_name").val();
+                    var division = modal.find("#division").val();
+                    var roles = modal.find("#select-roles").val();
+                    var signature = modal.find("#signature").val();
+
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                        }
+                    });
+                    // Send an AJAX request to update the user
+                    $.ajax({
+                        url: "/admin/users/" + userId, // Correct URL for PATCH request
+                        type: 'PATCH', // Use PATCH for this request
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            email: email,
+                            first_name: first_name,
+                            last_name: last_name,
+                            division: division,
+                            roles: roles,
+                            signature: signature,
+                        },
+                        success: function () {
+                            // Reload the page
+                            location.reload();
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            console.error(xhr.responseText);
+                            // Handle errors here if needed.
+                        }
+                    });
+
+                }
+            })
+        }
+
     </script>
     <script>
         $(document).ready(function () {

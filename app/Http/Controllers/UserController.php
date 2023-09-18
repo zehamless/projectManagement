@@ -90,13 +90,11 @@ class UserController extends Controller
         return view('users.updateForm', compact('user'));
     }
 
-    /**
-     * @param Request $request
-     * @param User $user
-     * @return RedirectResponse
-     */
-    public function update(Request $request, User $user): RedirectResponse
+
+    public function update(Request $request, User $user)
     {
+        $users = User::find($user->id);
+//        dd($request->all());
         $request->validate([
             'first_name' => ['string', 'max:255'],
             'last_name' => ['nullable', 'string', 'max:255'],
@@ -110,14 +108,16 @@ class UserController extends Controller
             $filepath = $file->store('public/signatures');
         }
 
-        $user->update([
+       $user = $user->update([
             'first_name' => $request->first_name ?? $user->first_name,
             'last_name' => $request->last_name ?? $user->last_name,
             'email' => $request->email ?? $user->email,
             'division' => $request->division ?? $user->division,
             'signature' => $filepath ?? $user->signature,
         ]);
-        return redirect()->route('users.index')->with('success', 'User berhasil diupdate');
+        $users->hasroles()->sync($request->roles);
+//        return redirect()->route('users.index')->with('success', 'User berhasil diupdate');
+        return session()->flash('success', 'User berhasil diupdate');
     }
 
     /**
@@ -130,7 +130,7 @@ class UserController extends Controller
             \Storage::delete($user->signature);
         }
         $user->delete();
-        return redirect()->route('users.index')->with('success', 'User berhasil dihapus');
+//        return redirect()->route('users.index')->with('success', 'User berhasil dihapus');
     }
 
     public function show($user)
