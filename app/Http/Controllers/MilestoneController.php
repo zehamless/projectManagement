@@ -10,28 +10,34 @@ class MilestoneController extends Controller
 {
     public function store(Request $request)
     {
-        $projectId = '9a22dce4-69f9-44bf-9eb2-189a495e10a4';
         // Validasi data input dari form
         $validatedData = $request->validate([
+            'project_id' => 'required|exists:projects,id',
             'submitted_date' => 'required|date',
             'description' => 'required|string',
             'due_date' => 'required|date',
             'progress' => 'required|string',
-            // Jangan lupa menambahkan validasi lainnya sesuai kebutuhan Anda
         ]);
 
         // Simpan data Milestone ke dalam database dengan mengaitkannya dengan ID proyek
-        $project = Project::findOrFail($projectId);
-        $milestone = new Milestone($validatedData);
-        $project->milestones()->save($milestone);
+        $milestone = new Milestone([
+            'submitted_date' => $request->input('submitted_date'),
+            'description' => $request->input('description'),
+            'due_date' => $request->input('due_date'),
+            'progress' => $request->input('progress'),
+        ]);
 
-        return dd("Berhasil");
+        $project = Project::find($validatedData['project_id']);
+        $project->milestones()->save($milestone);
+        return redirect()->route('projects.show', $validatedData['project_id'])->with('success', 'Milestone berhasil ditambahkan');
     }
 
 
 
-    public function create()
+
+    public function create($id)
     {
-        return view('testform');
+        $project = $id;
+        return view('projects.createMilestone', compact('project'));
     }
 }
