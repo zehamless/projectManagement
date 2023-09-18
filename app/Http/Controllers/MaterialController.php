@@ -12,7 +12,6 @@ class MaterialController extends Controller
         $materials = Material::all();
         return view('materials.index', compact('materials'));
     }
-
     public function create()
     {
         return view('materials.create');
