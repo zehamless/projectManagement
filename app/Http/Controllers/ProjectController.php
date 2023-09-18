@@ -161,7 +161,7 @@ class ProjectController extends Controller
         $project = Project::findOrFail($id);
         $project->update($validatedData);
 
-        return redirect('/projects')->with('success', 'Project berhasil diperbarui.');
+        return redirect('/projects/projects')->with('success', 'Project berhasil diperbarui.');
     }
 
     // Menghapus project dari database
@@ -170,6 +170,6 @@ class ProjectController extends Controller
         $project = Project::findOrFail($id);
         $project->delete();
 
-        return redirect('/projects')->with('success', 'Project berhasil dihapus.');
+        return redirect('/projects/projects')->with('success', 'Project berhasil dihapus.');
     }
 }

@@ -56,7 +56,8 @@
                                     <h4 class="mt-0 header-title">Milestone</h4>
                                 </div>
                                 <div class="col-sm-4">
-                                    <a href="#" class="btn btn-createItems w-md waves-effect waves-light mb-3 px-4"><i
+                                    <a href="{{ url('projects/createMilestone') }}"
+                                        class="btn btn-createItems w-md waves-effect waves-light mb-3 px-4"><i
                                             class="mdi mdi-plus"></i>Add Milestone</a>
                                 </div>
                             </div>
@@ -125,7 +126,8 @@
                                     <h4 class="mt-0 header-title">Production Cost</h4>
                                 </div>
                                 <div class="col-sm-4">
-                                    <a href="#" class="btn btn-createItems w-md waves-effect waves-light mb-3 px-4"><i
+                                    <a href="{{ url('projects/createProductionCost') }}"
+                                        class="btn btn-createItems w-md waves-effect waves-light mb-3 px-4"><i
                                             class="mdi mdi-plus"></i>Add Cost</a>
                                 </div>
                             </div>
@@ -183,7 +185,8 @@
                                     <h4 class="mt-0 header-title">Field Service Log</h4>
                                 </div>
                                 <div class="col-sm-4">
-                                    <a href="#" class="btn btn-createItems w-md waves-effect waves-light mb-3 px-4"><i
+                                    <a href="{{ url('projects/createOperational') }}"
+                                        class="btn btn-createItems w-md waves-effect waves-light mb-3 px-4"><i
                                             class="mdi mdi-plus"></i>Add Operational</a>
                                 </div>
                             </div>
@@ -197,6 +200,7 @@
                                             <th>Project Label</th>
                                             <th>Service Type</th>
                                             <th>SPK Code</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -207,6 +211,20 @@
                                             <td>Project Label</td>
                                             <td>Service Type</td>
                                             <td>SPK Code</td>
+                                            <td>
+                                                <div class="btn-group btn-group-sm" style="float: none;">
+                                                    <button type="button"
+                                                        class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                                        style="background-color: #3E8BFF;">
+                                                        <span class="mdi mdi-pencil"></span>
+                                                </button>
+                                                </div>
+                                                <div class="btn-group btn-group-sm" style="float: none;">
+                                                    <button type="button" class="tabledit-edit-button btn btn-danger">
+                                                        <span class="mdi mdi-trash-can-outline"></span>
+                                                    </button>
+                                                </div>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <th scope="row">2</th>
@@ -215,6 +233,20 @@
                                             <td>Project Label</td>
                                             <td>Service Type</td>
                                             <td>SPK Code</td>
+                                            <td>
+                                                <div class="btn-group btn-group-sm" style="float: none;">
+                                                    <button type="button"
+                                                        class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                                        style="background-color: #3E8BFF;">
+                                                        <span class="mdi mdi-pencil"></span>
+                                                    </button>
+                                                </div>
+                                                <div class="btn-group btn-group-sm" style="float: none;">
+                                                    <button type="button" class="tabledit-edit-button btn btn-danger">
+                                                        <span class="mdi mdi-trash-can-outline"></span>
+                                                    </button>
+                                                </div>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <th scope="row">3</th>
@@ -223,6 +255,20 @@
                                             <td>Project Label</td>
                                             <td>Service Type</td>
                                             <td>SPK Code</td>
+                                            <td>
+                                                <div class="btn-group btn-group-sm" style="float: none;">
+                                                    <button type="button"
+                                                        class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                                        style="background-color: #3E8BFF;">
+                                                        <span class="mdi mdi-pencil"></span>
+                                                    </button>
+                                                </div>
+                                                <div class="btn-group btn-group-sm" style="float: none;">
+                                                    <button type="button" class="tabledit-edit-button btn btn-danger">
+                                                        <span class="mdi mdi-trash-can-outline"></span>
+                                                    </button>
+                                                </div>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -305,9 +351,21 @@
                                         </tr>
                                         <tr>
                                             <th scope="row">
-                                                <p class="title-text">Progress Milestone</p>
-                                                <p class="details-text">
-                                                <div id="donut-chart" style="width: auto; height: auto;">
+                                                <div class="row text-center">
+                                                    <div class="col-md-6">
+                                                        {{-- <div style="width: fit-content; height: fit-content;"> --}}
+                                                            <p class="title-text">Progress Milestone</p>
+                                                            <canvas id="donut-chart"></canvas>
+                                                            {{--
+                                                        </div> --}}
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        {{-- <div style="width: fit-content; height: fit-content;"> --}}
+                                                            <p class="title-text">Progress Payment</p>
+                                                            <canvas id="donut-chart2"></canvas>
+                                                            {{--
+                                                        </div> --}}
+                                                    </div>
                                                 </div>
                                                 </p>
                                             </th>
@@ -335,33 +393,77 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.pie.js"></script>
 
-<script>
-// Sample data
-var data = [
-    { label: "Category A", data: 30 },
-    { label: "Category B", data: 40 },
-    { label: "Category C", data: 20 },
-];
+{{-- js flot chart --}}
 
-$(document).ready(function () {
-    $.plot("#donut-chart", data, {
-        series: {
-            pie: {
-                show: true,
-                radius: 1,
-                label: {
-                    show: true,
-                    radius: 3 / 4,
-                    formatter: labelFormatter,
+
+<script>
+    // Sample data
+    var data = [70, 30];
+    // var labels = ["Completed"];
+
+
+    var ctx = document.getElementById("donut-chart").getContext("2d");
+
+    var donutChart = new Chart(ctx, {
+    type: "doughnut", // Specifies the chart type as a donut chart
+    data: {
+        // labels: labels,
+        datasets: [
+        {
+            data: data,
+            backgroundColor: ["#17D72A", "#F3F2F2"], // Customize segment colors
+        },
+        ],
+    },
+    options: {
+        cutout: "70%", // Control the size of the hole in the middle (percentage)
+            elements: {
+                arc: {
+                    borderWidth: 0, // Remove border
+                    borderRadius: 30, // Set border radius to round the edges
                 },
+        },    
+    },
+    });
+
+
+    // Function to format the labels
+    function labelFormatter(label, series) {
+        return `<div style="font-size:8pt; text-align:center; padding:2px; color:white;">${label}<br/>${Math.round(series.percent)}%</div>`;
+    }
+
+</script>
+
+<script>
+    // Sample data
+    var data = [80, 20];
+    // var labels = ["Total"];
+
+
+    var ctx = document.getElementById("donut-chart2").getContext("2d");
+
+    var donutChart = new Chart(ctx, {
+    type: "doughnut", // Specifies the chart type as a donut chart
+    data: {
+        // labels: labels,
+        datasets: [
+        {
+            data: data,
+            backgroundColor: ["#FE3E3E", "#F3F2F2"], // Customize segment colors
+        },
+        ],
+    },
+    options: {
+        cutout: "70%", // Control the size of the hole in the middle (percentage)
+        elements: {
+            arc: {
+                borderWidth: 0, // Remove border
+                borderRadius: 30, // Set border radius to round the edges
             },
         },
-        legend: {
-            show: true,
-            position: "ne",
-        },
+    },
     });
-});
+
 
 // Function to format the labels
 function labelFormatter(label, series) {
