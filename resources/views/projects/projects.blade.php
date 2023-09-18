@@ -45,8 +45,9 @@
                 <div class="row">
                     <div class="col-sm-7">
                         <a href="{{ route('projects.createProjects') }}"
-                            class="btn btn-createProjects w-md waves-effect waves-light mb-3 px-4"><i
-                                class="mdi mdi-plus"></i> Create Project</a>
+                            class="btn btn-createProjects w-md waves-effect waves-light mb-3 px-4"
+                            title="Untuk menambahkan project"><i class="mdi mdi-plus" title="Untuk menambahkan project"></i>
+                            Create Project</a>
                     </div>
                     <div class="col-sm-5">
                         <form class="app-search" action="{{ route('projects.index') }}">
@@ -149,7 +150,8 @@
                                     <div class="project-detail">
                                         <a href="{{ route('projects.show', ['id' => $project->id]) }}">
                                             <button type="button"
-                                                class="btn btn-danger btn-detail rounded-pill px-3 waves-effect waves-light">Details</button>
+                                                class="btn btn-danger btn-detail rounded-pill px-3 waves-effect waves-light"
+                                                title="Melihat detail project">Details</button>
                                         </a>
                                     </div>
 
