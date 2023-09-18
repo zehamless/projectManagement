@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Login - Project Management</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+    <meta content="Coderthemes" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{{ asset('images/logo_trafindo_only.png') }}">
+
+    <!-- App css -->
+
+    <link href="{{ asset('templateAdmin/Admin/dist/assets/css/app.min.css') }}" rel="stylesheet" type="text/css"
+        id="app-style" />
+
+    <!-- icons -->
+    <link href="{{ asset('templateAdmin/Admin/dist/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+
+    <style>
+        .logo-trafindo {
+            height: auto;
+            max-width: 100%;
+        }
+
+        .background-page {
+            background-image: url('{{ asset(' images/trafindo-workshop.png') }}');
+            background-size: cover;
+        }
+
+        .background-page:before {
+            content: '';
+            background-color: rgba(138, 9, 9, 0.315);
+            /* Adjust the color and opacity here */
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0
+        }
+    </style>
+
+</head>
+
+<body class="loading background-page">
+
+    <div class="account-pages my-5">
+        <div class="container">
+
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6 col-xl-4">
+                    <div class="text-center">
+                        <a href="index.html">
+                            {{-- <img src="{{ asset('images/logo_trafindo_full.png') }}" alt="" height="100"
+                                class="mx-auto"> --}}
+                        </a>
+                        <p class="text-muted mt-2 mb-4"></p>
+
+                    </div>
+                    <div class="card">
+                        <div class="card-body p-4">
+
+                            <div class="text-center mb-4">
+                                <img src="{{ asset('images/logo_trafindo_full.png') }}" alt="logo_trafindo"
+                                    class="logo-trafindo mx-auto" style="max-height: 60px;">
+                            </div>
+
+                            <form action="#">
+                                <div class="mb-3">
+                                    <label for="emailaddress" class="form-label">Email address</label>
+                                    <input class="form-control" type="email" id="emailaddress" required=""
+                                        placeholder="Enter your email">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input class="form-control" type="password" required="" id="password"
+                                        placeholder="Enter your password">
+                                </div>
+
+                                <div class="mb-3 d-grid text-center">
+                                    <button class="btn btn-primary" type="submit"> Log In </button>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-12 text-center">
+                                        <p> <a href="pages-recoverpw.html" class="text-muted ms-1"><i
+                                                    class="fa fa-lock me-1"></i>Forgot your password?</a></p>
+                                        <p class="text-muted">Don't have an account? <a href="pages-register.html"
+                                                class="text-dark ms-1"><b>Sign Up</b></a></p>
+                                    </div> <!-- end col -->
+                                </div>
+                                <!-- end row -->
+                            </form>
+
+                        </div> <!-- end card-body -->
+                    </div>
+                    <!-- end card -->
+
+                </div> <!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </div>
+    <!-- end page -->
+
+    @include('template.script')
+
+</body>
+
+</html>
