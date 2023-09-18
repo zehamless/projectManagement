@@ -12,11 +12,15 @@ use Illuminate\Http\Request;
 class RoleController extends Controller
 {
     /**
+     * @return \Illuminate\Http\JsonResponse
      * @return Application|Factory|View|\Illuminate\Foundation\Application
      */
     public function index()
     {
         $roles = Role::all();
+        if (\request()->ajax()){
+            return response()->json($roles);
+        }
         return view('roles.index', compact('roles'));
     }
 
