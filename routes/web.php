@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CustomerContactController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\MilestoneController;
 use App\Http\Controllers\OperationalAgendaController;
 use App\Http\Controllers\OperationalController;
 use App\Http\Controllers\ProfileController;
@@ -66,6 +67,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::prefix('milestone')->group(function () {
+    Route::get('/create/{id}', [MilestoneController::class, 'create'])->name('milestone.create');
+    Route::post('/store', [MilestoneController::class, 'store'])->name('milestone.store');
+});
+
+
 Route::prefix('customer')->group(function () {
     Route::get('/', [CustomerController::class, 'index'])->name('customer.index');
     Route::get('/create', [CustomerController::class, 'create'])->name('customer.create');
@@ -77,13 +84,13 @@ Route::prefix('customer')->group(function () {
 });
 
 Route::prefix('customerContact')->group(function () {
-     Route::get('/', [CustomerContactController::class, 'index'])->name('customerContact.index');
-     Route::get('/create', [CustomerContactController::class, 'create'])->name('customerContact.create');
-     Route::post('/store', [CustomerContactController::class, 'store'])->name('customerContact.store');
-     Route::get('/show', [CustomerContactController::class, 'show'])->name('customerContact.show');
-     Route::get('/edit', [CustomerContactController::class, 'edit'])->name('customerContact.edit');
-     Route::get('/update', [CustomerContactController::class, 'update'])->name('customerContact.update');
-     Route::get('/delete', [CustomerContactController::class, 'delete'])->name('customerContact.delete');
+    Route::get('/', [CustomerContactController::class, 'index'])->name('customerContact.index');
+    Route::get('/create', [CustomerContactController::class, 'create'])->name('customerContact.create');
+    Route::post('/store', [CustomerContactController::class, 'store'])->name('customerContact.store');
+    Route::get('/show', [CustomerContactController::class, 'show'])->name('customerContact.show');
+    Route::get('/edit', [CustomerContactController::class, 'edit'])->name('customerContact.edit');
+    Route::get('/update', [CustomerContactController::class, 'update'])->name('customerContact.update');
+    Route::get('/delete', [CustomerContactController::class, 'delete'])->name('customerContact.delete');
 });
 
 //contoh route (post(/admin/roles)
@@ -99,6 +106,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::get('/users/create', [UserController::class, 'createForm'])->name('users.createForm');
     Route::post('/users', [UserController::class, 'store'])->name('users.store');
+    Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
     Route::get('/users/{user}/edit', [UserController::class, 'updateForm'])->name('users.updateForm');
     Route::patch('/users/{user}', [UserController::class, 'update'])->name('users.update');
     Route::delete('/users/{user}', [UserController::class, 'delete'])->name('users.delete');
@@ -121,9 +129,10 @@ Route::prefix('operationalAgenda')->group(function () {
     Route::post('/store', [OperationalAgendaController::class, 'store'])->name('operational_agenda.store');
     Route::get('/show', [OperationalAgendaController::class, 'show'])->name('operational_agenda.show');
     Route::get('/edit', [OperationalAgendaController::class, 'edit'])->name('operational_agenda.edit');
-    Route::get('/update',[OperationalAgendaController::class, 'update'])->name('operational_agenda.update');
+    Route::get('/update', [OperationalAgendaController::class, 'update'])->name('operational_agenda.update');
     Route::get('/delete', [OperationalAgendaController::class, 'delete'])->name('operational_agenda.delete');
 });
+
 
 Route::get('/admin/olahAkun', function () {
     return view('admin.olahAkun');

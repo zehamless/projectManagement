@@ -41,7 +41,7 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="userName" class="form-label">Division Date<span
+                                <label for="userName" class="form-label">Division<span
                                         class="text-danger">*</span></label>
                                 <input type="text" name="division" parsley-trigger="change" required=""
                                     placeholder="Enter user name" class="form-control" id="userName">

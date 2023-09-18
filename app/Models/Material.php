@@ -4,12 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class OperationalAgenda extends Model
+class Material extends Model
 {
     protected $fillable = [
+        'material_id',
         'operational_id',
-        'description',
-        'due_date',
+        'memo',
+        'do',
+        'np',
         'status',
     ];
 
