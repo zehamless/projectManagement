@@ -12,7 +12,7 @@ class CustomerController extends Controller
     {
         // Mengambil data customer_id dan company dari tabel customers
         {
-            $customers = Customer::select('customer_id', 'company')->get();
+            $customers = Customer::select('company')->get();
             return view('customers.index', compact('customers'));
         }
     }
@@ -27,13 +27,11 @@ class CustomerController extends Controller
     {
         // Validasi input data
     $request->validate([
-        'customer_id' => 'required',
         'company' => 'required',
     ]);
 
     // Membuat dan menyimpan data baru
     $customer = new Customer();
-    $customer->customer_id = $request->input('customer_id');
     $customer->company = $request->input('company');
     $customer->save();
 
@@ -57,7 +55,6 @@ class CustomerController extends Controller
     public function update(Request $request, Customer $customer)
     {
         $request->validate([
-            'customer_id' => 'required',
             'company' => 'required',
         ]);
 
