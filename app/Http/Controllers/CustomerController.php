@@ -10,16 +10,13 @@ class CustomerController extends Controller
     // Menampilkan daftar data
     public function index()
     {
-        // Mengambil data customer_id dan company dari tabel customers
-        {
-            $customers = Customer::select('company')->get();
-            return view('customers.index', compact('customers'));
-        }
+        $customer = Customer::all();
+        return view('customers.index', compact('customers'));
     }
     // Menampilkan formulir untuk membuat data baru
     public function create()
     {
-        return view('customer.create');
+        return view('customers.create');
     }
 
     // Menyimpan data baru ke database
@@ -35,20 +32,20 @@ class CustomerController extends Controller
     $customer->company = $request->input('company');
     $customer->save();
 
-    return redirect()->route('customer_companies.index')
+    return redirect()->route('customers.index')
         ->with('success', 'Data customer berhasil ditambahkan.');
 }
 
     // Menampilkan detail data
     public function show(Customer $customer)
     {
-        return view('customer.show', compact('customer'));
+        return view('customers.show', compact('customer'));
     }
 
     // Menampilkan formulir untuk mengedit data
     public function edit(Customer $customer)
     {
-        return view('customer.edit', compact('customer'));
+        return view('customers.edit', compact('customer'));
     }
 
     // Memperbarui data dalam database
@@ -60,7 +57,7 @@ class CustomerController extends Controller
 
         $customer->update($request->all());
 
-        return redirect()->route('customer.index')
+        return redirect()->route('customers.index')
             ->with('success', 'Data customer berhasil diperbarui.');
     }
 
@@ -69,7 +66,7 @@ class CustomerController extends Controller
     {
         $customer->delete();
 
-        return redirect()->route('customer.index')
+        return redirect()->route('customers.index')
             ->with('success', 'Data customer berhasil dihapus.');
     }
 }

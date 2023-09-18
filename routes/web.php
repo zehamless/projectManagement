@@ -72,24 +72,24 @@ Route::prefix('milestone')->group(function () {
 });
 
 
-Route::prefix('customer')->group(function () {
-    Route::get('/', [CustomerController::class, 'index'])->name('customer.index');
-    Route::get('/create', [CustomerController::class, 'create'])->name('customer.create');
-    Route::post('/store', [CustomerController::class, 'store'])->name('customer.store');
-    Route::get('/show', [CustomerController::class, 'show'])->name('customer.show');
-    Route::get('/edit', [CustomerController::class, 'edit'])->name('customer.edit');
-    Route::get('/update', [CustomerController::class, 'update'])->name('customer.update');
-    Route::delete('/delete', [CustomerController::class, 'delete'])->name('customer.delete');
+Route::prefix('customers')->group(function () {
+    Route::get('/', [CustomerController::class, 'index'])->name('customers.index');
+    Route::get('/create', [CustomerController::class, 'create'])->name('customers.create');
+    Route::post('/store', [CustomerController::class, 'store'])->name('customers.store');
+    Route::get('/show', [CustomerController::class, 'show'])->name('customers.show');
+    Route::get('/edit', [CustomerController::class, 'edit'])->name('customers.edit');
+    Route::get('/update', [CustomerController::class, 'update'])->name('customers.update');
+    Route::delete('/delete', [CustomerController::class, 'delete'])->name('customers.delete');
 });
 
 Route::prefix('customerContact')->group(function () {
-    Route::get('/', [CustomerContactController::class, 'index'])->name('customerContact.index');
-    Route::get('/create', [CustomerContactController::class, 'create'])->name('customerContact.create');
-    Route::post('/store', [CustomerContactController::class, 'store'])->name('customerContact.store');
-    Route::get('/show', [CustomerContactController::class, 'show'])->name('customerContact.show');
-    Route::get('/edit', [CustomerContactController::class, 'edit'])->name('customerContact.edit');
-    Route::get('/update', [CustomerContactController::class, 'update'])->name('customerContact.update');
-    Route::get('/delete', [CustomerContactController::class, 'delete'])->name('customerContact.delete');
+    Route::get('/', [CustomerContactController::class, 'index'])->name('customer_contacts.index');
+    Route::get('/create', [CustomerContactController::class, 'create'])->name('customer_contacts.create');
+    Route::post('/store', [CustomerContactController::class, 'store'])->name('customer_contacts.store');
+    Route::get('/show', [CustomerContactController::class, 'show'])->name('customer_contacts.show');
+    Route::get('/edit', [CustomerContactController::class, 'edit'])->name('customer_contacts.edit');
+    Route::get('/update', [CustomerContactController::class, 'update'])->name('customer_contacts.update');
+    Route::get('/delete', [CustomerContactController::class, 'delete'])->name('customer_contacts.delete');
 });
 
 //contoh route (post(/admin/roles)
