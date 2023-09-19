@@ -103,29 +103,31 @@
                                                                             <thead>
                                                                                 <tr>
                                                                                     <th>#</th>
-                                                                                    <th>First Name</th>
-                                                                                    <th>Last Name</th>
-                                                                                    <th>Username</th>
+                                                                                    <th>Operational</th>
+                                                                                    <th>Description</th>
+                                                                                    <th>Due Date</th>
+                                                                                    <th>Status</th>
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
                                                                                 <tr>
                                                                                     <th scope="row">1</th>
-                                                                                    <td>Mark</td>
-                                                                                    <td>Otto</td>
-                                                                                    <td>@mdo</td>
+                                                                                    <td>N-23009</td>
+                                                                                    <td>Dummy Work Plans</td>
+                                                                                    <td>11/09/2023</td>
+                                                                                    <td><span class="badge bg-info">Planned</span></td>
                                                                                 </tr>
-                                                                                <tr>
                                                                                     <th scope="row">2</th>
-                                                                                    <td>Jacob</td>
-                                                                                    <td>Thornton</td>
-                                                                                    <td>@fat</td>
+                                                                                    <td>N-23009</td>
+                                                                                    <td>Dummy Work Plans</td>
+                                                                                    <td>11/09/2023</td>
+                                                                                    <td><span class="badge bg-warning">On Progress</span></td>
                                                                                 </tr>
-                                                                                <tr>
                                                                                     <th scope="row">3</th>
-                                                                                    <td>Larry</td>
-                                                                                    <td>the Bird</td>
-                                                                                    <td>@twitter</td>
+                                                                                    <td>N-23009</td>
+                                                                                    <td>Dummy Work Plans</td>
+                                                                                    <td>11/09/2023</td>
+                                                                                    <td><span class="badge bg-success">Completed</span></td>
                                                                                 </tr>
                                                                             </tbody>
                                                                         </table>
@@ -135,9 +137,126 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div role="tabpanel" class="tab-pane fade" id="expenses">2</div>
-                                                <div role="tabpanel" class="tab-pane fade" id="material">3</div>
-                                                <div role="tabpanel" class="tab-pane fade" id="technician">4</div>
+                                                <div role="tabpanel" class="tab-pane fade" id="expenses">
+                                                    <div class="row text-start">
+                                                        <div class="col-lg-12">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <div class="table-responsive">
+                                                                        <table class="table mb-0">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>#</th>
+                                                                                    <th>Expense Date</th>
+                                                                                    <th>Expense Item</th>
+                                                                                    <th>Amount</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <th scope="row">1</th>
+                                                                                    <td>11/09/2023</td>
+                                                                                    <td>Transport</td>
+                                                                                    <td>200.000</td>
+                                                                                </tr>
+                                                                                    <th scope="row">2</th>
+                                                                                    <td>11/09/2023</td>
+                                                                                    <td>Makan</td>
+                                                                                    <td>200.000</td>
+                                                                                </tr>
+                                                                                    <th scope="row">3</th>
+                                                                                    <td>11/09/2023</td>
+                                                                                    <td>Emergency</td>
+                                                                                    <td>200.000</td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div role="tabpanel" class="tab-pane fade" id="material">
+                                                    <div class="row text-start">
+                                                        <div class="col-lg-12">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <div class="table-responsive">
+                                                                        <table class="table mb-0">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>#</th>
+                                                                                    <th>Operational</th>
+                                                                                    <th>Memo Number</th>
+                                                                                    <th>Delivery Order Number</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <th scope="row">1</th>
+                                                                                    <td>N-23009</td>
+                                                                                    <td>M223</td>
+                                                                                    <td>DO-886</td>
+                                                                                </tr>
+                                                                                    <th scope="row">2</th>
+                                                                                    <td>N-23009</td>
+                                                                                    <td>M223</td>
+                                                                                    <td>DO-886</td>
+                                                                                </tr>
+                                                                                    <th scope="row">3</th>
+                                                                                    <td>N-23009</td>
+                                                                                    <td>M223</td>
+                                                                                    <td>DO-886</td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div role="tabpanel" class="tab-pane fade" id="technician">
+                                                    <div class="row text-start">
+                                                        <div class="col-lg-12">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <div class="table-responsive">
+                                                                        <table class="table mb-0">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>#</th>
+                                                                                    <th>Operational</th>
+                                                                                    <th>Technician</th>
+                                                                                    <th>Division</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <th scope="row">1</th>
+                                                                                    <td>C-23009</td>
+                                                                                    <td>Partogi</td>
+                                                                                    <td>Electrical</td>
+                                                                                </tr>
+                                                                                    <th scope="row">2</th>
+                                                                                    <td>C-23009</td>
+                                                                                    <td>Partogi</td>
+                                                                                    <td>Electrical</td>
+                                                                                </tr>
+                                                                                    <th scope="row">3</th>
+                                                                                    <td>C-23009</td>
+                                                                                    <td>Partogi</td>
+                                                                                    <td>Electrical</td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
