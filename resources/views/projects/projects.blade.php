@@ -132,7 +132,7 @@
                                 <div class="card-body project-box">
                                     <div class="badge bg-danger float-end font-14">{{ $project['so'] }}</div>
                                     <div class="mt-0 project-title">{{ $project['label'] }}</div>
-                                    <p class="font-13">{{ $project['companyName'] }}</p>
+                                    <p class="font-13">{{ $project['customer']['companyName'] }}</p>
                                     <p class="text-muted font-15">Project Manager : {{ $project['project_manager'] }}</p>
                                     <p class="text-muted font-15">Sales Executive : {{ $project['sales_executive'] }}</p>
 
