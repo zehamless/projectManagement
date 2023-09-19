@@ -108,7 +108,7 @@ Route::prefix('operational')->group(function () {
     Route::post('/store', [OperationalController::class, 'store'])->name('operational.store');
     Route::get('/show', [OperationalController::class, 'show'])->name('operational.show');
     Route::get('/{operational}/edit', [OperationalController::class, 'updateForm'])->name('operational.update-form');
-    Route::get('/{operational}', [OperationalController::class, 'update'])->name('operational.update');
+    Route::patch('/{operational}', [OperationalController::class, 'update'])->name('operational.update');
     Route::delete('/{operational}', [OperationalController::class, 'delete'])->name('operational.delete');
     Route::post('/approve/{operational}', [OperationalController::class, 'approve'])->name('operational.approve');
 });
