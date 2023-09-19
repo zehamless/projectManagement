@@ -12,11 +12,11 @@ class Customer extends Model
     use HasUuids;
     // Kolom yang dapat diisi (jika perlu)
     protected $fillable = [
-        'company',
+        'companyName',
     ];
     public function contacts()
 {
-    return $this->hasMany(CustomerContact::class, 'phone', 'company');
+    return $this->hasMany(CustomerContact::class, 'phone', 'companyName');
 }
     public function project()
     {
