@@ -115,7 +115,10 @@ class UserController extends Controller
             'division' => $request->division ?? $user->division,
             'signature' => $filepath ?? $user->signature,
         ]);
+        if ($request->roles)
+        {
         $users->hasroles()->sync($request->roles);
+        }
 //        return redirect()->route('users.index')->with('success', 'User berhasil diupdate');
         return session()->flash('success', 'User berhasil diupdate');
     }
@@ -128,6 +131,9 @@ class UserController extends Controller
     {
         if ($user->signature) {
             \Storage::delete($user->signature);
+        }
+        if ($user->hasroles()->exists()) {
+            $user->hasroles()->detach();
         }
         $user->delete();
 //        return redirect()->route('users.index')->with('success', 'User berhasil dihapus');
