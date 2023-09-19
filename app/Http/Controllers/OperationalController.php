@@ -24,6 +24,7 @@ class OperationalController extends Controller
             'spk_code' => 'required|string|max:10',
             'spk_number' => 'max:10',
             'type' => 'required',
+            'team' => 'required|array',
             'description' => 'string|max:255',
             'transportation_mode' => 'required|string',
             'vehicle_number' => 'required|max:12|string',
@@ -42,6 +43,7 @@ class OperationalController extends Controller
             'vehicle_number' => $request->vehicle_number,
             'created_by' => $request->created_by,
         ]);
+        $operational->team()->sync($request->team);
         return redirect()->route('operational.index')->with('success', 'Operational created successfully.');
     }
 
@@ -57,6 +59,7 @@ class OperationalController extends Controller
             'spk_code' => 'string|max:10',
             'spk_number' => 'string|max:10',
             'type' => 'string',
+            'team' => 'array',
             'description' => 'max:255',
             'transportation_mode' => 'string',
             'vehicle_number' => 'string|max:12',
@@ -71,6 +74,7 @@ class OperationalController extends Controller
             'transportation' => $request->transportation ?? $operational->transportation,
             'vehicle_number' => $request->vehicle_number ?? $operational->vehicle_number,
         ]);
+        $operational->team()->sync($request->team);
         return redirect()->route('operational.index')->with('success', 'Operational updated successfully.');
     }
 
