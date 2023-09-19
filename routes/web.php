@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CustomerContactController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\MilestoneController;
 use App\Http\Controllers\OperationalAgendaController;
 use App\Http\Controllers\OperationalController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Material;
 use App\Models\Role;
 use Illuminate\Support\Facades\Route;
 
@@ -82,7 +84,7 @@ Route::prefix('customers')->group(function () {
     Route::delete('/delete', [CustomerController::class, 'delete'])->name('customers.delete');
 });
 
-Route::prefix('customerContact')->group(function () {
+Route::prefix('customer_contacts')->group(function () {
     Route::get('/', [CustomerContactController::class, 'index'])->name('customer_contacts.index');
     Route::get('/create', [CustomerContactController::class, 'create'])->name('customer_contacts.create');
     Route::post('/store', [CustomerContactController::class, 'store'])->name('customer_contacts.store');
@@ -132,6 +134,15 @@ Route::prefix('operationalAgenda')->group(function () {
     Route::get('/delete', [OperationalAgendaController::class, 'delete'])->name('operational_agenda.delete');
 });
 
+Route::prefix('materials')->group(function() {
+    Route::get('/', [MaterialController::class, 'index'])->name('materials.index');
+    Route::get('/create', [MaterialController::class, 'create'])->name('materials.update');
+    Route::post('/store', [MaterialController::class, 'store'])->name('materials.store');
+    Route::get('/show', [MaterialController::class, 'show'])->name('materials.show');
+    Route::get('/edit', [MaterialController::class, 'edit'])->name('materials.edit');
+    Route::get('/update', [MaterialController::class, 'update'])->name('materials.update');
+    Route::get('/delete', [MaterialController::class, 'delete'])->name('materials.delete');
+});
 
 Route::get('/admin/olahAkun', function () {
     return view('admin.olahAkun');
