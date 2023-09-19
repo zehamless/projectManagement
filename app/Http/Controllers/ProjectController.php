@@ -61,8 +61,8 @@ class ProjectController extends Controller
             $fullName = $user->first_name . ' ' . $user->last_name;
             $usersByRole[$role][] = ['id' => $user->id, 'name' => $fullName];
         }
-
-        return view('projects.createProjects', compact('usersByRole'));
+        $customers = Customer::all();
+        return view('projects.createProjects', compact('usersByRole', 'customers'));
     }
 
 
