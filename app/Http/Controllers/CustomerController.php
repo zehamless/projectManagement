@@ -32,7 +32,7 @@ class CustomerController extends Controller
         $customer->companyName = $request->input('companyName');
         $customer->save();
 
-        return redirect()->route('customer_companies.index')
+        return redirect()->route('customers.index')
             ->with('success', 'Data customer berhasil ditambahkan.');
     }
 

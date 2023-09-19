@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class CustomerContact extends Model
 {
     protected $fillable = [
-        'company',
+        'companyName',
         'phone'
     ];
 
     // Definisi relasi dengan model Customer
     public function customer()
     {
-        return $this->belongsTo(Customer::class, 'company');
+        return $this->belongsTo(Customer::class, 'companyNames');
     }
 }
