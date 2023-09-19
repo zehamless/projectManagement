@@ -232,8 +232,7 @@
     <!-- Include Select2 JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
-    <!-- Sweet Alerts js -->
-    <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/sweetalert2/sweetalert2.all.min.js') }}"></script>
+    
     <script type="text/javascript">
         $(document).ready(function () {
             var table = $('#datatable').DataTable({

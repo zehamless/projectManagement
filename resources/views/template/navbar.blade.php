@@ -68,6 +68,13 @@
                 </li>
 
                 <li>
+                    <a href="{{ url('operational') }}">
+                        <i class="mdi mdi-book-clock-outline"></i>
+                        <span> Operational </span>
+                    </a>
+                </li>
+
+                <li>
                     <a href="apps-calendar.html">
                         <i class="mdi mdi-calendar-blank-outline"></i>
                         <span> Calendar </span>
