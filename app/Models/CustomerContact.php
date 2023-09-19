@@ -15,6 +15,6 @@ class CustomerContact extends Model
     // Definisi relasi dengan model Customer
     public function customer()
     {
-        return $this->belongsTo(Customer::class, 'companyNames');
+        return $this->belongsTo(Customer::class, 'companyName');
     }
 }
