@@ -10,10 +10,10 @@ class CustomerController extends Controller
     // Menampilkan daftar data
     public function index()
     {
-        // Mengambil data customer_id dan company dari tabel customers
+        // Mengambil data customer_id dan companyName dari tabel customers
         {
-            $customers = Customer::select('customer_id', 'company')->get();
-            return view('customers.index', compact('customers'));
+            $customers = Customer::select('companyName')->get();
+            return view('customer', compact('customers'));
         }
     }
     // Menampilkan formulir untuk membuat data baru
@@ -26,20 +26,18 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         // Validasi input data
-    $request->validate([
-        'customer_id' => 'required',
-        'company' => 'required',
-    ]);
+        $request->validate([
+            'companyName' => 'required',
+        ]);
 
-    // Membuat dan menyimpan data baru
-    $customer = new Customer();
-    $customer->customer_id = $request->input('customer_id');
-    $customer->company = $request->input('company');
-    $customer->save();
+        // Membuat dan menyimpan data baru
+        $customer = new Customer();
+        $customer->companyName = $request->input('companyName');
+        $customer->save();
 
-    return redirect()->route('customer_companies.index')
-        ->with('success', 'Data customer berhasil ditambahkan.');
-}
+        return redirect()->route('customer_companies.index')
+            ->with('success', 'Data customer berhasil ditambahkan.');
+    }
 
     // Menampilkan detail data
     public function show(Customer $customer)
@@ -58,7 +56,7 @@ class CustomerController extends Controller
     {
         $request->validate([
             'customer_id' => 'required',
-            'company' => 'required',
+            'companyName' => 'required',
         ]);
 
         $customer->update($request->all());

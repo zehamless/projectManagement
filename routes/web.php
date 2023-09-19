@@ -24,22 +24,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['prefix' => 'projects'], function () {
-    // Menampilkan daftar project
     Route::get('/', [ProjectController::class, 'index'])->name('projects.index');
-    // Menampilkan form untuk membuat project baru
     Route::get('/createProjects', [ProjectController::class, 'create'])->name('projects.createProjects');
-    // Menyimpan project baru ke dalaFm database
     Route::post('/', [ProjectController::class, 'store'])->name('projects.store');
-    // Menampilkan detail project
     Route::get('/detail/{id}', [ProjectController::class, 'show'])->name('projects.show');
-
-    // Menampilkan form untuk mengedit project
     Route::get('/{id}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
-
-    // Mengupdate project ke dalam database
     Route::put('/{id}', [ProjectController::class, 'update'])->name('projects.update');
-
-    // Menghapus project dari database
     Route::delete('/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
 });
 
