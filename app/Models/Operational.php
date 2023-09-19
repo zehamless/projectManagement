@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Operational extends Model
 {
@@ -30,9 +31,9 @@ class Operational extends Model
     {
         return $this->hasMany(Agenda::class);
     }
-    public function team()
+    public function team(): BelongsToMany
     {
-        return $this->hasMany(Team::class);
+        return $this->belongsToMany(User::class, 'operational_team', 'operational_id', 'user_id');
     }
     public function materials()
     {

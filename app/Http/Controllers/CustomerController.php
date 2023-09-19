@@ -23,18 +23,18 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         // Validasi input data
-    $request->validate([
-        'company' => 'required',
-    ]);
+        $request->validate([
+            'companyName' => 'required',
+        ]);
 
-    // Membuat dan menyimpan data baru
-    $customer = new Customer();
-    $customer->company = $request->input('company');
-    $customer->save();
+        // Membuat dan menyimpan data baru
+        $customer = new Customer();
+        $customer->companyName = $request->input('companyName');
+        $customer->save();
 
-    return redirect()->route('customers.index')
-        ->with('success', 'Data customer berhasil ditambahkan.');
-}
+        return redirect()->route('customer_companies.index')
+            ->with('success', 'Data customer berhasil ditambahkan.');
+    }
 
     // Menampilkan detail data
     public function show(Customer $customer)
