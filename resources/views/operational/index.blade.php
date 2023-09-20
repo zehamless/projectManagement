@@ -30,7 +30,7 @@
     }
 
     .card-nbm{
-        margin-bottom: 0 !important; 
+        margin-bottom: 0 !important;
     }
 </style>
 
@@ -47,11 +47,11 @@
                                 <div class="col-md-12">
                                     <h4 class="header-title mb-2">Sales Order Number</h4>
 
-                                    <select class="form-select">
-                                        <option selected="">Pilih Sales Order Number</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                    <select class="form-select" id="sales-order" onchange="getOperationals(this.value)">
+                                        <option selected value="">Pilih Sales Order Number</option>
+                                        @foreach ($salesOrder as $item)
+                                            <option value="{{ $item->id }}">{{ $item->so }}</option>
+                                        @endforeach
                                     </select>
 
                                 </div> <!-- end col -->
@@ -70,11 +70,9 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <h4 class="header-title mb-2">Operational</h4>
-                                        <select class="form-select mb-2">
-                                            <option selected="">Pilih Operational</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+                                        <select id="select-operational" class="form-select mb-2" onchange="detailOperational(this.value)" >
+                                            <option selected value="">Silahkan Pilih SO</option>
+
                                         </select>
                                     </div> <!-- end col -->
                                 </div>
@@ -83,41 +81,41 @@
                                     <div class="col-md-6">
                                         <th scope="row">
                                             <p class="title-text">SPK Number :</p>
-                                            <p class="details-text">Project 1</p>
+                                            <p class="details-text" id="spk_number">-</p>
                                         </th>
                                         <th scope="row">
                                             <p class="title-text">Service Date :</p>
-                                            <p class="details-text">12/12/2023</p>
+                                            <p class="details-text" id="date">-</p>
                                         </th>
                                         <th scope="row">
                                             <p class="title-text">Project Label :</p>
-                                            <p class="details-text">Project PT ABC Trafo 100kwh</p>
+                                            <p class="details-text" id="label">-</p>
                                         </th>
                                         <th scope="row">
                                             <p class="title-text">Service Type :</p>
-                                            <p class="details-text">Maintenance</p>
+                                            <p class="details-text" id="type">-</p>
                                         </th>
                                         <th scope="row">
                                             <p class="title-text">File</p>
-                                            <p class="details-text">N-23009_04624A62.pdf</p>
+                                            <p class="details-text" id="file">-</p>
                                         </th>
                                     </div>
                                     <div class="col-md-6">
                                         <th scope="row">
                                             <p class="title-text">Description</p>
-                                            <p class="details-text">Maintenance 3 Unit</p>
+                                            <p class="details-text" id="description">-</p>
                                         </th>
                                         <th scope="row">
                                             <p class="title-text">Approved by</p>
-                                            <p class="details-text">Agus Taryan</p>
+                                            <p class="details-text" id="approved">-</p>
                                         </th>
                                         <th scope="row">
                                             <p class="title-text">Transportation Mode</p>
-                                            <p class="details-text">Mobil</p>
+                                            <p class="details-text" id="transport">-</p>
                                         </th>
                                         <th scope="row">
                                             <p class="title-text">Created by</p>
-                                            <p class="details-text">Aditia Mahardika</p>
+                                            <p class="details-text" id="created">-</p>
                                         </th>
                                     </div>
                                 </div>
@@ -333,4 +331,58 @@
     </div>
 </div>
 {{-- <script src="https://kit.fontawesome.com/031855bb65.js" crossorigin="anonymous"></script> --}}
+@endsection
+@section('pageScript')
+    <script type="text/javascript">
+        function getOperationals(salesOrder){
+            if(salesOrder !== "" && salesOrder != null){
+
+                $.ajax({
+                    url: "{{ route('operational.get-operational', '') }}" + "/" + salesOrder,
+                    type: "GET",
+                    success: function (data) {
+                        console.log(data);
+                        $(`#select-operational`).empty();
+                        $(`#select-operational`).append(`<option selected value="">Pilih Operational</option>`);
+                        $.each(data, function (key, value) {
+                            var option = new Option(value.spk_number, value.id);
+                            $("#select-operational").append(option)
+                        });
+                    }
+                });
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        function detailOperational(operational)
+        {
+            if (operational !== "" && operational != null)
+            {
+                $.ajax({
+                    url: "{{ route('operational.show', '') }}" + "/" + operational,
+                    type: "GET",
+                    success: function (data){
+                        console.log(data);
+                        $('#spk_number').text(data.spk_number);
+                        $('#date').text(data.date);
+                        $('#label').text(data.project.label);
+                        $('#type').text(data.type);
+                        $('#file').text(data.file);
+                        $('#description').text(data.description);
+                        $('#transport').text(data.transport);
+                        $('#created').text(data.created);
+                        if (data.approved == null)
+                        {
+                            $('#approved').text('Belum di Approve');
+                            //text become red button
+                            $('#approved').addClass('btn btn-danger disabled');
+                        }else{
+                        $('#approved').text(data.approved);
+                        }
+
+                    }
+                })
+            }
+        }
+    </script>
 @endsection

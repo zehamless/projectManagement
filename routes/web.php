@@ -109,11 +109,12 @@ Route::prefix('operational')->group(function () {
     Route::get('/', [OperationalController::class, 'index'])->name('operational.index');
     Route::get('/create', [OperationalController::class, 'createForm'])->name('operational.createForm');
     Route::post('/store', [OperationalController::class, 'store'])->name('operational.store');
-    Route::get('/show', [OperationalController::class, 'show'])->name('operational.show');
+    Route::get('/show/{operational}', [OperationalController::class, 'show'])->name('operational.show');
     Route::get('/{operational}/edit', [OperationalController::class, 'updateForm'])->name('operational.update-form');
     Route::patch('/{operational}', [OperationalController::class, 'update'])->name('operational.update');
     Route::delete('/{operational}', [OperationalController::class, 'delete'])->name('operational.delete');
     Route::post('/approve/{operational}', [OperationalController::class, 'approve'])->name('operational.approve');
+    Route::get('/getOperational/{salesOrder}', [OperationalController::class, 'getOperational'])->name('operational.get-operational');
 });
 
 Route::prefix('operationalAgenda')->group(function () {
