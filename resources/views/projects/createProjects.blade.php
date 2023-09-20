@@ -26,9 +26,27 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                <form action="projects.store" method="post" class="parsley-examples" novalidate="">
+                                <form action="{{ route('projects.store') }}" method="post" class="parsley-examples"
+                                    novalidate="">
                                     @csrf
 
+                                    <div class="row">
+                                        @if ($errors->any())
+                                            <div class="alert alert-danger">
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
+
+                                        @if (session('success'))
+                                            <div class="alert alert-success">
+                                                {{ session('success') }}
+                                            </div>
+                                        @endif
+                                    </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="mb-3">
@@ -139,7 +157,7 @@
                                     <div class="mb-3">
                                         <label for="emailAddress" class="form-label">Project Name<span
                                                 class="text-danger">*</span></label>
-                                        <input type="email" name="email" parsley-trigger="change" required=""
+                                        <input type="text" name="label" parsley-trigger="change" required=""
                                             placeholder="Masukkan Project Name" class="form-control" id="emailAddress">
                                         @error('label')
                                             <p class="text-danger">{{ $message }}</p>
@@ -148,9 +166,9 @@
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">Customers<span
                                                 class="text-danger">*</span></label>
-                                        <select id="customers" class="form-control" name="customers[]"
+                                        <select id="customers" class="form-control" name="customers"
                                             style="color: black;">
-                                            <option value="">--Pilih Customer--</option>
+                                            <option>--Pilih Customer--</option>
                                             @foreach ($customers as $customer)
                                                 <option value="{{ $customer->id }}">{{ $customer['companyName'] }}</option>
                                             @endforeach
@@ -161,9 +179,9 @@
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">Customers Contact Name<span
                                                 class="text-danger">*</span></label>
-                                        <select id="customers-name" class="form-control" name="customers-name[]"
+                                        <select id="customers-name" class="form-control" name="customers-name"
                                             style="color: black;">
-                                            <option value=""></option>
+                                            <option></option>
                                         </select>
                                     </div>
                                     <div class="mb-3">
@@ -197,38 +215,40 @@
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">Location<span
                                                 class="text-danger">*</span></label>
-                                        <input type="text" name="" parsley-trigger="change" required=""
+                                        <input type="text" name="location" parsley-trigger="change" required=""
                                             placeholder="Enter user name" class="form-control" id="userName">
                                     </div>
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">Start Date<span
                                                 class="text-danger">*</span></label>
-                                        <input type="date" name="nick" parsley-trigger="change" required=""
+                                        <input type="date" name="start_date" parsley-trigger="change" required=""
                                             placeholder="Enter user name" class="form-control" id="userName">
                                     </div>
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">End Date<span
                                                 class="text-danger">*</span></label>
-                                        <input type="date" name="nick" parsley-trigger="change" required=""
+                                        <input type="date" name="end_date" parsley-trigger="change" required=""
                                             placeholder="Enter user name" class="form-control" id="userName">
                                     </div>
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">Preliminary Cost<span
                                                 class="text-danger">*</span></label>
-                                        <input type="text" name="nick" parsley-trigger="change" required=""
-                                            placeholder="Enter user name" class="form-control" id="userName">
+                                        <input type="text" name="preliminary_cost" parsley-trigger="change"
+                                            required="" placeholder="Enter user name" class="form-control"
+                                            id="userName">
                                     </div>
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">Purchase Order Amount<span
                                                 class="text-danger">*</span></label>
-                                        <input type="text" name="nick" parsley-trigger="change" required=""
+                                        <input type="text" name="po_amount" parsley-trigger="change" required=""
                                             placeholder="Enter user name" class="form-control" id="userName">
                                     </div>
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">Expense Budget<span
                                                 class="text-danger">*</span></label>
-                                        <input type="text" name="nick" parsley-trigger="change" required=""
-                                            placeholder="Enter user name" class="form-control" id="userName">
+                                        <input type="text" name="expense_budget" parsley-trigger="change"
+                                            required="" placeholder="Enter user name" class="form-control"
+                                            id="userName">
                                     </div>
                                     <div class="text-end">
                                         <a href="{{ url('projects') }}">
