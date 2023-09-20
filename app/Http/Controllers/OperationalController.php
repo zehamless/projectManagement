@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Operational;
+use App\Models\Project;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class OperationalController extends Controller
 {
     public function index()
     {
-        return view('operational.index');
+        $salesOrder = Project::all();
+        return view('operational.index', compact('salesOrder'));
     }
 
     public function createForm()
@@ -97,5 +100,24 @@ class OperationalController extends Controller
         $operational->approved_by = $request->approved_by;
         $operational->save();
         return redirect()->route('operational.index')->with('success', 'Operational approved successfully.');
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function getOperational($salesOrder): JsonResponse
+    {
+        $operationals = Operational::select('id', 'spk_number')->where('project_id', $salesOrder)->get();
+        return response()->json($operationals);
+    }
+
+    /**
+     * @param Operational $operational
+     * @return JsonResponse
+     */
+    public function show($operational)
+    {
+        $operationals = Operational::find($operational)->with('project:id,label')->first();
+        return response()->json($operationals);
     }
 }

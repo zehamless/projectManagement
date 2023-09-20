@@ -76,5 +76,25 @@ class OperationalTest extends TestCase
         ]);
     }
 
+    public function testGetOperational()
+    {
+        $this->test_store();
+        $operational = Project::all()->first();
+        $response = $this->get('/operational/getOperational/'.$operational->so);
+        $response->assertStatus(200);
+        $response->assertJson([
+            'data' => [
+                'id' => $operational->id,
+                'date' => '2021-10-10',
+                'spk_code' => 'SPK001',
+                'spk_number' => 'SPK001',
+                'type' => 'SPK',
+                'description' => 'SPK',
+                'transportation_mode' => 'SPK',
+                'vehicle_number' => 'SPK',
+                'created_by' => 'SPK',
+            ]
+        ]);
+    }
 
 }

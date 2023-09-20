@@ -195,7 +195,8 @@
                                                                         data-bs-dismiss="modal">Close
                                                                 </button>
                                                                 <button type="button"
-                                                                        onclick="updateUser()"
+                                                                        id="update-button"
+                                                                        onclick="updateUser($(this).attr('data-id'))"
                                                                         class="btn btn-editAccount waves-effect waves-light">
                                                                     Save
                                                                     changes
@@ -232,7 +233,7 @@
     <!-- Include Select2 JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
-    
+
     <script type="text/javascript">
         $(document).ready(function () {
             var table = $('#datatable').DataTable({
@@ -268,7 +269,7 @@
                         <td class="text-center">
                             <div class="btn-group btn-group-sm" style="float: none;">
                                 <button type="button"
-                                id="edit-button"
+                                id="edit-button-${data}"
                                     class="tabledit-edit-button btn btn-primary waves-effect waves-light"
                                     style="background-color: #3E8BFF;"
                                     data-bs-toggle="modal"
@@ -341,6 +342,8 @@
 
                             // Open the modal.
                             modal.modal("show");
+                            //add attribute data-id in update button
+                            modal.find("#update-button").attr("data-id", userData.id);
                         } else {
                             console.error("Data not found");
                         }
@@ -400,9 +403,8 @@
         }
     </script>
     <script type="text/javascript">
-        function updateUser() {
-            var userId = $(".tabledit-edit-button").attr('data-id');
-
+        function updateUser(userId) {
+            // console.log(userId);
             Swal.fire({
                 title: 'Are you sure?',
                 text: 'You will not be able to recover this user!',
