@@ -2,6 +2,12 @@
 
 @section('content')
 
+<style>
+    #select-roles {
+        max-width: 100%;
+    }
+</style>
+
 <div class="content-page">
     <!-- Start Content-->
     <div class="container-fluid">
@@ -64,7 +70,7 @@
                                 <label for="userName" class="form-label">Tanda Tangan<span
                                         class="text-danger">*</span></label>
                                 <input type="file" name="signature" parsley-trigger="change" required=""
-                                    placeholder="Enter user name" class="form-control" id="userName">
+                                    class="form-control" data-plugins="dropify" data-height="150">
                                 @error('signature')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -79,9 +85,10 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="pass1" class="form-label">Password Confirmation<span class="text-danger">*</span></label>
-                                <input id="pass1" type="password_confirmation" placeholder="Type your password again" required=""
-                                    class="form-control" name="password_confirmation">
+                                <label for="pass1" class="form-label">Password Confirmation<span
+                                        class="text-danger">*</span></label>
+                                <input id="pass1" type="password_confirmation" placeholder="Type your password again"
+                                    required="" class="form-control" name="password_confirmation">
                                 @error('password_confirmation')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -110,6 +117,14 @@
 
 <!-- Include Select2 JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+<!-- Plugins js for file upload-->
+<script src="{{ asset('templateAdmin/Admin/dist/assets/libs/dropzone/min/dropzone.min.js') }}"></script>
+<script src="{{ asset('templateAdmin/Admin/dist/assets/libs/dropify/js/dropify.min.js') }}"></script>
+
+<!-- Init js for file upload-->
+<script src="{{ asset('templateAdmin/Admin/dist/assets/js/pages/form-fileuploads.init.js') }}"></script>
+
 
 <script>
     $(document).ready(function() {

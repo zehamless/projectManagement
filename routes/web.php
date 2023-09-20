@@ -48,7 +48,9 @@ Route::get('/formcustomer', function () {
 Route::get('/staff', function () {
     return view('staff');
 });
-
+Route::get('/RoleSelect', function () {
+    return view('rolecustomelogin');
+});
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

@@ -22,9 +22,9 @@
 <link href="{{ asset('templateAdmin/Admin/dist/assets/libs/datatables.net-select-bs5/css/select.bootstrap5.min.css') }}"
     rel="stylesheet" type="text/css" />
 
-<!-- Plugins dropzone file upload css -->
-<link href="assets/libs/dropzone/min/dropzone.min.css" rel="stylesheet" type="text/css" />
-<link href="assets/libs/dropify/css/dropify.min.css" rel="stylesheet" type="text/css" />
+<!-- Plugins css -->
+<link href="{{ asset('templateAdmin/Admin/dist/assets/libs/dropzone/min/dropzone.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('templateAdmin/Admin/dist/assets/libs/dropify/css/dropify.min.css') }}" rel="stylesheet" type="text/css" />
 
 <!-- Sweet Alert-->
 <link href="{{ asset('templateAdmin/Admin/dist/assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet"
