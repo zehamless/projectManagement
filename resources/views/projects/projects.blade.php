@@ -45,8 +45,9 @@
                 <div class="row">
                     <div class="col-sm-7">
                         <a href="{{ route('projects.createProjects') }}"
-                            class="btn btn-createProjects w-md waves-effect waves-light mb-3 px-4"><i
-                                class="mdi mdi-plus"></i> Create Project</a>
+                            class="btn btn-createProjects w-md waves-effect waves-light mb-3 px-4"
+                            title="Untuk menambahkan project"><i class="mdi mdi-plus" title="Untuk menambahkan project"></i>
+                            Create Project</a>
                     </div>
                     <div class="col-sm-5">
                         <form class="app-search" action="{{ route('projects.index') }}">
@@ -131,7 +132,7 @@
                                 <div class="card-body project-box">
                                     <div class="badge bg-danger float-end font-14">{{ $project['so'] }}</div>
                                     <div class="mt-0 project-title">{{ $project['label'] }}</div>
-                                    <p class="font-13">{{ $project['companyName'] }}</p>
+                                    <p class="font-13">{{ $project['customer']['companyName'] }}</p>
                                     <p class="text-muted font-15">Project Manager : {{ $project['project_manager'] }}</p>
                                     <p class="text-muted font-15">Sales Executive : {{ $project['sales_executive'] }}</p>
 
@@ -149,7 +150,8 @@
                                     <div class="project-detail">
                                         <a href="{{ route('projects.show', ['id' => $project->id]) }}">
                                             <button type="button"
-                                                class="btn btn-danger btn-detail rounded-pill px-3 waves-effect waves-light">Details</button>
+                                                class="btn btn-danger btn-detail rounded-pill px-3 waves-effect waves-light"
+                                                title="Melihat detail project">Details</button>
                                         </a>
                                     </div>
 

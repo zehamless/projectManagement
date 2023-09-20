@@ -58,7 +58,7 @@
                                     <div class="col-sm-4">
                                         <a href="{{ route('milestone.create', ['id' => $projectData->id]) }}"
                                             class="btn btn-createItems w-md waves-effect waves-light mb-3 px-4"><i
-                                                class="mdi mdi-plus"></i>Add Milestone</a>
+                                                class="mdi mdi-plus" title="Menambahkan milestone"></i>Add Milestone</a>
                                     </div>
                                 </div>
 
@@ -84,7 +84,7 @@
                                                 @foreach ($milestones as $milestone)
                                                     <tr>
                                                         <th scope="row">{{ $index++ }}</th>
-                                                        <td>{{ $milestone['submitted_date'] }}</td>
+                                                        <td title="Submit date">{{ $milestone['submitted_date'] }}</td>
                                                         <td>{{ $milestone['description'] }}</td>
                                                         <td>{{ $milestone['due_date'] }}</td>
                                                         <td class="text-center">
@@ -99,14 +99,14 @@
                                                         </td>
                                                         <td class="text-center">
                                                             <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <button type="button"
+                                                                <button title="Untuk mengedit milestone" type="button"
                                                                     class="tabledit-edit-button btn btn-primary waves-effect waves-light"
                                                                     style="background-color: #3E8BFF;">
                                                                     <span class="mdi mdi-pencil"></span>
                                                                 </button>
                                                             </div>
                                                             <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <button type="button"
+                                                                <button title="Untuk menghapus milestone" type="button"
                                                                     class="tabledit-edit-button btn btn-danger">
                                                                     <span class="mdi mdi-trash-can-outline"></span>
                                                                 </button>
@@ -158,14 +158,16 @@
                                                         <td>{{ $cost['amount'] }}</td>
                                                         <td class="text-center">
                                                             <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <button type="button"
+                                                                <button title="Untuk mengedit production cost"
+                                                                    type="button"
                                                                     class="tabledit-edit-button btn btn-primary waves-effect waves-light"
                                                                     style="background-color: #3E8BFF;">
                                                                     <span class="mdi mdi-pencil"></span>
                                                                 </button>
                                                             </div>
                                                             <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <button type="button"
+                                                                <button title="Untuk menghapus operational cost"
+                                                                    type="button"
                                                                     class="tabledit-edit-button btn btn-danger">
                                                                     <span class="mdi mdi-trash-can-outline"></span>
                                                                 </button>
@@ -245,7 +247,8 @@
                                                         </button>
                                                     </div>
                                                     <div class="btn-group btn-group-sm" style="float: none;">
-                                                        <button type="button" class="tabledit-edit-button btn btn-danger">
+                                                        <button type="button"
+                                                            class="tabledit-edit-button btn btn-danger">
                                                             <span class="mdi mdi-trash-can-outline"></span>
                                                         </button>
                                                     </div>

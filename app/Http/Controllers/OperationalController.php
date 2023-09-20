@@ -74,12 +74,17 @@ class OperationalController extends Controller
             'transportation' => $request->transportation ?? $operational->transportation,
             'vehicle_number' => $request->vehicle_number ?? $operational->vehicle_number,
         ]);
+        if ($request->team){
         $operational->team()->sync($request->team);
+        }
         return redirect()->route('operational.index')->with('success', 'Operational updated successfully.');
     }
 
     public function delete(Operational $operational)
     {
+        if ($operational->team()->exists()) {
+            $operational->team()->detach();
+        }
         $operational->delete();
         return redirect()->route('operational.index')->with('success', 'Operational deleted successfully.');
     }

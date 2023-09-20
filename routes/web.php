@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CustomerContactController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\MilestoneController;
 use App\Http\Controllers\OperationalAgendaController;
 use App\Http\Controllers\OperationalController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Material;
 use App\Models\Role;
 use Illuminate\Support\Facades\Route;
 
@@ -24,22 +26,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['prefix' => 'projects'], function () {
-    // Menampilkan daftar project
     Route::get('/', [ProjectController::class, 'index'])->name('projects.index');
-    // Menampilkan form untuk membuat project baru
     Route::get('/createProjects', [ProjectController::class, 'create'])->name('projects.createProjects');
-    // Menyimpan project baru ke dalaFm database
     Route::post('/', [ProjectController::class, 'store'])->name('projects.store');
-    // Menampilkan detail project
     Route::get('/detail/{id}', [ProjectController::class, 'show'])->name('projects.show');
-
-    // Menampilkan form untuk mengedit project
     Route::get('/{id}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
-
-    // Mengupdate project ke dalam database
     Route::put('/{id}', [ProjectController::class, 'update'])->name('projects.update');
-
-    // Menghapus project dari database
     Route::delete('/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
 });
 
@@ -73,24 +65,24 @@ Route::prefix('milestone')->group(function () {
 });
 
 
-Route::prefix('customer')->group(function () {
-    Route::get('/', [CustomerController::class, 'index'])->name('customer.index');
-    Route::get('/create', [CustomerController::class, 'create'])->name('customer.create');
-    Route::post('/store', [CustomerController::class, 'store'])->name('customer.store');
-    Route::get('/show', [CustomerController::class, 'show'])->name('customer.show');
-    Route::get('/edit', [CustomerController::class, 'edit'])->name('customer.edit');
-    Route::get('/update', [CustomerController::class, 'update'])->name('customer.update');
-    Route::delete('/delete', [CustomerController::class, 'delete'])->name('customer.delete');
+Route::prefix('customers')->group(function () {
+    Route::get('/', [CustomerController::class, 'index'])->name('customers.index');
+    Route::get('/create', [CustomerController::class, 'create'])->name('customers.create');
+    Route::post('/store', [CustomerController::class, 'store'])->name('customers.store');
+    Route::get('/show', [CustomerController::class, 'show'])->name('customers.show');
+    Route::get('/edit', [CustomerController::class, 'edit'])->name('customers.edit');
+    Route::get('/update', [CustomerController::class, 'update'])->name('customers.update');
+    Route::delete('/delete', [CustomerController::class, 'delete'])->name('customers.delete');
 });
 
-Route::prefix('customerContact')->group(function () {
-    Route::get('/', [CustomerContactController::class, 'index'])->name('customerContact.index');
-    Route::get('/create', [CustomerContactController::class, 'create'])->name('customerContact.create');
-    Route::post('/store', [CustomerContactController::class, 'store'])->name('customerContact.store');
-    Route::get('/show', [CustomerContactController::class, 'show'])->name('customerContact.show');
-    Route::get('/edit', [CustomerContactController::class, 'edit'])->name('customerContact.edit');
-    Route::get('/update', [CustomerContactController::class, 'update'])->name('customerContact.update');
-    Route::get('/delete', [CustomerContactController::class, 'delete'])->name('customerContact.delete');
+Route::prefix('customer_contacts')->group(function () {
+    Route::get('/', [CustomerContactController::class, 'index'])->name('customer_contacts.index');
+    Route::get('/create', [CustomerContactController::class, 'create'])->name('customer_contacts.create');
+    Route::post('/store', [CustomerContactController::class, 'store'])->name('customer_contacts.store');
+    Route::get('/show', [CustomerContactController::class, 'show'])->name('customer_contacts.show');
+    Route::get('/edit', [CustomerContactController::class, 'edit'])->name('customer_contacts.edit');
+    Route::get('/update', [CustomerContactController::class, 'update'])->name('customer_contacts.update');
+    Route::get('/delete', [CustomerContactController::class, 'delete'])->name('customer_contacts.delete');
 });
 
 //contoh route (post(/admin/roles)
@@ -118,7 +110,7 @@ Route::prefix('operational')->group(function () {
     Route::post('/store', [OperationalController::class, 'store'])->name('operational.store');
     Route::get('/show', [OperationalController::class, 'show'])->name('operational.show');
     Route::get('/{operational}/edit', [OperationalController::class, 'updateForm'])->name('operational.update-form');
-    Route::get('/{operational}', [OperationalController::class, 'update'])->name('operational.update');
+    Route::patch('/{operational}', [OperationalController::class, 'update'])->name('operational.update');
     Route::delete('/{operational}', [OperationalController::class, 'delete'])->name('operational.delete');
     Route::post('/approve/{operational}', [OperationalController::class, 'approve'])->name('operational.approve');
 });
@@ -133,6 +125,15 @@ Route::prefix('operationalAgenda')->group(function () {
     Route::get('/delete', [OperationalAgendaController::class, 'delete'])->name('operational_agenda.delete');
 });
 
+Route::prefix('materials')->group(function() {
+    Route::get('/', [MaterialController::class, 'index'])->name('materials.index');
+    Route::get('/create', [MaterialController::class, 'create'])->name('materials.update');
+    Route::post('/store', [MaterialController::class, 'store'])->name('materials.store');
+    Route::get('/show', [MaterialController::class, 'show'])->name('materials.show');
+    Route::get('/edit', [MaterialController::class, 'edit'])->name('materials.edit');
+    Route::get('/update', [MaterialController::class, 'update'])->name('materials.update');
+    Route::get('/delete', [MaterialController::class, 'delete'])->name('materials.delete');
+});
 
 Route::get('/admin/olahAkun', function () {
     return view('admin.olahAkun');

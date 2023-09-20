@@ -14,14 +14,14 @@
 <div class="content-page">
     <div class="content">
 
-        <!-- Start Content-->
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <form action="projects.store" method="post" class="parsley-examples" novalidate="">
-                                @csrf
+            <!-- Start Content-->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <form action="projects.store" method="post" class="parsley-examples" novalidate="">
+                                    @csrf
 
                                 <div class="row">
                                     <div class="col-md-6">
@@ -224,15 +224,15 @@
     // }
 </script>
 
-<script>
-    $(document).ready(function() {
-        $('#customers').select2({
-            allowClear: true,
-            tags: true,
-            theme: 'classic',
+    <script>
+        $(document).ready(function() {
+            $('#customers').select2({
+                allowClear: true,
+                tags: true,
+                theme: 'classic',
+            });
         });
-    });
-</script>
+    </script>
 
 <script>
     $(document).ready(function() {

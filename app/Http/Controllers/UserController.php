@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendMail;
+use App\Mail\SendPassword;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
@@ -10,6 +12,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rules\Password;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -78,6 +81,13 @@ class UserController extends Controller
         foreach ($request->input('roles') as $role) {
             $user->hasroles()->attach($role);
         }
+        //send email
+        $emailData = [
+            'name' => $request->first_name,
+            'password' => $request->password,
+        ];
+        Mail::to($request->email)->send(new SendPassword($emailData));
+
         return redirect()->route('users.index')->with('success', 'User berhasil ditambahkan');
     }
 
@@ -115,7 +125,10 @@ class UserController extends Controller
             'division' => $request->division ?? $user->division,
             'signature' => $filepath ?? $user->signature,
         ]);
+        if ($request->roles)
+        {
         $users->hasroles()->sync($request->roles);
+        }
 //        return redirect()->route('users.index')->with('success', 'User berhasil diupdate');
         return session()->flash('success', 'User berhasil diupdate');
     }
@@ -128,6 +141,9 @@ class UserController extends Controller
     {
         if ($user->signature) {
             \Storage::delete($user->signature);
+        }
+        if ($user->hasroles()->exists()) {
+            $user->hasroles()->detach();
         }
         $user->delete();
 //        return redirect()->route('users.index')->with('success', 'User berhasil dihapus');

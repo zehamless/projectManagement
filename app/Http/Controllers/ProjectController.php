@@ -15,11 +15,9 @@ class ProjectController extends Controller
     // Menampilkan daftar project
     public function index(Request $request)
     {
-        $query = Project::select('po', 'so', 'label', 'location', 'project_manager', 'sales_executive', 'start_date', 'end_date', 'preliminary_cost', 'po_amount', 'expense_budget', 'customers.id as customer_id', 'customers.companyName')
-            ->orderBy('projects.created_at', 'desc');
-
         $query = Project::with('customer')
-            ->get();
+            ->orderBy('created_at', 'desc');
+
         if ($request->has('search')) {
             $search = $request->input('search');
 
@@ -34,10 +32,12 @@ class ProjectController extends Controller
             });
         }
 
-        $projects = $query;
+        $projects = $query->whereHas('customer')->get();
 
         return view('projects.projects', compact('projects'));
     }
+
+
 
     // Menampilkan form untuk membuat project baru
     public function create()
@@ -61,8 +61,8 @@ class ProjectController extends Controller
             $fullName = $user->first_name . ' ' . $user->last_name;
             $usersByRole[$role][] = ['id' => $user->id, 'name' => $fullName];
         }
-
-        return view('projects.createProjects', compact('usersByRole'));
+        $customers = Customer::all();
+        return view('projects.createProjects', compact('usersByRole', 'customers'));
     }
 
 

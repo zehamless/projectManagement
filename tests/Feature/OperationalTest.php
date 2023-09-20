@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Operational;
 use App\Models\Project;
 use App\Models\User;
 use Database\Seeders\ProjectsSeeder;
@@ -40,4 +41,40 @@ class OperationalTest extends TestCase
         $response->assertSessionHas('success');
         $this->assertDatabaseCount('operational_team', 1);
     }
+
+    public function testUpdate()
+    {
+        $this->test_store();
+        $operational = Operational::all()->first();
+        $user = User::all()->first();
+
+        $response = $this->patch('/operational/'.$operational->id, [
+            'spk_number' => 'SPK001',
+            'type' => 'SPK',
+//            'team'=> [$user->id],
+            'description' => 'SPK',
+            'vehicle_number' => 'SPK',
+            'created_by' => 'SPK',
+        ]);
+        $response->assertSessionHas('success');
+        $this->assertDatabaseHas('operational_team', [
+            'operational_id' => $operational->id,
+            'user_id' => $user->id,
+        ]);
+    }
+
+    public function testDelete()
+    {
+        $this->test_store();
+        $operational = Operational::all()->first();
+        $user = User::all()->first();
+        $response = $this->delete('/operational/'.$operational->id);
+        $response->assertSessionHas('success');
+        $this->assertDatabaseMissing('operational_team', [
+            'operational_id' => $operational->id,
+            'user_id' => $user->id,
+        ]);
+    }
+
+
 }
