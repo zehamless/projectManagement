@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CustomerContactController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\MilestoneController;
 use App\Http\Controllers\OperationalAgendaController;
 use App\Http\Controllers\OperationalController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Material;
 use App\Models\Role;
 use Illuminate\Support\Facades\Route;
 
@@ -63,14 +65,14 @@ Route::prefix('milestone')->group(function () {
 });
 
 
-Route::prefix('customer')->group(function () {
-    Route::get('/', [CustomerController::class, 'index'])->name('customer.index');
-    Route::get('/create', [CustomerController::class, 'create'])->name('customer.create');
-    Route::post('/store', [CustomerController::class, 'store'])->name('customer.store');
-    Route::get('/show', [CustomerController::class, 'show'])->name('customer.show');
-    Route::get('/edit', [CustomerController::class, 'edit'])->name('customer.edit');
-    Route::get('/update', [CustomerController::class, 'update'])->name('customer.update');
-    Route::delete('/delete', [CustomerController::class, 'delete'])->name('customer.delete');
+Route::prefix('customers')->group(function () {
+    Route::get('/', [CustomerController::class, 'index'])->name('customers.index');
+    Route::get('/create', [CustomerController::class, 'create'])->name('customers.create');
+    Route::post('/store', [CustomerController::class, 'store'])->name('customers.store');
+    Route::get('/show', [CustomerController::class, 'show'])->name('customers.show');
+    Route::get('/edit', [CustomerController::class, 'edit'])->name('customers.edit');
+    Route::get('/update', [CustomerController::class, 'update'])->name('customers.update');
+    Route::delete('/delete', [CustomerController::class, 'delete'])->name('customers.delete');
 });
 
 Route::prefix('customerContact')->group(function () {
@@ -124,6 +126,15 @@ Route::prefix('operationalAgenda')->group(function () {
     Route::get('/delete', [OperationalAgendaController::class, 'delete'])->name('operational_agenda.delete');
 });
 
+Route::prefix('materials')->group(function () {
+    Route::get('/', [MaterialController::class, 'index'])->name('materials.index');
+    Route::get('/create', [MaterialController::class, 'create'])->name('materials.update');
+    Route::post('/store', [MaterialController::class, 'store'])->name('materials.store');
+    Route::get('/show', [MaterialController::class, 'show'])->name('materials.show');
+    Route::get('/edit', [MaterialController::class, 'edit'])->name('materials.edit');
+    Route::get('/update', [MaterialController::class, 'update'])->name('materials.update');
+    Route::get('/delete', [MaterialController::class, 'delete'])->name('materials.delete');
+});
 
 Route::get('/admin/olahAkun', function () {
     return view('admin.olahAkun');

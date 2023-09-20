@@ -26,19 +26,20 @@
         }
 
         .background-page {
-            background-image: url('{{ asset(' images/trafindo-workshop.png') }}');
+
+            background-image: linear-gradient(rgba(81, 81, 81, 0.233),
+                rgba(255, 0, 0, 0.45)),
+            url('{{ asset('images/trafindo-workshop.png') }}');
             background-size: cover;
         }
 
-        .background-page:before {
-            content: '';
-            background-color: rgba(138, 9, 9, 0.315);
-            /* Adjust the color and opacity here */
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0
+        .btn-login {
+            background-color: #FF3E3E;
+            border: #FF3E3E;
+            border-radius: 5px;
+            color: white;
+            padding: 10px;
+            font-weight: 800;
         }
     </style>
 
@@ -67,29 +68,33 @@
                                     class="logo-trafindo mx-auto" style="max-height: 60px;">
                             </div>
 
-                            <form action="#">
+                            <form action="{{ url('/') }}" class="parsley-examples">
+                                @csrf
                                 <div class="mb-3">
-                                    <label for="emailaddress" class="form-label">Email address</label>
-                                    <input class="form-control" type="email" id="emailaddress" required=""
+                                    <label for="emailaddress" class="form-label">Email address<span
+                                        class="text-danger">*</span></label>
+                                    <input class="form-control" type="email" id="emailaddress" required="" parsley-trigger="change"
                                         placeholder="Enter your email">
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="password" class="form-label">Password</label>
-                                    <input class="form-control" type="password" required="" id="password"
+                                    <label for="password" class="form-label">Password<span
+                                        class="text-danger">*</span></label>
+                                    <input class="form-control" type="password" required="" id="password" parsley-trigger="change"
                                         placeholder="Enter your password">
                                 </div>
 
                                 <div class="mb-3 d-grid text-center">
-                                    <button class="btn btn-primary" type="submit"> Log In </button>
+                                    <button class="btn btn-login round-20" type="submit"> Log In </button>
                                 </div>
 
                                 <div class="row mt-3">
                                     <div class="col-12 text-center">
-                                        <p> <a href="pages-recoverpw.html" class="text-muted ms-1"><i
+                                        <p> <a href="#" class="text-muted ms-1"><i
                                                     class="fa fa-lock me-1"></i>Forgot your password?</a></p>
-                                        <p class="text-muted">Don't have an account? <a href="pages-register.html"
-                                                class="text-dark ms-1"><b>Sign Up</b></a></p>
+                                        <p class="text-muted">Don't have an account? <a
+                                                href="https://wa.me/628111260360" class="text-dark ms-1"
+                                                target="_blank"><b>Contact Admin</b></a></p>
                                     </div> <!-- end col -->
                                 </div>
                                 <!-- end row -->

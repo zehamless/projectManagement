@@ -252,13 +252,13 @@
 @section('pageScript')
     {{-- masih belum kelar --}}
     <script>
-        function saveConfirmation() {
-            Swal.fire({
-                title: "Good job!",
-                text: "You clicked the button!",
-                icon: "success",
-            });
-        }
+        // function saveConfirmation() {
+        //         Swal.fire({
+        //             title: 'Saved!',
+        //             text: "Project berhasil dibuat",
+        //             icon: "success",
+        //         });
+        // }
     </script>
 
     <script>
