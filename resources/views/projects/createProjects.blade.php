@@ -191,7 +191,7 @@
                                             @if (isset($usersByRole['Project Manager']))
                                                 <option>--Pilih Project Manager--</option>
                                                 @foreach ($usersByRole['Project Manager'] as $pm)
-                                                    <option value="{{ $pm['id'] }}">{{ $pm['name'] }}</option>
+                                                    <option value="{{ $pm['name'] }}">{{ $pm['name'] }}</option>
                                                 @endforeach
                                             @else
                                                 <option value="">Tidak ada Project Manager</option>
@@ -205,7 +205,7 @@
                                             @if (isset($usersByRole['Sales Executive']))
                                                 <option>--Pilih Sales Executive--</option>
                                                 @foreach ($usersByRole['Sales Executive'] as $se)
-                                                    <option value="{{ $se['id'] }}">{{ $se['name'] }}</option>
+                                                    <option value="{{ $se['name'] }}">{{ $se['name'] }}</option>
                                                 @endforeach
                                             @else
                                                 <option value="">Tidak ada Sales Executive</option>
