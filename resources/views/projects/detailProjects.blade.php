@@ -90,7 +90,7 @@
                                                         <td class="text-center">
                                                             <span
                                                                 class="badge
-                                                                @if ($milestone['progress'] == 'Completed') bg-success
+                                                                @if ($milestone['progress'] == 'Done') bg-success
                                                                 @elseif($milestone['progress'] == 'Planned')
                                                                 bg-primary
                                                                 @elseif($milestone['progress'] == 'On Progress')

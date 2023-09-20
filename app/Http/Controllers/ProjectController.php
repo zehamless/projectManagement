@@ -69,35 +69,48 @@ class ProjectController extends Controller
     // Menyimpan project baru ke dalam database
     public function store(Request $request)
     {
-        // Validasi data input dari form
-        $validatedData = $request->validate([
-            'po' => 'required|string',
-            'customer_id' => 'required|string',
-            'label' => 'required|string',
-            'location' => 'required|string',
-            'project_manager' => 'required|string',
-            'sales_executive' => 'required|string',
+        // Validasi input dari form
+        $request->validate([
+            'label' => 'required',
+            'customers' => 'required',
+            'customers-name' => 'required',
+            'project_manager' => 'required',
+            'sales_executive' => 'required',
+            'location' => 'required',
             'start_date' => 'required|date',
-            'end_date' => 'required|date|after:start_date',
+            'end_date' => 'required|date',
             'preliminary_cost' => 'required|numeric',
             'po_amount' => 'required|numeric',
-            'expense_budget' => 'nullable|numeric',
-            'so' => [
-                'nullable',
-                'string',
-                'regex:/^(S\d{1}\/\d{2}\/\d{4}|S\d{1}-\d{2}-\d{4}|S\d{1}\/\d{2}\/[A-Z\s]+)$/i',
-            ],
-            'memo' => 'nullable|required_without_all:so|string',
-        ], [
-            'memo.required_without_all' => 'Memo harus diisi jika SO Number tidak diisi.',
+            'expense_budget' => 'required|numeric',
         ]);
-        $validatedData['id'] = Str::uuid();
+
+        // Menggabungkan kolom PO, Memo, dan SO menjadi satu nilai
+        $po = $request->input('po-1') . '/' . $request->input('po-2');
+        $memo = $request->input('memo-1') . "/" . $request->input('memo-2') . "/" . $request->input('memo-3') . "/" . $request->input('memo-4') . "/" . $request->input('memo-5');
+        $so = $request->input('so-1') . "/" . $request->input('so-2') . "/" . $request->input('so-3');
 
         // Simpan data ke dalam database
-        Project::create($validatedData);
+        $project = new Project;
+        $project->label = $request->input('label');
+        $project->customer_id = $request->input('customers');
+        $project->customer_contact_id = $request->input('customers-name');
+        $project->project_manager = $request->input('project_manager');
+        $project->sales_executive = $request->input('sales_executive');
+        $project->location = $request->input('location');
+        $project->start_date = $request->input('start_date');
+        $project->end_date = $request->input('end_date');
+        $project->preliminary_cost = $request->input('preliminary_cost');
+        $project->po = $po;
+        $project->memo = $memo;
+        $project->so = $so;
+        $project->po_amount = $request->input('po_amount');
+        $project->expense_budget = $request->input('expense_budget');
+        $project->save();
 
-        return dd("Berhasil");
+        // Redirect atau tampilkan pesan sukses
+        return redirect('projects')->with('success', 'Project berhasil ditambahkan');
     }
+
 
     public function show($id)
     {

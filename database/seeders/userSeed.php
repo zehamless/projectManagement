@@ -32,7 +32,7 @@ class userSeed extends Seeder
         $users = User::factory()->count(5)->create();
         //assign role to user
         foreach ($users as $user) {
-            $user->hasroles()->attach(random_int(1, 3));
+            $user->hasroles()->attach(random_int(1, 5));
         }
     }
 }
