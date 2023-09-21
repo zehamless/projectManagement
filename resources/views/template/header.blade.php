@@ -23,12 +23,19 @@
     rel="stylesheet" type="text/css" />
 
 <!-- Plugins css -->
-<link href="{{ asset('templateAdmin/Admin/dist/assets/libs/dropzone/min/dropzone.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('templateAdmin/Admin/dist/assets/libs/dropify/css/dropify.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('templateAdmin/Admin/dist/assets/libs/dropzone/min/dropzone.min.css') }}" rel="stylesheet"
+    type="text/css" />
+<link href="{{ asset('templateAdmin/Admin/dist/assets/libs/dropify/css/dropify.min.css') }}" rel="stylesheet"
+    type="text/css" />
 
 <!-- Sweet Alert-->
 <link href="{{ asset('templateAdmin/Admin/dist/assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet"
     type="text/css" />
+
+
+<!-- magnific css -->
+<link href="{{ asset('templateAdmin/Admin/dist/assets/libs/magnific-popup/magnific-popup.css') }}" rel="stylesheet" type="text/css" />
+
 
 {{-- chart js --}}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -83,7 +90,6 @@
 
     .btn-save {
         background-color: #FF3E3E;
-        border: #FF3E3E;
         color: white;
     }
 </style>
