@@ -82,11 +82,11 @@ class UserController extends Controller
             $user->hasroles()->attach($role);
         }
         //send email
-        $emailData = [
-            'name' => $request->first_name,
-            'password' => $request->password,
-        ];
-        Mail::to($request->email)->send(new SendPassword($emailData));
+//        $emailData = [
+//            'name' => $request->first_name,
+//            'password' => $request->password,
+//        ];
+//        Mail::to($request->email)->send(new SendPassword($emailData));
 
         return redirect()->route('users.index')->with('success', 'User berhasil ditambahkan');
     }
