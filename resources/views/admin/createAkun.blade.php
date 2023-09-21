@@ -94,10 +94,10 @@
                                 @enderror
                             </div>
                             <div class="text-end">
-                                <button class="btn btn-primary waves-effect waves-light" type="submit">Submit</button>
                                 <a href="{{ url('admin/olahAkun') }}">
                                     <button type="button" class="btn btn-secondary waves-effect">Cancel</button>
                                 </a>
+                                <button class="btn btn-save waves-effect waves-light" type="submit">Submit</button>
                             </div>
                         </form>
                     </div>
@@ -117,13 +117,6 @@
 
 <!-- Include Select2 JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-
-<!-- Plugins js for file upload-->
-<script src="{{ asset('templateAdmin/Admin/dist/assets/libs/dropzone/min/dropzone.min.js') }}"></script>
-<script src="{{ asset('templateAdmin/Admin/dist/assets/libs/dropify/js/dropify.min.js') }}"></script>
-
-<!-- Init js for file upload-->
-<script src="{{ asset('templateAdmin/Admin/dist/assets/js/pages/form-fileuploads.init.js') }}"></script>
 
 
 <script>
