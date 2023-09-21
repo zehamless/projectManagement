@@ -2,68 +2,68 @@
 
 @section('content')
 
-    <style>
-        .btn-createAccount {
-            border-radius: 10px;
-            background-color: #FF3E3E;
-            border: #FF3E3E;
-            color: white;
+<style>
+    .btn-createAccount {
+        border-radius: 10px;
+        background-color: #FF3E3E;
+        border: #FF3E3E;
+        color: white;
 
-        }
+    }
 
-        .btn-editAccount {
-            background-color: #FF3E3E;
-            border: #FF3E3E;
-            color: white;
-        }
+    .btn-editAccount {
+        background-color: #FF3E3E;
+        border: #FF3E3E;
+        color: white;
+    }
 
-        .btn-createAccount:focus {
-            color: white;
-        }
+    .btn-createAccount:focus {
+        color: white;
+    }
 
-        .form-label {
-            text-align: start !important;
-        }
+    .form-label {
+        text-align: start !important;
+    }
 
-        /*.modal-open .modal {*/
-        /*    overflow-y: hidden !important;*/
-        /*}*/
-    </style>
+    /*.modal-open .modal {*/
+    /*    overflow-y: hidden !important;*/
+    /*}*/
+</style>
 
-    <div class="content-page">
-        <div class="content">
-            @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
+<div class="content-page">
+    <div class="content">
+        @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-sm-7">
+                    <a href="{{ url('admin/users/create') }}"
+                        class="btn btn-createAccount w-md waves-effect waves-light mb-3 px-4"><i
+                            class="mdi mdi-plus"></i> Create Account</a>
                 </div>
-            @endif
-            <!-- Start Content-->
-            <div class="container-fluid">
+                <div class="col-sm-5">
 
-                <div class="row">
-                    <div class="col-sm-7">
-                        <a href="{{ url('admin/users/create') }}"
-                           class="btn btn-createAccount w-md waves-effect waves-light mb-3 px-4"><i
-                                class="mdi mdi-plus"></i> Create Account</a>
-                    </div>
-                    <div class="col-sm-5">
+                </div><!-- end col-->
+            </div>
 
-                    </div><!-- end col-->
-                </div>
-
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="mt-0 header-title">Data Akun Table</h4>
-                                <p class="text-muted font-14 mb-3">
-                                <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <table id="datatable"
-                                                   class="table table-bordered dt-responsive table-hover table-responsive nowrap dataTable no-footer dtr-inline"
-                                                   aria-describedby="datatable_info">
-                                                <thead>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="mt-0 header-title">Data Akun Table</h4>
+                            <p class="text-muted font-14 mb-3">
+                            <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table id="datatable"
+                                            class="table table-bordered dt-responsive table-hover table-responsive nowrap dataTable no-footer dtr-inline"
+                                            aria-describedby="datatable_info">
+                                            <thead>
                                                 <tr>
                                                     <th class="sorting sorting_asc" tabindex="0"
                                                         aria-controls="datatable" rowspan="1" colspan="1"
@@ -103,138 +103,143 @@
                                                         aria-label="Salary: activate to sort column ascending">Actions
                                                     </th>
                                                 </tr>
-                                                </thead>
-                                                {{-- modals --}}
-                                                <div id="con-close-modal" class="modal fade"
-                                                     role="dialog" aria-labelledby="myModalLabel"
-                                                     aria-hidden="true" style="overflow:hidden;">
-                                                    <div class="modal-dialog modal-dialog-centered">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h4 class="modal-title">Edit Data Akun</h4>
-                                                                <button type="button" class="btn-close"
-                                                                        data-bs-dismiss="modal"
-                                                                        aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="row">
-                                                                    <div class="col-md-12">
-                                                                        <div class="mb-3 text-start">
-                                                                            <label for="field-3"
-                                                                                   class="form-label">Email</label>
-                                                                            <input type="text"
-                                                                                   class="form-control"
-                                                                                   id="email"
-                                                                                   placeholder="type your email here">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-md-6">
-                                                                        <div class="mb-3 text-start">
-                                                                            <label for="field-1"
-                                                                                   class="form-label">First
-                                                                                Name</label>
-                                                                            <input type="text"
-                                                                                   class="form-control"
-                                                                                   id="first_name"
-                                                                                   placeholder="First">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <div class="mb-3 text-start">
-                                                                            <label for="field-2 "
-                                                                                   class="form-label">Last
-                                                                                Name</label>
-                                                                            <input type="text"
-                                                                                   class="form-control"
-                                                                                   id="last_name" placeholder="Last">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-md-12">
-                                                                        <div class="mb-3 text-start">
-                                                                            <label for="field-3"
-                                                                                   class="form-label">Division
-                                                                            </label>
-                                                                            <input type="text"
-                                                                                   class="form-control"
-                                                                                   id="division"
-                                                                                   placeholder="Divisi">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-md-12">
-                                                                        <div class="mb-3 text-start">
-                                                                            <label for="field-3"
-                                                                                   class="form-label">Role</label>
-                                                                            <select id="select-roles"
-                                                                                    class="form-control" name="roles[]"
-                                                                                    style="color: black;"></select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-md-12">
-                                                                        <div class="mb-3 text-start">
-                                                                            <label for="field-3"
-                                                                                   class="form-label">Tanda
-                                                                                Tangan</label>
-                                                                            <input type="file"
-                                                                                   class="form-control"
-                                                                                   id="signature">
-                                                                        </div>
+                                            </thead>
+                                            {{-- modals --}}
+                                            <div id="con-close-modal" class="modal fade" role="dialog"
+                                                aria-labelledby="myModalLabel" aria-hidden="true"
+                                                style="overflow:hidden;">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Edit Data Akun</h4>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="mb-3 text-start">
+                                                                        <label for="field-3"
+                                                                            class="form-label">Email</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="email"
+                                                                            placeholder="type your email here">
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button"
-                                                                        class="btn btn-secondary waves-effect"
-                                                                        data-bs-dismiss="modal">Close
-                                                                </button>
-                                                                <button type="button"
-                                                                        onclick="updateUser()"
-                                                                        class="btn btn-editAccount waves-effect waves-light">
-                                                                    Save
-                                                                    changes
-                                                                </button>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="mb-3 text-start">
+                                                                        <label for="field-1" class="form-label">First
+                                                                            Name</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="first_name" placeholder="First">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="mb-3 text-start">
+                                                                        <label for="field-2 " class="form-label">Last
+                                                                            Name</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="last_name" placeholder="Last">
+                                                                    </div>
+                                                                </div>
                                                             </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="mb-3 text-start">
+                                                                        <label for="field-3" class="form-label">Division
+                                                                        </label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="division" placeholder="Divisi">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="mb-3 text-start">
+                                                                        <label for="field-3"
+                                                                            class="form-label">Role</label>
+                                                                        <select id="select-roles" class="form-control"
+                                                                            name="roles[]"
+                                                                            style="color: black;"></select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="mb-3 text-start">
+                                                                        <label for="field-3" class="form-label">Tanda
+                                                                            Tangan</label>
+                                                                        <input type="file" class="form-control" data-plugins="dropify" data-height="100"
+                                                                            id="signature">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary waves-effect"
+                                                                data-bs-dismiss="modal">Close
+                                                            </button>
+                                                            <button type="button" onclick="updateUser()"
+                                                                class="btn btn-editAccount waves-effect waves-light">
+                                                                Save
+                                                                changes
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!-- /.modal -->
+                                            </div>
+                                            <!-- /.modal -->
 
-                                            </table>
-                                        </div>
+                                        </table>
                                     </div>
-
                                 </div>
+
                             </div>
                         </div>
-
                     </div>
+
                 </div>
+            </div>
 
 
-            </div> <!-- container-fluid -->
+        </div> <!-- container-fluid -->
 
-        </div> <!-- content -->
-    </div>
+    </div> <!-- content -->
+</div>
 @endsection
 
 @section('pageScript')
 
-    <!-- Include Select2 CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
+<!-- Include Select2 CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 
-    <!-- Include Select2 JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<!-- Include Select2 JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
-    
-    <script type="text/javascript">
-        $(document).ready(function () {
+<!-- isotope filter plugin -->
+<script src="{{ asset('templateAdmin/Admin/dist/assets/libs/isotope-layout/isotope.pkgd.min.js') }}"></script>
+
+<!-- Magnific Popup-->
+<script src="{{ asset('templateAdmin/Admin/dist/assets/libs/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
+
+<!-- Gallery Init-->
+<script src="{{ asset('templateAdmin/Admin/dist/assets/js/pages/gallery.init.js') }}"></script>
+
+<!-- App js -->
+<script src="{{ asset('templateAdmin/Admin/dist/assets/js/app.min.js') }}"></script>
+
+<!-- Plugins js for file upload-->
+<script src="{{ asset('templateAdmin/Admin/dist/assets/libs/dropzone/min/dropzone.min.js') }}"></script>
+<script src="{{ asset('templateAdmin/Admin/dist/assets/libs/dropify/js/dropify.min.js') }}"></script>
+
+<!-- Init js for file upload-->
+<script src="{{ asset('templateAdmin/Admin/dist/assets/js/pages/form-fileuploads.init.js') }}"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
             var table = $('#datatable').DataTable({
                 processing: true,
                 responsive: true,
@@ -255,7 +260,7 @@
                         searchable: false,
                         render: function (data, type, full, meta) {
                             // Concatenate the image URL with the asset function
-                            return '<img src="{{ asset("' + data + '") }}" alt="Signature" width="100" height="auto">';
+                            return '<a href="{{ asset("' + data + '") }}" class="image-popup"><img src="{{ asset("' + data + '") }}" alt="Signature" width="100" height="auto"></a>';
                         }
                     },
                     {
@@ -293,9 +298,9 @@
                 ]
             });
         });
-    </script>
-    <script type="text/javascript">
-        function deleteUser(userId) {
+</script>
+<script type="text/javascript">
+    function deleteUser(userId) {
             // Display a confirmation dialog
             Swal.fire({
                 title: 'Are you sure?',
@@ -318,9 +323,9 @@
                 }
             });
         }
-    </script>
-    <script type="text/javascript">
-        function editUser(userId) {
+</script>
+<script type="text/javascript">
+    function editUser(userId) {
             var modal = $("#con-close-modal");
             // Make an Ajax request to get the data.
             $.ajax({
@@ -353,9 +358,9 @@
                 }
             });
         }
-    </script>
-    <script type="text/javascript">
-        function showRoles(userData) {
+</script>
+<script type="text/javascript">
+    function showRoles(userData) {
             // get all roles
             $.ajax({
                 url: "{{ route('roles.index') }}",
@@ -398,9 +403,9 @@
                 }
             });
         }
-    </script>
-    <script type="text/javascript">
-        function updateUser() {
+</script>
+<script type="text/javascript">
+    function updateUser() {
             var userId = $(".tabledit-edit-button").attr('data-id');
 
             Swal.fire({
@@ -453,9 +458,9 @@
             })
         }
 
-    </script>
-    <script>
-        $(document).ready(function () {
+</script>
+<script>
+    $(document).ready(function () {
             $('#select-roles').select2({
                 // placeholder: 'role',
                 dropdownParent: $('#con-close-modal'),
@@ -466,8 +471,24 @@
                 width: '100%',
             });
         });
-    </script>
-    <!-- Sweet alert init js-->
-    <script src="{{ asset('templateAdmin/Admin/dist/assets/js/pages/sweet-alerts.init.js') }}"></script>
+</script>
+<script>
+    $(document).ready(function() {
+            // Initialize Magnific Popup for image links
+            $('.image-popup').magnificPopup({
+                type: 'image', // Type of content (image)
+                gallery: {
+                    enabled: true // Enable gallery mode for multiple images
+                }
+            });
+        });
+</script>
+<!-- isotope filter plugin -->
+<script src="assets/libs/isotope-layout/isotope.pkgd.min.js"></script>
 
+<!-- Magnific Popup-->
+<script src="assets/libs/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<!-- Gallery Init-->
+<script src="assets/js/pages/gallery.init.js"></script>
 @endsection
