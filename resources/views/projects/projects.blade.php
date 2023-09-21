@@ -34,6 +34,20 @@
             font-weight: 900;
             font-size: 1.125rem;
         }
+
+        .bg-so {
+            background-color: #dc3545;
+            /* Warna default, misalnya merah */
+        }
+
+        /* CSS untuk mengubah latar belakang menjadi warning ketika "so" kosong atau "Perlu diisi" */
+        .bg-so:empty,
+        /* Ketika kosong */
+        .bg-so:contains("Nomor SO Belum diisi") {
+            /* Ketika isinya "Perlu diisi" */
+            background-color: #ffc107;
+            /* Warna warning, misalnya kuning */
+        }
     </style>
 
     <div class="content-page">
@@ -130,7 +144,10 @@
                         <div class="col-xl-4">
                             <div class="card">
                                 <div class="card-body project-box">
-                                    <div class="badge bg-danger float-end font-14">{{ $project['so'] }}</div>
+                                    <div
+                                        class="badge {{ $project['so'] == '' || $project['so'] == 'Nomor SO Belum diisi' ? 'bg-warning' : 'bg-danger' }} float-end font-14">
+                                        {{ $project['so'] }}
+                                    </div>
                                     <div class="mt-0 project-title">{{ $project['label'] }}</div>
                                     <p class="font-13">{{ $project['customer']['companyName'] }}</p>
                                     <p class="text-muted font-15">Project Manager : {{ $project['project_manager'] }}</p>
