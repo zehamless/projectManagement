@@ -17,6 +17,7 @@ class MilestoneController extends Controller
             'description' => 'required|string',
             'due_date' => 'required|date',
             'progress' => 'required|string',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi file gambar
         ]);
 
         // Simpan data Milestone ke dalam database dengan mengaitkannya dengan ID proyek
@@ -27,10 +28,20 @@ class MilestoneController extends Controller
             'progress' => $request->input('progress'),
         ]);
 
+        // Simpan file
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $fileName = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('milestone_files'), $fileName);
+            $milestone->file = $fileName;
+        }
+
         $project = Project::find($validatedData['project_id']);
         $project->milestones()->save($milestone);
+
         return redirect()->route('projects.show', $validatedData['project_id'])->with('success', 'Milestone berhasil ditambahkan');
     }
+
 
 
 

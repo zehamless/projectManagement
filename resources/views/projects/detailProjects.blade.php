@@ -341,7 +341,7 @@
                                             <tr>
                                                 <th scope="row">
                                                     <p class="title-text">End Date</p>
-                                                    <p class="details-text">end_date</p>
+                                                    <p class="details-text">{{ $projectData['end_date'] }}</p>
                                                 </th>
                                             </tr>
                                             <tr>
