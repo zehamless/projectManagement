@@ -25,8 +25,7 @@
 
 
 {{-- script load library js --}}
-<script src="{{ asset('templateAdmin/Admin/dist/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}">
-</script>
+<script src="{{ asset('templateAdmin/Admin/dist/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}">
 </script>
 <script
@@ -46,7 +45,8 @@
 </script>
 <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/datatables.net-buttons/js/buttons.print.min.js') }}">
 </script>
-<script src="{{ asset('templateAdmin/Admin/dist/assets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js') }}">
+<script
+    src="{{ asset('templateAdmin/Admin/dist/assets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js') }}">
 </script>
 <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/datatables.net-select/js/dataTables.select.min.js') }}">
 </script>
@@ -80,5 +80,15 @@
 
 <!-- Init js for file upload-->
 <script src="{{ asset('templateAdmin/Admin/dist/assets/js/pages/form-fileuploads.init.js') }}"></script>
+
+{{-- Script buat tanggal --}}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        flatpickr('.datepicker', {
+            enableTime: false, // Hapus ini jika ingin memungkinkan input waktu juga
+            dateFormat: "Y-m-d",
+        });
+    });
+</script>
 
 @yield('pageScript')
