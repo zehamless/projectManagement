@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Customer;
+use App\Models\CustomerContact;
 use App\Models\Project;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -17,9 +18,12 @@ class ProjectsSeeder extends Seeder
         //call customer seed
         $this->call(CustomerSeeder::class);
         $customer = Customer::first();
+        $this->call(CustomerContactSeeder::class);
+        $customer_contact = CustomerContact::first();
         Project::create([
             'po' => 'Project 1',
             'customer_id' => $customer->id,
+            'customer_contact_id' => $customer_contact->id,
             'memo' => 'Memo 1',
             'label' => 'Label 1',
             'so' => 'SO 1',

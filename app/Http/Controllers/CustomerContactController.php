@@ -63,4 +63,10 @@ class CustomerContactController extends Controller
         return redirect()->route('customer_contacts.index')
             ->with('success', 'Customer contact deleted successfully.');
     }
+
+    public function getCustomerContacts($customer_id)
+    {
+        $customerContacts = CustomerContact::where('customer_id', $customer_id)->get();
+        return response()->json($customerContacts);
+    }
 }

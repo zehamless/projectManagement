@@ -77,14 +77,15 @@ Route::prefix('customers')->group(function () {
     Route::delete('/delete', [CustomerController::class, 'delete'])->name('customers.delete');
 });
 
-Route::prefix('customer_contacts')->group(function () {
-    Route::get('/', [CustomerContactController::class, 'index'])->name('customer_contacts.index');
-    Route::get('/create', [CustomerContactController::class, 'create'])->name('customer_contacts.create');
-    Route::post('/store', [CustomerContactController::class, 'store'])->name('customer_contacts.store');
-    Route::get('/show', [CustomerContactController::class, 'show'])->name('customer_contacts.show');
-    Route::get('/edit', [CustomerContactController::class, 'edit'])->name('customer_contacts.edit');
-    Route::get('/update', [CustomerContactController::class, 'update'])->name('customer_contacts.update');
-    Route::get('/delete', [CustomerContactController::class, 'delete'])->name('customer_contacts.delete');
+Route::prefix('customerContact')->group(function () {
+    Route::get('/', [CustomerContactController::class, 'index'])->name('customerContact.index');
+    Route::get('/create', [CustomerContactController::class, 'create'])->name('customerContact.create');
+    Route::post('/store', [CustomerContactController::class, 'store'])->name('customerContact.store');
+    Route::get('/show', [CustomerContactController::class, 'show'])->name('customerContact.show');
+    Route::get('/edit', [CustomerContactController::class, 'edit'])->name('customerContact.edit');
+    Route::get('/update', [CustomerContactController::class, 'update'])->name('customerContact.update');
+    Route::get('/delete', [CustomerContactController::class, 'delete'])->name('customerContact.delete');
+    Route::get('/get-customer-contacts/{customer_id}', [CustomerContactController::class, 'getCustomerContacts'])->name('customerContact.getCustomerContact');;
 });
 
 //contoh route (post(/admin/roles)
@@ -128,7 +129,7 @@ Route::prefix('operationalAgenda')->group(function () {
     Route::get('/delete', [OperationalAgendaController::class, 'delete'])->name('operational_agenda.delete');
 });
 
-Route::prefix('materials')->group(function() {
+Route::prefix('materials')->group(function () {
     Route::get('/', [MaterialController::class, 'index'])->name('materials.index');
     Route::get('/create', [MaterialController::class, 'create'])->name('materials.update');
     Route::post('/store', [MaterialController::class, 'store'])->name('materials.store');
