@@ -48,7 +48,9 @@ Route::get('/formcustomer', function () {
 Route::get('/staff', function () {
     return view('staff');
 });
-
+Route::get('/RoleSelect', function () {
+    return view('rolecustomelogin');
+});
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -75,14 +77,15 @@ Route::prefix('customers')->group(function () {
     Route::delete('/delete', [CustomerController::class, 'delete'])->name('customers.delete');
 });
 
-Route::prefix('customer_contacts')->group(function () {
-    Route::get('/', [CustomerContactController::class, 'index'])->name('customer_contacts.index');
-    Route::get('/create', [CustomerContactController::class, 'create'])->name('customer_contacts.create');
-    Route::post('/store', [CustomerContactController::class, 'store'])->name('customer_contacts.store');
-    Route::get('/show', [CustomerContactController::class, 'show'])->name('customer_contacts.show');
-    Route::get('/edit', [CustomerContactController::class, 'edit'])->name('customer_contacts.edit');
-    Route::get('/update', [CustomerContactController::class, 'update'])->name('customer_contacts.update');
-    Route::get('/delete', [CustomerContactController::class, 'delete'])->name('customer_contacts.delete');
+Route::prefix('customerContact')->group(function () {
+    Route::get('/', [CustomerContactController::class, 'index'])->name('customerContact.index');
+    Route::get('/create', [CustomerContactController::class, 'create'])->name('customerContact.create');
+    Route::post('/store', [CustomerContactController::class, 'store'])->name('customerContact.store');
+    Route::get('/show', [CustomerContactController::class, 'show'])->name('customerContact.show');
+    Route::get('/edit', [CustomerContactController::class, 'edit'])->name('customerContact.edit');
+    Route::get('/update', [CustomerContactController::class, 'update'])->name('customerContact.update');
+    Route::get('/delete', [CustomerContactController::class, 'delete'])->name('customerContact.delete');
+    Route::get('/get-customer-contacts/{customer_id}', [CustomerContactController::class, 'getCustomerContacts'])->name('customerContact.getCustomerContact');;
 });
 
 //contoh route (post(/admin/roles)
@@ -108,11 +111,12 @@ Route::prefix('operational')->group(function () {
     Route::get('/', [OperationalController::class, 'index'])->name('operational.index');
     Route::get('/create', [OperationalController::class, 'createForm'])->name('operational.createForm');
     Route::post('/store', [OperationalController::class, 'store'])->name('operational.store');
-    Route::get('/show', [OperationalController::class, 'show'])->name('operational.show');
+    Route::get('/show/{operational}', [OperationalController::class, 'show'])->name('operational.show');
     Route::get('/{operational}/edit', [OperationalController::class, 'updateForm'])->name('operational.update-form');
     Route::patch('/{operational}', [OperationalController::class, 'update'])->name('operational.update');
     Route::delete('/{operational}', [OperationalController::class, 'delete'])->name('operational.delete');
     Route::post('/approve/{operational}', [OperationalController::class, 'approve'])->name('operational.approve');
+    Route::get('/getOperational/{salesOrder}', [OperationalController::class, 'getOperational'])->name('operational.get-operational');
 });
 
 Route::prefix('operationalAgenda')->group(function () {
@@ -125,7 +129,7 @@ Route::prefix('operationalAgenda')->group(function () {
     Route::get('/delete', [OperationalAgendaController::class, 'delete'])->name('operational_agenda.delete');
 });
 
-Route::prefix('materials')->group(function() {
+Route::prefix('materials')->group(function () {
     Route::get('/', [MaterialController::class, 'index'])->name('materials.index');
     Route::get('/create', [MaterialController::class, 'create'])->name('materials.update');
     Route::post('/store', [MaterialController::class, 'store'])->name('materials.store');

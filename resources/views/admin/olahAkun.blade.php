@@ -171,7 +171,8 @@
                                                                     <div class="mb-3 text-start">
                                                                         <label for="field-3" class="form-label">Tanda
                                                                             Tangan</label>
-                                                                        <input type="file" class="form-control" data-plugins="dropify" data-height="100"
+                                                                        <input type="file" class="form-control"
+                                                                            data-plugins="dropify" data-height="100"
                                                                             id="signature">
                                                                     </div>
                                                                 </div>
@@ -181,7 +182,8 @@
                                                             <button type="button" class="btn btn-secondary waves-effect"
                                                                 data-bs-dismiss="modal">Close
                                                             </button>
-                                                            <button type="button" onclick="updateUser()"
+                                                            <button type="button" id="update-button"
+                                                                onclick="updateUser($(this).attr('data-id'))"
                                                                 class="btn btn-editAccount waves-effect waves-light">
                                                                 Save
                                                                 changes
@@ -217,25 +219,6 @@
 
 <!-- Include Select2 JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-
-<!-- isotope filter plugin -->
-<script src="{{ asset('templateAdmin/Admin/dist/assets/libs/isotope-layout/isotope.pkgd.min.js') }}"></script>
-
-<!-- Magnific Popup-->
-<script src="{{ asset('templateAdmin/Admin/dist/assets/libs/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
-
-<!-- Gallery Init-->
-<script src="{{ asset('templateAdmin/Admin/dist/assets/js/pages/gallery.init.js') }}"></script>
-
-<!-- App js -->
-<script src="{{ asset('templateAdmin/Admin/dist/assets/js/app.min.js') }}"></script>
-
-<!-- Plugins js for file upload-->
-<script src="{{ asset('templateAdmin/Admin/dist/assets/libs/dropzone/min/dropzone.min.js') }}"></script>
-<script src="{{ asset('templateAdmin/Admin/dist/assets/libs/dropify/js/dropify.min.js') }}"></script>
-
-<!-- Init js for file upload-->
-<script src="{{ asset('templateAdmin/Admin/dist/assets/js/pages/form-fileuploads.init.js') }}"></script>
 
 
 <script type="text/javascript">
@@ -273,7 +256,7 @@
                         <td class="text-center">
                             <div class="btn-group btn-group-sm" style="float: none;">
                                 <button type="button"
-                                id="edit-button"
+                                id="edit-button-${data}"
                                     class="tabledit-edit-button btn btn-primary waves-effect waves-light"
                                     style="background-color: #3E8BFF;"
                                     data-bs-toggle="modal"
@@ -346,6 +329,8 @@
 
                             // Open the modal.
                             modal.modal("show");
+                            //add attribute data-id in update button
+                            modal.find("#update-button").attr("data-id", userData.id);
                         } else {
                             console.error("Data not found");
                         }
@@ -405,9 +390,8 @@
         }
 </script>
 <script type="text/javascript">
-    function updateUser() {
-            var userId = $(".tabledit-edit-button").attr('data-id');
-
+    function updateUser(userId) {
+            // console.log(userId);
             Swal.fire({
                 title: 'Are you sure?',
                 text: 'You will not be able to recover this user!',
