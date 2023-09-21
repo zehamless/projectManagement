@@ -1,12 +1,9 @@
-
-{{-- @endsection --}}
-
 @extends('template.index')
 
 @section('content')
 
 <style>
-    .btn-createAccount {
+    .btn-create {
         border-radius: 10px;
         background-color: #FF3E3E;
         border: #FF3E3E;
@@ -42,8 +39,8 @@
             <div class="row">
                 <div class="col-sm-7">
                     <a href="{{ url('formcustomer') }}"
-                        class="btn btn-createAccount w-md waves-effect waves-light mb-3 px-4"><i
-                            class="mdi mdi-plus"></i> Add Customer</a>
+                        class="btn btn-create w-md waves-effect waves-light mb-3 px-4"><i class="mdi mdi-plus"></i> Add
+                        Customer</a>
                 </div>
                 <div class="col-sm-5">
 
@@ -51,10 +48,10 @@
             </div>
 
             <div class="row">
-                <div class="col-12">
+                <div class="col-7">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="mt-0 header-title">Data Akun Table</h4>
+                            <h4 class="mt-0 header-title">Data Customers</h4>
                             <p class="text-muted font-14 mb-3">
                             <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
                                 <div class="row">
@@ -90,14 +87,6 @@
                                                         aria-label="Office: activate to sort column ascending">Customer
                                                         Name
                                                     </th>
-                                                    <th class="sorting" tabindex="0" aria-controls="datatable"
-                                                        rowspan="1" colspan="1" style="width: auto;"
-                                                        aria-label="Age: activate to sort column ascending">Related Project
-                                                    </th>
-                                                    <th class="sorting" tabindex="0" aria-controls="datatable"
-                                                        rowspan="1" colspan="1" style="width: auto;"
-                                                        aria-label="Age: activate to sort column ascending">Customer Contact
-                                                    </th>
                                                     <th class="sorting text-center" tabindex="0"
                                                         aria-controls="datatable" rowspan="1" colspan="1"
                                                         style="width: auto;"
@@ -111,8 +100,6 @@
                                                 <tr class="odd">
                                                     <td class="dtr-control sorting_1" tabindex="0">1</td>
                                                     <td>Accountant</td>
-                                                    <td>SPV</td>
-                                                    <td>$162,700</td>
                                                     <td class="text-center">
                                                         {{-- button --}}
                                                         <div class="btn-group btn-group-sm" style="float: none;">
@@ -219,6 +206,95 @@
                                                         </div><!-- /.modal -->
                                                     </td>
                                                 </tr>
+                                                <tr class="even">
+                                                    <td class="sorting_1 dtr-control">2</td>
+                                                    <td>Chief Executive Officer</td>
+                                                    <td class="text-center">
+                                                        <div class="btn-group btn-group-sm" style="float: none;">
+                                                            <button type="button"
+                                                                class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                                                style="background-color: #3E8BFF;"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#con-close-modal">
+                                                                <span class="mdi mdi-pencil"></span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="btn-group btn-group-sm" style="float: none;">
+                                                            <button type="button"
+                                                                class="tabledit-edit-button btn btn-danger"
+                                                                id="sa-warning">
+                                                                <span class="mdi mdi-trash-can-outline"></span>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr class="odd">
+                                                    <td class="dtr-control sorting_1" tabindex="0">3</td>
+                                                    <td>Junior Technical Author</td>
+                                                    <td class="text-center">
+                                                        <div class="btn-group btn-group-sm" style="float: none;">
+                                                            <button type="button"
+                                                                class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                                                style="background-color: #3E8BFF;"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#con-close-modal">
+                                                                <span class="mdi mdi-pencil"></span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="btn-group btn-group-sm" style="float: none;">
+                                                            <button type="button"
+                                                                class="tabledit-edit-button btn btn-danger"
+                                                                id="sa-warning">
+                                                                <span class="mdi mdi-trash-can-outline"></span>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="even">
+                                                    <td class="sorting_1 dtr-control">4</td>
+                                                    <td>Software Engineer</td>
+                                                    <td class="text-center">
+                                                        <div class="btn-group btn-group-sm" style="float: none;">
+                                                            <button type="button"
+                                                                class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                                                style="background-color: #3E8BFF;"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#con-close-modal">
+                                                                <span class="mdi mdi-pencil"></span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="btn-group btn-group-sm" style="float: none;">
+                                                            <button type="button"
+                                                                class="tabledit-edit-button btn btn-danger"
+                                                                id="sa-warning">
+                                                                <span class="mdi mdi-trash-can-outline"></span>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="odd">
+                                                    <td class="sorting_1 dtr-control">5</td>
+                                                    <td>Software Engineer</td>
+                                                    <td class="text-center">
+                                                        <div class="btn-group btn-group-sm" style="float: none;">
+                                                            <button type="button"
+                                                                class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                                                style="background-color: #3E8BFF;"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#con-close-modal">
+                                                                <span class="mdi mdi-pencil"></span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="btn-group btn-group-sm" style="float: none;">
+                                                            <button type="button"
+                                                                class="tabledit-edit-button btn btn-danger"
+                                                                id="sa-warning">
+                                                                <span class="mdi mdi-trash-can-outline"></span>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -264,6 +340,76 @@
                         </div>
                     </div>
 
+                </div>
+                <div class="col-5">
+
+                    {{-- row tabel related customer contacts --}}
+                    <div class="row">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row table-title">
+                                    <div class="col-sm-7">
+                                        <h4 class="mt-0 header-title">Customer Contacts</h4>
+                                    </div>
+                                    <div class="col-sm-5 text-end">
+                                        <a href="" class="btn btn-create w-md waves-effect waves-light mb-3 px-4"><i
+                                                class="mdi mdi-plus" title="Menambahkan milestone"></i>Add Contacts</a>
+                                    </div>
+                                </div>
+
+                                <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Name</th>
+                                                <th>Number</th>
+                                                <th class="text-center">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="6" align="center">Belum ada cotact</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- row tabel related projects --}}
+                    <div class="row">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row table-title">
+                                    <div class="col-sm-8">
+                                        <h4 class="mt-0 header-title">Related Projects</h4>
+                                    </div>
+                                    <div class="col-sm-4">
+
+                                    </div>
+                                </div>
+
+                                <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Name</th>
+                                                <th class="text-center">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="6" align="center">Belum ada project</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
