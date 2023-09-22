@@ -6,12 +6,6 @@
         vertical-align: middle;
     }
 
-    .tabledit-edit-button {
-        float: none;
-        color: white;
-        border-radius: 15px !important;
-    }
-
     .btn-createItems {
         border-radius: 10px;
         background-color: #FF3E3E;

@@ -84,6 +84,12 @@
         color: white;
     }
 
+    .tabledit-edit-button {
+        float: none;
+        color: white;
+        border-radius: 15px !important;
+    }
+
     /* navbar styling end */
 
     #sidebar-menu>ul>li>a:hover {

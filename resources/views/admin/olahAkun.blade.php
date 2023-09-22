@@ -28,6 +28,9 @@
     /*.modal-open .modal {*/
     /*    overflow-y: hidden !important;*/
     /*}*/
+    .actionColumn{
+        text-align: center !important;
+    }
 </style>
 
 <div class="content-page">
@@ -266,15 +269,14 @@
                                     <span class="mdi mdi-pencil"></span>
                                 </button>
                             </div>
-            <div class="btn-group btn-group-sm" style="float: none;">
-                <button type="button"
-                    class="tabledit-edit-button btn btn-danger"
-                    onclick="deleteUser('${data}')">
-                    <span class="mdi mdi-trash-can-outline"></span>
-                </button>
-            </div>
-
-</td>`;
+                            <div class="btn-group btn-group-sm" style="float: none;">
+                                <button type="button"
+                                    class="tabledit-edit-button btn btn-danger"
+                                    onclick="deleteUser('${data}')">
+                                    <span class="mdi mdi-trash-can-outline"></span>
+                                </button>
+                            </div>
+                        </td>`;
                         }
                     },
 
