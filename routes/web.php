@@ -39,6 +39,7 @@ Route::get('/', function () {
     return view('dashboard');
 });
 
+
 Route::prefix('customer')->group(function () {
     Route::get('/', [CustomerController::class, 'index'])->name('customer.index');
 });
@@ -48,9 +49,17 @@ Route::get('/formcustomer', function () {
 Route::get('/staff', function () {
     return view('staff');
 });
+
 Route::get('/RoleSelect', function () {
     return view('rolecustomelogin');
 });
+
+Route::get('/testPage', function () {
+    return view('testPage.index');
+});
+
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
