@@ -99,10 +99,12 @@
                                                         </td>
                                                         <td class="text-center">
                                                             <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <button title="untuk mengunduh file" type="button"
-                                                                    class="tabledit-edit-button btn btn-success waves-effect waves-light">
+                                                                <a title="untuk mengunduh file"
+                                                                    href="{{ asset('milestone_files/' . $milestone->file) }}"
+                                                                    class="tabledit-edit-button btn btn-success waves-effect waves-light"
+                                                                    download>
                                                                     <span class="mdi mdi-file-download-outline"></span>
-                                                                </button>
+                                                                </a>
                                                             </div>
                                                             <div class="btn-group btn-group-sm" style="float: none;">
                                                                 <button title="Untuk mengedit milestone" type="button"
