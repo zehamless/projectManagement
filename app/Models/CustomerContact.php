@@ -10,13 +10,14 @@ class CustomerContact extends Model
 {
     use HasUuids;
     protected $fillable = [
-        'companyName',
+        'customer_id',
+        'name',
         'phone'
     ];
 
     // Definisi relasi dengan model Customer
     public function customer()
     {
-        return $this->belongsTo(Customer::class, 'companyName');
+        return $this->belongsTo(Customer::class, 'customer_id');
     }
 }
