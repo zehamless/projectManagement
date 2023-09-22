@@ -114,6 +114,7 @@ Route::prefix('operational')->group(function () {
     Route::delete('/{operational}', [OperationalController::class, 'delete'])->name('operational.delete');
     Route::post('/approve/{operational}', [OperationalController::class, 'approve'])->name('operational.approve');
     Route::get('/getOperational/{salesOrder}', [OperationalController::class, 'getOperational'])->name('operational.get-operational');
+    Route::get('/getTeam/{operational}', [OperationalController::class, 'getTeam'])->name('operational.get-team');
 });
 
 Route::prefix('operationalAgenda')->group(function () {
@@ -134,14 +135,6 @@ Route::prefix('materials')->group(function() {
     Route::get('/edit', [MaterialController::class, 'edit'])->name('materials.edit');
     Route::get('/update', [MaterialController::class, 'update'])->name('materials.update');
     Route::get('/delete', [MaterialController::class, 'delete'])->name('materials.delete');
-});
-
-Route::get('/admin/olahAkun', function () {
-    return view('admin.olahAkun');
-});
-
-Route::get('/admin/createAkun', function () {
-    return view('admin.createAkun');
 });
 
 Route::get('/projects/createMilestone', function () {

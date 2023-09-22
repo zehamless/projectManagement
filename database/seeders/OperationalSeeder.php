@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Operational;
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,8 +15,9 @@ class OperationalSeeder extends Seeder
      */
     public function run(): void
     {
+        $users = User::all()->pluck('id')->toArray();
         $projectId = Project::first()->id;
-        Operational::create([
+        $operational = Operational::create([
             'project_id' => $projectId,
             'date' => '2021-01-01',
             'spk_code' => 'SPK Code 1',
@@ -26,5 +28,8 @@ class OperationalSeeder extends Seeder
             'vehicle_number' => 'be1088ce',
             'created_by' => 'admin',
         ]);
+        foreach ($users as $user) {
+            $operational->team()->attach($user);
+        }
     }
 }
