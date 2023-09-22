@@ -272,17 +272,11 @@
 
 
 @section('pageScript')
-    {{-- masih belum kelar --}}
-    <script>
-        // function saveConfirmation() {
-        //         Swal.fire({
-        //             title: 'Saved!',
-        //             text: "Project berhasil dibuat",
-        //             icon: "success",
-        //         });
-        // }
-    </script>
+    <!-- Include Select2 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 
+    <!-- Include Select2 JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script>
         $(document).ready(function() {
             $('#customers').select2({
