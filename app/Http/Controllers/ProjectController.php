@@ -73,7 +73,6 @@ class ProjectController extends Controller
         $request->validate([
             'label' => 'required',
             'customers' => 'required',
-            'customers-name' => 'required',
             'project_manager' => 'required',
             'sales_executive' => 'required',
             'location' => 'required',
@@ -82,12 +81,54 @@ class ProjectController extends Controller
             'preliminary_cost' => 'required|numeric',
             'po_amount' => 'required|numeric',
             'expense_budget' => 'required|numeric',
+            'so-1' => [
+                'required_if:so-2,|so-3',
+                'nullable',
+                'string',
+            ],
+            'so-2' => [
+                'required_if:so-1,|so-3',
+                'nullable',
+                'string',
+            ],
+            'so-3' => [
+                'required_if:so-1,|so-2',
+                'nullable',
+                'string',
+            ],
+            'memo-1' => [
+                'required_if:so-1,|so-2|so-3',
+                'nullable',
+                'string',
+            ],
+            'memo-2' => [
+                'required_if:memo-1,',
+                'nullable',
+                'string',
+            ],
+            'memo-3' => [
+                'required_if:memo-1,|memo-2|so-1|so-2|so-2',
+                'nullable',
+                'string',
+            ],
+            'memo-4' => [
+                'required_if:memo-1,|memo-2|memo-3|so-1|so-2|so-2',
+                'nullable',
+                'string',
+            ],
+            'memo-5' => [
+                'required_if:memo-1,|memo-2|memo-3|memo-4|so-1|so-2|so-2',
+                'nullable',
+                'string',
+            ],
+        ], [
+            'memo-1.required_if' => 'Memo harus diisi jika SO Number tidak diisi.',
         ]);
 
         // Menggabungkan kolom PO, Memo, dan SO menjadi satu nilai
         $po = $request->input('po-1') . '/' . $request->input('po-2');
+        $so = $request->filled('so-1') ? $request->input('so-1') . "/" . $request->input('so-2') . "/" . $request->input('so-3') : "Nomor SO Belum diisi";
         $memo = $request->input('memo-1') . "/" . $request->input('memo-2') . "/" . $request->input('memo-3') . "/" . $request->input('memo-4') . "/" . $request->input('memo-5');
-        $so = $request->input('so-1') . "/" . $request->input('so-2') . "/" . $request->input('so-3');
 
         // Simpan data ke dalam database
         $project = new Project;
@@ -107,9 +148,11 @@ class ProjectController extends Controller
         $project->expense_budget = $request->input('expense_budget');
         $project->save();
 
-        // Redirect atau tampilkan pesan sukses
+        // Redirect dengan pesan sukses
         return redirect('projects')->with('success', 'Project berhasil ditambahkan');
     }
+
+
 
 
     public function show($id)

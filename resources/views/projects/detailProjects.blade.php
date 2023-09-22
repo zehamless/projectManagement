@@ -99,6 +99,12 @@
                                                         </td>
                                                         <td class="text-center">
                                                             <div class="btn-group btn-group-sm" style="float: none;">
+                                                                <button title="untuk mengunduh file" type="button"
+                                                                    class="tabledit-edit-button btn btn-success waves-effect waves-light">
+                                                                    <span class="mdi mdi-file-download-outline"></span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="btn-group btn-group-sm" style="float: none;">
                                                                 <button title="Untuk mengedit milestone" type="button"
                                                                     class="tabledit-edit-button btn btn-primary waves-effect waves-light"
                                                                     style="background-color: #3E8BFF;">
@@ -335,7 +341,7 @@
                                             <tr>
                                                 <th scope="row">
                                                     <p class="title-text">End Date</p>
-                                                    <p class="details-text">end_date</p>
+                                                    <p class="details-text">{{ $projectData['end_date'] }}</p>
                                                 </th>
                                             </tr>
                                             <tr>
