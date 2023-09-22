@@ -8,8 +8,13 @@ use Illuminate\Http\Request;
 class CustomerController extends Controller
 {
     // Menampilkan daftar data
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->input('search');
+
+        $customers = Customer::query()
+            ->where('companyName', 'LIKE', "%{$search}%")
+            ->get();
         $customer = Customer::all();
         return view('customers.index', compact('customers'));
     }
