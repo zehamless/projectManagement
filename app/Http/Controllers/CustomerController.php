@@ -8,15 +8,30 @@ use Illuminate\Http\Request;
 class CustomerController extends Controller
 {
     // Menampilkan daftar data
-    public function index()
+    public function index(Request $request)
     {
-        $customer = Customer::all();
-        return view('customers.index', compact('customers'));
+        // Mulai dengan query untuk model Customer
+        $query = Customer::query()->orderBy('created_at', 'desc');
+
+        // Mengecek apakah ada kata kunci pencarian
+        if ($request->has('search')) {
+            $search = $request->input('search');
+
+            $query->where(function ($query) use ($search) {
+                $query->where('companyName', 'like', "%$search%");
+            });
+        }
+
+        // Ambil hasil query
+        $customer = $query->get();
+
+        return view('customer', compact('customer'));
     }
+
     // Menampilkan formulir untuk membuat data baru
     public function create()
     {
-        return view('customers.create');
+        return view('customer.create');
     }
 
     // Menyimpan data baru ke database
@@ -32,20 +47,20 @@ class CustomerController extends Controller
         $customer->companyName = $request->input('companyName');
         $customer->save();
 
-        return redirect()->route('customers.index')
+        return redirect()->route('customer.index')
             ->with('success', 'Data customer berhasil ditambahkan.');
     }
 
     // Menampilkan detail data
     public function show(Customer $customer)
     {
-        return view('customers.show', compact('customer'));
+        return view('customer.show', compact('customer'));
     }
 
     // Menampilkan formulir untuk mengedit data
     public function edit(Customer $customer)
     {
-        return view('customers.edit', compact('customer'));
+        return view('customer.edit', compact('customer'));
     }
 
     // Memperbarui data dalam database
@@ -57,7 +72,7 @@ class CustomerController extends Controller
 
         $customer->update($request->all());
 
-        return redirect()->route('customers.index')
+        return redirect()->route('customer.index')
             ->with('success', 'Data customer berhasil diperbarui.');
     }
 
@@ -66,7 +81,7 @@ class CustomerController extends Controller
     {
         $customer->delete();
 
-        return redirect()->route('customers.index')
+        return redirect()->route('customer.index')
             ->with('success', 'Data customer berhasil dihapus.');
     }
 }

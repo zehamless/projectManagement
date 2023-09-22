@@ -21,7 +21,7 @@ class CustomerContactController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'customerContact_id' => 'required',
+            'customer_id' => 'required',
             'name' => 'required',
             'phone' => 'required',
         ]);
@@ -45,7 +45,7 @@ class CustomerContactController extends Controller
     public function update(Request $request, CustomerContact $customerContact)
     {
         $request->validate([
-            'customerContact_id' => 'required',
+            'customer_id' => 'required',
             'name' => 'required',
             'phone' => 'required',
         ]);
