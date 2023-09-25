@@ -32,6 +32,22 @@
         margin-bottom: unset;
         font-weight: 100;
     }
+
+    @media screen and (max-width: 768px) {
+        .container-fluid{
+            flex-direction: column;
+        }
+
+        .detailProjects-col {
+            order: 1;
+            /* Change the order of the first div */
+        }
+
+        .tables-col {
+            order: 2;
+            /* Change the order of the second div */
+        }
+    }
 </style>
 
 <div class="content-page">
@@ -39,10 +55,8 @@
 
         <!-- Start Content-->
         <div class="container-fluid">
-
-
             <div class="row">
-                <div class="col-xl-8">
+                <div class="col-xl-8 tables-col">
                     <div class="card">
                         <div class="card-body">
                             <div class="row table-title">
@@ -223,7 +237,8 @@
                                                     </button>
                                                 </div>
                                                 <div class="btn-group btn-group-sm" style="float: none;">
-                                                    <button title="hapus data" type="button" class="tabledit-edit-button btn btn-danger">
+                                                    <button title="hapus data" type="button"
+                                                        class="tabledit-edit-button btn btn-danger">
                                                         <span class="mdi mdi-trash-can-outline"></span>
                                                     </button>
                                                 </div>
@@ -245,7 +260,8 @@
                                                     </button>
                                                 </div>
                                                 <div class="btn-group btn-group-sm" style="float: none;">
-                                                    <button title="hapus data" type="button" class="tabledit-edit-button btn btn-danger">
+                                                    <button title="hapus data" type="button"
+                                                        class="tabledit-edit-button btn btn-danger">
                                                         <span class="mdi mdi-trash-can-outline"></span>
                                                     </button>
                                                 </div>
@@ -267,7 +283,8 @@
                                                     </button>
                                                 </div>
                                                 <div class="btn-group btn-group-sm" style="float: none;">
-                                                    <button title="hapus data" type="button" class="tabledit-edit-button btn btn-danger">
+                                                    <button title="hapus data" type="button"
+                                                        class="tabledit-edit-button btn btn-danger">
                                                         <span class="mdi mdi-trash-can-outline"></span>
                                                     </button>
                                                 </div>
@@ -326,7 +343,8 @@
                                                     </button>
                                                 </div>
                                                 <div class="btn-group btn-group-sm" style="float: none;">
-                                                    <button title="hapus data" type="button" class="tabledit-edit-button btn btn-danger">
+                                                    <button title="hapus data" type="button"
+                                                        class="tabledit-edit-button btn btn-danger">
                                                         <span class="mdi mdi-trash-can-outline"></span>
                                                     </button>
                                                 </div>
@@ -353,7 +371,8 @@
                                                     </button>
                                                 </div>
                                                 <div class="btn-group btn-group-sm" style="float: none;">
-                                                    <button title="hapus data" type="button" class="tabledit-edit-button btn btn-danger">
+                                                    <button title="hapus data" type="button"
+                                                        class="tabledit-edit-button btn btn-danger">
                                                         <span class="mdi mdi-trash-can-outline"></span>
                                                     </button>
                                                 </div>
@@ -393,7 +412,8 @@
                     </div>
 
                 </div><!-- end col-->
-                <div class="col-xl-4">
+
+                <div class="col-xl-4 detailProjects-col">
                     <div class="card">
                         <div class="card-body">
                             <h4 class="mt-0 header-title">{{ $projectData['label'] }}</h4>
@@ -408,17 +428,17 @@
                                         <tr>
                                             <th scope="row">
                                                 <div class="row text-center">
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-6 px-4">
                                                         {{-- <div style="width: fit-content; height: fit-content;"> --}}
                                                             <p class="title-text">Progress Milestone</p>
                                                             <canvas id="donut-chart"></canvas>
                                                             {{--
                                                         </div> --}}
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-6 px-4">
                                                         {{-- <div style="width: fit-content; height: fit-content;"> --}}
                                                             <p class="title-text">Progress Payment</p>
-                                                            <canvas id="donut-chart2"></canvas>
+                                                            <canvas id="donut-chart2" width="200"></canvas>
                                                             {{--
                                                         </div> --}}
                                                     </div>

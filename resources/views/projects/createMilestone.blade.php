@@ -82,6 +82,6 @@
     </div>
 @endsection
 
-{{-- script js halaman detail project --}}
+{{-- script js halaman create milestone --}}
 @section('pageScript')
 @endsection
