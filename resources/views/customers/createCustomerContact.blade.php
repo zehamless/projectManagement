@@ -10,37 +10,28 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                <form action="{{ route('milestone.store') }}" method="post" enctype="multipart/form-data"
+                                <form action="" method="post" enctype="multipart/form-data"
                                     class="parsley-examples" novalidate="">
                                     @csrf
-                                    <input type="hidden" name="project_id" value="{{ $project }}">
+                                    <input type="hidden" name="project_id" value="">
                                     <div class="mb-3">
                                         <label for="submitted_date" class="form-label">Submitted Date<span
                                                 class="text-danger">*</span></label>
                                         <input type="date" name="submitted_date" parsley-trigger="change" required=""
                                             placeholder="Masukkan tanggal" class="form-control datepicker"
                                             id="submitted_date">
-                                        @error('submitted_date')
-                                            <p style="color: red;">{{ $message }}</p>
-                                        @enderror
                                     </div>
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">Description<span
                                                 class="text-danger">*</span></label>
                                         <input type="text" name="description" parsley-trigger="change" required=""
                                             placeholder="Tambahkan deskripsi" class="form-control" id="userName">
-                                        @error('description')
-                                            <p style="color: red;">{{ $message }}</p>
-                                        @enderror
                                     </div>
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">Due Date<span
                                                 class="text-danger">*</span></label>
                                         <input type="date" name="due_date" parsley-trigger="change" required=""
                                             placeholder="Masukkan tanggal" class="form-control datepicker" id="userName">
-                                        @error('due_date')
-                                            <p style="color: red;">{{ $message }}</p>
-                                        @enderror
                                     </div>
                                     <div class="mb-3">
                                         <label for="progress" class="form-label">Progress<span
@@ -50,9 +41,6 @@
                                             <option value="On Progress">On Progress</option>
                                             <option value="Done">Done</option>
                                         </select>
-                                        @error('progress')
-                                            <p style="color: red;">{{ $message }}</p>
-                                        @enderror
                                     </div>
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">File Attachment<span
@@ -60,9 +48,6 @@
                                         <input type="file" name="file" parsley-trigger="change" required=""
                                             data-plugins="dropify" data-height="150" class="form-control"
                                             id="fileAttachment">
-                                        @error('file')
-                                            <p style="color: red;">{{ $message }}</p>
-                                        @enderror
                                     </div>
                                     <div class="text-end">
                                         <a href="{{ url('projects') }}">
@@ -82,6 +67,6 @@
     </div>
 @endsection
 
-{{-- script js halaman create milestone --}}
+{{-- script halaman create customers contact --}}
 @section('pageScript')
 @endsection
