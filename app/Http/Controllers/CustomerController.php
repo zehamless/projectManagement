@@ -21,7 +21,7 @@ class CustomerController extends Controller
     // Menampilkan formulir untuk membuat data baru
     public function create()
     {
-        return view('customers.create');
+        return view('customers.createCustomer');
     }
 
     // Menyimpan data baru ke database

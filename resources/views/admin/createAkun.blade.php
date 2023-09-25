@@ -51,7 +51,8 @@
                             </div>
                             <div class="mb-3">
                                 <label for="userName" class="form-label">Roles<span class="text-danger">*</span></label>
-                                <select id="select-roles" class="form-control" name="roles[]" style="color: black; width: 100%">
+                                <select id="select-roles" class="form-control select2-multiple" name="roles[]"
+                                    style="color: black; width: 100%">
                                     @foreach($roles as $role)
                                     <option value=" {{ $role->id }}">{{ $role->name }}</option>
                                     @endforeach
@@ -71,8 +72,13 @@
                             </div>
                             <div class="mb-3">
                                 <label for="pass1" class="form-label">Password<span class="text-danger">*</span></label>
-                                <input id="pass1" type="password" placeholder="Password" required="" name="password"
-                                    class="form-control">
+                                <div class="input-group input-group-merge">
+                                    <input id="pass1" type="password" placeholder="Password" required="" name="password"
+                                        class="form-control">
+                                    <div class="input-group-text" data-password="false">
+                                        <span class="password-eye"></span>
+                                    </div>
+                                </div>
                                 @error('password')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -81,8 +87,14 @@
                             <div class="mb-3">
                                 <label for="pass1" class="form-label">Password Confirmation<span
                                         class="text-danger">*</span></label>
-                                <input id="pass1" type="password_confirmation" placeholder="Type your password again"
-                                    required="" class="form-control" name="password_confirmation">
+                                <div class="input-group input-group-merge">
+                                    <input id="pass1" type="password_confirmation"
+                                        placeholder="Type your password again" required="" class="form-control"
+                                        name="password_confirmation">
+                                    <div class="input-group-text" data-password="false">
+                                        <span class="password-eye"></span>
+                                    </div>
+                                </div>
                                 @error('password_confirmation')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -119,7 +131,7 @@
             // placeholder: 'role',
             width: 'resolve',
             allowClear: true, // Option to clear selection
-            theme: 'classic', // Use a different theme (change CSS classes)
+            // theme: 'classic', // Use a different theme (change CSS classes)
             multiple: true
         });
     });
