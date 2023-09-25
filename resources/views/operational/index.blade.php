@@ -165,7 +165,7 @@
                                                                 <div class="card">
                                                                     <div class="card-body">
                                                                         <div class="table-responsive">
-                                                                            <table class="table mb-0">
+                                                                            <table class="table table-striped table-hover mb-0">
                                                                                 <thead>
                                                                                 <tr>
                                                                                     <th>#</th>
@@ -214,7 +214,7 @@
                                                                 <div class="card">
                                                                     <div class="card-body">
                                                                         <div class="table-responsive">
-                                                                            <table class="table mb-0">
+                                                                            <table class="table table table-striped table-hover mb-0">
                                                                                 <thead>
                                                                                 <tr>
                                                                                     <th>#</th>
@@ -254,7 +254,7 @@
                                                                 <div class="card">
                                                                     <div class="card-body">
                                                                         <div class="table-responsive">
-                                                                            <table class="table mb-0">
+                                                                            <table class="table table table-striped table-hover mb-0">
                                                                                 <thead>
                                                                                 <tr>
                                                                                     <th>#</th>
@@ -294,7 +294,7 @@
                                                                 <div class="card">
                                                                     <div class="card-body">
                                                                         <div class="table-responsive">
-                                                                            <table class="table mb-0"
+                                                                            <table class="table table table-striped table-hover mb-0"
                                                                                    id="table-technician">
                                                                                 <thead>
                                                                                 <tr>
@@ -386,9 +386,7 @@
                         if (operational.team.length == 0) {
                             $('#table-technician tbody').append(`
                             <tr>
-                                <th scope="row">-</th>
-                                <td>Belum ada teknisi</td>
-                                <td>Belum ada teknisi</td>
+                                <td colspan="3" align="center">Belum ada Technician</td>
                             </tr>
                           `);
                         } else {

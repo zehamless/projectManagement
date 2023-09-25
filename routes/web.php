@@ -39,8 +39,9 @@ Route::get('/', function () {
     return view('dashboard');
 });
 
-Route::get('/customer', function () {
-    return view('customer');
+
+Route::prefix('customer')->group(function () {
+    Route::get('/', [CustomerController::class, 'index'])->name('customer.index');
 });
 Route::get('/formcustomer', function () {
     return view('formcustomer');
@@ -48,9 +49,17 @@ Route::get('/formcustomer', function () {
 Route::get('/staff', function () {
     return view('staff');
 });
+
 Route::get('/RoleSelect', function () {
     return view('rolecustomelogin');
 });
+
+Route::get('/testPage', function () {
+    return view('testPage.index');
+});
+
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -67,14 +76,14 @@ Route::prefix('milestone')->group(function () {
 });
 
 
-Route::prefix('customers')->group(function () {
-    Route::get('/', [CustomerController::class, 'index'])->name('customers.index');
-    Route::get('/create', [CustomerController::class, 'create'])->name('customers.create');
-    Route::post('/store', [CustomerController::class, 'store'])->name('customers.store');
-    Route::get('/show', [CustomerController::class, 'show'])->name('customers.show');
-    Route::get('/edit', [CustomerController::class, 'edit'])->name('customers.edit');
-    Route::get('/update', [CustomerController::class, 'update'])->name('customers.update');
-    Route::delete('/delete', [CustomerController::class, 'delete'])->name('customers.delete');
+Route::prefix('customer')->group(function () {
+    Route::get('/', [CustomerController::class, 'index'])->name('customer.index');
+    Route::get('/create', [CustomerController::class, 'create'])->name('customer.create');
+    Route::post('/store', [CustomerController::class, 'store'])->name('customer.store');
+    Route::get('/show', [CustomerController::class, 'show'])->name('customer.show');
+    Route::get('/edit', [CustomerController::class, 'edit'])->name('customer.edit');
+    Route::get('/update', [CustomerController::class, 'update'])->name('customer.update');
+    Route::delete('/delete', [CustomerController::class, 'delete'])->name('customer.delete');
 });
 
 Route::prefix('customerContact')->group(function () {
