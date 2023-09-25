@@ -41,7 +41,11 @@
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 {{-- select2 css --}}
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link href="{{ asset('templateAdmin/Admin/dist/assets/libs/multiselect/css/multi-select.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('templateAdmin/Admin/dist/assets/libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('templateAdmin/Admin/dist/assets/libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet" type="text/css" />
+{{--
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> --}}
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 
@@ -93,7 +97,8 @@
     /* navbar styling end */
 
     #sidebar-menu>ul>li>a:hover {
-        color: red;
+        background-color: red;
+        color: white;
     }
 
     #sidebar-menu>ul>li>a:active {
