@@ -82,7 +82,7 @@
                 </li>
 
                 <li>
-                    <a href="{{ url('customers') }}">
+                    <a href="{{ url('customer') }}">
                         <i class="mdi mdi-account-supervisor-outline"></i>
                         <span> Customers </span>
                     </a>
