@@ -39,8 +39,9 @@ Route::get('/', function () {
     return view('dashboard');
 });
 
-Route::get('/customer', function () {
-    return view('customer');
+
+Route::prefix('customer')->group(function () {
+    Route::get('/', [CustomerController::class, 'index'])->name('customer.index');
 });
 Route::get('/formcustomer', function () {
     return view('formcustomer');
@@ -48,9 +49,17 @@ Route::get('/formcustomer', function () {
 Route::get('/staff', function () {
     return view('staff');
 });
+
 Route::get('/RoleSelect', function () {
     return view('rolecustomelogin');
 });
+
+Route::get('/testPage', function () {
+    return view('testPage.index');
+});
+
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -67,14 +76,14 @@ Route::prefix('milestone')->group(function () {
 });
 
 
-Route::prefix('customers')->group(function () {
-    Route::get('/', [CustomerController::class, 'index'])->name('customers.index');
-    Route::get('/create', [CustomerController::class, 'create'])->name('customers.create');
-    Route::post('/store', [CustomerController::class, 'store'])->name('customers.store');
-    Route::get('/show', [CustomerController::class, 'show'])->name('customers.show');
-    Route::get('/edit', [CustomerController::class, 'edit'])->name('customers.edit');
-    Route::get('/update', [CustomerController::class, 'update'])->name('customers.update');
-    Route::delete('/delete', [CustomerController::class, 'delete'])->name('customers.delete');
+Route::prefix('customer')->group(function () {
+    Route::get('/', [CustomerController::class, 'index'])->name('customer.index');
+    Route::get('/create', [CustomerController::class, 'create'])->name('customer.create');
+    Route::post('/store', [CustomerController::class, 'store'])->name('customer.store');
+    Route::get('/show', [CustomerController::class, 'show'])->name('customer.show');
+    Route::get('/edit', [CustomerController::class, 'edit'])->name('customer.edit');
+    Route::get('/update', [CustomerController::class, 'update'])->name('customer.update');
+    Route::delete('/delete', [CustomerController::class, 'delete'])->name('customer.delete');
 });
 
 Route::prefix('customerContact')->group(function () {
@@ -117,6 +126,7 @@ Route::prefix('operational')->group(function () {
     Route::delete('/{operational}', [OperationalController::class, 'delete'])->name('operational.delete');
     Route::post('/approve/{operational}', [OperationalController::class, 'approve'])->name('operational.approve');
     Route::get('/getOperational/{salesOrder}', [OperationalController::class, 'getOperational'])->name('operational.get-operational');
+    Route::get('/getTeam/{operational}', [OperationalController::class, 'getTeam'])->name('operational.get-team');
 });
 
 Route::prefix('operationalAgenda')->group(function () {
@@ -137,14 +147,6 @@ Route::prefix('materials')->group(function () {
     Route::get('/edit', [MaterialController::class, 'edit'])->name('materials.edit');
     Route::get('/update', [MaterialController::class, 'update'])->name('materials.update');
     Route::get('/delete', [MaterialController::class, 'delete'])->name('materials.delete');
-});
-
-Route::get('/admin/olahAkun', function () {
-    return view('admin.olahAkun');
-});
-
-Route::get('/admin/createAkun', function () {
-    return view('admin.createAkun');
 });
 
 Route::get('/projects/createMilestone', function () {

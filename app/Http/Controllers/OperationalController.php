@@ -115,9 +115,10 @@ class OperationalController extends Controller
      * @param Operational $operational
      * @return JsonResponse
      */
-    public function show($operational)
+    public function show(Operational $operational)
     {
-        $operationals = Operational::find($operational)->with('project:id,label')->first();
+        $operationals = Operational::where('id', $operational->id)->with('team', 'project:id,label')->get();
         return response()->json($operationals);
     }
+
 }

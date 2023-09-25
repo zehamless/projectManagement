@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\CustomerContact;
 use App\Models\Project;
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -78,22 +79,52 @@ class ProjectController extends Controller
             'sales_executive' => 'required',
             'location' => 'required',
             'start_date' => 'required|date',
-            'end_date' => 'required|date',
+            'end_date' => 'required|date|after:start_date',
             'preliminary_cost' => 'required|numeric',
             'po_amount' => 'required|numeric',
             'expense_budget' => 'required|numeric',
+            'so-1' => 'nullable|string',
+            'so-2' => 'nullable|string',
+            'so-3' => 'nullable|string',
+            'memo-1' => 'nullable|required_without_all:so-1,so-2,so-3|string',
+            'memo-2' => 'nullable|required_without_all:so-1,so-2,so-3|string',
+            'memo-3' => 'nullable|required_without_all:so-1,so-2,so-3|string',
+            'memo-4' => 'nullable|required_without_all:so-1,so-2,so-3|string',
+            'memo-5' => 'nullable|required_without_all:so-1,so-2,so-3|string',
+        ], [
+            'end_date.after' => 'Tanggal akhir harus setelah tanggal awal.',
+            'so-1.required_if' => 'SO Number harus diisi jika salah satu so-2 atau so-3 diisi.',
+            'so-2.required_if' => 'SO Number harus diisi jika salah satu so-1 atau so-3 diisi.',
+            'so-3.required_if' => 'SO Number harus diisi jika salah satu so-1 atau so-2 diisi.',
+            'memo-1.required' => 'Memo harus diisi jika SO Number tidak diisi.',
         ]);
+
 
         // Menggabungkan kolom PO, Memo, dan SO menjadi satu nilai
         $po = $request->input('po-1') . '/' . $request->input('po-2');
+        $so = $request->filled('so-1') ? $request->input('so-1') . "/" . $request->input('so-2') . "/" . $request->input('so-3') : "Nomor SO Belum diisi";
         $memo = $request->input('memo-1') . "/" . $request->input('memo-2') . "/" . $request->input('memo-3') . "/" . $request->input('memo-4') . "/" . $request->input('memo-5');
-        $so = $request->input('so-1') . "/" . $request->input('so-2') . "/" . $request->input('so-3');
+
+        // Cek apakah pelanggan sudah ada di database berdasarkan nama
+        $customer = Customer::firstOrCreate(['companyName' => $request->input('customers')]);
+
+        $customerContact = CustomerContact::firstOrNew([
+            'name' => $request->input('customers-name'),
+        ]);
+
+        if (!$customerContact->exists) {
+            // Kontak pelanggan belum ada dalam database, maka atur kolom-kolom yang diperlukan
+            $customerContact->customer_id = $customer->id;
+            $customerContact->phone = "Belum diisi";
+            $customerContact->save();
+        }
 
         // Simpan data ke dalam database
         $project = new Project;
         $project->label = $request->input('label');
-        $project->customer_id = $request->input('customers');
-        $project->customer_contact_id = $request->input('customers-name');
+        $project->label = $request->input('label');
+        $project->customer_id = $customer->id; // Menggunakan ID pelanggan yang ada atau yang baru dibuat
+        $project->customer_contact_id = $customerContact->id; // Menggunakan ID kontak pelanggan yang ada atau yang baru dibuat
         $project->project_manager = $request->input('project_manager');
         $project->sales_executive = $request->input('sales_executive');
         $project->location = $request->input('location');
@@ -107,9 +138,11 @@ class ProjectController extends Controller
         $project->expense_budget = $request->input('expense_budget');
         $project->save();
 
-        // Redirect atau tampilkan pesan sukses
+        // Redirect dengan pesan sukses
         return redirect('projects')->with('success', 'Project berhasil ditambahkan');
     }
+
+
 
 
     public function show($id)

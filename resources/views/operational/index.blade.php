@@ -29,8 +29,15 @@
         margin-bottom: unset;
     }
 
-    .card-nbm{
+    .card-nbm {
         margin-bottom: 0 !important;
+    }
+
+    .btn-addMaterial {
+        border-radius: 10px;
+        background-color: #FF3E3E;
+        border: #FF3E3E;
+        color: white;
     }
 </style>
 
@@ -50,7 +57,7 @@
                                     <select class="form-select" id="sales-order" onchange="getOperationals(this.value)">
                                         <option selected value="">Pilih Sales Order Number</option>
                                         @foreach ($salesOrder as $item)
-                                            <option value="{{ $item->id }}">{{ $item->so }}</option>
+                                        <option value="{{ $item->id }}">{{ $item->so }}</option>
                                         @endforeach
                                     </select>
 
@@ -70,7 +77,8 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <h4 class="header-title mb-2">Operational</h4>
-                                        <select id="select-operational" class="form-select mb-2" onchange="detailOperational(this.value)" >
+                                        <select id="select-operational" class="form-select mb-2"
+                                            onchange="detailOperational(this.value, false)">
                                             <option selected value="">Silahkan Pilih SO</option>
 
                                         </select>
@@ -114,6 +122,10 @@
                                             <p class="details-text" id="transport">-</p>
                                         </th>
                                         <th scope="row">
+                                            <p class="title-text">Vehicle Number</p>
+                                            <p class="details-text" id="vehicle">-</p>
+                                        </th>
+                                        <th scope="row">
                                             <p class="title-text">Created by</p>
                                             <p class="details-text" id="created">-</p>
                                         </th>
@@ -127,22 +139,27 @@
                                                 <ul class="nav nav-tabs card-header-tabs" role="tablist">
                                                     <li class="nav-item">
                                                         <button type="button" class="nav-link active show" href="#work"
-                                                            role="tab" data-toggle="tab">Work Plan</button>
+                                                            role="tab" data-toggle="tab">Work Plan
+                                                        </button>
                                                     </li>
                                                     <li class="nav-item">
                                                         <button type="button" class="nav-link" role="tab"
                                                             href="#expenses" data-toggle="tab">Operational
-                                                            Expenses</button>
+                                                            Expenses
+                                                        </button>
                                                     </li>
                                                     <li class="nav-item">
                                                         <button type="button" class="nav-link" role="tab"
                                                             href="#material" data-toggle="tab">Material
-                                                            Utilized</button>
+                                                            Utilized
+                                                        </button>
                                                     </li>
                                                     <li class="nav-item">
                                                         <button type="button" class="nav-link" role="tab"
-                                                            href="#technician" data-toggle="tab">Technician
-                                                            List</button>
+                                                            href="#technician" data-toggle="tab"
+                                                            id="technician_list">Technician
+                                                            List
+                                                        </button>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -153,7 +170,8 @@
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <div class="table-responsive">
-                                                                        <table class="table mb-0">
+                                                                        <table
+                                                                            class="table table-striped table-hover mb-0">
                                                                             <thead>
                                                                                 <tr>
                                                                                     <th>#</th>
@@ -202,7 +220,8 @@
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <div class="table-responsive">
-                                                                        <table class="table mb-0">
+                                                                        <table
+                                                                            class="table table table-striped table-hover mb-0">
                                                                             <thead>
                                                                                 <tr>
                                                                                     <th>#</th>
@@ -237,12 +256,117 @@
                                                     </div>
                                                 </div>
                                                 <div role="tabpanel" class="tab-pane fade" id="material">
+
                                                     <div class="row text-start">
                                                         <div class="col-lg-12">
                                                             <div class="card">
-                                                                <div class="card-body">
+                                                                <div class="card-body pt-0">
+                                                                    <div class="row table-title">
+                                                                        <div class="col-sm-8">
+                                                                            <h4 class="mt-0 header-title"></h4>
+                                                                        </div>
+                                                                        <div class="col-sm-4 text-end">
+                                                                            <button type="button" data-bs-toggle="modal"
+                                                                                data-bs-target="#add-material-modal"
+                                                                                class="btn btn-save w-md waves-effect waves-light px-4 btn-addMaterial"><i
+                                                                                    class="mdi mdi-plus"></i>Add
+                                                                                Material</button>
+                                                                        </div>
+                                                                        {{-- modals --}}
+                                                                        <form action="" class="parsley-examples"
+                                                                            novalidate="" method="post"
+                                                                            enctype="multipart/form-data">
+                                                                            @csrf
+                                                                            <div id="add-material-modal"
+                                                                                class="modal fade" role="dialog"
+                                                                                aria-labelledby="myModalLabel"
+                                                                                aria-hidden="true"
+                                                                                style="overflow:hidden;">
+                                                                                <div
+                                                                                    class="modal-dialog modal-dialog-centered">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <h4 class="modal-title">Add
+                                                                                                Material</h4>
+                                                                                            <button type="button"
+                                                                                                class="btn-close"
+                                                                                                data-bs-dismiss="modal"
+                                                                                                aria-label="Close"></button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            <div class="row">
+                                                                                                <div class="row">
+                                                                                                </div>
+                                                                                                <div class="col-md-12">
+                                                                                                    <div
+                                                                                                        class="mb-3 text-start">
+                                                                                                        <label
+                                                                                                            for="field-1"
+                                                                                                            class="form-label">Operational<span
+                                                                                                            class="text-danger">*</span></label>
+                                                                                                        <input
+                                                                                                            type="text"
+                                                                                                            class="form-control"
+                                                                                                            id="memo_number"
+                                                                                                            placeholder="get value default dari operational id"
+                                                                                                            parsley-trigger="change" required="">
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="col-md-12">
+                                                                                                    <div
+                                                                                                        class="mb-3 text-start">
+                                                                                                        <label
+                                                                                                            for="field-1"
+                                                                                                            class="form-label">Memo
+                                                                                                            Number</label>
+                                                                                                        <input
+                                                                                                            type="text"
+                                                                                                            class="form-control"
+                                                                                                            id="memo_number"
+                                                                                                            placeholder="Memo Number">
+                                                                                                        <small
+                                                                                                            id="emailHelp"
+                                                                                                            class="form-text text-muted">(Optional)</small>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="col-md-12">
+                                                                                                    <div
+                                                                                                        class="mb-3 text-start">
+                                                                                                        <label
+                                                                                                            for="field-2 "
+                                                                                                            class="form-label">Delivery
+                                                                                                            Order
+                                                                                                            Number<span
+                                                                                                            class="text-danger">*</span></label>
+                                                                                                        <input
+                                                                                                            type="text"
+                                                                                                            class="form-control"
+                                                                                                            id="do_number"
+                                                                                                            placeholder="DO Number"
+                                                                                                            parsley-trigger="change" required="">
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="modal-footer">
+                                                                                                <button type="button"
+                                                                                                    class="btn btn-secondary waves-effect"
+                                                                                                    data-bs-dismiss="modal">Close
+                                                                                                </button>
+                                                                                                <button type="submit"
+                                                                                                    class="btn btn-save waves-effect waves-light">
+                                                                                                    Save
+                                                                                                    changes
+                                                                                                </button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <!-- /.modal -->
+                                                                        </form>
+                                                                    </div>
                                                                     <div class="table-responsive">
-                                                                        <table class="table mb-0">
+                                                                        <table
+                                                                            class="table table table-striped table-hover mb-0">
                                                                             <thead>
                                                                                 <tr>
                                                                                     <th>#</th>
@@ -282,32 +406,17 @@
                                                             <div class="card">
                                                                 <div class="card-body">
                                                                     <div class="table-responsive">
-                                                                        <table class="table mb-0">
+                                                                        <table
+                                                                            class="table table table-striped table-hover mb-0"
+                                                                            id="table-technician">
                                                                             <thead>
                                                                                 <tr>
                                                                                     <th>#</th>
-                                                                                    <th>Operational</th>
-                                                                                    <th>Technician</th>
+                                                                                    <th>Name</th>
                                                                                     <th>Division</th>
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
-                                                                                <tr>
-                                                                                    <th scope="row">1</th>
-                                                                                    <td>C-23009</td>
-                                                                                    <td>Partogi</td>
-                                                                                    <td>Electrical</td>
-                                                                                </tr>
-                                                                                <th scope="row">2</th>
-                                                                                <td>C-23009</td>
-                                                                                <td>Partogi</td>
-                                                                                <td>Electrical</td>
-                                                                                </tr>
-                                                                                <th scope="row">3</th>
-                                                                                <td>C-23009</td>
-                                                                                <td>Partogi</td>
-                                                                                <td>Electrical</td>
-                                                                                </tr>
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
@@ -333,10 +442,9 @@
 {{-- <script src="https://kit.fontawesome.com/031855bb65.js" crossorigin="anonymous"></script> --}}
 @endsection
 @section('pageScript')
-    <script type="text/javascript">
-        function getOperationals(salesOrder){
-            if(salesOrder !== "" && salesOrder != null){
-
+<script type="text/javascript">
+    function getOperationals(salesOrder) {
+            if (salesOrder !== "" && salesOrder != null) {
                 $.ajax({
                     url: "{{ route('operational.get-operational', '') }}" + "/" + salesOrder,
                     type: "GET",
@@ -345,44 +453,93 @@
                         $(`#select-operational`).empty();
                         $(`#select-operational`).append(`<option selected value="">Pilih Operational</option>`);
                         $.each(data, function (key, value) {
-                            var option = new Option(value.spk_number, value.id);
+                            var option = new Option(value.spk_number, value.id, false, false);
                             $("#select-operational").append(option)
                         });
                     }
                 });
             }
         }
-    </script>
-    <script type="text/javascript">
-        function detailOperational(operational)
-        {
-            if (operational !== "" && operational != null)
-            {
+</script>
+<script type="text/javascript">
+    function detailOperational(operational) {
+            if (operational !== "" && operational != null) {
+                console.log(operational);
+
                 $.ajax({
                     url: "{{ route('operational.show', '') }}" + "/" + operational,
                     type: "GET",
-                    success: function (data){
+                    success: function (data) {
                         console.log(data);
-                        $('#spk_number').text(data.spk_number);
-                        $('#date').text(data.date);
-                        $('#label').text(data.project.label);
-                        $('#type').text(data.type);
-                        $('#file').text(data.file);
-                        $('#description').text(data.description);
-                        $('#transport').text(data.transport);
-                        $('#created').text(data.created);
-                        if (data.approved == null)
-                        {
+
+                        // Get the first operational in the array.
+                        const operational = data[0];
+
+                        // Get the project label.
+                        const projectLabel = operational.project.label;
+
+                        $('#spk_number').text(operational.spk_number);
+                        $('#date').text(operational.date);
+                        $('#label').text(projectLabel);
+                        $('#type').text(operational.type);
+                        $('#file').text(operational.file);
+                        $('#description').text(operational.description);
+                        $('#transport').text(operational.transportation_mode);
+                        $('#vehicle').text(operational.vehicle_number);
+                        $('#created').text(operational.created_by);
+                        if (operational.approved == null) {
                             $('#approved').text('Belum di Approve');
                             //text become red button
                             $('#approved').addClass('btn btn-danger disabled');
-                        }else{
-                        $('#approved').text(data.approved);
+                        } else {
+                            $('#approved').text(operational.approved);
                         }
-
+                            var i = 1;
+                        //check if team is empty
+                        if (operational.team.length == 0) {
+                            $('#table-technician tbody').append(`
+                            <tr>
+                                <td colspan="3" align="center">Belum ada Technician</td>
+                            </tr>
+                          `);
+                        } else {
+                            //looping team
+                        for (const member of operational.team) {
+                            console.log(member.first_name);
+                            $('#table-technician tbody').append(`
+                            <tr>
+                                <th scope="row">${i}</th>
+                                <td>${(member.first_name + member.last_name)}</td>
+                                <td>${member.division}</td>
+                            </tr>
+                          `);
+                            i++
+                        }
                     }
-                })
+                }
+            });
+
+            } else {
+                // Cancel the AJAX call.
+                event.preventDefault();
             }
         }
-    </script>
+
+</script>
+{{-- <script type="text/javascript">
+    --}}
+    {{--        function technicianList(operational){--}}
+    {{--            if (operational !== "" && operational != null)--}}
+    {{--            {--}}
+    {{--                $.ajax({--}}
+    {{--                    url: "{{ route('operational.get-team', '') }}" + "/" + operational,--}}
+    {{--                    type: "GET",--}}
+    {{--                    success: function (data){--}}
+    {{--                        console.log(data);--}}
+    {{--                    }--}}
+    {{--                })--}}
+    {{--            }--}}
+    {{--        }--}}
+    {{--    
+</script>--}}
 @endsection

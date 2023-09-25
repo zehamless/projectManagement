@@ -1,14 +1,14 @@
 @extends('template.index')
 
 @section('content')
-    <style>
-        .btn-createAccount {
-            border-radius: 10px;
-            background-color: #FF3E3E;
-            border: #FF3E3E;
-            color: white;
 
-        }
+<style>
+    .btn-createAccount {
+        border-radius: 10px;
+        background-color: #FF3E3E;
+        border: #FF3E3E;
+        color: white;
+    }
 
         .btn-editAccount {
             background-color: #FF3E3E;
@@ -24,10 +24,13 @@
             text-align: start !important;
         }
 
-        /*.modal-open .modal {*/
-        /*    overflow-y: hidden !important;*/
-        /*}*/
-    </style>
+    /*.modal-open .modal {*/
+    /*    overflow-y: hidden !important;*/
+    /*}*/
+    .actionColumn{
+        text-align: center !important;
+    }
+</style>
 
     <div class="content-page">
         <div class="content">
@@ -50,150 +53,148 @@
                     </div><!-- end col-->
                 </div>
 
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="mt-0 header-title">Data Akun Table</h4>
-                                <p class="text-muted font-14 mb-3">
-                                <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <table id="datatable"
-                                                class="table table-bordered dt-responsive table-hover table-responsive nowrap dataTable no-footer dtr-inline"
-                                                aria-describedby="datatable_info">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="sorting sorting_asc" tabindex="0"
-                                                            aria-controls="datatable" rowspan="1" colspan="1"
-                                                            style="width: auto;" aria-sort="ascending"
-                                                            aria-label="Name: activate to sort column descending">#
-                                                        </th>
-                                                        <th class="sorting" tabindex="0" aria-controls="datatable"
-                                                            rowspan="1" colspan="1" style="width: auto;"
-                                                            aria-label="Position: activate to sort column ascending">
-                                                            Email
-                                                        </th>
-                                                        <th class="sorting" tabindex="0" aria-controls="datatable"
-                                                            rowspan="1" colspan="1" style="width: auto;"
-                                                            aria-label="Office: activate to sort column ascending">First
-                                                            Name
-                                                        </th>
-                                                        <th class="sorting" tabindex="0" aria-controls="datatable"
-                                                            rowspan="1" colspan="1" style="width: auto;"
-                                                            aria-label="Age: activate to sort column ascending">Last Name
-                                                        </th>
-                                                        <th class="sorting" tabindex="0" aria-controls="datatable"
-                                                            rowspan="1" colspan="1" style="width: auto;"
-                                                            aria-label="Age: activate to sort column ascending">Role
-                                                        </th>
-                                                        <th class="sorting" tabindex="0" aria-controls="datatable"
-                                                            rowspan="1" colspan="1" style="width: auto;"
-                                                            aria-label="Start date: activate to sort column ascending">
-                                                            Division
-                                                        </th>
-                                                        <th class="sorting" tabindex="0" aria-controls="datatable"
-                                                            rowspan="1" colspan="1" style="width: auto;"
-                                                            aria-label="Salary: activate to sort column ascending">Signature
-                                                        </th>
-                                                        <th class="sorting text-center" tabindex="0"
-                                                            aria-controls="datatable" rowspan="1" colspan="1"
-                                                            style="width: auto;"
-                                                            aria-label="Salary: activate to sort column ascending">Actions
-                                                        </th>
-                                                    </tr>
-                                                </thead>
-                                                {{-- modals --}}
-                                                <div id="con-close-modal" class="modal fade" role="dialog"
-                                                    aria-labelledby="myModalLabel" aria-hidden="true"
-                                                    style="overflow:hidden;">
-                                                    <div class="modal-dialog modal-dialog-centered">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h4 class="modal-title">Edit Data Akun</h4>
-                                                                <button type="button" class="btn-close"
-                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="row">
-                                                                    <div class="col-md-12">
-                                                                        <div class="mb-3 text-start">
-                                                                            <label for="field-3"
-                                                                                class="form-label">Email</label>
-                                                                            <input type="text" class="form-control"
-                                                                                id="email"
-                                                                                placeholder="type your email here">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-md-6">
-                                                                        <div class="mb-3 text-start">
-                                                                            <label for="field-1" class="form-label">First
-                                                                                Name</label>
-                                                                            <input type="text" class="form-control"
-                                                                                id="first_name" placeholder="First">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <div class="mb-3 text-start">
-                                                                            <label for="field-2 " class="form-label">Last
-                                                                                Name</label>
-                                                                            <input type="text" class="form-control"
-                                                                                id="last_name" placeholder="Last">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-md-12">
-                                                                        <div class="mb-3 text-start">
-                                                                            <label for="field-3"
-                                                                                class="form-label">Division
-                                                                            </label>
-                                                                            <input type="text" class="form-control"
-                                                                                id="division" placeholder="Divisi">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-md-12">
-                                                                        <div class="mb-3 text-start">
-                                                                            <label for="field-3"
-                                                                                class="form-label">Role</label>
-                                                                            <select id="select-roles" class="form-control"
-                                                                                name="roles[]"
-                                                                                style="color: black;"></select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-md-12">
-                                                                        <div class="mb-3 text-start">
-                                                                            <label for="field-3" class="form-label">Tanda
-                                                                                Tangan</label>
-                                                                            <input type="file" class="form-control"
-                                                                                data-plugins="dropify" data-height="100"
-                                                                                id="signature">
-                                                                        </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="mt-0 header-title">Data Akun Table</h4>
+                            <p class="text-muted font-14 mb-3">
+                            <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table id="datatable"
+                                            class="table table-bordered dt-responsive table-hover table-responsive nowrap dataTable no-footer dtr-inline"
+                                            aria-describedby="datatable_info">
+                                            <thead>
+                                                <tr>
+                                                    <th class="sorting sorting_asc" tabindex="0"
+                                                        aria-controls="datatable" rowspan="1" colspan="1"
+                                                        style="width: auto;" aria-sort="ascending"
+                                                        aria-label="Name: activate to sort column descending">#
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="datatable"
+                                                        rowspan="1" colspan="1" style="width: auto;"
+                                                        aria-label="Position: activate to sort column ascending">
+                                                        Email
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="datatable"
+                                                        rowspan="1" colspan="1" style="width: auto;"
+                                                        aria-label="Office: activate to sort column ascending">First
+                                                        Name
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="datatable"
+                                                        rowspan="1" colspan="1" style="width: auto;"
+                                                        aria-label="Age: activate to sort column ascending">Last Name
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="datatable"
+                                                        rowspan="1" colspan="1" style="width: auto;"
+                                                        aria-label="Age: activate to sort column ascending">Role
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="datatable"
+                                                        rowspan="1" colspan="1" style="width: auto;"
+                                                        aria-label="Start date: activate to sort column ascending">
+                                                        Division
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="datatable"
+                                                        rowspan="1" colspan="1" style="width: auto;"
+                                                        aria-label="Salary: activate to sort column ascending">Signature
+                                                    </th>
+                                                    <th class="sorting text-center" tabindex="0"
+                                                        aria-controls="datatable" rowspan="1" colspan="1"
+                                                        style="width: auto;"
+                                                        aria-label="Salary: activate to sort column ascending">Actions
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            {{-- modals --}}
+                                            <div id="con-close-modal" class="modal fade" role="dialog"
+                                                aria-labelledby="myModalLabel" aria-hidden="true"
+                                                style="overflow:hidden;">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Edit Data Akun</h4>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="mb-3 text-start">
+                                                                        <label for="field-3"
+                                                                            class="form-label">Email</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="email"
+                                                                            placeholder="type your email here">
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button"
-                                                                    class="btn btn-secondary waves-effect"
-                                                                    data-bs-dismiss="modal">Close
-                                                                </button>
-                                                                <button type="button" id="update-button"
-                                                                    onclick="updateUser($(this).attr('data-id'))"
-                                                                    class="btn btn-editAccount waves-effect waves-light">
-                                                                    Save
-                                                                    changes
-                                                                </button>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="mb-3 text-start">
+                                                                        <label for="field-1" class="form-label">First
+                                                                            Name</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="first_name" placeholder="First">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="mb-3 text-start">
+                                                                        <label for="field-2 " class="form-label">Last
+                                                                            Name</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="last_name" placeholder="Last">
+                                                                    </div>
+                                                                </div>
                                                             </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="mb-3 text-start">
+                                                                        <label for="field-3" class="form-label">Division
+                                                                        </label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="division" placeholder="Divisi">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="mb-3 text-start">
+                                                                        <label for="field-3"
+                                                                            class="form-label">Role</label>
+                                                                        <select id="select-roles" class="form-control"
+                                                                            name="roles[]"
+                                                                            style="color: black;"></select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="mb-3 text-start">
+                                                                        <label for="field-3" class="form-label">Tanda
+                                                                            Tangan</label>
+                                                                        <input type="file" class="form-control"
+                                                                            data-plugins="dropify" data-height="100"
+                                                                            id="signature" data-default-file="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary waves-effect"
+                                                                data-bs-dismiss="modal">Close
+                                                            </button>
+                                                            <button type="button" id="update-button"
+                                                                onclick="updateUser($(this).attr('data-id'))"
+                                                                class="btn btn-editAccount waves-effect waves-light">
+                                                                Save
+                                                                changes
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!-- /.modal -->
+                                            </div>
+                                            <!-- /.modal -->
 
                                             </table>
                                         </div>
@@ -286,15 +287,14 @@
                                     <span class="mdi mdi-pencil"></span>
                                 </button>
                             </div>
-            <div class="btn-group btn-group-sm" style="float: none;">
-                <button type="button"
-                    class="tabledit-edit-button btn btn-danger"
-                    onclick="deleteUser('${data}')">
-                    <span class="mdi mdi-trash-can-outline"></span>
-                </button>
-            </div>
-
-</td>`;
+                            <div class="btn-group btn-group-sm" style="float: none;">
+                                <button type="button"
+                                    class="tabledit-edit-button btn btn-danger"
+                                    onclick="deleteUser('${data}')">
+                                    <span class="mdi mdi-trash-can-outline"></span>
+                                </button>
+                            </div>
+                        </td>`;
                         }
                     },
 

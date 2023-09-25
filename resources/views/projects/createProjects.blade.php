@@ -216,25 +216,27 @@
                                         <label for="userName" class="form-label">Location<span
                                                 class="text-danger">*</span></label>
                                         <input type="text" name="location" parsley-trigger="change" required=""
-                                            placeholder="Enter user name" class="form-control" id="userName">
+                                            placeholder="Masukkan lokasi" class="form-control" id="userName">
                                     </div>
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">Start Date<span
                                                 class="text-danger">*</span></label>
                                         <input type="date" name="start_date" parsley-trigger="change" required=""
-                                            placeholder="Enter user name" class="form-control" id="userName">
+                                            placeholder="Masukkan tanggal" class="form-control datepicker"
+                                            id="userName">
                                     </div>
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">End Date<span
                                                 class="text-danger">*</span></label>
                                         <input type="date" name="end_date" parsley-trigger="change" required=""
-                                            placeholder="Enter user name" class="form-control" id="userName">
+                                            placeholder="Masukkan tanggal" class="form-control datepicker"
+                                            id="userName">
                                     </div>
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">Preliminary Cost<span
                                                 class="text-danger">*</span></label>
                                         <input type="text" name="preliminary_cost" parsley-trigger="change"
-                                            required="" placeholder="Enter user name" class="form-control"
+                                            required="" placeholder="Masukkan PCost" class="form-control"
                                             id="userName">
                                     </div>
                                     <div class="mb-3">
@@ -270,17 +272,11 @@
 
 
 @section('pageScript')
-    {{-- masih belum kelar --}}
-    <script>
-        // function saveConfirmation() {
-        //         Swal.fire({
-        //             title: 'Saved!',
-        //             text: "Project berhasil dibuat",
-        //             icon: "success",
-        //         });
-        // }
-    </script>
+    <!-- Include Select2 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 
+    <!-- Include Select2 JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script>
         $(document).ready(function() {
             $('#customers').select2({
