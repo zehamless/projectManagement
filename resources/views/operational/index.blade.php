@@ -46,7 +46,6 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <h4 class="header-title mb-2">Sales Order Number</h4>
-
                                         <select class="form-select" id="sales-order"
                                                 onchange="getOperationals(this.value)">
                                             <option selected value="">Pilih Sales Order Number</option>
