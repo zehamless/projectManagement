@@ -79,7 +79,7 @@
                                             <th>Description</th>
                                             <th>Due Date</th>
                                             <th class="text-center">Status</th>
-                                            <th class="text-center">Action</th>
+                                            <th class="text-center">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -155,7 +155,7 @@
                                             <th>#</th>
                                             <th>Description</th>
                                             <th>Amount</th>
-                                            <th class="text-center">Action</th>
+                                            <th class="text-center">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -218,7 +218,7 @@
                                             <th>Project Label</th>
                                             <th>Service Type</th>
                                             <th>SPK Code</th>
-                                            <th class="text-center">Action</th>
+                                            <th class="text-center">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -319,7 +319,7 @@
                                             <th>Amount</th>
                                             <th>Status</th>
                                             <th>Description</th>
-                                            <th class="text-center">Action</th>
+                                            <th class="text-center">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
