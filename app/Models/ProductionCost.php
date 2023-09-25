@@ -12,4 +12,5 @@ class ProductionCost extends Model
     use HasUuids;
 
     protected $table = 'production_cost';
+    protected $fillable = ['description', 'amount'];
 }
