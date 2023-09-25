@@ -3,11 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\OperationalExpense;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class OperationalExpensesController extends Controller
 {
 
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
     public function store(Request $request)
     {
         $request->validate([
@@ -22,6 +27,11 @@ class OperationalExpensesController extends Controller
             ->with('success', 'Operational Expense created successfully.');
     }
 
+    /**
+     * @param Request $request
+     * @param OperationalExpense $expense
+     * @return RedirectResponse
+     */
     public function update(Request $request, OperationalExpense $expense)
     {
         $request->validate([
@@ -35,6 +45,10 @@ class OperationalExpensesController extends Controller
             ->with('success', 'Operational Expense updated successfully');
     }
 
+    /**
+     * @param OperationalExpense $expense
+     * @return RedirectResponse
+     */
     public function delete(OperationalExpense $expense)
     {
         $expense->delete();
