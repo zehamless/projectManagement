@@ -1,102 +1,103 @@
 @extends('template.index')
 
 @section('content')
-<style>
-    tr {
-        vertical-align: middle;
-    }
-
-    .btn-createItems {
-        border-radius: 10px;
-        background-color: #FF3E3E;
-        border: #FF3E3E;
-        color: white;
-        margin-right: 0;
-        float: right;
-        margin-left: auto;
-    }
-
-    .btn-createItems:focus {
-        color: white;
-    }
-
-    .table-title {
-        vertical-align: middle !important;
-    }
-
-    .details-text {
-        margin-bottom: unset;
-    }
-
-    .title-text {
-        margin-bottom: unset;
-        font-weight: 100;
-    }
-
-    @media screen and (max-width: 768px) {
-        .container-fluid{
-            flex-direction: column;
+    <style>
+        tr {
+            vertical-align: middle;
         }
 
-        .detailProjects-col {
-            order: 1;
-            /* Change the order of the first div */
+        .btn-createItems {
+            border-radius: 10px;
+            background-color: #FF3E3E;
+            border: #FF3E3E;
+            color: white;
+            margin-right: 0;
+            float: right;
+            margin-left: auto;
         }
 
-        .tables-col {
-            order: 2;
-            /* Change the order of the second div */
+        .btn-createItems:focus {
+            color: white;
         }
-    }
-</style>
 
-<div class="content-page">
-    <div class="content">
+        .table-title {
+            vertical-align: middle !important;
+        }
 
-        <!-- Start Content-->
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xl-8 tables-col">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row table-title">
-                                <div class="col-sm-8">
-                                    <h4 class="mt-0 header-title">Milestone</h4>
+        .details-text {
+            margin-bottom: unset;
+        }
+
+        .title-text {
+            margin-bottom: unset;
+            font-weight: 100;
+        }
+
+        @media screen and (max-width: 768px) {
+            .container-fluid {
+                flex-direction: column;
+            }
+
+            .detailProjects-col {
+                order: 1;
+                /* Change the order of the first div */
+            }
+
+            .tables-col {
+                order: 2;
+                /* Change the order of the second div */
+            }
+        }
+    </style>
+
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Start Content-->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-8 tables-col">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row table-title">
+                                    <div class="col-sm-8">
+                                        <h4 class="mt-0 header-title">Milestone</h4>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <a href="{{ route('milestone.create', ['id' => $projectData->id]) }}"
+                                            class="btn btn-createItems w-md waves-effect waves-light mb-3 px-4"><i
+                                                class="mdi mdi-plus" title="Menambahkan milestone"></i>Add Milestone</a>
+                                    </div>
                                 </div>
-                                <div class="col-sm-4">
-                                    <a href="{{ route('milestone.create', ['id' => $projectData->id]) }}"
-                                        class="btn btn-createItems w-md waves-effect waves-light mb-3 px-4"><i
-                                            class="mdi mdi-plus" title="Menambahkan milestone"></i>Add Milestone</a>
-                                </div>
-                            </div>
 
-                            <div class="table-responsive">
-                                <table class="table mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Entry Date</th>
-                                            <th>Description</th>
-                                            <th>Due Date</th>
-                                            <th class="text-center">Status</th>
-                                            <th class="text-center">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @if ($milestones->isEmpty())
-                                        <tr>
-                                            <td colspan="6" align="center">Belum ada milestone</td>
-                                        </tr>
-                                        @else
-                                        @php($index = 1)
-                                        @foreach ($milestones as $milestone)
-                                        <tr>
-                                            <th scope="row">{{ $index++ }}</th>
-                                            <td title="Submit date">{{ $milestone['submitted_date'] }}</td>
-                                            <td>{{ $milestone['description'] }}</td>
-                                            <td>{{ $milestone['due_date'] }}</td>
-                                            <td class="text-center">
-                                                <span class="badge
+                                <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Entry Date</th>
+                                                <th>Description</th>
+                                                <th>Due Date</th>
+                                                <th class="text-center">Status</th>
+                                                <th class="text-center">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if ($milestones->isEmpty())
+                                                <tr>
+                                                    <td colspan="6" align="center">Belum ada milestone</td>
+                                                </tr>
+                                            @else
+                                                @php($index = 1)
+                                                @foreach ($milestones as $milestone)
+                                                    <tr>
+                                                        <th scope="row">{{ $index++ }}</th>
+                                                        <td title="Submit date">{{ $milestone['submitted_date'] }}</td>
+                                                        <td>{{ $milestone['description'] }}</td>
+                                                        <td>{{ $milestone['due_date'] }}</td>
+                                                        <td class="text-center">
+                                                            <span
+                                                                class="badge
                                                                 @if ($milestone['progress'] == 'Done') bg-success
                                                                 @elseif($milestone['progress'] == 'Planned')
                                                                 bg-primary
@@ -145,7 +146,7 @@
                                     <h4 class="mt-0 header-title">Production Cost</h4>
                                 </div>
                                 <div class="col-sm-4">
-                                    <a href="{{ url('projects/createProductionCost') }}"
+                                    <a href="{{ url('projects/createProductionCost', ['id' => $projectData->id]) }}"
                                         class="btn btn-createItems w-md waves-effect waves-light mb-3 px-4"><i
                                             class="mdi mdi-plus"></i>Add Cost</a>
                                 </div>
@@ -163,33 +164,33 @@
                                     </thead>
                                     <tbody>
                                         @if ($productionCost->isEmpty())
-                                        <tr>
-                                            <td colspan="4" align="center">Belum ada production cost</td>
-                                        </tr>
+                                            <tr>
+                                                <td colspan="4" align="center">Belum ada production cost</td>
+                                            </tr>
                                         @else
-                                        @php($index = 1)
-                                        @foreach ($productionCost as $cost)
-                                        <tr>
-                                            <th scope="row">{{ $index++ }}</th>
-                                            <td>{{ $cost['description'] }}</td>
-                                            <td>{{ $cost['amount'] }}</td>
-                                            <td class="text-center">
-                                                <div class="btn-group btn-group-sm" style="float: none;">
-                                                    <button title="Untuk mengedit production cost" type="button"
-                                                        class="tabledit-edit-button btn btn-primary waves-effect waves-light"
-                                                        style="background-color: #3E8BFF;">
-                                                        <span class="mdi mdi-pencil"></span>
-                                                    </button>
-                                                </div>
-                                                <div class="btn-group btn-group-sm" style="float: none;">
-                                                    <button title="Untuk menghapus operational cost" type="button"
-                                                        class="tabledit-edit-button btn btn-danger">
-                                                        <span class="mdi mdi-trash-can-outline"></span>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        @endforeach
+                                            @php($index = 1)
+                                            @foreach ($productionCost as $cost)
+                                                <tr>
+                                                    <th scope="row">{{ $index++ }}</th>
+                                                    <td>{{ $cost['description'] }}</td>
+                                                    <td>{{ $cost['amount'] }}</td>
+                                                    <td class="text-center">
+                                                        <div class="btn-group btn-group-sm" style="float: none;">
+                                                            <button title="Untuk mengedit production cost" type="button"
+                                                                class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                                                style="background-color: #3E8BFF;">
+                                                                <span class="mdi mdi-pencil"></span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="btn-group btn-group-sm" style="float: none;">
+                                                            <button title="Untuk menghapus operational cost" type="button"
+                                                                class="tabledit-edit-button btn btn-danger">
+                                                                <span class="mdi mdi-trash-can-outline"></span>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                         @endif
 
                                     </tbody>
@@ -434,16 +435,16 @@
                                                 <div class="row text-center">
                                                     <div class="col-md-6 px-4">
                                                         {{-- <div style="width: fit-content; height: fit-content;"> --}}
-                                                            <p class="title-text">Progress Milestone</p>
-                                                            <canvas id="donut-chart"></canvas>
-                                                            {{--
+                                                        <p class="title-text">Progress Milestone</p>
+                                                        <canvas id="donut-chart"></canvas>
+                                                        {{--
                                                         </div> --}}
                                                     </div>
                                                     <div class="col-md-6 px-4">
                                                         {{-- <div style="width: fit-content; height: fit-content;"> --}}
-                                                            <p class="title-text">Progress Payment</p>
-                                                            <canvas id="donut-chart2" width="200"></canvas>
-                                                            {{--
+                                                        <p class="title-text">Progress Payment</p>
+                                                        <canvas id="donut-chart2" width="200"></canvas>
+                                                        {{--
                                                         </div> --}}
                                                     </div>
                                                 </div>
@@ -524,21 +525,21 @@
         </div> <!-- container-fluid -->
 
     </div> <!-- content -->
-</div>
+    </div>
 @endsection
 
 {{-- script js halaman detail project --}}
 @section('pageScript')
-{{-- donut chart --}}
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.pie.js"></script>
+    {{-- donut chart --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.pie.js"></script>
 
-{{-- js flot chart --}}
+    {{-- js flot chart --}}
 
 
-<script>
-    // Sample data
+    <script>
+        // Sample data
         // var labels = ["Completed", "Uncomplete"];
         var data = [70, 20];
 
@@ -569,10 +570,10 @@
         function labelFormatter(label, series) {
             return `<div style="font-size:8pt; text-align:center; padding:2px; color:white;">${label}<br/>${Math.round(series.percent)}%</div>`;
         }
-</script>
+    </script>
 
-<script>
-    // Sample data
+    <script>
+        // Sample data
         var data = [70, 20];
         // var labels = ["Total"];
 
@@ -604,5 +605,5 @@
         function labelFormatter(label, series) {
             return `<div style="font-size:8pt; text-align:center; padding:2px; color:white;">${label}<br/>${Math.round(series.percent)}%</div>`;
         }
-</script>
+    </script>
 @endsection
