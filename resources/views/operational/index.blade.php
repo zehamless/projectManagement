@@ -390,6 +390,8 @@
                             </tr>
                           `);
                         } else {
+                            //empty table
+                            $('#table-technician tbody').empty();
                             //looping team
                         for (const member of operational.team) {
                             console.log(member.first_name);
