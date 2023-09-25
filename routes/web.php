@@ -6,6 +6,7 @@ use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\MilestoneController;
 use App\Http\Controllers\OperationalAgendaController;
 use App\Http\Controllers\OperationalController;
+use App\Http\Controllers\ProductionCostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RoleController;
@@ -153,9 +154,7 @@ Route::get('/projects/createMilestone', function () {
     return view('projects.createMilestone');
 });
 
-Route::get('/projects/createProductionCost', function () {
-    return view('projects.createProductionCost');
-});
+Route::get('/projects/createProductionCost/{id}', [ProductionCostController::class, 'create']);
 
 Route::get('/projects/createOperational', function () {
     return view('projects.createOperational');
