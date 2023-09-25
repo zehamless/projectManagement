@@ -25,13 +25,13 @@ class CustomerController extends Controller
         // Ambil hasil query
         $customer = $query->get();
 
-        return view('customer', compact('customer'));
+        return view('customer.index', compact('customer'));
     }
 
     // Menampilkan formulir untuk membuat data baru
     public function create()
     {
-        return view('customers.createCustomer');
+        return view('customer.createCustomer');
     }
 
     // Menyimpan data baru ke database
