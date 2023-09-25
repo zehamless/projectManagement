@@ -303,13 +303,13 @@
                                                                                                         <label
                                                                                                             for="field-1"
                                                                                                             class="form-label">Operational<span
-                                                                                                            class="text-danger">*</span></label>
+                                                                                                                class="text-danger">*</span></label>
                                                                                                         <input
                                                                                                             type="text"
                                                                                                             class="form-control"
                                                                                                             id="memo_number"
                                                                                                             placeholder="get value default dari operational id"
-                                                                                                            parsley-trigger="change" required="">
+                                                                                                            readonly>
                                                                                                     </div>
                                                                                                 </div>
                                                                                                 <div class="col-md-12">
@@ -337,13 +337,14 @@
                                                                                                             class="form-label">Delivery
                                                                                                             Order
                                                                                                             Number<span
-                                                                                                            class="text-danger">*</span></label>
+                                                                                                                class="text-danger">*</span></label>
                                                                                                         <input
                                                                                                             type="text"
                                                                                                             class="form-control"
                                                                                                             id="do_number"
                                                                                                             placeholder="DO Number"
-                                                                                                            parsley-trigger="change" required="">
+                                                                                                            parsley-trigger="change"
+                                                                                                            required="">
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
@@ -373,6 +374,8 @@
                                                                                     <th>Operational</th>
                                                                                     <th>Memo Number</th>
                                                                                     <th>Delivery Order Number</th>
+                                                                                    <th class="text-center" width="140">
+                                                                                        Actions</th>
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
@@ -381,16 +384,85 @@
                                                                                     <td>N-23009</td>
                                                                                     <td>M223</td>
                                                                                     <td>DO-886</td>
+                                                                                    <td class="text-center">
+                                                                                        <div class="btn-group btn-group-sm"
+                                                                                            style="float: none;">
+                                                                                            <button type="button"
+                                                                                                data-bs-toggle="modal"
+                                                                                                data-bs-target="#add-material-modal"
+                                                                                                title="Edit Material"
+                                                                                                type="button"
+                                                                                                class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                                                                                style="background-color: #3E8BFF;">
+                                                                                                <span
+                                                                                                    class="mdi mdi-pencil"></span>
+                                                                                            </button>
+                                                                                        </div>
+                                                                                        <div class="btn-group btn-group-sm"
+                                                                                            style="float: none;">
+                                                                                            <button id="delete-button"
+                                                                                                title="Hapus Material"
+                                                                                                type="button"
+                                                                                                class="tabledit-edit-button btn btn-danger">
+                                                                                                <span
+                                                                                                    class="mdi mdi-trash-can-outline"></span>
+                                                                                            </button>
+                                                                                        </div>
+                                                                                    </td>
                                                                                 </tr>
                                                                                 <th scope="row">2</th>
                                                                                 <td>N-23009</td>
                                                                                 <td>M223</td>
                                                                                 <td>DO-886</td>
+                                                                                <td class="text-center">
+                                                                                    <div class="btn-group btn-group-sm"
+                                                                                        style="float: none;">
+                                                                                        <button title="Edit Material"
+                                                                                            type="button"
+                                                                                            class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                                                                            style="background-color: #3E8BFF;">
+                                                                                            <span
+                                                                                                class="mdi mdi-pencil"></span>
+                                                                                        </button>
+                                                                                    </div>
+                                                                                    <div class="btn-group btn-group-sm"
+                                                                                        style="float: none;">
+                                                                                        <button id="delete-button"
+                                                                                            title="Hapus Material"
+                                                                                            type="button"
+                                                                                            class="tabledit-edit-button btn btn-danger">
+                                                                                            <span
+                                                                                                class="mdi mdi-trash-can-outline"></span>
+                                                                                        </button>
+                                                                                    </div>
+                                                                                </td>
                                                                                 </tr>
                                                                                 <th scope="row">3</th>
                                                                                 <td>N-23009</td>
                                                                                 <td>M223</td>
                                                                                 <td>DO-886</td>
+                                                                                <td class="text-center">
+                                                                                    <div class="btn-group btn-group-sm"
+                                                                                        style="float: none;">
+                                                                                        <button title="Edit Material"
+                                                                                            type="button"
+                                                                                            class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                                                                            style="background-color: #3E8BFF;">
+                                                                                            <span
+                                                                                                class="mdi mdi-pencil"></span>
+                                                                                        </button>
+                                                                                    </div>
+                                                                                    <div class="btn-group btn-group-sm"
+                                                                                        style="float: none;">
+                                                                                        <button id="delete-button"
+                                                                                            title="Hapus Material"
+                                                                                            type="button"
+                                                                                            class="tabledit-edit-button btn btn-danger">
+                                                                                            <span
+                                                                                                class="mdi mdi-trash-can-outline"></span>
+                                                                                        </button>
+                                                                                    </div>
+                                                                                </td>
                                                                                 </tr>
                                                                             </tbody>
                                                                         </table>
@@ -542,4 +614,31 @@
     {{--        }--}}
     {{--    
 </script>--}}
+
+<script>
+    // Wait for the document to be ready
+    document.addEventListener("DOMContentLoaded", function () {
+
+      const deleteButton = document.getElementById("delete-button");
+  
+      deleteButton.addEventListener("click", function () {
+        Swal.fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#ff0000",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire("Deleted!", "Your data has been deleted.", "success");
+          }
+        });
+      });
+    });
+</script>
+
+
+
 @endsection

@@ -291,6 +291,7 @@
                 text: 'You will not be able to recover this user!',
                 icon: 'warning',
                 showCancelButton: true,
+                confirmButtonColor: '#f34e4e',
                 confirmButtonText: 'Yes, delete it!',
                 cancelButtonText: 'Cancel'
             }).then((result) => {
