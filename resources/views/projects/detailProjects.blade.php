@@ -103,41 +103,38 @@
                                                                 @elseif($milestone['progress'] == 'On Progress')
                                                                 bg-warning @endif
                                                             ">{{ $milestone['progress'] }}</span>
-
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <a title="untuk mengunduh file"
-                                                                    href="{{ asset('milestone_files/' . $milestone->file) }}"
-                                                                    class="tabledit-edit-button btn btn-success waves-effect waves-light"
-                                                                    download>
-                                                                    <span class="mdi mdi-file-download-outline"></span>
-                                                                </a>
-                                                            </div>
-                                                            <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <button title="Untuk mengedit milestone" type="button"
-                                                                    class="tabledit-edit-button btn btn-primary waves-effect waves-light"
-                                                                    style="background-color: #3E8BFF;">
-                                                                    <span class="mdi mdi-pencil"></span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <button title="Untuk menghapus milestone" type="button"
-                                                                    class="tabledit-edit-button btn btn-danger">
-                                                                    <span class="mdi mdi-trash-can-outline"></span>
-                                                                </button>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            @endif
-                                        </tbody>
-                                    </table>
-                                </div>
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="btn-group btn-group-sm" style="float: none;">
+                                                    <button title="untuk mengunduh file" type="button"
+                                                        class="tabledit-edit-button btn btn-success waves-effect waves-light">
+                                                        <span class="mdi mdi-file-download-outline"></span>
+                                                    </button>
+                                                </div>
+                                                <div class="btn-group btn-group-sm" style="float: none;">
+                                                    <button title="Untuk mengedit milestone" type="button"
+                                                        class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                                        style="background-color: #3E8BFF;">
+                                                        <span class="mdi mdi-pencil"></span>
+                                                    </button>
+                                                </div>
+                                                <div class="btn-group btn-group-sm" style="float: none;">
+                                                    <button title="Untuk menghapus milestone" type="button"
+                                                        class="tabledit-edit-button btn btn-danger">
+                                                        <span class="mdi mdi-trash-can-outline"></span>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                        @endif
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
 
+                    {{-- card table production cost --}}
                     <div class="card">
                         <div class="card-body">
                             <div class="row table-title">
