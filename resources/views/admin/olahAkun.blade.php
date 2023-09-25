@@ -8,7 +8,6 @@
         background-color: #FF3E3E;
         border: #FF3E3E;
         color: white;
-
     }
 
     .btn-editAccount {
@@ -176,7 +175,7 @@
                                                                             Tangan</label>
                                                                         <input type="file" class="form-control"
                                                                             data-plugins="dropify" data-height="100"
-                                                                            id="signature">
+                                                                            id="signature" data-default-file="">
                                                                     </div>
                                                                 </div>
                                                             </div>
