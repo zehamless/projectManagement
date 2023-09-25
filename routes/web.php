@@ -34,6 +34,8 @@ Route::group(['prefix' => 'projects'], function () {
     Route::get('/{id}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
     Route::put('/{id}', [ProjectController::class, 'update'])->name('projects.update');
     Route::delete('/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
+    Route::get('/createProductionCost/{id}', [ProductionCostController::class, 'create'])->name('production-cost.create');
+    Route::post('/production-cost', [ProductionCostController::class, 'store'])->name('production-cost.store');
 });
 
 Route::get('/', function () {
@@ -154,7 +156,6 @@ Route::get('/projects/createMilestone', function () {
     return view('projects.createMilestone');
 });
 
-Route::get('/projects/createProductionCost/{id}', [ProductionCostController::class, 'create']);
 
 Route::get('/projects/createOperational', function () {
     return view('projects.createOperational');
