@@ -97,11 +97,11 @@
 
                                     <ul class="list-inline">
                                         <li class="list-inline-item me-4">
-                                            <h4 class="mb-0">{{ $project['preliminary_cost'] }}</h4>
+                                            <h4 class="mb-0 rupiah">{{ $project['preliminary_cost'] }}</h4>
                                             <p class="text-muted">Preliminary Cost</p>
                                         </li>
                                         <li class="list-inline-item operational-cost">
-                                            <h4 class="mb-0">{{ $project['expense_budget'] }}</h4>
+                                            <h4 class="mb-0 rupiah">{{ $project['expense_budget'] }}</h4>
                                             <p class="text-muted">Operational Cost</p>
                                         </li>
                                     </ul>

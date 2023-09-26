@@ -60,28 +60,28 @@
 
                 <li class="menu-title mt-2">Apps</li>
 
-                <li>
+                <li class="{{ Request::is('projects/*') || Request::is('milestone/*') ? 'menuitem-active' : ''}}">
                     <a href="{{ url('projects') }}">
                         <i class="mdi mdi-briefcase-variant-outline"></i>
                         <span> Projects </span>
                     </a>
                 </li>
 
-                <li>
+                <li class="{{ Request::is('operational/*') ? 'menuitem-active' : ''}}">
                     <a href="{{ url('operational') }}">
                         <i class="mdi mdi-book-clock-outline"></i>
                         <span> Operational </span>
                     </a>
                 </li>
 
-                <li>
+                <li class="{{ Request::is('calendar/*') ? 'menuitem-active' : ''}}">
                     <a href="apps-calendar.html">
                         <i class="mdi mdi-calendar-blank-outline"></i>
                         <span> Calendar </span>
                     </a>
                 </li>
 
-                <li>
+                <li class="{{ Request::is('customer/*') ? 'menuitem-active' : ''}}">
                     <a href="{{ url('customer') }}">
                         <i class="mdi mdi-account-supervisor-outline"></i>
                         <span> Customers </span>
@@ -90,7 +90,7 @@
 
                 <li class="menu-title mt-2">Account Management</li>
 
-                <li>
+                <li class="{{ Request::is('admin/*') ? 'menuitem-active' : ''}}">
                     <a href="{{ url('admin/users') }}">
                         <i class="mdi mdi-account-group-outline"></i>
                         <span> Data Akun </span>

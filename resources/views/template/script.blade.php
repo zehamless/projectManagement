@@ -85,4 +85,17 @@
     });
 </script>
 
+{{-- Script buat ubah format uang --}}
+<script>
+    $(document).ready(function() {
+        $('.rupiah').each(function() {
+            var angka = parseFloat($(this).text());
+            if (!isNaN(angka)) {
+                var formatRupiah = angka.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&.');
+                $(this).text('Rp ' + formatRupiah);
+            }
+        });
+    });
+</script>
+
 @yield('pageScript')
