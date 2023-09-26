@@ -74,7 +74,7 @@
                         <div class="card-body card-nbm">
                             <div class="row">
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 mb-3">
                                         <h4 class="header-title mb-2">Operational</h4>
                                         <select id="select-operational" class="form-select mb-2"
                                             onchange="detailOperational(this.value, false)">
@@ -193,6 +193,7 @@
                                                                                     <th>Description</th>
                                                                                     <th>Due Date</th>
                                                                                     <th>Status</th>
+                                                                                    <th class="text-center" width="140">Actions</th>
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
@@ -204,21 +205,96 @@
                                                                                     <td><span
                                                                                             class="badge bg-info">Planned</span>
                                                                                     </td>
+                                                                                    <td class="text-center" width="140">
+                                                                                        <div class="btn-group btn-group-sm"
+                                                                                            style="float: none;">
+                                                                                            <button type="button"
+                                                                                                data-bs-toggle="modal"
+                                                                                                data-bs-target="#add-work-modal"
+                                                                                                title="Edit Operational Expenses"
+                                                                                                type="button"
+                                                                                                class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                                                                                style="background-color: #3E8BFF;">
+                                                                                                <span
+                                                                                                    class="mdi mdi-pencil"></span>
+                                                                                            </button>
+                                                                                        </div>
+                                                                                        <div class="btn-group btn-group-sm"
+                                                                                            style="float: none;">
+                                                                                            <button id="delete-button"
+                                                                                                title="Hapus Operational Expenses"
+                                                                                                type="button"
+                                                                                                class="tabledit-edit-button btn btn-danger">
+                                                                                                <span
+                                                                                                    class="mdi mdi-trash-can-outline"></span>
+                                                                                            </button>
+                                                                                        </div>
+                                                                                    </td>
                                                                                 </tr>
-                                                                                <th scope="row">2</th>
-                                                                                <td>N-23009</td>
-                                                                                <td>Dummy Work Plans</td>
-                                                                                <td>11/09/2023</td>
-                                                                                <td><span class="badge bg-warning">On
-                                                                                        Progress</span></td>
+                                                                                    <th scope="row">2</th>
+                                                                                    <td>N-23009</td>
+                                                                                    <td>Dummy Work Plans</td>
+                                                                                    <td>11/09/2023</td>
+                                                                                    <td><span class="badge bg-warning">On
+                                                                                            Progress</span></td>
+                                                                                    <td class="text-center">
+                                                                                        <div class="btn-group btn-group-sm"
+                                                                                            style="float: none;">
+                                                                                            <button type="button"
+                                                                                                data-bs-toggle="modal"
+                                                                                                data-bs-target="#add-work-modal"
+                                                                                                title="Edit Operational Expenses"
+                                                                                                type="button"
+                                                                                                class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                                                                                style="background-color: #3E8BFF;">
+                                                                                                <span
+                                                                                                    class="mdi mdi-pencil"></span>
+                                                                                            </button>
+                                                                                        </div>
+                                                                                        <div class="btn-group btn-group-sm"
+                                                                                            style="float: none;">
+                                                                                            <button id="delete-button"
+                                                                                                title="Hapus Operational Expenses"
+                                                                                                type="button"
+                                                                                                class="tabledit-edit-button btn btn-danger">
+                                                                                                <span
+                                                                                                    class="mdi mdi-trash-can-outline"></span>
+                                                                                            </button>
+                                                                                        </div>
+                                                                                    </td>
                                                                                 </tr>
-                                                                                <th scope="row">3</th>
-                                                                                <td>N-23009</td>
-                                                                                <td>Dummy Work Plans</td>
-                                                                                <td>11/09/2023</td>
-                                                                                <td><span
-                                                                                        class="badge bg-success">Completed</span>
-                                                                                </td>
+                                                                                    <th scope="row">3</th>
+                                                                                    <td>N-23009</td>
+                                                                                    <td>Dummy Work Plans</td>
+                                                                                    <td>11/09/2023</td>
+                                                                                    <td><span
+                                                                                            class="badge bg-success">Completed</span>
+                                                                                    </td>
+                                                                                    <td class="text-center">
+                                                                                        <div class="btn-group btn-group-sm"
+                                                                                            style="float: none;">
+                                                                                            <button type="button"
+                                                                                                data-bs-toggle="modal"
+                                                                                                data-bs-target="#add-work-modal"
+                                                                                                title="Edit Operational Expenses"
+                                                                                                type="button"
+                                                                                                class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                                                                                style="background-color: #3E8BFF;">
+                                                                                                <span
+                                                                                                    class="mdi mdi-pencil"></span>
+                                                                                            </button>
+                                                                                        </div>
+                                                                                        <div class="btn-group btn-group-sm"
+                                                                                            style="float: none;">
+                                                                                            <button id="delete-button"
+                                                                                                title="Hapus Operational Expenses"
+                                                                                                type="button"
+                                                                                                class="tabledit-edit-button btn btn-danger">
+                                                                                                <span
+                                                                                                    class="mdi mdi-trash-can-outline"></span>
+                                                                                            </button>
+                                                                                        </div>
+                                                                                    </td>
                                                                                 </tr>
                                                                             </tbody>
                                                                         </table>
@@ -257,6 +333,9 @@
                                                                                     <th>Expense Date</th>
                                                                                     <th>Expense Item</th>
                                                                                     <th>Amount</th>
+                                                                                    <th class="text-center" width="140">
+                                                                                        Actions
+                                                                                    </th>
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
@@ -265,16 +344,91 @@
                                                                                     <td>11/09/2023</td>
                                                                                     <td>Transport</td>
                                                                                     <td>200.000</td>
+                                                                                    <td class="text-center">
+                                                                                        <div class="btn-group btn-group-sm"
+                                                                                            style="float: none;">
+                                                                                            <button type="button"
+                                                                                                data-bs-toggle="modal"
+                                                                                                data-bs-target="#add-expenses-modal"
+                                                                                                title="Edit Operational Expenses"
+                                                                                                type="button"
+                                                                                                class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                                                                                style="background-color: #3E8BFF;">
+                                                                                                <span
+                                                                                                    class="mdi mdi-pencil"></span>
+                                                                                            </button>
+                                                                                        </div>
+                                                                                        <div class="btn-group btn-group-sm"
+                                                                                            style="float: none;">
+                                                                                            <button id="delete-button"
+                                                                                                title="Hapus Operational Expenses"
+                                                                                                type="button"
+                                                                                                class="tabledit-edit-button btn btn-danger">
+                                                                                                <span
+                                                                                                    class="mdi mdi-trash-can-outline"></span>
+                                                                                            </button>
+                                                                                        </div>
+                                                                                    </td>
                                                                                 </tr>
                                                                                 <th scope="row">2</th>
                                                                                 <td>11/09/2023</td>
                                                                                 <td>Makan</td>
                                                                                 <td>200.000</td>
+                                                                                <td class="text-center">
+                                                                                    <div class="btn-group btn-group-sm"
+                                                                                        style="float: none;">
+                                                                                        <button type="button"
+                                                                                            data-bs-toggle="modal"
+                                                                                            data-bs-target="#add-expenses-modal"
+                                                                                            title="Edit Operational Expenses"
+                                                                                            type="button"
+                                                                                            class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                                                                            style="background-color: #3E8BFF;">
+                                                                                            <span
+                                                                                                class="mdi mdi-pencil"></span>
+                                                                                        </button>
+                                                                                    </div>
+                                                                                    <div class="btn-group btn-group-sm"
+                                                                                        style="float: none;">
+                                                                                        <button id="delete-button"
+                                                                                            title="Hapus Operational Expenses"
+                                                                                            type="button"
+                                                                                            class="tabledit-edit-button btn btn-danger">
+                                                                                            <span
+                                                                                                class="mdi mdi-trash-can-outline"></span>
+                                                                                        </button>
+                                                                                    </div>
+                                                                                </td>
                                                                                 </tr>
                                                                                 <th scope="row">3</th>
                                                                                 <td>11/09/2023</td>
                                                                                 <td>Emergency</td>
                                                                                 <td>200.000</td>
+                                                                                <td class="text-center">
+                                                                                    <div class="btn-group btn-group-sm"
+                                                                                        style="float: none;">
+                                                                                        <button type="button"
+                                                                                            data-bs-toggle="modal"
+                                                                                            data-bs-target="#add-expenses-modal"
+                                                                                            title="Edit Operational Expenses"
+                                                                                            type="button"
+                                                                                            class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                                                                            style="background-color: #3E8BFF;">
+                                                                                            <span
+                                                                                                class="mdi mdi-pencil"></span>
+                                                                                        </button>
+                                                                                    </div>
+                                                                                    <div class="btn-group btn-group-sm"
+                                                                                        style="float: none;">
+                                                                                        <button id="delete-button"
+                                                                                            title="Hapus Operational Expenses"
+                                                                                            type="button"
+                                                                                            class="tabledit-edit-button btn btn-danger">
+                                                                                            <span
+                                                                                                class="mdi mdi-trash-can-outline"></span>
+                                                                                        </button>
+                                                                                    </div>
+                                                                                </td>
                                                                                 </tr>
                                                                             </tbody>
                                                                         </table>
@@ -441,6 +595,7 @@
                                                                                     <th>#</th>
                                                                                     <th>Name</th>
                                                                                     <th>Division</th>
+                                                                                    <th class="text-center" width="140">Actions</th>
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
@@ -543,6 +698,16 @@
                                 <th scope="row">${i}</th>
                                 <td>${(member.first_name + member.last_name)}</td>
                                 <td>${member.division}</td>
+                                <td class="text-center"> <div class="btn-group btn-group-sm"
+                                        style="float: none;">
+                                        <button id="delete-button"
+                                            title="Hapus Operational Expenses"
+                                            type="button"
+                                            class="tabledit-edit-button btn btn-danger">
+                                            <span
+                                                class="mdi mdi-trash-can-outline"></span>
+                                        </button>
+                                    </div></td>
                             </tr>
                           `);
                                 i++
