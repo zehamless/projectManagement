@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use Faker\Provider\Address;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -9,7 +10,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class SendPassword extends Mailable
+class SendPassword extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
     public $emailData;
@@ -28,7 +29,7 @@ class SendPassword extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Send Password',
+            from: 'Project Management Account',
         );
     }
 
