@@ -11,7 +11,7 @@ class OperationalController extends Controller
 {
     public function index()
     {
-        $salesOrder = Project::all();
+        $salesOrder = Project::select('id', 'so')->get();
         return view('operational.index', compact('salesOrder'));
     }
 
