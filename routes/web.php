@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CustomerContactController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\MilestoneController;
 use App\Http\Controllers\OperationalAgendaController;
@@ -39,9 +40,7 @@ Route::group(['prefix' => 'projects'], function () {
     Route::post('/production-cost', [ProductionCostController::class, 'store'])->name('production-cost.store');
 });
 
-Route::get('/', function () {
-    return view('dashboard');
-});
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
 
 
 Route::prefix('customer')->group(function () {
