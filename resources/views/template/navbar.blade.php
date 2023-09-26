@@ -99,6 +99,23 @@
             </ul>
         </div>
 
+        <div class="profile-section user-box text-start">
+            <div class="row px-3">
+                <div class="col-3 profile-photo-column">
+                    <img src="https://d34u8crftukxnk.cloudfront.net/slackpress/prod/sites/6/E12KS1G65-W0168RE00G7-133faf432639-512.jpeg" alt="user-img" title="Mat Helme"
+                        class="rounded img-thumbnail avatar-md">
+                </div>
+                <div class="col-7">
+                    <h5 class="mb-1">Garcia Patel</h5>
+                    <p class="text-muted left-user-info mb-0">Admin</p>
+                </div>
+                <div class="col-2 my-auto">
+                    <a href="{{ url('login') }}">
+                        <i class="fe-log-out logout-font" title="Logout System"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
 
         <div class="clearfix"></div>
 

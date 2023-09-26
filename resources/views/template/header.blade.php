@@ -111,4 +111,32 @@
         background-color: #FF3E3E;
         color: white;
     }
+
+    .profile-photo-column{
+        padding: unset;
+    }
+
+    .rounded{
+        border-radius: 30% !important; 
+    }
+
+    .profile-section{
+        bottom: 0;
+    }
+
+    .logout-font{
+        font-size: 18px;
+        font-weight: 100;
+        color: red;
+    }
+
+    .logout-font:hover{
+        font-weight: 900;
+    }
+
+    .profile-section {
+        position: absolute;
+        bottom: 50px;
+        width: 100%;
+    }
 </style>
