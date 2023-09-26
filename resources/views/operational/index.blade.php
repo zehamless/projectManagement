@@ -363,6 +363,7 @@
                                                                                     </div>
                                                                                 </div>
                                                                                 <!-- /.modal -->
+                                                                            </div>
                                                                         </form>
                                                                     </div>
                                                                     <div class="table-responsive">
