@@ -79,7 +79,7 @@
                                                 <th>Description</th>
                                                 <th>Due Date</th>
                                                 <th class="text-center">Status</th>
-                                                <th class="text-center">Action</th>
+                                                <th class="text-center">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -158,7 +158,7 @@
                                                 <th>#</th>
                                                 <th>Description</th>
                                                 <th>Amount</th>
-                                                <th class="text-center">Action</th>
+                                                <th class="text-center">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -223,7 +223,7 @@
                                                 <th>Project Label</th>
                                                 <th>Service Type</th>
                                                 <th>SPK Code</th>
-                                                <th class="text-center">Action</th>
+                                                <th class="text-center">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -280,7 +280,7 @@
                                                 <td>Project Label</td>
                                                 <td>Service Type</td>
                                                 <td>SPK Code</td>
-                                                <td class="text-center">]
+                                                <td class="text-center">
                                                     <div class="btn-group btn-group-sm" style="float: none;">
                                                         <button title="edit data" type="button"
                                                             class="tabledit-edit-button btn btn-primary waves-effect waves-light"
@@ -324,7 +324,7 @@
                                                 <th>Amount</th>
                                                 <th>Status</th>
                                                 <th>Description</th>
-                                                <th class="text-center">Action</th>
+                                                <th class="text-center">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
