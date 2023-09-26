@@ -12,6 +12,7 @@ class Milestone extends Model
     use HasUlids;
 
     protected $fillable = [
+        'id',
         'submitted_date',
         'description',
         'due_date',
