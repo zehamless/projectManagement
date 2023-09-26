@@ -43,9 +43,7 @@ Route::get('/', function () {
 Route::prefix('customer')->group(function () {
     Route::get('/', [CustomerController::class, 'index'])->name('customer.index');
 });
-Route::get('/formcustomer', function () {
-    return view('formcustomer');
-});
+
 Route::get('/staff', function () {
     return view('staff');
 });
