@@ -107,7 +107,7 @@
                                                         </td>
                                                         <td class="text-center">
                                                             <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <a href="{{ asset('images/milestone_file/' . $milestone->file) }}"
+                                                                <a href="{{ asset('images/milestone_files/' . $milestone->file) }}"
                                                                     title="Download Gambar Milestone" type="button"
                                                                     class="tabledit-edit-button btn btn-success waves-effect waves-light"
                                                                     download>
@@ -172,7 +172,7 @@
                                                     <tr>
                                                         <th scope="row">{{ $index++ }}</th>
                                                         <td>{{ $cost['description'] }}</td>
-                                                        <td>{{ $cost['amount'] }}</td>
+                                                        <td class="rupiah">{{ $cost['amount'] }}</td>
                                                         <td class="text-center">
                                                             <div class="btn-group btn-group-sm" style="float: none;">
                                                                 <button title="Untuk mengedit production cost"
@@ -498,19 +498,21 @@
                                             <tr>
                                                 <th scope="row">
                                                     <p class="title-text">Preliminary Cost</p>
-                                                    <p class="details-text">{{ $projectData['preliminary_cost'] }}</p>
+                                                    <p class="details-text rupiah">{{ $projectData['preliminary_cost'] }}
+                                                    </p>
                                                 </th>
                                             </tr>
                                             <tr>
                                                 <th scope="row">
                                                     <p class="title-text">Purchase Order Amount</p>
-                                                    <p class="details-text">{{ $projectData['po_amount'] }}</p>
+                                                    <p class="details-text rupiah">{{ $projectData['po_amount'] }}</p>
                                                 </th>
                                             </tr>
                                             <tr>
                                                 <th scope="row">
                                                     <p class="title-text">Real Cost</p>
-                                                    <p class="details-text">{{ $projectData['expense_budget'] }}</p>
+                                                    <p class="details-text rupiah">{{ $projectData['expense_budget'] }}
+                                                    </p>
                                                 </th>
                                             </tr>
 
