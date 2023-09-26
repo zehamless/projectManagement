@@ -196,25 +196,29 @@
                                 <div class="mb-3 text-start">
                                     <label for="field-1" class="form-label">Operational<span
                                             class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="memo_number"
+                                    <input type="text" class="form-control" id="operational"
                                         placeholder="get value default dari operational id" readonly>
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <div class="mb-3 text-start">
-                                    <label for="field-1" class="form-label">Memo
-                                        Number</label>
-                                    <input type="text" class="form-control" id="memo_number" placeholder="Memo Number">
-                                    <small id="emailHelp" class="form-text text-muted">(Optional)</small>
+                                <div class="mb-3 text-start" id="technician-parent">
+                                    <label for="field-1" class="form-label">Technician</label>
+                                    {{-- <input type="text" class="form-control" id="technician"
+                                        placeholder="Technician" parsley-trigger="change" required=""> --}}
+                                    <select class="form-select" id="select-technician">
+                                        <option selected value="">-- Pilih Technician -- </option>
+                                        <option value="">Technician 1</option>
+                                        <option value="">Technician 2</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="mb-3 text-start">
-                                    <label for="field-2 " class="form-label">Delivery
-                                        Order
-                                        Number<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="do_number" placeholder="DO Number"
-                                        parsley-trigger="change" required="">
+                                    <label for="field-2 " class="form-label">Dvision<span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="division"
+                                        placeholder="generate value division dari data user" parsley-trigger="change"
+                                        required="">
                                 </div>
                             </div>
                         </div>

@@ -604,5 +604,19 @@
             });
         });
 </script>
+<script type="text/javascript">
+    $(document).ready(function () {
+            $('#select-technician').select2({
+                // placeholder: 'role',
+                // dropdownParent: $('#con-close-modal'),
+                theme: 'default',
+                multiple: false,
+                dropdownAutoWidth: true,
+                width: '100%',
+                dropdownParent: $('#technician-parent'),
+                formatNoMatches: function () { return "Nothing found"; },
+            });
+        });
+</script>
 
 @endsection
