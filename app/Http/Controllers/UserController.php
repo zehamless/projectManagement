@@ -34,9 +34,6 @@ class UserController extends Controller
                         return $role->name;
                     })->implode(', ');
                 })
-                ->addColumn('image', function (User $user) {
-                    return $user->signature ? '<img src="' . asset("$user->signature") . '" width="100px" height="100px">' : '';
-                })
                 ->toJson();
         }
         $users = User::with('hasroles')->get();

@@ -264,7 +264,8 @@
                         searchable: false,
                         render: function(data, type, full, meta) {
                             // Concatenate the image URL with the asset function
-                            return '<a class="view" href="{{ asset('images/logo_trafindo_only.png') }}" ><img src="{{ asset('images/logo_trafindo_only.png') }}" alt="Signature" width="100" height="auto"></a>';
+                            return '<a class="view" href="' + '{{ asset("storage/") }}' + '/' + data + '"><img src="' + '{{ asset("storage/") }}' + '/' + data + '" alt="Signature" id= "view" width="100" height="auto"></a>';
+
                         }
                     },
                     {
@@ -490,9 +491,9 @@
     <script>
         $(document).ready(function() {
 
-            $('.view').magnificPopup({
+            $('#view').magnificPopup({
                 type: 'image',
-                closeOnContentClick: ture,
+                closeOnContentClick: true,
                 mainClass: 'mfp-img-mobile',
                 image: {
                     verticalFit: true
