@@ -164,14 +164,17 @@ class ProjectController extends Controller
         // Hitung total jumlah Milestone
         $totalMilestones = $milestones->count();
 
+        // Perhitungan real cost
+        $realCost = $project->productionCost->sum('amount');
+
         // Hitung persentase untuk setiap kategori
         $percentageDone = $totalMilestones > 0 ? ($doneMilestones / $totalMilestones) * 100 : 0;
 
         $productionCost = $project->productionCost()->orderBy('created_at', 'desc')->get();
 
-        // dd($milestones, $projectData, $productionCost, $percentageDone, $percentageOnProgress, $percentagePlanning, $totalMilestones);
-        return view('projects.detailProjects', compact('milestones', 'projectData', 'productionCost', 'percentageDone'));
+        return view('projects.detailProjects', compact('milestones', 'projectData', 'productionCost', 'percentageDone', 'realCost'));
     }
+
 
 
 
