@@ -543,17 +543,23 @@
                                                 </th>
                                             </tr>
                                             <tr>
+                                                <th scope="row">
+                                                    <p class="title-text">Expense Budget</p>
+                                                    <p class="details-text rupiah">{{ $projectData['expense_budget'] }}
+                                                    </p>
+                                                </th>
+                                            </tr>
+                                            <tr>
                                                 <td scope="row"
                                                     class="{{ $realCost > $projectData->expense_budget ? 'text-danger' : 'text-success' }} rupiah">
                                                     <p class="title-text">Real Cost</p>
-                                                    <div
-                                                        style="display: flex; flex-direction: column; justify-items: start;">
-                                                        <p class="details-text rupiah"
-                                                            style="display: inline; font-weight: bold;">
+                                                    <div style="display: flex; align-items: start;">
+                                                        <p class="rupiah" style="font-weight: bold;">
                                                             {{ $realCost }}</p>
                                                         @if ($realCost > $projectData->expense_budget)
-                                                            <p class="details-text text-danger">
-                                                                +<span
+                                                            <p class="text-light"
+                                                                style="font-size: 10px; border-radius: 10px; margin-left: 5px; padding:2px 4px; background-color: red;">
+                                                                + <span
                                                                     class="rupiah">{{ $realCost - $projectData->expense_budget }}</span>
                                                             </p>
                                                         @endif
