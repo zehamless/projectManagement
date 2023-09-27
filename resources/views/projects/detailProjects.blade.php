@@ -442,15 +442,17 @@
                                 </div>
                                 <div class="col-4 text-end">
                                     <div class="btn-group btn-group-sm" style="float: none;">
-                                        <button title="edit data" type="button"
-                                            class="tabledit-edit-button btn btn-primary waves-effect waves-light"
-                                            style="background-color: #3E8BFF;">
-                                            <span class="mdi mdi-pencil"></span>
-                                        </button>
+                                        <a href="{{ route('projects.createProjects') }}">
+                                            <button title="edit data" type="button"
+                                                class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                                style="background-color: #3E8BFF; padding: 0.28rem 0.8rem;">
+                                                <span class="mdi mdi-pencil"></span>
+                                            </button>
+                                        </a>
                                     </div>
                                     <div class="btn-group btn-group-sm" style="float: none;">
                                         <button title="hapus data" type="button"
-                                            class="tabledit-edit-button btn btn-danger">
+                                            class="tabledit-edit-button btn btn-danger" onclick="deleteProject()">
                                             <span class="mdi mdi-trash-can-outline"></span>
                                         </button>
                                     </div>
@@ -639,5 +641,24 @@
                 },
             },
         });
+</script>
+
+<script type="text/javascript">
+    function deleteProject() {
+        // Display a confirmation dialog
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You will not be able to recover this user!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#f34e4e',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Silahkan isi logika nya sendiri xixixi
+            }
+        });
+    }
 </script>
 @endsection
