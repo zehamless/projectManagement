@@ -32,7 +32,7 @@ class CustomerController extends Controller
     public function create()
     {
         $path = request()->path();
-        return view('customer.createCustomer', compact('path'));
+        return view('customer.create', compact('path'));
     }
 
     // Menyimpan data baru ke database
@@ -40,17 +40,26 @@ class CustomerController extends Controller
     {
         // Validasi input data
         $request->validate([
-            'companyName' => 'required',
+            'companyName' => 'required|string|max:255',
         ]);
 
         // Membuat dan menyimpan data baru
-        $customer = new Customer();
-        $customer->companyName = $request->input('companyName');
-        $customer->save();
+        //$customer = new Customer();
+       // $customer->companyName = $request->input('companyName');
+       // $customer->save();
+       try {
+        $customer = Customer::create([
+            'companyName' => $request->input('companyName'),
+        ]);
 
-        return redirect()->route('customer.index')
-            ->with('success', 'Data customer berhasil ditambahkan.');
-    }
+        return redirect()->route('customer.index')->with('success', 'Data customer berhasil ditambahkan.');
+        } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
+        }
+
+       // return redirect()->route('customer.index')
+        //    ->with('success', 'Data customer berhasil ditambahkan.');}
 
     // Menampilkan detail data
     public function show(Customer $customer)
@@ -68,7 +77,7 @@ class CustomerController extends Controller
     public function update(Request $request, Customer $customer)
     {
         $request->validate([
-            'company' => 'required',
+            'companyName' => 'required',
         ]);
 
         $customer->update($request->all());

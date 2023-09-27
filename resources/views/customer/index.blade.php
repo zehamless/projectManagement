@@ -163,6 +163,7 @@
                                                                         <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
                                                                         <button type="button" class="btn btn-editAccount waves-effect waves-light">Save
                                                                             changes</button>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
