@@ -91,6 +91,8 @@
                     </div>
                     <div class="modal-body">
                         <div class="row">
+
+                            {{-- form generate read only project name --}}
                             <div class="mb-3">
                                 <label for="userName" class="form-label">Projects<span
                                         class="text-danger">*</span></label>
@@ -98,12 +100,16 @@
                                 <input type="text" name="label" parsley-trigger="change" required
                                     class="form-control" readonly value="">
                             </div>
+
+                            {{-- form input description --}}
                             <div class="mb-3">
                                 <label for="description" class="form-label">Description<span
                                         class="text-danger">*</span></label>
                                 <textarea type="text" name="description" parsley-trigger="change" required
                                     placeholder="Enter description" class="form-control"> </textarea>
                             </div>
+
+                            {{-- form input amount --}}
                             <div class="mb-3">
                                 <label for="amount" class="form-label">Amount<span
                                         class="text-danger">*</span></label>

@@ -38,8 +38,7 @@
 
             <div class="row">
                 <div class="col-sm-7">
-                    <a href="{{ url('customer/create') }}"
-                        class="btn btn-create w-md waves-effect waves-light mb-3 px-4"><i class="mdi mdi-plus"></i> Add
+                    <a href="{{ url('customer/create') }}" class="btn btn-create w-md waves-effect waves-light mb-3 px-4"><i class="mdi mdi-plus"></i> Add
                         Customer</a>
                 </div>
                 <div class="col-sm-5">
@@ -64,10 +63,11 @@
                                                 </select> entries</label></div>
                                     </div>
                                     <div id="datatable_filter" class="dataTables_filter">
-                                    <form class="app-search" action="{{ route('customer.index') }}">
-                                        <label>Search:
-                                            <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="datatable" name="search" value="{{ request('search') }}">
-                                        </label>
+                                        <form class="app-search" action="{{ route('customer.index') }}">
+                                            <label>Search:
+                                                <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="datatable" name="search" value="{{ request('search') }}">
+                                            </label>
+                                        </form>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -86,21 +86,25 @@
 
 
                                             <tbody>
-                                            @foreach($customer as $name)
+                                                @foreach($customer as $name)
                                                 <tr class="odd">
                                                     <td class="dtr-control sorting_1" tabindex="0">1</td>
                                                     <td>{{$name['companyName']}}</td>
                                                     <td class="text-center">
                                                         {{-- button --}}
                                                         <div class="btn-group btn-group-sm" style="float: none;">
-                                                            <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light " style="background-color: #3E8BFF;" data-bs-toggle="modal" data-bs-target="#con-close-modal">
+                                                            <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light" style="background-color: #3E8BFF;" data-bs-toggle="modal" data-bs-target="#con-close-modal">
                                                                 <span class="mdi mdi-pencil"></span>
                                                             </button>
                                                         </div>
                                                         <div class="btn-group btn-group-sm" style="float: none;">
-                                                            <button type="button" class="tabledit-edit-button btn btn-danger" id="sa-warning">
-                                                                <span class="mdi mdi-trash-can-outline"></span>
-                                                            </button>
+                                                            <form action="{{ route('customer.destroy', $name->id) }}" method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="tabledit-edit-button btn btn-danger" id="sa-warning">
+                                                                    <span class="mdi mdi-trash-can-outline"></span>
+                                                                </button>
+                                                            </form>
                                                         </div>
 
                                                         {{-- modals --}}

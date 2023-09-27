@@ -36,7 +36,8 @@ class UserController extends Controller
                 })
                 ->toJson();
         }
-        return view('admin.olahAkun');
+        $users = User::with('hasroles')->get();
+        return view('admin.olahAkun', compact('users'));
     }
 
     /**
@@ -67,7 +68,7 @@ class UserController extends Controller
         $filepath = null;
         if ($request->hasFile('signature')) {
             $file = $request->file('signature');
-            $filepath = $file->store('public/signatures');
+            $filepath = $file->store('signatures', 'public');
         }
 
         $user = User::create([

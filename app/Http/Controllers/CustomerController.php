@@ -78,11 +78,11 @@ class CustomerController extends Controller
     }
 
     // Menghapus data dari database
-    public function delete(Customer $customer)
+    public function destroy($id)
     {
-        $customer->delete();
+    $customer = Customer::findOrFail($id);
+    $customer->delete();
 
-        return redirect()->route('customer.index')
-            ->with('success', 'Data customer berhasil dihapus.');
+    return redirect()->route('customer.index')->with('success', 'Customer berhasil dihapus.');
     }
 }

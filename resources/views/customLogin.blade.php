@@ -28,8 +28,8 @@
         .background-page {
 
             background-image: linear-gradient(rgba(81, 81, 81, 0.233),
-                rgba(255, 0, 0, 0.45)),
-            url('{{ asset('images/trafindo-workshop.png') }}');
+                    rgba(255, 0, 0, 0.45)),
+                url('{{ asset('images/trafindo-workshop.png') }}');
             background-size: cover;
         }
 
@@ -68,20 +68,20 @@
                                     class="logo-trafindo mx-auto" style="max-height: 60px;">
                             </div>
 
-                            <form action="{{ url('/') }}" class="parsley-examples">
+                            <form action="{{ route('login') }}" class="parsley-examples" method="POST">
                                 @csrf
                                 <div class="mb-3">
                                     <label for="emailaddress" class="form-label">Email address<span
-                                        class="text-danger">*</span></label>
-                                    <input class="form-control" type="email" id="emailaddress" required="" parsley-trigger="change"
-                                        placeholder="Enter your email">
+                                            class="text-danger">*</span></label>
+                                    <input class="form-control" type="email" name="email" id="emailaddress"
+                                        required="" parsley-trigger="change" placeholder="Enter your email">
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Password<span
-                                        class="text-danger">*</span></label>
-                                    <input class="form-control" type="password" required="" id="password" parsley-trigger="change"
-                                        placeholder="Enter your password">
+                                            class="text-danger">*</span></label>
+                                    <input class="form-control" type="password" required="" name="password"
+                                        id="password" parsley-trigger="change" placeholder="Enter your password">
                                 </div>
 
                                 <div class="mb-3 d-grid text-center">
