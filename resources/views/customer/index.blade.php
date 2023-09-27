@@ -38,7 +38,8 @@
 
             <div class="row">
                 <div class="col-sm-7">
-                    <a href="{{ url('customers/create') }}" class="btn btn-create w-md waves-effect waves-light mb-3 px-4"><i class="mdi mdi-plus"></i> Add
+                    <a href="{{ url('customer/create') }}"
+                        class="btn btn-create w-md waves-effect waves-light mb-3 px-4"><i class="mdi mdi-plus"></i> Add
                         Customer</a>
                 </div>
                 <div class="col-sm-5">

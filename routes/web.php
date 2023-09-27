@@ -2,10 +2,13 @@
 
 use App\Http\Controllers\CustomerContactController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\MilestoneController;
 use App\Http\Controllers\OperationalAgendaController;
 use App\Http\Controllers\OperationalController;
+use App\Http\Controllers\OperationalExpensesController;
+use App\Http\Controllers\ProductionCostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RoleController;
@@ -33,19 +36,17 @@ Route::group(['prefix' => 'projects'], function () {
     Route::get('/{id}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
     Route::put('/{id}', [ProjectController::class, 'update'])->name('projects.update');
     Route::delete('/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
+    Route::get('/createProductionCost/{id}', [ProductionCostController::class, 'create'])->name('production-cost.create');
+    Route::post('/production-cost', [ProductionCostController::class, 'store'])->name('production-cost.store');
 });
 
-Route::get('/', function () {
-    return view('dashboard');
-});
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
 
 
 Route::prefix('customer')->group(function () {
     Route::get('/', [CustomerController::class, 'index'])->name('customer.index');
 });
-Route::get('/formcustomer', function () {
-    return view('formcustomer');
-});
+
 Route::get('/staff', function () {
     return view('staff');
 });
@@ -127,7 +128,14 @@ Route::prefix('operational')->group(function () {
     Route::post('/approve/{operational}', [OperationalController::class, 'approve'])->name('operational.approve');
     Route::get('/getOperational/{salesOrder}', [OperationalController::class, 'getOperational'])->name('operational.get-operational');
     Route::get('/getTeam/{operational}', [OperationalController::class, 'getTeam'])->name('operational.get-team');
+    Route::prefix('expense')->group(function () {
+        Route::post('/store', [OperationalExpensesController::class, 'store'])->name('operational.expense.store');
+        Route::get('/{expense}/edit', [OperationalExpensesController::class, 'updateExpenseForm'])->name('operational.expense.update-form');
+        Route::patch('/{expense}', [OperationalExpensesController::class, 'update'])->name('operational.expense.update');
+        Route::delete('/{expense}', [OperationalExpensesController::class, 'delete'])->name('operational.expense.delete');
+    });
 });
+
 
 Route::prefix('operationalAgenda')->group(function () {
     Route::get('/', [OperationalAgendaController::class, 'index'])->name('operational_agenda.index');
@@ -153,9 +161,6 @@ Route::get('/projects/createMilestone', function () {
     return view('projects.createMilestone');
 });
 
-Route::get('/projects/createProductionCost', function () {
-    return view('projects.createProductionCost');
-});
 
 Route::get('/projects/createOperational', function () {
     return view('projects.createOperational');

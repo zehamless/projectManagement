@@ -31,7 +31,8 @@ class CustomerController extends Controller
     // Menampilkan formulir untuk membuat data baru
     public function create()
     {
-        return view('customer.createCustomer');
+        $path = request()->path();
+        return view('customer.createCustomer', compact('path'));
     }
 
     // Menyimpan data baru ke database

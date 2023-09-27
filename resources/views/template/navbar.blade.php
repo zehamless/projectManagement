@@ -60,28 +60,28 @@
 
                 <li class="menu-title mt-2">Apps</li>
 
-                <li>
+                <li class="{{ Request::is('projects/*') || Request::is('milestone/*') ? 'menuitem-active' : ''}}">
                     <a href="{{ url('projects') }}">
                         <i class="mdi mdi-briefcase-variant-outline"></i>
                         <span> Projects </span>
                     </a>
                 </li>
 
-                <li>
+                <li class="{{ Request::is('operational/*') ? 'menuitem-active' : ''}}">
                     <a href="{{ url('operational') }}">
                         <i class="mdi mdi-book-clock-outline"></i>
                         <span> Operational </span>
                     </a>
                 </li>
 
-                <li>
+                <li class="{{ Request::is('calendar/*') ? 'menuitem-active' : ''}}">
                     <a href="apps-calendar.html">
                         <i class="mdi mdi-calendar-blank-outline"></i>
                         <span> Calendar </span>
                     </a>
                 </li>
 
-                <li>
+                <li class="{{ Request::is('customer/*') ? 'menuitem-active' : ''}}">
                     <a href="{{ url('customer') }}">
                         <i class="mdi mdi-account-supervisor-outline"></i>
                         <span> Customers </span>
@@ -90,7 +90,7 @@
 
                 <li class="menu-title mt-2">Account Management</li>
 
-                <li>
+                <li class="{{ Request::is('admin/*') ? 'menuitem-active' : ''}}">
                     <a href="{{ url('admin/users') }}">
                         <i class="mdi mdi-account-group-outline"></i>
                         <span> Data Akun </span>
@@ -99,6 +99,23 @@
             </ul>
         </div>
 
+        <div class="profile-section user-box text-start">
+            <div class="row px-3">
+                <div class="col-3 profile-photo-column">
+                    <img src="https://d34u8crftukxnk.cloudfront.net/slackpress/prod/sites/6/E12KS1G65-W0168RE00G7-133faf432639-512.jpeg" alt="user-img" title="Mat Helme"
+                        class="rounded img-thumbnail avatar-md">
+                </div>
+                <div class="col-7">
+                    <h5 class="mb-1">Garcia Patel</h5>
+                    <p class="text-muted left-user-info mb-0">Admin</p>
+                </div>
+                <div class="col-2 my-auto">
+                    <a href="{{ url('login') }}">
+                        <i class="fe-log-out logout-font" title="Logout System"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
 
         <div class="clearfix"></div>
 

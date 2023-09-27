@@ -30,7 +30,7 @@
                                     <input type="text" class="form-control" id="customerContacts" aria-describedby="customerContactsHelp">
                                 </div>
                                 <div class="text-end">
-                                    <a href="{{ url('customers') }}">
+                                    <a href="{{ url('customer') }}">
                                         <button type="button" class="btn btn-secondary waves-effect" onclick="">Cancel</button>
                                     </a>
                                     <button class="btn btn-save waves-effect waves-light px-4" type="submit" onclick="saveConfirmation()" id="submitButton">Save</button>
