@@ -179,14 +179,15 @@
                                             <td class="rupiah">{{ $cost['amount'] }}</td>
                                             <td class="text-center">
                                                 <div class="btn-group btn-group-sm" style="float: none;">
-                                                    <button title="Untuk mengedit production cost" type="button"
+                                                    <button title="Edit Production Cost" type="button"
+                                                        data-bs-toggle="modal" data-bs-target="#edit-cost-modal"
                                                         class="tabledit-edit-button btn btn-primary waves-effect waves-light"
                                                         style="background-color: #3E8BFF;">
                                                         <span class="mdi mdi-pencil"></span>
                                                     </button>
                                                 </div>
                                                 <div class="btn-group btn-group-sm" style="float: none;">
-                                                    <button title="Untuk menghapus operational cost" type="button"
+                                                    <button title="Hapus Operational Cost" type="button"
                                                         class="tabledit-edit-button btn btn-danger">
                                                         <span class="mdi mdi-trash-can-outline"></span>
                                                     </button>
