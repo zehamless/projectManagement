@@ -509,11 +509,22 @@
                                                 </th>
                                             </tr>
                                             <tr>
-                                                <th scope="row">
+                                                <td scope="row"
+                                                    class="{{ $realCost > $projectData->expense_budget ? 'text-danger' : 'text-success' }} rupiah">
                                                     <p class="title-text">Real Cost</p>
-                                                    <p class="details-text rupiah">{{ $projectData['expense_budget'] }}
-                                                    </p>
-                                                </th>
+                                                    <div
+                                                        style="display: flex; flex-direction: column; justify-items: start;">
+                                                        <p class="details-text rupiah"
+                                                            style="display: inline; font-weight: bold;">
+                                                            {{ $realCost }}</p>
+                                                        @if ($realCost > $projectData->expense_budget)
+                                                            <p class="details-text text-danger">
+                                                                +<span
+                                                                    class="rupiah">{{ $realCost - $projectData->expense_budget }}</span>
+                                                            </p>
+                                                        @endif
+                                                    </div>
+                                                </td>
                                             </tr>
 
                                         </tbody>
