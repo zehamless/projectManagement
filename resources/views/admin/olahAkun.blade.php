@@ -220,14 +220,19 @@
 
     <!-- Include Select2 JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <!-- Required datatable js -->
+    <link href="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-1.13.6/r-2.5.0/sc-2.2.0/sp-2.2.0/sl-1.7.0/datatables.min.css" rel="stylesheet">
 
+    <script src="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-1.13.6/r-2.5.0/sc-2.2.0/sp-2.2.0/sl-1.7.0/datatables.min.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function() {
             var table = $('#datatable').DataTable({
                 processing: true,
-                responsive: true,
+                responsive: false,
                 serverSide: true,
+                scrollX: true,
+                dom: 'Bfrtip',
                 ajax: "{{ route('users.index') }}",
                 columns: [
                     //add dt row
@@ -264,7 +269,8 @@
                         searchable: false,
                         render: function(data, type, full, meta) {
                             // Concatenate the image URL with the asset function
-                            return '<a class="view" href="{{ asset('images/logo_trafindo_only.png') }}" ><img src="{{ asset('images/logo_trafindo_only.png') }}" alt="Signature" width="100" height="auto"></a>';
+                            return '<a class="view" href="' + '{{ asset("storage/") }}' + '/' + data + '"><img src="' + '{{ asset("storage/") }}' + '/' + data + '" alt="Signature" id= "view" width="100" height="auto"></a>';
+
                         }
                     },
                     {
@@ -490,9 +496,9 @@
     <script>
         $(document).ready(function() {
 
-            $('.view').magnificPopup({
+            $('#view').magnificPopup({
                 type: 'image',
-                closeOnContentClick: ture,
+                closeOnContentClick: true,
                 mainClass: 'mfp-img-mobile',
                 image: {
                     verticalFit: true
