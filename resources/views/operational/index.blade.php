@@ -650,6 +650,7 @@
     function detailOperational(operational) {
             if (operational !== "" && operational != null) {
                 console.log(operational);
+                var id = operational
 
                 $.ajax({
                     url: "{{ route('operational.show', '') }}" + "/" + operational,
@@ -658,30 +659,29 @@
                         console.log(data);
 
                         // Get the first operational in the array.
-                        const operational = data[0];
+                        const operationalData = data[0];
 
                         // Get the project label.
-                        const projectLabel = operational.project.label;
-
-                        $('#spk_number').text(operational.spk_number);
-                        $('#date').text(operational.date);
-                        $('#label').text(projectLabel);
-                        $('#type').text(operational.type);
-                        $('#file').text(operational.file);
-                        $('#description').text(operational.description);
-                        $('#transport').text(operational.transportation_mode);
-                        $('#vehicle').text(operational.vehicle_number);
-                        $('#created').text(operational.created_by);
-                        if (operational.approved == null) {
+                        const projectLabel = operationalData.project.label;
+                        $('#spk_number').text(operationalData.spk_number);
+                        $('#date').text(operationalData.date);
+                        $('#label').text(operationalData);
+                        $('#type').text(operationalData.type);
+                        $('#file').text(operationalData.file);
+                        $('#description').text(operationalData.description);
+                        $('#transport').text(operationalData.transportation_mode);
+                        $('#vehicle').text(operationalData.vehicle_number);
+                        $('#created').text(operationalData.created_by);
+                        if (operationalData.approved == null) {
                             $('#approved').text('Belum di Approve');
                             //text become red button
                             $('#approved').addClass('btn btn-danger disabled');
                         } else {
-                            $('#approved').text(operational.approved);
+                            $('#approved').text(operationalData.approved);
                         }
                         var i = 1;
                         //check if team is empty
-                        if (operational.team.length == 0) {
+                        if (operationalData.team.length == 0) {
                             $('#table-technician tbody').append(`
                             <tr>
                                 <td colspan="3" align="center">Belum ada Technician</td>
@@ -691,7 +691,7 @@
                             //empty table
                             $('#table-technician tbody').empty();
                             //looping team
-                            for (const member of operational.team) {
+                            for (const member of operationalData.team) {
                                 console.log(member.first_name);
                                 $('#table-technician tbody').append(`
                             <tr>
@@ -703,6 +703,7 @@
                                         <button id="delete-button"
                                             title="Hapus Operational Expenses"
                                             type="button"
+                                            onclick="deleteTeam('${operationalData.id}', '${member.id}')"
                                             class="tabledit-edit-button btn btn-danger">
                                             <span
                                                 class="mdi mdi-trash-can-outline"></span>
@@ -722,6 +723,41 @@
             }
         }
 
+</script>
+<script type="text/javascript">
+    function deleteTeam(operational, user_id)
+    {
+        // console.log(operational, user_id)
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You will not be able to recover this action!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#f34e4e',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Send an AJAX request to delete the user
+                $.ajax({
+                    url: "{{ route('operational.detach-team', '') }}" + '/' + operational,
+                    type: 'PATCH',
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        user_id: user_id,
+                    },
+                    success: function() {
+                        // Reload the page
+                        detailOperational(operational)
+                    },
+                    error: function(xhr, textStatus, errorThrown) {
+                        console.error(xhr.responseText);
+                        // Handle errors here if needed.
+                    }
+                });
+            }
+        });
+    }
 </script>
 
 <script>

@@ -134,6 +134,7 @@ Route::prefix('operational')->group(function () {
         Route::patch('/{expense}', [OperationalExpensesController::class, 'update'])->name('operational.expense.update');
         Route::delete('/{expense}', [OperationalExpensesController::class, 'delete'])->name('operational.expense.delete');
     });
+    Route::patch('/technician/{operational}', [OperationalController::class, 'detachTeam'])->name('operational.detach-team');
 });
 
 
