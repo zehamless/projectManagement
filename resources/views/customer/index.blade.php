@@ -38,8 +38,7 @@
 
             <div class="row">
                 <div class="col-sm-7">
-                    <a href="{{ url('customer/create') }}"
-                        class="btn btn-create w-md waves-effect waves-light mb-3 px-4"><i class="mdi mdi-plus"></i> Add
+                    <a href="{{ url('customer/create') }}" class="btn btn-create w-md waves-effect waves-light mb-3 px-4"><i class="mdi mdi-plus"></i> Add
                         Customer</a>
                 </div>
                 <div class="col-sm-5">
@@ -68,6 +67,7 @@
                                             <label>Search:
                                                 <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="datatable" name="search" value="{{ request('search') }}">
                                             </label>
+                                        </form>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -93,7 +93,7 @@
                                                     <td class="text-center">
                                                         {{-- button --}}
                                                         <div class="btn-group btn-group-sm" style="float: none;">
-                                                            <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light " style="background-color: #3E8BFF;" data-bs-toggle="modal" data-bs-target="#con-close-modal">
+                                                            <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light" style="background-color: #3E8BFF;" data-bs-toggle="modal" data-bs-target="#con-close-modal">
                                                                 <span class="mdi mdi-pencil"></span>
                                                             </button>
                                                         </div>
@@ -101,9 +101,10 @@
                                                             <form action="{{ route('customer.destroy', $name->id) }}" method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
-                                                                <button type="button" class="tabledit-edit-button btn btn-danger" id="sa-warning">
+                                                                <button type="submit" class="tabledit-edit-button btn btn-danger" id="sa-warning">
                                                                     <span class="mdi mdi-trash-can-outline"></span>
                                                                 </button>
+                                                            </form>
                                                         </div>
 
                                                         {{-- modals --}}
