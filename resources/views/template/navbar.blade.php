@@ -102,7 +102,7 @@
         <div class="profile-section user-box text-start">
             <div class="row px-3">
                 <div class="col-3 profile-photo-column">
-                    <img src="https://d34u8crftukxnk.cloudfront.net/slackpress/prod/sites/6/E12KS1G65-W0168RE00G7-133faf432639-512.jpeg" alt="user-img" title="Mat Helme"
+                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="user-img" title="Mat Helme"
                         class="rounded img-thumbnail avatar-md">
                 </div>
                 <div class="col-7">
