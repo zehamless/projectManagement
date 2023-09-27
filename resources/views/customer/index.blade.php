@@ -38,8 +38,7 @@
 
             <div class="row">
                 <div class="col-sm-7">
-                    <a href="{{ url('customers/create') }}"
-                        class="btn btn-create w-md waves-effect waves-light mb-3 px-4"><i class="mdi mdi-plus"></i> Add
+                    <a href="{{ url('customers/create') }}" class="btn btn-create w-md waves-effect waves-light mb-3 px-4"><i class="mdi mdi-plus"></i> Add
                         Customer</a>
                 </div>
                 <div class="col-sm-5">
@@ -64,10 +63,10 @@
                                                 </select> entries</label></div>
                                     </div>
                                     <div id="datatable_filter" class="dataTables_filter">
-                                    <form class="app-search" action="{{ route('customer.index') }}">
-                                        <label>Search:
-                                            <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="datatable" name="search" value="{{ request('search') }}">
-                                        </label>
+                                        <form class="app-search" action="{{ route('customer.index') }}">
+                                            <label>Search:
+                                                <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="datatable" name="search" value="{{ request('search') }}">
+                                            </label>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -86,7 +85,7 @@
 
 
                                             <tbody>
-                                            @foreach($customer as $name)
+                                                @foreach($customer as $name)
                                                 <tr class="odd">
                                                     <td class="dtr-control sorting_1" tabindex="0">1</td>
                                                     <td>{{$name['companyName']}}</td>
@@ -98,9 +97,12 @@
                                                             </button>
                                                         </div>
                                                         <div class="btn-group btn-group-sm" style="float: none;">
-                                                            <button type="button" class="tabledit-edit-button btn btn-danger" id="sa-warning">
-                                                                <span class="mdi mdi-trash-can-outline"></span>
-                                                            </button>
+                                                            <form action="{{ route('customer.destroy', $name->id) }}" method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="button" class="tabledit-edit-button btn btn-danger" id="sa-warning">
+                                                                    <span class="mdi mdi-trash-can-outline"></span>
+                                                                </button>
                                                         </div>
 
                                                         {{-- modals --}}
