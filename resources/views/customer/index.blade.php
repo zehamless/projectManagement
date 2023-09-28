@@ -24,13 +24,6 @@
     .form-label {
         text-align: start !important;
     }
-
-    .btn-addItems {
-            border-radius: 10px;
-            background-color: #FF3E3E;
-            border: #FF3E3E;
-            color: white;
-        }
 </style>
 
 

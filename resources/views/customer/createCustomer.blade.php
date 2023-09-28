@@ -12,8 +12,8 @@
                     <!-- end row -->
                 </div> <!-- container-fluid -->
             </div>
-            @foreach ($customer as $name)
-            <td>{{$name['companyName']}}</td>
+            {{-- @foreach ($customer as $name) --}}
+            {{-- <td>{{$name['companyName']}}</td> --}}
             <div class="row mt-1">
                 <div class="col">
                     <div class="card">
@@ -25,13 +25,13 @@
                                     <input type="text" class="form-control" id="companyName" aria-describedby="companyNameHelp">
                                 </div>
                                 <div class="text-end">
-                                    <a href="{{ route('customer.create') }}">
+                                    <a href="{{ url('customer') }}">
                                         <button type="button" class="btn btn-secondary waves-effect">Cancel</button>
                                     </a>
                                     <button class="btn btn-save waves-effect waves-light px-4" type="submit" id="submitButton">Save</button>
                                 </div>
                             </form>
-                            @endforeach
+                            {{-- @endforeach --}}
                         </div>
                     </div>
 
