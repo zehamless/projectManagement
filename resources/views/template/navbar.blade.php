@@ -81,7 +81,7 @@
                     </a>
                 </li>
 
-                <li class="{{ Request::is('customer/*') ? 'menuitem-active' : ''}}">
+                <li class="{{ Request::is('customer/*') || Request::is('customerContact/*') ? 'menuitem-active' : ''}}">
                     <a href="{{ url('customer') }}">
                         <i class="mdi mdi-account-supervisor-outline"></i>
                         <span> Customers </span>

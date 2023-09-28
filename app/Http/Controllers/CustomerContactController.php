@@ -15,7 +15,7 @@ class CustomerContactController extends Controller
 
     public function create()
     {
-        return view('customer_contacts.create');
+        return view('customer.createCustomerContact');
     }
 
     public function store(Request $request)
@@ -28,7 +28,7 @@ class CustomerContactController extends Controller
 
         CustomerContact::create($request->all());
 
-        return redirect()->route('customer_contacts.index')
+        return redirect()->route('customer.index')
             ->with('success', 'Customer contact created successfully.');
     }
 

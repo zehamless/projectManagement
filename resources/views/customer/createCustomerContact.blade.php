@@ -13,44 +13,27 @@
                                 <form action="" method="post" enctype="multipart/form-data"
                                     class="parsley-examples" novalidate="">
                                     @csrf
-                                    <input type="hidden" name="project_id" value="">
+                                    <input type="hidden" name="" value="">
                                     <div class="mb-3">
-                                        <label for="submitted_date" class="form-label">Submitted Date<span
+                                        <label for="companyName" class="form-label">Company<span
                                                 class="text-danger">*</span></label>
-                                        <input type="date" name="submitted_date" parsley-trigger="change" required=""
-                                            placeholder="Masukkan tanggal" class="form-control datepicker"
-                                            id="submitted_date">
+                                        <input type="text" name="name" parsley-trigger="change" required=""
+                                            placeholder="Company Name Generated dari parent id" class="form-control" id="userName">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="userName" class="form-label">Description<span
+                                        <label for="name" class="form-label">Name<span
                                                 class="text-danger">*</span></label>
-                                        <input type="text" name="description" parsley-trigger="change" required=""
-                                            placeholder="Tambahkan deskripsi" class="form-control" id="userName">
+                                        <input type="text" name="name" parsley-trigger="change" required=""
+                                            placeholder="Enter Name" class="form-control" id="userName">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="userName" class="form-label">Due Date<span
+                                        <label for="companyName" class="form-label">Phone<span
                                                 class="text-danger">*</span></label>
-                                        <input type="date" name="due_date" parsley-trigger="change" required=""
-                                            placeholder="Masukkan tanggal" class="form-control datepicker" id="userName">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="progress" class="form-label">Progress<span
-                                                class="text-danger">*</span></label>
-                                        <select class="form-control" id="progress" name="progress">
-                                            <option value="Planned">Planned</option>
-                                            <option value="On Progress">On Progress</option>
-                                            <option value="Done">Done</option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="userName" class="form-label">File Attachment<span
-                                                class="text-danger">*</span></label>
-                                        <input type="file" name="file" parsley-trigger="change" required=""
-                                            data-plugins="dropify" data-height="150" class="form-control"
-                                            id="fileAttachment">
+                                        <input type="text" name="name" parsley-trigger="change" required=""
+                                            placeholder="Enter Phone Number" class="form-control" id="userName">
                                     </div>
                                     <div class="text-end">
-                                        <a href="{{ url('projects') }}">
+                                        <a href="{{ url('customer/show') }}">
                                             <button type="button" class="btn btn-secondary waves-effect">Cancel</button>
                                         </a>
                                         <button class="btn btn-save waves-effect waves-light px-4" type="submit"

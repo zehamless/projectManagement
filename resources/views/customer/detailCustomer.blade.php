@@ -18,8 +18,8 @@
                                     <h4 class="mt-0 header-title">Customer Contacts</h4>
                                 </div>
                                 <div class="col-sm-4 text-end">
-                                    <a href="" class="btn btn-addItems w-md waves-effect waves-light mb-3"><i
-                                            class="mdi mdi-plus" title="Menambahkan milestone"></i>Add Customer
+                                    <a href="{{ url('customerContact/create') }}" class="btn btn-addItems w-md waves-effect waves-light mb-3"><i
+                                            class="mdi mdi-plus" title="Menambahkan Customer Contact"></i>Add Customer
                                         Contact</a>
                                 </div>
                             </div>
