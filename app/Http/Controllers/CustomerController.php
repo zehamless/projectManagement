@@ -31,8 +31,8 @@ class CustomerController extends Controller
     // Menampilkan formulir untuk membuat data baru
     public function create()
     {
-        $path = request()->path();
-        return view('customer.create', compact('path'));
+        
+        return view('customer.createCustomer', );
     }
 
     // Menyimpan data baru ke database
@@ -64,7 +64,7 @@ class CustomerController extends Controller
     // Menampilkan detail data
     public function show(Customer $customer)
     {
-        return view('customer.show', compact('customer'));
+        return view('customer.detailCustomer', compact('customer'));
     }
 
     // Menampilkan formulir untuk mengedit data

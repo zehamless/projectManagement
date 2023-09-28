@@ -21,19 +21,6 @@
             color: white;
         }
 
-        .table-title {
-            vertical-align: middle !important;
-        }
-
-        .details-text {
-            margin-bottom: unset;
-        }
-
-        .title-text {
-            margin-bottom: unset;
-            font-weight: 100;
-        }
-
         @media screen and (max-width: 768px) {
             .container-fluid {
                 flex-direction: column;
