@@ -326,7 +326,7 @@
                         url: "{{ route('users.delete', '') }}" + '/' + userId,
                         type: 'DELETE',
                         data: {
-                            _token: "{{ csrf_token() }}"
+                            _token: "{{ csrf_token() }}",
                         },
                     });
                     location.reload();

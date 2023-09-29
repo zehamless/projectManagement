@@ -57,8 +57,6 @@
     </form>
 
     {{-- modals operational expenses --}}
-    <form action="" class="parsley-examples" novalidate="" method="post" enctype="multipart/form-data">
-        @csrf
         <div id="add-expenses-modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
             style="overflow:hidden;">
             <div class="modal-dialog modal-dialog-centered">
@@ -75,26 +73,35 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="mb-3 text-start">
-                                    <label for="field-1" class="form-label">Project<span
+                                    <label for="field-1" class="form-label" id="operational-label">Operational<span
                                             class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="project_name"
+                                    <input type="text" class="form-control" id="expense-id" name="expense-id"
                                         placeholder="get value default dari parent project name" readonly>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="mb-3 text-start">
-                                    <label for="field-1" class="form-label">Description<span
+                                    <label for="field-1" class="form-label">Item<span
                                             class="text-danger">*</span>
                                     </label>
-                                    <input type="text" class="form-control" id="description"
-                                        placeholder="Description" parsley-trigger="change" required="">
+                                    <input type="text" class="form-control" id="expense-item" placeholder="Item" name="expense-item"
+                                        parsley-trigger="change" required="">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="mb-3 text-start">
+                                    <label for="field-1" class="form-label">Date<span
+                                            class="text-danger">*</span>
+                                    </label>
+                                    <input type="date" class="form-control" id="expense-date" placeholder="date" name="expense-date"
+                                           parsley-trigger="change" required="">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="mb-3 text-start">
                                     <label for="field-2 " class="form-label">Amount<span
                                             class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="amount" placeholder="Amount"
+                                    <input type="text" class="form-control" id="expense-amount" placeholder="Amount" name="expense-amount"
                                         parsley-trigger="change" required="">
                                 </div>
                             </div>
@@ -103,7 +110,7 @@
                             <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">
                                 Close
                             </button>
-                            <button type="submit" class="btn btn-save waves-effect waves-light">
+                            <button type="submit" class="btn btn-save waves-effect waves-light" id="expenseButton" onclick="updateExpense($(this).attr('data-id'))">
                                 Save
                                 changes
                             </button>
@@ -113,7 +120,6 @@
             </div>
             <!-- /.modal -->
         </div>
-    </form>
 
     {{-- modals material utilized --}}
     <form action="" class="parsley-examples" novalidate="" method="post" enctype="multipart/form-data">
@@ -236,5 +242,5 @@
             <!-- /.modal -->
         </div>
     </form>
-    
+
 </div>
