@@ -39,6 +39,8 @@ Route::group(['prefix' => 'projects'], function () {
     Route::get('/createProductionCost/{id}', [ProductionCostController::class, 'create'])->name('production-cost.create');
     Route::post('/production-cost', [ProductionCostController::class, 'store'])->name('production-cost.store');
 });
+// Milestone
+Route::get('/get-milestone-data', [MilestoneController::class, 'getMilestoneData'])->name("milestone.get");
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
 

@@ -44,8 +44,8 @@
     type="text/css" />
 <link href="{{ asset('templateAdmin/Admin/dist/assets/libs/select2/css/select2.min.css') }}" rel="stylesheet"
     type="text/css" />
-<link href="{{ asset('templateAdmin/Admin/dist/assets/libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet"
-    type="text/css" />
+<link href="{{ asset('templateAdmin/Admin/dist/assets/libs/selectize/css/selectize.bootstrap3.css') }}"
+    rel="stylesheet" type="text/css" />
 <!-- Plugins css -->
 <link href="{{ asset('templateAdmin/Admin/dist/assets/libs/mohithg-switchery/switchery.min.css') }}" rel="stylesheet"
     type="text/css" />
