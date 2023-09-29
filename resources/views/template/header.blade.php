@@ -40,12 +40,17 @@
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 {{-- select2 css --}}
-<link href="{{ asset('templateAdmin/Admin/dist/assets/libs/multiselect/css/multi-select.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('templateAdmin/Admin/dist/assets/libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('templateAdmin/Admin/dist/assets/libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('templateAdmin/Admin/dist/assets/libs/multiselect/css/multi-select.css') }}" rel="stylesheet"
+    type="text/css" />
+<link href="{{ asset('templateAdmin/Admin/dist/assets/libs/select2/css/select2.min.css') }}" rel="stylesheet"
+    type="text/css" />
+<link href="{{ asset('templateAdmin/Admin/dist/assets/libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet"
+    type="text/css" />
 <!-- Plugins css -->
-<link href="{{ asset('templateAdmin/Admin/dist/assets/libs/mohithg-switchery/switchery.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('templateAdmin/Admin/distassets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('templateAdmin/Admin/dist/assets/libs/mohithg-switchery/switchery.min.css') }}" rel="stylesheet"
+    type="text/css" />
+<link href="{{ asset('templateAdmin/Admin/distassets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css') }}"
+    rel="stylesheet" type="text/css" />
 {{--
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> --}}
 {{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
@@ -112,25 +117,25 @@
         color: white;
     }
 
-    .profile-photo-column{
+    .profile-photo-column {
         padding: unset;
     }
 
-    .rounded{
-        border-radius: 30% !important; 
+    .rounded {
+        border-radius: 30% !important;
     }
 
-    .profile-section{
+    .profile-section {
         bottom: 0;
     }
 
-    .logout-font{
+    .logout-font {
         font-size: 18px;
         font-weight: 100;
         color: red;
     }
 
-    .logout-font:hover{
+    .logout-font:hover {
         font-weight: 900;
     }
 
@@ -138,5 +143,25 @@
         position: absolute;
         bottom: 50px;
         width: 100%;
+    }
+
+    .btn-addItems {
+        border-radius: 10px;
+        background-color: #FF3E3E;
+        border: #FF3E3E;
+        color: white;
+    }
+
+    .table-title {
+        vertical-align: middle !important;
+    }
+
+    .details-text {
+        margin-bottom: unset;
+    }
+
+    .title-text {
+        margin-bottom: unset;
+        font-weight: 100;
     }
 </style>

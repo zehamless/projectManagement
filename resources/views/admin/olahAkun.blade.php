@@ -63,7 +63,7 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <table id="datatable"
-                                            class="table table-bordered dt-responsive table-hover table-responsive nowrap dataTable no-footer dtr-inline"
+                                            class="table table-striped dt-responsive table-hover table-responsive nowrap dataTable no-footer dtr-inline"
                                             aria-describedby="datatable_info">
                                             <thead>
                                                 <tr>
@@ -228,6 +228,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             var table = $('#datatable').DataTable({
+                autoWidth: false,
                 processing: true,
                 responsive: false,
                 serverSide: true,

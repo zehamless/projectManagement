@@ -1,7 +1,6 @@
 @extends('template.index')
 
 @section('content')
-
     <style>
         .nav-link {
             color: black;
@@ -53,6 +52,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <h4 class="header-title mb-2">Sales Order Number</h4>
+
                                         <select class="form-select" id="sales-order"
                                                 onchange="getOperationals(this.value)">
                                             <option selected value="">Pilih Sales Order Number</option>
@@ -282,7 +282,7 @@
                                                                                          style="float: none;">
                                                                                         <button type="button"
                                                                                                 data-bs-toggle="modal"
-                                                                                                data-bs-target="#add-work-modal"
+                                                                                                data-bs-target="#add-expenses-modal"
                                                                                                 title="Edit Operational Expenses"
                                                                                                 type="button"
                                                                                                 class="tabledit-edit-button btn btn-primary waves-effect waves-light"
@@ -559,11 +559,11 @@
                 $.ajax({
                     url: "{{ route('operational.get-operational', '') }}" + "/" + salesOrder,
                     type: "GET",
-                    success: function (data) {
+                    success: function(data) {
                         console.log(data);
                         $(`#select-operational`).empty();
                         $(`#select-operational`).append(`<option selected value="">Pilih Operational</option>`);
-                        $.each(data, function (key, value) {
+                        $.each(data, function(key, value) {
                             var option = new Option(value.spk_number, value.id, false, false);
                             $("#select-operational").append(option)
                         });
@@ -580,7 +580,7 @@
                 $.ajax({
                     url: "{{ route('operational.show', '') }}" + "/" + operational,
                     type: "GET",
-                    success: function (data) {
+                    success: function(data) {
                         console.log(data);
 
                         // Get the first operational in the array.
@@ -647,6 +647,7 @@
                 event.preventDefault();
             }
         }
+    </script>
 
     </script>
 
@@ -950,5 +951,4 @@
             })
         }
     </script>
-
 @endsection

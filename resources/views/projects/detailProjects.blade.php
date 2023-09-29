@@ -14,23 +14,11 @@
             margin-right: 0;
             float: right;
             margin-left: auto;
+            width: 150px;
         }
 
         .btn-createItems:focus {
             color: white;
-        }
-
-        .table-title {
-            vertical-align: middle !important;
-        }
-
-        .details-text {
-            margin-bottom: unset;
-        }
-
-        .title-text {
-            margin-bottom: unset;
-            font-weight: 100;
         }
 
         @media screen and (max-width: 768px) {
@@ -57,6 +45,8 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xl-8 tables-col">
+
+                        {{-- card table milestones --}}
                         <div class="card">
                             <div class="card-body">
                                 <div class="row table-title">
@@ -65,7 +55,7 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <a href="{{ route('milestone.create', ['id' => $projectData->id]) }}"
-                                            class="btn btn-createItems w-md waves-effect waves-light mb-3 px-4"><i
+                                            class="btn btn-createItems w-md waves-effect waves-light mb-3"><i
                                                 class="mdi mdi-plus" title="Menambahkan milestone"></i>Add Milestone</a>
                                     </div>
                                 </div>
@@ -79,7 +69,7 @@
                                                 <th>Description</th>
                                                 <th>Due Date</th>
                                                 <th class="text-center">Status</th>
-                                                <th class="text-center">Actions</th>
+                                                <th class="text-center" width="160">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -116,6 +106,9 @@
                                                             </div>
                                                             <div class="btn-group btn-group-sm" style="float: none;">
                                                                 <button title="Untuk mengedit milestone" type="button"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#edit-milestone-modal"
+                                                                    title="Edit Field Service Log"
                                                                     class="tabledit-edit-button btn btn-primary waves-effect waves-light"
                                                                     style="background-color: #3E8BFF;">
                                                                     <span class="mdi mdi-pencil"></span>
@@ -146,7 +139,7 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <a href="{{ url('projects/createProductionCost', ['id' => $projectData->id]) }}"
-                                            class="btn btn-createItems w-md waves-effect waves-light mb-3 px-4"><i
+                                            class="btn btn-createItems w-md waves-effect waves-light mb-3"><i
                                                 class="mdi mdi-plus"></i>Add Cost</a>
                                     </div>
                                 </div>
@@ -158,7 +151,7 @@
                                                 <th>#</th>
                                                 <th>Description</th>
                                                 <th>Amount</th>
-                                                <th class="text-center">Actions</th>
+                                                <th class="text-center" width="140">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -175,16 +168,15 @@
                                                         <td class="rupiah">{{ $cost['amount'] }}</td>
                                                         <td class="text-center">
                                                             <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <button title="Untuk mengedit production cost"
-                                                                    type="button"
+                                                                <button title="Edit Production Cost" type="button"
+                                                                    data-bs-toggle="modal" data-bs-target="#edit-cost-modal"
                                                                     class="tabledit-edit-button btn btn-primary waves-effect waves-light"
                                                                     style="background-color: #3E8BFF;">
                                                                     <span class="mdi mdi-pencil"></span>
                                                                 </button>
                                                             </div>
                                                             <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <button title="Untuk menghapus operational cost"
-                                                                    type="button"
+                                                                <button title="Hapus Operational Cost" type="button"
                                                                     class="tabledit-edit-button btn btn-danger">
                                                                     <span class="mdi mdi-trash-can-outline"></span>
                                                                 </button>
@@ -209,7 +201,7 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <a href="{{ url('projects/createOperational') }}"
-                                            class="btn btn-createItems w-md waves-effect waves-light mb-3 px-4"><i
+                                            class="btn btn-createItems w-md waves-effect waves-light mb-3"><i
                                                 class="mdi mdi-plus"></i>Add Operational</a>
                                     </div>
                                 </div>
@@ -223,7 +215,7 @@
                                                 <th>Project Label</th>
                                                 <th>Service Type</th>
                                                 <th>SPK Code</th>
-                                                <th class="text-center">Actions</th>
+                                                <th class="text-center" width="140">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -236,7 +228,9 @@
                                                 <td>SPK Code</td>
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-sm" style="float: none;">
-                                                        <button title="edit data" type="button"
+                                                        <button title="edit data" type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#edit-service-modal"
+                                                            title="Edit Field Service Log"
                                                             class="tabledit-edit-button btn btn-primary waves-effect waves-light"
                                                             style="background-color: #3E8BFF;">
                                                             <span class="mdi mdi-pencil"></span>
@@ -259,7 +253,9 @@
                                                 <td>SPK Code</td>
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-sm" style="float: none;">
-                                                        <button title="edit data" type="button"
+                                                        <button title="edit data" type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#add-service-modal"
+                                                            title="Edit Field Service Log"
                                                             class="tabledit-edit-button btn btn-primary waves-effect waves-light"
                                                             style="background-color: #3E8BFF;">
                                                             <span class="mdi mdi-pencil"></span>
@@ -282,7 +278,9 @@
                                                 <td>SPK Code</td>
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-sm" style="float: none;">
-                                                        <button title="edit data" type="button"
+                                                        <button title="edit data" type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#add-service-modal"
+                                                            title="Edit Field Service Log"
                                                             class="tabledit-edit-button btn btn-primary waves-effect waves-light"
                                                             style="background-color: #3E8BFF;">
                                                             <span class="mdi mdi-pencil"></span>
@@ -311,7 +309,7 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <a href="{{ url('projects/createPayment') }}"
-                                            class="btn btn-createItems w-md waves-effect waves-light mb-3 px-4"><i
+                                            class="btn btn-createItems w-md waves-effect waves-light mb-3"><i
                                                 class="mdi mdi-plus"></i>Add Payment</a>
                                     </div>
                                 </div>
@@ -324,7 +322,7 @@
                                                 <th>Amount</th>
                                                 <th>Status</th>
                                                 <th>Description</th>
-                                                <th class="text-center">Actions</th>
+                                                <th class="text-center" width="160">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -418,15 +416,38 @@
                             </div>
                         </div>
 
+                        @include('projects.listModals')
+
                     </div><!-- end col-->
 
                     <div class="col-xl-4 detailProjects-col">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="mt-0 header-title">{{ $projectData['label'] }}</h4>
-                                <p class="text-muted font-14 mb-3">
-                                    {{ $projectData['companyName'] }}
-                                </p>
+                                <div class="row">
+                                    <div class="col-8">
+                                        <h4 class="mt-0 header-title">{{ $projectData['label'] }}</h4>
+                                        <p class="text-muted font-14 mb-3">
+                                            {{ $projectData['companyName'] }}
+                                        </p>
+                                    </div>
+                                    <div class="col-4 text-end">
+                                        <div class="btn-group btn-group-sm" style="float: none;">
+                                            <a href="{{ route('projects.createProjects') }}">
+                                                <button title="edit data" type="button"
+                                                    class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                                    style="background-color: #3E8BFF; padding: 0.28rem 0.8rem;">
+                                                    <span class="mdi mdi-pencil"></span>
+                                                </button>
+                                            </a>
+                                        </div>
+                                        <div class="btn-group btn-group-sm" style="float: none;">
+                                            <button title="hapus data" type="button"
+                                                class="tabledit-edit-button btn btn-danger" onclick="deleteProject()">
+                                                <span class="mdi mdi-trash-can-outline"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="table-responsive">
                                     <table class="table mb-0">
                                         <thead>
@@ -510,10 +531,27 @@
                                             </tr>
                                             <tr>
                                                 <th scope="row">
-                                                    <p class="title-text">Real Cost</p>
+                                                    <p class="title-text">Expense Budget</p>
                                                     <p class="details-text rupiah">{{ $projectData['expense_budget'] }}
                                                     </p>
                                                 </th>
+                                            </tr>
+                                            <tr>
+                                                <td scope="row"
+                                                    class="{{ $realCost > $projectData->expense_budget ? 'text-danger' : 'text-success' }} rupiah">
+                                                    <p class="title-text">Real Cost</p>
+                                                    <div style="display: flex; align-items: start;">
+                                                        <p class="rupiah" style="font-weight: bold;">
+                                                            {{ $realCost }}</p>
+                                                        @if ($realCost > $projectData->expense_budget)
+                                                            <p class="text-light"
+                                                                style="font-size: 10px; border-radius: 10px; margin-left: 5px; padding:2px 4px; background-color: red;">
+                                                                + <span
+                                                                    class="rupiah">{{ $realCost - $projectData->expense_budget }}</span>
+                                                            </p>
+                                                        @endif
+                                                    </div>
+                                                </td>
                                             </tr>
 
                                         </tbody>
@@ -610,5 +648,24 @@
                 },
             },
         });
+    </script>
+
+    <script type="text/javascript">
+        function deleteProject() {
+            // Display a confirmation dialog
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You will not be able to recover this user!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#f34e4e',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Silahkan isi logika nya sendiri xixixi
+                }
+            });
+        }
     </script>
 @endsection
