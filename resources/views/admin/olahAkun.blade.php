@@ -232,7 +232,6 @@
                 responsive: false,
                 serverSide: true,
                 scrollX: true,
-                dom: 'Bfrtip',
                 ajax: "{{ route('users.index') }}",
                 columns: [
                     //add dt row
