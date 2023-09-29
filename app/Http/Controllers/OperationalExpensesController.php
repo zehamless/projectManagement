@@ -63,12 +63,14 @@ class OperationalExpensesController extends Controller
 
     /**
      * @param OperationalExpense $expense
-     * @return RedirectResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function delete(OperationalExpense $expense)
     {
         $expense->delete();
-        return redirect()->back()->with('success', 'Operational Expense deleted successfully');
+        return response()->json([
+            'success' => 'Operational Expense deleted successfully!'
+        ], 200);
     }
 
     public function show(Request $request,string $expense)

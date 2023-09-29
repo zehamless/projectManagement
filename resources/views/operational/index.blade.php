@@ -777,6 +777,7 @@
                             <button id="delete-button"
                             title="Hapus Operational Expenses"
                             type="button"
+                            onclick="deleteExpense('${data}')"
                             class="tabledit-edit-button btn btn-danger">
                             <span
                             class="mdi mdi-trash-can-outline"></span>
@@ -861,6 +862,42 @@
             })
         }
 
+    </script>
+    <script type="text/javascript">
+        function deleteExpense(expense)
+        {
+            swal.fire({
+                title: 'Are you sure?',
+                text: 'You will not be able to recover this action!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#f34e4e',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios({
+                        method: 'DELETE',
+                        url: "{{ route('operational.expense.delete', '') }}" + "/" + expense,
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                        },
+                    }).then(function (response)
+                    {
+                        console.log(response);
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        )
+                        $('#table-expenses').DataTable().ajax.reload();
+                    }).catch(function (error) {
+                        console.log(error);
+                        swal.fire("Error!", "Please try again", "error");
+                    })
+                }
+            })
+        }
     </script>
 
 @endsection
