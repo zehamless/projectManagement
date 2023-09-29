@@ -107,7 +107,7 @@
                                                             <div class="btn-group btn-group-sm" style="float: none;">
                                                                 <button title="Untuk mengedit milestone" type="button"
                                                                     data-bs-toggle="modal"
-                                                                    data-bs-target="#edit-milestone-modal"
+                                                                    data-bs-target="#edit-milestone-modal{{ $milestone['id'] }}"
                                                                     title="Edit Field Service Log"
                                                                     class="tabledit-edit-button btn btn-primary waves-effect waves-light"
                                                                     style="background-color: #3E8BFF;">
@@ -318,20 +318,18 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Payment Date</th>
-                                                <th>Amount</th>
-                                                <th>Status</th>
+                                                <th>Payment Type</th>
                                                 <th>Description</th>
+                                                <th class="text-center">Status</th>
                                                 <th class="text-center" width="160">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <th scope="row">1</th>
-                                                <td>Payment Date</td>
-                                                <td>Amount</td>
-                                                <td>Status</td>
-                                                <td>Description</td>
+                                                <td>DP</td>
+                                                <td>Tanda jadi pembayaran trafo</td>
+                                                <td class="text-center"><span class="badge bg-success">Done</span></td>
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-sm" style="float: none;">
                                                         <button title="unduh file" type="button"
@@ -356,10 +354,9 @@
                                             </tr>
                                             <tr>
                                                 <th scope="row">2</th>
-                                                <td>SPK Number</td>
-                                                <td>Service Date</td>
-                                                <td>Project Label</td>
-                                                <td>Service Type</td>
+                                                <td>Tahap 1</td>
+                                                <td>Bayar sisa pembayaran tahap 1</td>
+                                                <td class="text-center"><span class="badge bg-success">Done</span></td>
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-sm" style="float: none;">
                                                         <button title="unduh file" type="button"
@@ -384,10 +381,9 @@
                                             </tr>
                                             <tr>
                                                 <th scope="row">3</th>
-                                                <td>SPK Number</td>
-                                                <td>Service Date</td>
-                                                <td>Project Label</td>
-                                                <td>Service Type</td>
+                                                <td>Tahap 2 - Pelunasan</td>
+                                                <td>Melunasi sisa pembayaran</td>
+                                                <td class="text-center"><span class="badge bg-warning">Progress</span></td>
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-sm" style="float: none;">
                                                         <button title="untuk mengunduh file" type="button"
@@ -518,6 +514,12 @@
                                             </tr>
                                             <tr>
                                                 <th scope="row">
+                                                    <p class="title-text">Purchase Order Amount</p>
+                                                    <p class="details-text rupiah">{{ $projectData['po_amount'] }}</p>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">
                                                     <p class="title-text">Preliminary Cost</p>
                                                     <p class="details-text rupiah">{{ $projectData['preliminary_cost'] }}
                                                     </p>
@@ -525,13 +527,14 @@
                                             </tr>
                                             <tr>
                                                 <th scope="row">
-                                                    <p class="title-text">Purchase Order Amount</p>
-                                                    <p class="details-text rupiah">{{ $projectData['po_amount'] }}</p>
+                                                    <p class="title-text">Real Service Cost</p>
+                                                    {{-- Rumus : Real Service Cost = Budget Service - Service Cost --}}
+                                                    <p class="details-text rupiah"></p>
                                                 </th>
                                             </tr>
                                             <tr>
                                                 <th scope="row">
-                                                    <p class="title-text">Expense Budget</p>
+                                                    <p class="title-text">Production Cost</p>
                                                     <p class="details-text rupiah">{{ $projectData['expense_budget'] }}
                                                     </p>
                                                 </th>
@@ -539,7 +542,7 @@
                                             <tr>
                                                 <td scope="row"
                                                     class="{{ $realCost > $projectData->expense_budget ? 'text-danger' : 'text-success' }} rupiah">
-                                                    <p class="title-text">Real Cost</p>
+                                                    <p class="title-text">Real Production Cost</p>
                                                     <div style="display: flex; align-items: start;">
                                                         <p class="rupiah" style="font-weight: bold;">
                                                             {{ $realCost }}</p>
@@ -547,6 +550,7 @@
                                                             <p class="text-light"
                                                                 style="font-size: 10px; border-radius: 10px; margin-left: 5px; padding:2px 4px; background-color: red;">
                                                                 + <span
+                                                                    {{-- rumus = real production cost = prelim cost - production cost --}}
                                                                     class="rupiah">{{ $realCost - $projectData->expense_budget }}</span>
                                                             </p>
                                                         @endif
