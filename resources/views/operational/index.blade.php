@@ -797,8 +797,17 @@
     <!-- Repopulate Expense Modal -->
     <script type="text/javascript">
         function editExpense(expense) {
+
             console.log(expense);
+
             let modal = $('#add-expenses-modal');
+            const button = modal.find('#expenseButton');
+            button.innerHTML= 'Save Changes';
+            button.off('click');
+            button.click(function () {
+                updateExpense(expense);
+            });
+
             let operational = $('#select-operational').val();
             let operationalText = $('#select-operational option:selected').text();
             console.log(operational)
@@ -903,16 +912,27 @@
     </script>
     <script type="text/javascript">
         function showExpenseForm() {
-            const modal = document.getElementById('add-expenses-modal');
-            const button = modal.querySelector('#expenseButton');
+            const modal = $('#add-expenses-modal');
+            const button = modal.find('#expenseButton');
 
-            // Set the onclick attribute of the button element.
-            button.setAttribute('onclick', 'addExpense()');
+            // Unbind click event to prevent multiple bindings
+            button.off('click');
+
+            // Bind click event to the button
+            button.on('click', function () {
+                addExpense();
+            });
 
             // Change the inner HTML of the button element.
-            button.innerHTML = 'Add Expense';
+            button.text('Add Expense');
+
+            // Empty the form.
+            modal.find('#expense-date').val('');
+            modal.find('#expense-item').val('');
+            modal.find('#expense-amount').val('');
         }
     </script>
+
     <script type="text/javascript">
         function addExpense()
         {
