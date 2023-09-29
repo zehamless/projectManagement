@@ -42,6 +42,22 @@ class MilestoneController extends Controller
         return redirect()->route('projects.show', $validatedData['project_id'])->with('success', 'Milestone berhasil ditambahkan');
     }
 
+    // Kirim data json untuk edit milestone
+    public function getMilestoneData(Request $request)
+    {
+        $milestoneId = $request->input('id');
+
+        // Cari data milestone berdasarkan ID
+        $milestone = Milestone::find($milestoneId);
+
+        if (!$milestone) {
+            return response()->json(['error' => 'Milestone not found'], 404);
+        }
+
+        // Mengembalikan data milestone sebagai respons JSON
+        return response()->json($milestone);
+    }
+
 
 
 
