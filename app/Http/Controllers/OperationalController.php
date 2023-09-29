@@ -6,6 +6,7 @@ use App\Models\Operational;
 use App\Models\Project;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use PhpParser\Node\Scalar\String_;
 
 class OperationalController extends Controller
 {
@@ -119,6 +120,14 @@ class OperationalController extends Controller
     {
         $operationals = Operational::where('id', $operational->id)->with('team', 'project:id,label')->get();
         return response()->json($operationals);
+    }
+
+    public function detachTeam(Operational $operational, Request $request)
+    {
+        $operational->team()->detach($request->user_id);
+        return response()->json([
+            '200'
+        ]);
     }
 
 }
