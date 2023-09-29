@@ -5,17 +5,33 @@ namespace App\Http\Controllers;
 use App\Models\OperationalExpense;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class OperationalExpensesController extends Controller
 {
 
     /**
+     * @throws \Exception
+     */
+    public function index(Request $request, $operational)
+    {
+
+        if ($request->ajax()){
+            $expense = OperationalExpense::where('operational_id', $operational)->get();
+            return DataTables::of($expense)
+                ->addIndexColumn()
+                ->toJson();
+        }
+    }
+
+    /**
      * @param Request $request
-     * @return RedirectResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
         $request->validate([
+            'operational_id' => 'required',
             'date' => 'required',
             'item' => 'required',
             'amount' => 'required',
@@ -23,14 +39,15 @@ class OperationalExpensesController extends Controller
 
         OperationalExpense::create($request->all());
 
-        return redirect()->route('operational.index')
-            ->with('success', 'Operational Expense created successfully.');
+        return response()->json([
+            'success' => "Operational Expense added succescfully"
+        ], 200);
     }
 
     /**
      * @param Request $request
      * @param OperationalExpense $expense
-     * @return RedirectResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, OperationalExpense $expense)
     {
@@ -41,17 +58,27 @@ class OperationalExpensesController extends Controller
 
        $expense->update($request->all());
 
-        return redirect()->route('operational.index')
-            ->with('success', 'Operational Expense updated successfully');
+        return response()->json([
+            'success' => 'Operational Expense updated successfully!'
+        ], 200);
     }
 
     /**
      * @param OperationalExpense $expense
-     * @return RedirectResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function delete(OperationalExpense $expense)
     {
         $expense->delete();
-        return redirect()->back()->with('success', 'Operational Expense deleted successfully');
+        return response()->json([
+            'success' => 'Operational Expense deleted successfully!'
+        ], 200);
+    }
+
+    public function show(Request $request,string $expense)
+    {
+        $attrExpense = OperationalExpense::where('id', $expense)->get();
+
+        return response()->json($attrExpense);
     }
 }
