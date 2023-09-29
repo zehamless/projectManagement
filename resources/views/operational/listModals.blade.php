@@ -111,7 +111,7 @@
                             <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">
                                 Close
                             </button>
-                            <button type="submit" class="btn btn-save waves-effect waves-light" id="updateExpense" onclick="updateExpense($(this).attr('data-id'))">
+                            <button type="submit" class="btn btn-save waves-effect waves-light" id="expenseButton" onclick="updateExpense($(this).attr('data-id'))">
                                 Save
                                 changes
                             </button>

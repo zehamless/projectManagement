@@ -26,11 +26,12 @@ class OperationalExpensesController extends Controller
 
     /**
      * @param Request $request
-     * @return RedirectResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
         $request->validate([
+            'operational_id' => 'required',
             'date' => 'required',
             'item' => 'required',
             'amount' => 'required',
@@ -38,8 +39,9 @@ class OperationalExpensesController extends Controller
 
         OperationalExpense::create($request->all());
 
-        return redirect()->route('operational.index')
-            ->with('success', 'Operational Expense created successfully.');
+        return response()->json([
+            'success' => "Operational Expense added succescfully"
+        ], 200);
     }
 
     /**

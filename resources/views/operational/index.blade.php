@@ -326,6 +326,7 @@
                                                                                 <button type="button"
                                                                                         data-bs-toggle="modal"
                                                                                         data-bs-target="#add-expenses-modal"
+                                                                                        onclick="showExpenseForm()"
                                                                                         class="btn btn-save w-md waves-effect waves-light px-4 btn-addMaterial">
                                                                                     <i class="mdi mdi-plus"></i>Add
                                                                                     Expenses
@@ -896,6 +897,56 @@
                         swal.fire("Error!", "Please try again", "error");
                     })
                 }
+            })
+        }
+    </script>
+    <script type="text/javascript">
+        function showExpenseForm() {
+            const modal = document.getElementById('add-expenses-modal');
+            const button = modal.querySelector('#expenseButton');
+
+            // Set the onclick attribute of the button element.
+            button.setAttribute('onclick', 'addExpense()');
+
+            // Change the inner HTML of the button element.
+            button.innerHTML = 'Add Expense';
+        }
+    </script>
+    <script type="text/javascript">
+        function addExpense()
+        {
+            let modal = $('#add-expenses-modal');
+            let operational = $('#select-operational').val();
+            let date = modal.find('#expense-date').val()
+            let item = modal.find('#expense-item').val()
+            let amount = modal.find('#expense-amount').val()
+            if (operational == null || operational == "") {
+                swal.fire("Error!", "Please select operational", "error");
+                return;
+            }
+            axios({
+                method: 'POST',
+                url: "{{ route('operational.expense.store') }}",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    operational_id: operational,
+                    date: date,
+                    amount: amount,
+                    item: item,
+                },
+            }).then(function (response)
+            {
+                console.log(response);
+                Swal.fire(
+                    'Added!',
+                    'Expense has been added.',
+                    'success'
+                )
+                $('#table-expenses').DataTable().ajax.reload();
+                modal.modal('hide');
+            }).catch(function (error) {
+                console.log(error);
+                swal.fire("Error!", "Please try again", "error");
             })
         }
     </script>
