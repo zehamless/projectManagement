@@ -3,7 +3,7 @@
     {{-- modals edit milestone --}}
     <form action="" class="parsley-examples" novalidate="" method="post" enctype="multipart/form-data">
         @csrf
-        <div id="edit-milestone-modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel"
+        <div id="edit-milestone-modal{{ $milestone['id'] }}" class="modal fade" role="dialog" aria-labelledby="myModalLabel"
             aria-hidden="true" style="overflow:hidden;">
             <div class="modal-dialog modal-dialog-centered modal-xl">
                 <div class="modal-content">
@@ -23,7 +23,7 @@
                                 <label for="submitted_date" class="form-label">Submitted Date<span
                                         class="text-danger">*</span></label>
                                 <input type="date" name="submitted_date" parsley-trigger="change" required=""
-                                    placeholder="Masukkan tanggal" class="form-control datepicker" id="submitted_date">
+                                    placeholder="Masukkan tanggal" class="form-control datepicker" id="submitted_date" value="{{ $milestone['submitted_date'] }}">
                             </div>
 
                             {{-- form input description --}}
@@ -31,7 +31,7 @@
                                 <label for="userName" class="form-label">Description<span
                                         class="text-danger">*</span></label>
                                 <input type="text" name="description" parsley-trigger="change" required=""
-                                    placeholder="Tambahkan deskripsi" class="form-control" id="userName">
+                                    placeholder="Tambahkan deskripsi" class="form-control" value="{{ $milestone['description'] }}">
                             </div>
 
                             {{-- form input due date --}}
