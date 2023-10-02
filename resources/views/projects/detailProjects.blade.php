@@ -38,6 +38,7 @@
         }
     </style>
 
+
     <div class="content-page">
         <div class="content">
 
@@ -45,6 +46,10 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xl-8 tables-col">
+
+                        @if (session('success'))
+                            <div id="success-alert"></div>
+                        @endif
 
                         {{-- card table milestones --}}
                         <div class="card">
@@ -454,19 +459,21 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <th scope="row">
+                                                <th scope="row" class="pb-1">
                                                     <div class="row text-center">
                                                         <div class="col-md-6 px-4">
                                                             {{-- <div style="width: fit-content; height: fit-content;"> --}}
                                                             <p class="title-text">Progress Milestone</p>
-                                                            <canvas id="donut-chart"></canvas>
+                                                            <canvas id="donut-chart" class="py-1"
+                                                                width="200"></canvas>
                                                             {{--
                                                         </div> --}}
                                                         </div>
                                                         <div class="col-md-6 px-4">
                                                             {{-- <div style="width: fit-content; height: fit-content;"> --}}
                                                             <p class="title-text">Progress Payment</p>
-                                                            <canvas id="donut-chart2" width="200"></canvas>
+                                                            <canvas id="donut-chart2" class="py-1"
+                                                                width="200"></canvas>
                                                             {{--
                                                         </div> --}}
                                                         </div>
@@ -618,6 +625,26 @@
                     },
                 },
             },
+            plugins: [{
+                id: 'text',
+                beforeDraw: function(chart, a, b) {
+                    var width = chart.width,
+                        height = chart.height,
+                        ctx = chart.ctx;
+
+                    ctx.restore();
+                    var fontSize = (height / 120).toFixed(2);
+                    ctx.font = fontSize + "em sans-serif";
+                    ctx.textBaseline = "middle";
+
+                    var text = "{{ $percentageDone }}%",
+                        textX = Math.round((width - ctx.measureText(text).width) / 2),
+                        textY = height / 2;
+
+                    ctx.fillText(text, textX, textY);
+                    ctx.save();
+                }
+            }],
         });
 
 
@@ -631,7 +658,7 @@
     <script>
         // Sample data
         var data = [70, 20];
-        // var labels = ["Total"];
+        var labels = ["Paid", "Not Paid"];
 
 
         var ctx = document.getElementById("donut-chart2").getContext("2d");
@@ -639,7 +666,7 @@
         var donutChart = new Chart(ctx, {
             type: "doughnut", // Specifies the chart type as a donut chart
             data: {
-                // labels: labels,
+                labels: labels,
                 datasets: [{
                     data: data,
                     backgroundColor: ["#FE3E3E", "#F3F2F2"], // Customize segment colors
@@ -653,12 +680,37 @@
                         borderRadius: 30, // Set border radius to round the edges
                     },
                 },
+                plugins: {
+                    legend: {
+                        display: false, // Hide legend
+                    },
+                },
             },
+            plugins: [{
+                id: 'text',
+                beforeDraw: function(chart, a, b) {
+                    var width = chart.width,
+                        height = chart.height,
+                        ctx = chart.ctx;
+
+                    ctx.restore();
+                    var fontSize = (height / 120).toFixed(2);
+                    ctx.font = fontSize + "em sans-serif";
+                    ctx.textBaseline = "middle";
+
+                    var text = "75%",
+                        textX = Math.round((width - ctx.measureText(text).width) / 2),
+                        textY = height / 2;
+
+                    ctx.fillText(text, textX, textY);
+                    ctx.save();
+                }
+            }],
         });
     </script>
 
     <script type="text/javascript">
-        function deleteProject() {
+        function deleteProject(milestoneId) {
             // Display a confirmation dialog
             Swal.fire({
                 title: 'Are you sure?',
@@ -671,6 +723,14 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     // Silahkan isi logika nya sendiri xixixi
+                    $.ajax({
+                        url: "{{ route('users.delete', '') }}" + '/' + milestoneId,
+                        type: 'DELETE',
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                        },
+                    });
+                    location.reload();
                 }
             });
         }
@@ -713,7 +773,7 @@
                         $("#cost_id").val(response.id);
                         $("#description_cost").val(response.description);
                         $("#amount_cost").val(parseInt(response
-                        .amount)); // Menggunakan parseInt() untuk menghapus angka desimal
+                            .amount)); // Menggunakan parseInt() untuk menghapus angka desimal
                     },
                     error: function(response) {
                         alert("Error: " + response.statusText);

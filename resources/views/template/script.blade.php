@@ -98,4 +98,22 @@
     });
 </script>
 
+
+{{-- script untuk manggil alert jika berhasil create/edit --}}
+<script>
+    var alertSuccess = document.getElementById('success-alert');
+    
+    if(alertSuccess){
+        $(document).ready(function(){
+        Swal.fire({
+            title: "Complete!",
+            text: "{{ session('success') }}",
+            icon: "success",
+        });
+        });
+    }else{
+        
+    }
+</script>
+
 @yield('pageScript')
