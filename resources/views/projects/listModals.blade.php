@@ -3,7 +3,7 @@
     {{-- modals edit milestone --}}
     <form action="" class="parsley-examples" novalidate="" method="post" enctype="multipart/form-data">
         @csrf
-        <div id="edit-milestone-modal{{ $milestone['id'] }}" class="modal fade" role="dialog" aria-labelledby="myModalLabel"
+        <div id="edit-milestone-modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel"
             aria-hidden="true" style="overflow:hidden;">
             <div class="modal-dialog modal-dialog-centered modal-xl">
                 <div class="modal-content">
@@ -16,7 +16,7 @@
                         <div class="row">
 
                             {{-- form input hidden project id --}}
-                            <input type="hidden" name="project_id" value="">
+                            <input type="hidden" name="project_id" value="" id="id-to-remove">
 
                             {{-- form input submitted date --}}
                             <div class="mb-3">
