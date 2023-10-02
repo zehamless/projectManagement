@@ -107,9 +107,10 @@
                                                             <div class="btn-group btn-group-sm" style="float: none;">
                                                                 <button title="Untuk mengedit milestone" type="button"
                                                                     data-bs-toggle="modal"
-                                                                    data-bs-target="#edit-milestone-modal{{ $milestone['id'] }}"
+                                                                    data-bs-target="#edit-milestone-modal"
+                                                                    value="{{ $milestone['id'] }}"
                                                                     title="Edit Field Service Log"
-                                                                    class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                                                    class="tabledit-edit-button milestoneEdit btn btn-primary waves-effect waves-light"
                                                                     style="background-color: #3E8BFF;">
                                                                     <span class="mdi mdi-pencil"></span>
                                                                 </button>
@@ -383,7 +384,8 @@
                                                 <th scope="row">3</th>
                                                 <td>Tahap 2 - Pelunasan</td>
                                                 <td>Melunasi sisa pembayaran</td>
-                                                <td class="text-center"><span class="badge bg-warning">Progress</span></td>
+                                                <td class="text-center"><span class="badge bg-warning">Progress</span>
+                                                </td>
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-sm" style="float: none;">
                                                         <button title="untuk mengunduh file" type="button"
@@ -549,8 +551,7 @@
                                                         @if ($realCost > $projectData->expense_budget)
                                                             <p class="text-light"
                                                                 style="font-size: 10px; border-radius: 10px; margin-left: 5px; padding:2px 4px; background-color: red;">
-                                                                + <span
-                                                                    {{-- rumus = real production cost = prelim cost - production cost --}}
+                                                                + <span {{-- rumus = real production cost = prelim cost - production cost --}}
                                                                     class="rupiah">{{ $realCost - $projectData->expense_budget }}</span>
                                                             </p>
                                                         @endif
@@ -671,5 +672,29 @@
                 }
             });
         }
+    </script>
+
+    {{-- Milestone edit --}}
+    <script>
+        $(document).ready(function() {
+            $(document).on('click', '.milestoneEdit', function() {
+                var id = $(this).val(); // Menggunakan data-id yang baru
+                $.ajax({
+                    type: "GET",
+                    url: "/get-milestone-data/" + id,
+                    dataType: "json",
+                    success: function(response) {
+                        $("#milestone_id").val(response.id);
+                        $("#submitted_date").val(response.submitted_date);
+                        $("#description").val(response.description);
+                        $("#due_date").val(response.due_date);
+                        $("#progress").val(response.progress);
+                    },
+                    error: function(response) {
+                        alert("Error: " + response.statusText);
+                    }
+                });
+            });
+        });
     </script>
 @endsection
