@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Operational;
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use PhpParser\Node\Scalar\String_;
@@ -125,6 +126,14 @@ class OperationalController extends Controller
     public function detachTeam(Operational $operational, Request $request)
     {
         $operational->team()->detach($request->user_id);
+        return response()->json([
+            '200'
+        ]);
+    }
+
+    public function attachTeam(Operational $operational, Request $request)
+    {
+        $operational->team()->attach($request->user_id);
         return response()->json([
             '200'
         ]);

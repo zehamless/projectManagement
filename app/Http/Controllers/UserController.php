@@ -20,23 +20,33 @@ use Yajra\DataTables\Facades\DataTables;
 class UserController extends Controller
 {
     /**
-     * @return \Illuminate\Http\JsonResponse
+     * @return Application|Factory|View|\Illuminate\Foundation\Application|\Illuminate\Http\JsonResponse
      * @throws \Exception
      */
-    public function index()
+    public function index($operational = null)
     {
-        if (\request()->ajax()) {
-            $users = User::with('hasroles')->get();
-            return DataTables::of($users)
-                ->addIndexColumn()
-                ->addColumn('roles', function (User $user) {
-                    return $user->hasroles->map(function (Role $role) {
-                        return $role->name;
-                    })->implode(', ');
-                })
-                ->toJson();
-        }
         $users = User::with('hasroles')->get();
+        if (\request()->ajax()) {
+            if ($operational !== null) {
+//                $users1 = User::with('hasroles')->whereHas('hasroles',function ($query){
+//                    $query->where('id',5);
+//                })->get();
+                //get user with role operational and doesnt have operational
+                $users1 = User::with('hasroles')->whereHas('hasroles', function ($query) {
+                    $query->where('id', 5);
+                })->whereDoesntHave('operational')->get();
+                return response()->json($users1);
+            } else {
+                return DataTables::of($users)
+                    ->addIndexColumn()
+                    ->addColumn('roles', function (User $user) {
+                        return $user->hasroles->map(function (Role $role) {
+                            return $role->name;
+                        })->implode(', ');
+                    })
+                    ->toJson();
+            }
+        }
         return view('admin.olahAkun', compact('users'));
     }
 
@@ -119,16 +129,15 @@ class UserController extends Controller
             $filepath = $file->store('public/signatures');
         }
 
-       $user = $user->update([
+        $user = $user->update([
             'first_name' => $request->first_name ?? $user->first_name,
             'last_name' => $request->last_name ?? $user->last_name,
             'email' => $request->email ?? $user->email,
             'division' => $request->division ?? $user->division,
             'signature' => $filepath ?? $user->signature,
         ]);
-        if ($request->roles)
-        {
-        $users->hasroles()->sync($request->roles);
+        if ($request->roles) {
+            $users->hasroles()->sync($request->roles);
         }
 //        return redirect()->route('users.index')->with('success', 'User berhasil diupdate');
         return session()->flash('success', 'User berhasil diupdate');
@@ -155,4 +164,5 @@ class UserController extends Controller
         $users = User::with('hasroles')->where('id', $user)->get();
         return response()->json($users);
     }
+
 }

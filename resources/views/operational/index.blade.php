@@ -504,6 +504,7 @@
                                                                                 <button type="button"
                                                                                         data-bs-toggle="modal"
                                                                                         data-bs-target="#add-technician-modal"
+                                                                                        onclick="attachTeamForm()"
                                                                                         class="btn btn-save w-md waves-effect waves-light px-4 btn-addMaterial">
                                                                                     <i class="mdi mdi-plus"></i>Add
                                                                                     Technician
@@ -732,6 +733,7 @@
                 processing: true,
                 serverSide: true,
                 responsive: true,
+                "bDestroy": true,
                 ajax: "{{ route('operational.expense.index', '') }}" + "/" + expense,
                 columns: [
                     {
@@ -971,4 +973,74 @@
             })
         }
     </script>
+    <script type="text/javascript">
+        function attachTeamForm() {
+            let operational = $('#select-operational').val();
+            if (operational == null || operational == "") {
+                swal.fire("Error!", "Please select operational", "error");
+                return;
+            }
+
+            let data; // Define data variable in a broader scope
+
+            $.ajax({
+                url: "{{ route('users.index', 'users') }}",
+                type: "GET",
+                success: function (responseData) {
+                    console.log(responseData);
+                    data = responseData;
+                    $('#select-technician').empty();
+                    $('#select-technician').append(`<option selected value="">-- Pilih Technician --</option>`);
+                    $.each(data, function (key, value) {
+                        console.log(value.first_name);
+                        let option = new Option(value.first_name, value.id, false, false)
+                        $('#select-technician').append(option)
+                    });
+                }
+            });
+
+            $('#select-technician').on('change', function() {
+                let selectedUserId = $(this).val();
+                var selectedUser = data.find(user => user.id == selectedUserId);
+                if (selectedUser) {
+                    $('#division').val(selectedUser.division); // Set input value to selected user's division
+                } else {
+                    $('#division').val(''); // Clear input if no user is selected
+                }
+            });
+        }
+    </script>
+    <script type="text/javascript">
+        function attachTeam() {
+            let selected = $('#select-technician option:selected').val();
+            if (selected == null || selected == "") {
+                swal.fire("Error!", "Please select technician", "error");
+                return;
+            }
+            let operational = $('#select-operational').val();
+            console.log(selected);
+            axios({
+                url: "{{ route('operational.attach-team', '') }}" + '/' + operational,
+                method: 'PATCH',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    user_id: selected,
+                },
+            }).then(function (response) {
+                console.log(response);
+                Swal.fire(
+                    'Added!',
+                    'Technician has been added.',
+                    'success'
+                );
+                $('#add-technician-modal').modal('hide');
+                detailOperational(operational)
+            }).catch(function (error) {
+                console.log(error);
+                swal.fire("Error!", "Please try again", "error");
+            });
+        }
+    </script>
+
+
 @endsection

@@ -60,7 +60,6 @@ Route::get('/testPage', function () {
 });
 
 
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -108,7 +107,7 @@ Route::prefix('admin')->group(function () {
     Route::delete('/roles', [RoleController::class, 'delete'])->name('roles.delete');
     Route::get('/roles/{role}', [RoleController::class, 'showRole'])->name('roles.show');
 
-    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/users/{parameter?}', [UserController::class, 'index'])->name('users.index');
     Route::get('/users/create', [UserController::class, 'createForm'])->name('users.createForm');
     Route::post('/users', [UserController::class, 'store'])->name('users.store');
     Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
@@ -136,7 +135,11 @@ Route::prefix('operational')->group(function () {
         Route::delete('/{expense}', [OperationalExpensesController::class, 'delete'])->name('operational.expense.delete');
         Route::get('/show/{expense}', [OperationalExpensesController::class, 'show'])->name('operational.expense.show');
     });
-    Route::patch('/technician/{operational}', [OperationalController::class, 'detachTeam'])->name('operational.detach-team');
+    Route::prefix('technician')->group(function () {
+        Route::patch('/{operational}', [OperationalController::class, 'detachTeam'])->name('operational.detach-team');
+        Route::patch('/attach/{operational}', [OperationalController::class, 'attachTeam'])->name('operational.attach-team');
+
+    });
 });
 
 
