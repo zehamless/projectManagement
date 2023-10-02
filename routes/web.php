@@ -41,7 +41,9 @@ Route::group(['prefix' => 'projects'], function () {
 });
 // Milestone
 Route::get('/get-milestone-data/{id}', [MilestoneController::class, 'getMilestoneData'])->name("milestone.get");
-
+// Pcost json
+Route::get('/get-cost-data/{id}', [ProductionCostController::class, 'getPCostData'])->name("cost.get");
+Route::put('production/update/', [ProductionCostController::class, 'update'])->name('cost.update');
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
 
 
