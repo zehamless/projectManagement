@@ -46,6 +46,11 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xl-8 tables-col">
+
+                    @if (session('success'))
+                        <div id="success-alert"></div>
+                    @endif
+
                     {{-- card table milestones --}}
                     <div class="card">
                         <div class="card-body">
@@ -451,19 +456,19 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <th scope="row">
+                                            <th scope="row" class="pb-1">
                                                 <div class="row text-center">
                                                     <div class="col-md-6 px-4">
                                                         {{-- <div style="width: fit-content; height: fit-content;"> --}}
                                                             <p class="title-text">Progress Milestone</p>
-                                                            <canvas id="donut-chart" class="py-2" width="200"></canvas>
+                                                            <canvas id="donut-chart" class="py-1" width="200"></canvas>
                                                             {{--
                                                         </div> --}}
                                                     </div>
                                                     <div class="col-md-6 px-4">
                                                         {{-- <div style="width: fit-content; height: fit-content;"> --}}
                                                             <p class="title-text">Progress Payment</p>
-                                                            <canvas id="donut-chart2" class="py-2" width="200"></canvas>
+                                                            <canvas id="donut-chart2" class="py-1" width="200"></canvas>
                                                             {{--
                                                         </div> --}}
                                                         </div>
@@ -726,37 +731,27 @@
         }
 </script>
 
+{{-- Milestone edit --}}
 <script>
-    $(document).ready(function(){
-        Swal.fire({
-                title: "Good job!",
-                text: "You clicked the button!",
-                icon: "success",
-            });
-    });
-</script>
-
-    {{-- Milestone edit --}}
-    <script>
-        $(document).ready(function() {
-            $(document).on('click', '.milestoneEdit', function() {
-                var id = $(this).val(); // Menggunakan data-id yang baru
-                $.ajax({
-                    type: "GET",
-                    url: "/get-milestone-data/" + id,
-                    dataType: "json",
-                    success: function(response) {
-                        $("#milestone_id").val(response.id);
-                        $("#submitted_date").val(response.submitted_date);
-                        $("#description").val(response.description);
-                        $("#due_date").val(response.due_date);
-                        $("#progress").val(response.progress);
-                    },
-                    error: function(response) {
-                        alert("Error: " + response.statusText);
-                    }
-                });
+    $(document).ready(function() {
+        $(document).on('click', '.milestoneEdit', function() {
+            var id = $(this).val(); // Menggunakan data-id yang baru
+            $.ajax({
+                type: "GET",
+                url: "/get-milestone-data/" + id,
+                dataType: "json",
+                success: function(response) {
+                    $("#milestone_id").val(response.id);
+                    $("#submitted_date").val(response.submitted_date);
+                    $("#description").val(response.description);
+                    $("#due_date").val(response.due_date);
+                    $("#progress").val(response.progress);
+                },
+                error: function(response) {
+                    alert("Error: " + response.statusText);
+                }
             });
         });
-    </script>
+    });
+</script>
 @endsection
