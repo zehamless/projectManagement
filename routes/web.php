@@ -40,7 +40,7 @@ Route::group(['prefix' => 'projects'], function () {
     Route::post('/production-cost', [ProductionCostController::class, 'store'])->name('production-cost.store');
 });
 // Milestone
-Route::get('/get-milestone-data', [MilestoneController::class, 'getMilestoneData'])->name("milestone.get");
+Route::get('/get-milestone-data/{id}', [MilestoneController::class, 'getMilestoneData'])->name("milestone.get");
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
 
@@ -76,6 +76,7 @@ Route::middleware('auth')->group(function () {
 Route::prefix('milestone')->group(function () {
     Route::get('/create/{id}', [MilestoneController::class, 'create'])->name('milestone.create');
     Route::post('/store', [MilestoneController::class, 'store'])->name('milestone.store');
+    Route::put('/', [MilestoneController::class, 'update'])->name('milestone.update');
 });
 
 

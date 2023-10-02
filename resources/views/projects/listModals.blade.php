@@ -1,10 +1,12 @@
 <div class="listModals">
 
     {{-- modals edit milestone --}}
-    <form action="" class="parsley-examples" novalidate="" method="post" enctype="multipart/form-data">
+    <form action="{{ route('milestone.update') }}" class="parsley-examples" novalidate="" method="post"
+        enctype="multipart/form-data">
         @csrf
-        <div id="edit-milestone-modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel"
-            aria-hidden="true" style="overflow:hidden;">
+        @method('PUT')
+        <div id="edit-milestone-modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+            style="overflow:hidden;">
             <div class="modal-dialog modal-dialog-centered modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -12,18 +14,18 @@
                             Edit Milestone</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body milestoneEditModal">
                         <div class="row">
 
                             {{-- form input hidden project id --}}
-                            <input type="hidden" name="project_id" value="" id="id-to-remove">
+                            <input type="hidden" name="milestone_id" id="milestone_id" value="">
 
                             {{-- form input submitted date --}}
                             <div class="mb-3">
                                 <label for="submitted_date" class="form-label">Submitted Date<span
                                         class="text-danger">*</span></label>
                                 <input type="date" name="submitted_date" parsley-trigger="change" required=""
-                                    placeholder="Masukkan tanggal" class="form-control datepicker" id="submitted_date" value="{{ $milestone['submitted_date'] }}">
+                                    placeholder="Masukkan tanggal" class="form-control datepicker" id="submitted_date">
                             </div>
 
                             {{-- form input description --}}
@@ -31,15 +33,16 @@
                                 <label for="userName" class="form-label">Description<span
                                         class="text-danger">*</span></label>
                                 <input type="text" name="description" parsley-trigger="change" required=""
-                                    placeholder="Tambahkan deskripsi" class="form-control" value="{{ $milestone['description'] }}">
+                                    placeholder="Tambahkan deskripsi" id="description" class="form-control"
+                                    value="">
                             </div>
 
                             {{-- form input due date --}}
                             <div class="mb-3">
-                                <label for="userName" class="form-label">Due Date<span
+                                <label for="due_date" class="form-label">Due Date<span
                                         class="text-danger">*</span></label>
                                 <input type="date" name="due_date" parsley-trigger="change" required=""
-                                    placeholder="Masukkan tanggal" class="form-control datepicker" id="userName">
+                                    placeholder="Masukkan tanggal" class="form-control datepicker" id="due_date">
                             </div>
 
                             {{-- form input progress --}}
@@ -66,7 +69,7 @@
                             <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">
                                 Close
                             </button>
-                            
+
                             {{-- button save --}}
                             <button type="submit" class="btn btn-save waves-effect waves-light">Save Changes</button>
                         </div>
@@ -77,7 +80,7 @@
         </div>
     </form>
 
-    {{-- modals edit production cost--}}
+    {{-- modals edit production cost --}}
     <form action="" class="parsley-examples" novalidate="" method="post" enctype="multipart/form-data">
         @csrf
         <div id="edit-cost-modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
@@ -87,7 +90,8 @@
                     <div class="modal-header">
                         <h4 class="modal-title">
                             Edit Field Service Log</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="row">
@@ -105,8 +109,8 @@
                             <div class="mb-3">
                                 <label for="description" class="form-label">Description<span
                                         class="text-danger">*</span></label>
-                                <textarea type="text" name="description" parsley-trigger="change" required
-                                    placeholder="Enter description" class="form-control"> </textarea>
+                                <textarea type="text" name="description" parsley-trigger="change" required placeholder="Enter description"
+                                    class="form-control"> </textarea>
                             </div>
 
                             {{-- form input amount --}}
@@ -133,17 +137,18 @@
         </div>
     </form>
 
-    {{-- modals edit fields service log--}}
+    {{-- modals edit fields service log --}}
     <form action="" class="parsley-examples" novalidate="" method="post" enctype="multipart/form-data">
         @csrf
-        <div id="edit-service-modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
-            style="overflow:hidden;">
+        <div id="edit-service-modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true" style="overflow:hidden;">
             <div class="modal-dialog modal-dialog-centered modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">
                             Edit Field Service Log</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="row">
@@ -154,14 +159,16 @@
                                     <label for="userName" class="form-label">Service Date<span
                                             class="text-danger">*</span></label>
                                     <input type="date" name="nick" parsley-trigger="change" required=""
-                                        placeholder="Enter service date" class="form-control datepicker" id="userName">
+                                        placeholder="Enter service date" class="form-control datepicker"
+                                        id="userName">
                                 </div>
 
                                 {{-- form input project label --}}
                                 <div class="mb-3">
                                     <label for="userName" class="form-label">Project Label<span
                                             class="text-danger">*</span></label>
-                                    <select name="" parsley-trigger="change" required="" class="form-control">
+                                    <select name="" parsley-trigger="change" required=""
+                                        class="form-control">
                                         <option>PT ABC</option>
                                         <option>PT XYZ</option>
                                         <option>PT DEF</option>
@@ -172,7 +179,8 @@
                                 <div class="mb-3">
                                     <label for="userName" class="form-label">Service Type<span
                                             class="text-danger">*</span></label>
-                                    <select name="" parsley-trigger="change" required="" class="form-control">
+                                    <select name="" parsley-trigger="change" required=""
+                                        class="form-control">
                                         <option>Pre-Commisioning</option>
                                         <option>Comissioning</option>
                                         <option>Maintenance</option>
@@ -228,8 +236,8 @@
                                 <div class="mb-3">
                                     <label for="userName" class="form-label">Transportation Mode<span
                                             class="text-danger">*</span></label>
-                                    <select name="transportation_mode" id="transportation_mode" parsley-trigger="change"
-                                        required="" class="form-control">
+                                    <select name="transportation_mode" id="transportation_mode"
+                                        parsley-trigger="change" required="" class="form-control">
                                         <option value="pesawat">Pesawat</option>
                                         <option value="mobil">Mobil</option>
                                         <option value="kereta_api">Kereta Api</option>
@@ -241,7 +249,8 @@
                                 <div class="mb-3">
                                     <label for="userName" class="form-label">Created By<span
                                             class="text-danger">*</span></label>
-                                    <select name="" parsley-trigger="change" required="" class="form-control">
+                                    <select name="" parsley-trigger="change" required=""
+                                        class="form-control">
                                         <option>User 1</option>
                                         <option>User 2</option>
                                     </select>
@@ -251,7 +260,8 @@
                                 <div class="mb-3">
                                     <label for="userName" class="form-label">Technician<span
                                             class="text-danger">*</span></label>
-                                    <select id="select-technician" class="form-control" name="" style="color: black;">
+                                    <select id="select-technician" class="form-control" name=""
+                                        style="color: black;">
                                         <option value="">Technician 1</option>
                                         <option value="">Technician 2</option>
                                         <option value="">Technician 3</option>
@@ -263,7 +273,8 @@
                                 <div class="mb-3">
                                     <label for="userName" class="form-label">Material<span
                                             class="text-danger">*</span></label>
-                                    <select id="select-material" class="form-control" name="" style="color: black;">
+                                    <select id="select-material" class="form-control" name=""
+                                        style="color: black;">
                                         <option value="">Material 1</option>
                                         <option value="">Material 2</option>
                                         <option value="">Material 3</option>
@@ -275,8 +286,7 @@
                                 <div class="mb-3">
                                     <label for="userName" class="form-label">Description<span
                                             class="text-danger">*</span></label>
-                                    <textarea name="" parsley-trigger="change" required=""
-                                        class="form-control"></textarea>
+                                    <textarea name="" parsley-trigger="change" required="" class="form-control"></textarea>
                                 </div>
                             </div>
                         </div>
