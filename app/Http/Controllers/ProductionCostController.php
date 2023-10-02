@@ -46,4 +46,34 @@ class ProductionCostController extends Controller
         // Redirect atau tampilkan pesan sukses
         return redirect()->route('projects.show', $request->input('project_id'))->with('success', 'Production Cost berhasil ditambahkan');
     }
+
+    public function update(Request $request)
+    {
+        // Validasi data yang dikirim dari formulir
+        $validatedData = $request->validate([
+            'cost_id' => 'required',
+            'description' => 'required',
+            'amount' => 'required|numeric',
+        ]);
+
+        $production_cost = ProductionCost::findOrFail($request->cost_id);
+
+        // Mengupdate data production_cost dengan data yang validasi
+        $production_cost->update($validatedData);
+
+        return redirect()->route('projects.show', ['id' => $production_cost->project_id])->with('success', 'Production Cost berhasil diubah.');
+    }
+
+    public function getPCostData($id)
+    {
+        // Cari data p_cost berdasarkan ID
+        $p_cost = ProductionCost::find($id);
+
+        if (!$p_cost) {
+            return response()->json(['error' => 'Production Cost not found'], 404);
+        }
+
+        // Mengembalikan data p_cost sebagai respons JSON
+        return response()->json($p_cost);
+    }
 }
