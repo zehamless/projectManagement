@@ -17,7 +17,7 @@ class MilestoneController extends Controller
             'description' => 'required|string',
             'due_date' => 'required|date',
             'progress' => 'required|string',
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi file gambar
+            'file' => 'nullable|file|mimes:jpg,png,jpeg,pdf,docx|max:2048', // Validasi file gambar
         ]);
 
         // Simpan data Milestone ke dalam database dengan mengaitkannya dengan ID proyek
@@ -42,13 +42,40 @@ class MilestoneController extends Controller
         return redirect()->route('projects.show', $validatedData['project_id'])->with('success', 'Milestone berhasil ditambahkan');
     }
 
-    // Kirim data json untuk edit milestone
-    public function getMilestoneData(Request $request)
+    public function update(Request $request)
     {
-        $milestoneId = $request->input('id');
+        // Validasi data yang dikirim dari formulir
+        $validatedData = $request->validate([
+            'milestone_id' => 'required',
+            'submitted_date' => 'required|date',
+            'description' => 'required',
+            'due_date' => 'required|date',
+            'progress' => 'required|in:Planned,On Progress,Done', // Pilihan yang valid
+            'file' => 'nullable|file|mimes:jpg,png,jpeg,pdf,docx|max:2048', // Contoh validasi untuk tipe file
+        ]);
 
+        $milestone = Milestone::findOrFail($request->milestone_id);
+
+        // Mengupdate data milestone dengan data yang validasi
+        $milestone->update($validatedData);
+
+        // Upload file jika ada
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $fileName = $file->getClientOriginalName();
+            $file->storeAs('milestone_files', $fileName, 'public');
+            $milestone->file = $fileName;
+            $milestone->save();
+        }
+
+        return redirect()->route('projects.show', ['id' => $milestone->project_id])->with('success', 'Milestone berhasil diubah.');
+    }
+
+    // Kirim data json untuk edit milestone
+    public function getMilestoneData($id)
+    {
         // Cari data milestone berdasarkan ID
-        $milestone = Milestone::find($milestoneId);
+        $milestone = Milestone::find($id);
 
         if (!$milestone) {
             return response()->json(['error' => 'Milestone not found'], 404);
@@ -57,6 +84,7 @@ class MilestoneController extends Controller
         // Mengembalikan data milestone sebagai respons JSON
         return response()->json($milestone);
     }
+
 
 
 
