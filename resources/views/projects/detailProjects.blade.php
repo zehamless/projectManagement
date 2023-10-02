@@ -117,6 +117,7 @@
                                                             </div>
                                                             <div class="btn-group btn-group-sm" style="float: none;">
                                                                 <button title="Untuk menghapus milestone" type="button"
+                                                                    onclick="deleteProject()"
                                                                     class="tabledit-edit-button btn btn-danger">
                                                                     <span class="mdi mdi-trash-can-outline"></span>
                                                                 </button>
@@ -171,7 +172,8 @@
                                                             <div class="btn-group btn-group-sm" style="float: none;">
                                                                 <button title="Edit Production Cost" type="button"
                                                                     data-bs-toggle="modal" data-bs-target="#edit-cost-modal"
-                                                                    class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                                                    class="tabledit-edit-button costEdit btn btn-primary waves-effect waves-light"
+                                                                    value="{{ $cost['id'] }}"
                                                                     style="background-color: #3E8BFF;">
                                                                     <span class="mdi mdi-pencil"></span>
                                                                 </button>
@@ -689,6 +691,29 @@
                         $("#description").val(response.description);
                         $("#due_date").val(response.due_date);
                         $("#progress").val(response.progress);
+                    },
+                    error: function(response) {
+                        alert("Error: " + response.statusText);
+                    }
+                });
+            });
+        });
+    </script>
+
+    {{-- Production Cost edit --}}
+    <script>
+        $(document).ready(function() {
+            $(document).on('click', '.costEdit', function() {
+                var id = $(this).val(); // Menggunakan data-id yang baru
+                $.ajax({
+                    type: "GET",
+                    url: "/get-cost-data/" + id,
+                    dataType: "json",
+                    success: function(response) {
+                        $("#cost_id").val(response.id);
+                        $("#description_cost").val(response.description);
+                        $("#amount_cost").val(parseInt(response
+                        .amount)); // Menggunakan parseInt() untuk menghapus angka desimal
                     },
                     error: function(response) {
                         alert("Error: " + response.statusText);
