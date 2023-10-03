@@ -8,7 +8,6 @@
         background-color: #FF3E3E;
         border: #FF3E3E;
         color: white;
-
     }
 
     .btn-editAccount {
@@ -26,9 +25,7 @@
     }
 </style>
 
-
 {{-- halaman baru --}}
-
 <div class="content-page">
     <div class="content">
         <div class="container-fluid">
@@ -38,12 +35,16 @@
                         <div class="card-body">
                             <div class="row table-title">
                                 <div class="col-sm-8">
+                                    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+                                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                                    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
                                     <h4 class="mt-0">Data Customer</h4>
                                 </div>
                                 <div class="col-sm-4 text-end">
-                                    <a href="{{ url('customer/create') }}"
-                                        class="btn btn-addItems w-md waves-effect waves-light mb-3 px-3"><i class="mdi mdi-plus"
-                                            title="Menambahkan Customer"></i>Add Customer</a>
+                                    <a href="{{ url('customer/create') }}" class="btn btn-addItems w-md waves-effect waves-light mb-3 px-3">
+                                        <i class="mdi mdi-plus" title="Menambahkan Customer"></i>Add Customer
+                                    </a>
                                 </div>
                             </div>
                             <table id="dataTable" class="table table-striped dt-responsive table-responsive nowrap">
@@ -55,7 +56,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- Data rows will be added here dynamically -->
                                 </tbody>
                             </table>
                         </div>
@@ -68,114 +68,81 @@
 @endsection
 
 @section('pageScript')
+<link href="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-1.13.6/r-2.5.0/sc-2.2.0/sp-2.2.0/sl-1.7.0/datatables.min.css" rel="stylesheet">
+<script src="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-1.13.6/r-2.5.0/sc-2.2.0/sp-2.2.0/sl-1.7.0/datatables.min.js"></script>
 
-<script>
-    // Data Table Customer ditambahkan disini
-    const data = [
-        //column1 nomor, column2 customer name, column3 button actions
-        { column1: '1', column2: 'Customer 1', column3: `   <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <a href="{{ url('customer/show') }}">
-                                                                    <button type="button" class="tabledit-edit-button btn btn-info waves-effect waves-light"
-                                                                    data-bs-toggle="modal" data-bs-target="#con-close-modal" title="Detail Customer"
-                                                                    style="padding: 0.25rem 0.8rem;">
-                                                                    <span class="mdi mdi-eye"></span>
-                                                                </button>
-                                                                </a>
-                                                            </div>
-                                                            <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light" title="Edit Data"
-                                                                    style="background-color: #3E8BFF;" data-bs-toggle="modal" data-bs-target="#con-close-modal">
-                                                                    <span class="mdi mdi-pencil"></span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <form action="" method="POST" >
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <button type="submit" class="tabledit-edit-button btn btn-danger waves-effect waves-light" 
-                                                                    id="sa-warning" style="padding: 0.25rem 0.8rem;" title="Hapus Customer">
-                                                                        <span class="mdi mdi-trash-can-outline"></span>
-                                                                    </button>
-                                                                </form>
-                                                            </div>` },
-        { column1: '2', column2: 'Customer 2', column3: `   <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <a href="{{ url('customer/show') }}">
-                                                                    <button type="button" class="tabledit-edit-button btn btn-info waves-effect waves-light"
-                                                                    data-bs-toggle="modal" data-bs-target="#con-close-modal" title="Detail Customer"
-                                                                    style="padding: 0.25rem 0.8rem;">
-                                                                    <span class="mdi mdi-eye"></span>
-                                                                </button>
-                                                                </a>
-                                                            </div>
-                                                            <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light" title="Edit Data"
-                                                                    style="background-color: #3E8BFF;" data-bs-toggle="modal" data-bs-target="#con-close-modal">
-                                                                    <span class="mdi mdi-pencil"></span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <form action="" method="POST" >
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <button type="submit" class="tabledit-edit-button btn btn-danger waves-effect waves-light" 
-                                                                    id="sa-warning" style="padding: 0.25rem 0.8rem;" title="Hapus Customer">
-                                                                        <span class="mdi mdi-trash-can-outline"></span>
-                                                                    </button>
-                                                                </form>
-                                                            </div>` },
-        { column1: '3', column2: 'Customer 3', column3: `   <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <a href="{{ url('customer/show') }}">
-                                                                    <button type="button" class="tabledit-edit-button btn btn-info waves-effect waves-light"
-                                                                    data-bs-toggle="modal" data-bs-target="#con-close-modal" title="Detail Customer"
-                                                                    style="padding: 0.25rem 0.8rem;">
-                                                                    <span class="mdi mdi-eye"></span>
-                                                                </button>
-                                                                </a>
-                                                            </div>
-                                                            <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light" title="Edit Data"
-                                                                    style="background-color: #3E8BFF;" data-bs-toggle="modal" data-bs-target="#con-close-modal">
-                                                                    <span class="mdi mdi-pencil"></span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <form action="" method="POST" >
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <button type="submit" class="tabledit-edit-button btn btn-danger waves-effect waves-light" 
-                                                                    id="sa-warning" style="padding: 0.25rem 0.8rem;" title="Hapus Customer">
-                                                                        <span class="mdi mdi-trash-can-outline"></span>
-                                                                    </button>
-                                                                </form>
-                                                            </div>` },
-        
-    ];
-
-    // Fungsi untuk memasukkan data ke table
-    function populateTable() {
-        const tableBody = document.querySelector('#dataTable tbody');
-
-        data.forEach(item => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${item.column1}</td>
-                <td>${item.column2}</td>
-                <td class="text-center">${item.column3}</td>
-            `;
-            tableBody.appendChild(row);
-        });
-    }
-
-    // Call the populateTable function to create the table
-    populateTable();
-
-    $(document).ready(function(){
-        $('#dataTable').DataTable({
-            responsive: true,
-            autoWidth: false
+<script type="text/javascript">
+    $(document).ready(function() {
+        var table = $('#dataTable').DataTable({
+            autoWidth: false,
+            processing: true,
+            responsive: false,
+            serverSide: true,
+            scrollX: true,
+            ajax: "{{ route('customer.index') }}",
+            columns: [{
+                    data: 'id',
+                    name: 'id',
+                    searchable: false,
+                    orderable: false
+                },
+                {
+                    data: 'companyName',
+                    name: 'companyName'
+                },
+                {
+                    data: 'id',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false,
+                    render: function(data, type, full, meta) {
+                        console.log(full);
+                        return `
+                            <div class="btn-group btn-group-sm" style="float: none;">
+                                <a href="{{ url('customer/show') }}/${full.id}">
+                                    <button type="button" class="tabledit-edit-button btn btn-info waves-effect waves-light" title="Detail Customer" style="padding: 0.25rem 0.8rem;">
+                                        <span class="mdi mdi-eye"></span>
+                                    </button>
+                                </a>
+                            </div>
+                            <div class="btn-group btn-group-sm" style="float: none;">
+                                <a href="{{ url('customer/edit') }}/${full.id}">
+                                    <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light" title="Edit Data" style="background-color: #3E8BFF;">
+                                        <span class="mdi mdi-pencil"></span>
+                                    </button>
+                                </a>
+                            </div>
+                            <div class="btn-group btn-group-sm" style="float: none;">
+                                <button type="button" class="tabledit-edit-button btn btn-danger waves-effect waves-light" id="sa-warning" style="padding: 0.25rem 0.8rem;" title="Hapus Customer" onclick="deleteCustomer(${full.id})">
+                                    <span class="mdi mdi-trash-can-outline"></span>
+                                </button>
+                            </div>`;
+                    }
+                },
+            ]
         });
     });
-    
 
+    function deleteCustomer(id) {
+        if (confirm('Apakah Anda yakin ingin menghapus customer ini?')) {
+            // Kirim permintaan penghapusan ke server
+            $.ajax({
+                url: `{{ route('customer.destroy', ['id' => 'full.id']) }}/${id}`,
+                type: 'DELETE',
+                data: {
+                    "_token": "{{ csrf_token() }}"
+                },
+                success: function(response) {
+                    // Lakukan sesuatu setelah penghapusan berhasil
+                    console.log(response);
+                    // Misalnya, muat ulang tabel atau tindakan lainnya
+                },
+                error: function(error) {
+                    console.error(error);
+                    // Handle kesalahan, tampilkan pesan kesalahan atau lakukan tindakan lainnya
+                }
+            });
+        }
+    }
 </script>
 @endsection

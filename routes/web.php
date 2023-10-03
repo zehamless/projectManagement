@@ -81,10 +81,10 @@ Route::prefix('customer')->group(function () {
     Route::get('/', [CustomerController::class, 'index'])->name('customer.index');
     Route::get('/create', [CustomerController::class, 'create'])->name('customer.create');
     Route::post('/store', [CustomerController::class, 'store'])->name('customer.store');
-    Route::get('/show', [CustomerController::class, 'show'])->name('customer.show');
-    Route::get('/edit', [CustomerController::class, 'edit'])->name('customer.edit');
+    Route::get('/show/{id}', [CustomerController::class, 'show'])->name('customer.show');
+    Route::get('/edit/{id}', [CustomerController::class, 'edit'])->name('customer.edit');
     Route::get('/update', [CustomerController::class, 'update'])->name('customer.update');
-    Route::delete('/delete/{name}', [CustomerController::class, 'destroy'])->name('customer.destroy');
+    Route::delete('/delete/{id}', [CustomerController::class, 'destroy'])->name('customer.destroy');
 });
 
 Route::prefix('customerContact')->group(function () {
