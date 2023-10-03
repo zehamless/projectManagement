@@ -169,6 +169,7 @@
                                         <select id="customers" class="form-control" name="customers"
                                             style="color: black;">
                                             <option>--Pilih Customer--</option>
+                                            <option value="createNewCustomer">Buat baru</option>
                                             @foreach ($customers as $customer)
                                                 <option value="{{ $customer->id }}">{{ $customer['companyName'] }}</option>
                                             @endforeach
@@ -280,9 +281,10 @@
     <script>
         $(document).ready(function() {
             $('#customers').select2({
-                allowClear: true,
-                tags: true,
-                theme: 'classic',
+                placeholder: 'Cari company',
+                multiple: false,
+                dropdownAutoWidth: true,
+                width: '100%',
             });
         });
     </script>
@@ -290,9 +292,10 @@
     <script>
         $(document).ready(function() {
             $('#customers-name').select2({
-                allowClear: true,
-                tags: true,
-                theme: 'classic',
+                placeholder: 'Cari customer',
+                multiple: false,
+                dropdownAutoWidth: true,
+                width: '100%',
             });
         });
     </script>
@@ -320,8 +323,10 @@
                 var customer_id = $(this).val();
                 var $customerContact = $('#customers-name');
 
-
-                if (customer_id) {
+                if (customer_id === 'createNewCustomer') {
+                    // Redirect ke halaman pembuatan customer
+                    window.location.href = "{{ route('customer.create') }}";
+                } else if (customer_id) {
                     $customerContact.prop('disabled', false);
                     $.ajax({
                         url: '/customerContact/get-customer-contacts/' + customer_id,
