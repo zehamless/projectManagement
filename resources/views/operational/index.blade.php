@@ -190,9 +190,9 @@
                                                                                 </button>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="table-responsive">
+                                                                        <div class="">
                                                                             <table
-                                                                                class="table table-striped table-hover mb-0">
+                                                                                class="table table-striped table-hover table-responsive mb-0">
                                                                                 <thead>
                                                                                 <tr>
                                                                                     <th>#</th>
@@ -205,6 +205,7 @@
                                                                                     </th>
                                                                                 </tr>
                                                                                 </thead>
+                                                                                
                                                                                 <tbody>
                                                                                 <tr>
                                                                                     <th scope="row">1</th>
@@ -338,9 +339,9 @@
                                                                             </div>
 
                                                                         </div>
-                                                                        <div class="table-responsive">
+                                                                        <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap5">
                                                                             <table
-                                                                                class="table table-bordered dt-responsive table-hover table-responsive nowrap dataTable no-footer dtr-inline"
+                                                                                class="table table-striped table-hover dt-responsive table-hover table-responsive nowrap dataTable no-footer dtr-inline"
                                                                                 id="table-expenses">
                                                                                 <thead>
                                                                                 <tr>
@@ -734,9 +735,11 @@
             console.log(expense);
             // let operational = $('#select-operational').val();
             let table = $('#table-expenses').DataTable({
+                autoWidth: false,
                 processing: true,
                 serverSide: true,
                 responsive: true,
+                scrollX: true,
                 "bDestroy": true,
                 ajax: "{{ route('operational.expense.index', '') }}" + "/" + expense,
                 columns: [
