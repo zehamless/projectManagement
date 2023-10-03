@@ -74,6 +74,13 @@
                     </a>
                 </li>
 
+                <li class="{{ Request::is('approval/*') ? 'menuitem-active' : ''}}">
+                    <a href="{{ url('approval') }}">
+                        <i class="mdi mdi-clipboard-check-multiple-outline"></i>
+                        <span> Approval </span>
+                    </a>
+                </li>
+
                 <li class="{{ Request::is('calendar/*') ? 'menuitem-active' : ''}}">
                     <a href="{{ url('calendar') }}">
                         <i class="mdi mdi-calendar-blank-outline"></i>

@@ -42,7 +42,7 @@
                                     <h4 class="mt-0">Data Customer</h4>
                                 </div>
                                 <div class="col-sm-4 text-end">
-                                    <a href="{{ url('customer/create') }}" class="btn btn-addItems w-md waves-effect waves-light mb-3 px-3">
+                                    <a href="{{ $createRoute }}" class="btn btn-addItems w-md waves-effect waves-light mb-3 px-3">
                                         <i class="mdi mdi-plus" title="Menambahkan Customer"></i>Add Customer
                                     </a>
                                 </div>
