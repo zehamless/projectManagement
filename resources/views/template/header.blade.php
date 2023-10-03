@@ -166,6 +166,11 @@
         font-weight: 100;
     }
 
+    .dataTables_scrollHeadInner, .table{
+        width:100%!important
+    }
+
+    /* styling profile secrtion */
     @media screen and (max-width: 768px) {
         .profile-section {
             margin-top: 20px;
@@ -174,6 +179,7 @@
         }
     }
 
+    /* styling profile section */
     @media screen and (max-height: 650px) {
         .profile-section {
             margin-top: 20px;
