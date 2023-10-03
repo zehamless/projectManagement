@@ -2,15 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OperationalAgenda;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use App\OperationalAgenda;
+use Yajra\DataTables\Facades\DataTables;
 
 class OperationalAgendaController extends Controller
 {
-    public function index()
+    /**
+     * @param Request $request
+     * @param $operational
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
+    public function index(Request $request, $operational)
     {
-        $operationalAgenda = OperationalAgenda::all();
-        return view('operational_agenda.index', compact('operationalAgenda'));
+        if ($request->ajax()){
+            $agenda = OperationalAgenda::where('operational_id', $operational)->get();
+            return DataTables::of($agenda)
+                ->addIndexColumn()
+                ->toJson();
+        }
     }
 
     public function create()
@@ -37,8 +52,9 @@ class OperationalAgendaController extends Controller
             'status' => $request->input('status'),
         ]);
 
-        return redirect()->route('operational_agenda.index')
-            ->with('success', 'Data operational agenda berhasil ditambahkan.');
+        return response()->json([
+            'success' => "Operational Agenda added succescfully"
+        ], 200);
     }
 
     public function show(OperationalAgenda $operationalAgenda)
@@ -57,22 +73,17 @@ class OperationalAgendaController extends Controller
     {
         // Validasi data yang dikirim dari formulir
         $request->validate([
-            'operational_id' => 'required',
             'description' => 'required',
             'due_date' => 'required',
             'status' => 'required',
         ]);
 
         // Perbarui data yang ada dalam tabel "operational_agenda"
-        $operationalAgenda->update([
-            'operational_id' => $request->input('operational_id'),
-            'description' => $request->input('description'),
-            'due_date' => $request->input('due_date'),
-            'status' => $request->input('status'),
-        ]);
+        $operationalAgenda->update($request->all());
 
-        return redirect()->route('operational-agendas.index')
-            ->with('success', 'Data operational agenda berhasil diperbarui.');
+        return response()->json([
+            'success' => 'Operational Agenda updated successfully!'
+        ], 200);
     }
 
     public function delete(OperationalAgenda $operationalAgenda)
@@ -81,7 +92,20 @@ class OperationalAgendaController extends Controller
         // Hapus data dari tabel "operational_agenda"
         $operationalAgenda->delete();
 
-        return redirect()->route('operational_agenda.index')
-            ->with('success', 'Data operational agenda berhasil dihapus.');
+        return response()->json([
+            'success' => 'Operational Agenda deleted successfully!'
+        ], 200);
+     }
+
+    /**
+     * @param Request $request
+     * @param string $agenda
+     * @return JsonResponse
+     */
+    public function showAgenda(Request $request, string $agenda)
+     {
+         $attrAgenda = OperationalAgenda::where('id', $agenda)->get();
+
+         return response()->json($attrAgenda);
      }
 }
