@@ -50,7 +50,7 @@
                             <table id="dataTable" class="table table-striped dt-responsive table-responsive nowrap">
                                 <thead>
                                     <tr>
-                                        <th width="50">#</th>
+                                        <th width="50">No</th>
                                         <th>Customer Name</th>
                                         <th width="140" class="text-center">Actions</th>
                                     </tr>
@@ -81,8 +81,8 @@
             scrollX: true,
             ajax: "{{ route('customer.index') }}",
             columns: [{
-                    data: 'id',
-                    name: 'id',
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex',
                     searchable: false,
                     orderable: false
                 },
