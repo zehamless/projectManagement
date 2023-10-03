@@ -38,10 +38,13 @@ Route::group(['prefix' => 'projects'], function () {
     Route::delete('/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
     Route::get('/createProductionCost/{id}', [ProductionCostController::class, 'create'])->name('production-cost.create');
     Route::post('/production-cost', [ProductionCostController::class, 'store'])->name('production-cost.store');
+    Route::delete('/production-cost/{id}', [ProductionCostController::class, 'destroy'])->name('production-cost.destroy');
 });
 // Milestone
 Route::get('/get-milestone-data/{id}', [MilestoneController::class, 'getMilestoneData'])->name("milestone.get");
-
+// Pcost json
+Route::get('/get-cost-data/{id}', [ProductionCostController::class, 'getPCostData'])->name("cost.get");
+Route::put('production/update/', [ProductionCostController::class, 'update'])->name('cost.update');
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
 
 
@@ -76,6 +79,7 @@ Route::prefix('milestone')->group(function () {
     Route::get('/create/{id}', [MilestoneController::class, 'create'])->name('milestone.create');
     Route::post('/store', [MilestoneController::class, 'store'])->name('milestone.store');
     Route::put('/', [MilestoneController::class, 'update'])->name('milestone.update');
+    Route::delete('/{id}', [MilestoneController::class, 'destroy'])->name('milestone.destroy');
 });
 
 
@@ -141,7 +145,6 @@ Route::prefix('operational')->group(function () {
     Route::prefix('technician')->group(function () {
         Route::patch('/{operational}', [OperationalController::class, 'detachTeam'])->name('operational.detach-team');
         Route::patch('/attach/{operational}', [OperationalController::class, 'attachTeam'])->name('operational.attach-team');
-
     });
 });
 
@@ -173,6 +176,10 @@ Route::get('/projects/createMilestone', function () {
 
 Route::get('/projects/createOperational', function () {
     return view('projects.createOperational');
+});
+
+Route::get('/projects/createPayment', function () {
+    return view('projects.createPayment');
 });
 
 Route::get('calendar', function () {
