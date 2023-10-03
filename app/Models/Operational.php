@@ -33,6 +33,10 @@ class Operational extends Model
     {
         return $this->hasMany(Agenda::class);
     }
+
+    /**
+     * @return BelongsToMany
+     */
     public function team(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'operational_team', 'operational_id', 'user_id');

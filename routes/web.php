@@ -39,6 +39,8 @@ Route::group(['prefix' => 'projects'], function () {
     Route::get('/createProductionCost/{id}', [ProductionCostController::class, 'create'])->name('production-cost.create');
     Route::post('/production-cost', [ProductionCostController::class, 'store'])->name('production-cost.store');
 });
+// Milestone
+Route::get('/get-milestone-data/{id}', [MilestoneController::class, 'getMilestoneData'])->name("milestone.get");
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
 
@@ -60,7 +62,6 @@ Route::get('/testPage', function () {
 });
 
 
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -74,6 +75,7 @@ Route::middleware('auth')->group(function () {
 Route::prefix('milestone')->group(function () {
     Route::get('/create/{id}', [MilestoneController::class, 'create'])->name('milestone.create');
     Route::post('/store', [MilestoneController::class, 'store'])->name('milestone.store');
+    Route::put('/', [MilestoneController::class, 'update'])->name('milestone.update');
 });
 
 
@@ -108,7 +110,7 @@ Route::prefix('admin')->group(function () {
     Route::delete('/roles', [RoleController::class, 'delete'])->name('roles.delete');
     Route::get('/roles/{role}', [RoleController::class, 'showRole'])->name('roles.show');
 
-    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/users/{parameter?}', [UserController::class, 'index'])->name('users.index');
     Route::get('/users/create', [UserController::class, 'createForm'])->name('users.createForm');
     Route::post('/users', [UserController::class, 'store'])->name('users.store');
     Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
@@ -129,10 +131,17 @@ Route::prefix('operational')->group(function () {
     Route::get('/getOperational/{salesOrder}', [OperationalController::class, 'getOperational'])->name('operational.get-operational');
     Route::get('/getTeam/{operational}', [OperationalController::class, 'getTeam'])->name('operational.get-team');
     Route::prefix('expense')->group(function () {
+        Route::get('/get/{operational}', [OperationalExpensesController::class, 'index'])->name('operational.expense.index');
         Route::post('/store', [OperationalExpensesController::class, 'store'])->name('operational.expense.store');
         Route::get('/{expense}/edit', [OperationalExpensesController::class, 'updateExpenseForm'])->name('operational.expense.update-form');
         Route::patch('/{expense}', [OperationalExpensesController::class, 'update'])->name('operational.expense.update');
         Route::delete('/{expense}', [OperationalExpensesController::class, 'delete'])->name('operational.expense.delete');
+        Route::get('/show/{expense}', [OperationalExpensesController::class, 'show'])->name('operational.expense.show');
+    });
+    Route::prefix('technician')->group(function () {
+        Route::patch('/{operational}', [OperationalController::class, 'detachTeam'])->name('operational.detach-team');
+        Route::patch('/attach/{operational}', [OperationalController::class, 'attachTeam'])->name('operational.attach-team');
+
     });
 });
 

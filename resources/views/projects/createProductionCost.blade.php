@@ -19,18 +19,30 @@
                                         <input type="hidden" name="project_id" value="{{ $projectId }}">
                                         <input type="text" name="label" parsley-trigger="change" required
                                             class="form-control" readonly value="{{ $label }}">
+                                        @error('label')
+                                            <p style="color: red;">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                     <div class="mb-3">
                                         <label for="description" class="form-label">Description<span
                                                 class="text-danger">*</span></label>
                                         <input type="text" name="description" parsley-trigger="change" required
                                             placeholder="Enter description" class="form-control">
+                                        @error('description')
+                                            <p style="color: red;">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                     <div class="mb-3">
                                         <label for="amount" class="form-label">Amount<span
                                                 class="text-danger">*</span></label>
-                                        <input type="text" name="amount" parsley-trigger="change" required
-                                            placeholder="Enter amount" class="form-control">
+                                        <div class="flex input-group">
+                                            <span class="input-group-text">Rp.</span>
+                                            <input type="text" name="amount" parsley-trigger="change" required
+                                                placeholder="Enter amount" class="form-control">
+                                        </div>
+                                        @error('amount')
+                                            <p style="color: red;">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                     <div class="text-end">
                                         <a href="{{ url('projects') }}">

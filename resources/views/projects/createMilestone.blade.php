@@ -55,11 +55,9 @@
                                         @enderror
                                     </div>
                                     <div class="mb-3">
-                                        <label for="userName" class="form-label">File Attachment<span
-                                                class="text-danger">*</span></label>
-                                        <input type="file" name="file" parsley-trigger="change" required=""
-                                            data-plugins="dropify" data-height="150" class="form-control"
-                                            id="fileAttachment">
+                                        <label for="userName" class="form-label">File Attachment</label>
+                                        <input type="file" name="file" parsley-trigger="change" data-plugins="dropify"
+                                            data-height="150" class="form-control" id="fileAttachment">
                                         @error('file')
                                             <p style="color: red;">{{ $message }}</p>
                                         @enderror
