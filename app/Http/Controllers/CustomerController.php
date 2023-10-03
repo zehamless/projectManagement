@@ -21,7 +21,7 @@ class CustomerController extends Controller
                     return $btn;
                 })
                 ->rawColumns(['action'])
-                ->make(true);
+                ->toJson();
         }
 
         $createRoute = route('customer.create');
