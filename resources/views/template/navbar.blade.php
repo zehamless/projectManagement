@@ -88,6 +88,13 @@
                     </a>
                 </li>
 
+                <li class="{{ Request::is('summary/*') ? 'menuitem-active' : ''}}">
+                    <a href="{{ url('summary') }}">
+                        <i class="mdi mdi-bulletin-board"></i>
+                        <span> Summary </span>
+                    </a>
+                </li>
+
                 <li class="menu-title mt-2">Account Management</li>
 
                 <li class="{{ Request::is('admin/*') ? 'menuitem-active' : ''}}">

@@ -38,6 +38,10 @@
             border: #FF3E3E;
             color: white;
         }
+
+        .row{
+            --ct-gutter-x: 0rem !important;
+        }
     </style>
 
     <div class="content-page">
@@ -73,7 +77,7 @@
                     <div class="col-12">
                         <div class="card card-nbm">
                             <div class="card-body card-nbm">
-                                <div class="row">
+                                <div id="operational-section" class="row">
                                     <div class="row">
                                         <div class="col-md-12 mb-3">
                                             <h4 class="header-title mb-2">Operational</h4>
