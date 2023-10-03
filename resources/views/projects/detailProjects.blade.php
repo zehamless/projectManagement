@@ -121,9 +121,9 @@
                                                                 </button>
                                                             </div>
                                                             <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <button title="Untuk menghapus milestone" type="button"
-                                                                    onclick="deleteProject()"
-                                                                    class="tabledit-edit-button btn btn-danger">
+                                                                <button id="deleteButton" title="Untuk menghapus milestone"
+                                                                    type="button" value="{{ $milestone['id'] }}"
+                                                                    class="tabledit-edit-button hapusMilestone btn btn-danger">
                                                                     <span class="mdi mdi-trash-can-outline"></span>
                                                                 </button>
                                                             </div>
@@ -185,7 +185,8 @@
                                                             </div>
                                                             <div class="btn-group btn-group-sm" style="float: none;">
                                                                 <button title="Hapus Operational Cost" type="button"
-                                                                    class="tabledit-edit-button btn btn-danger">
+                                                                    value="{{ $cost->id }}"
+                                                                    class="tabledit-edit-button hapusPCost btn btn-danger">
                                                                     <span class="mdi mdi-trash-can-outline"></span>
                                                                 </button>
                                                             </div>
@@ -447,7 +448,8 @@
                                         </div>
                                         <div class="btn-group btn-group-sm" style="float: none;">
                                             <button title="hapus data" type="button"
-                                                class="tabledit-edit-button btn btn-danger" onclick="deleteProject()">
+                                                class="tabledit-edit-button hapusProject btn btn-danger"
+                                                value="{{ $projectData->id }}">
                                                 <span class="mdi mdi-trash-can-outline"></span>
                                             </button>
                                         </div>
@@ -637,8 +639,9 @@
                     ctx.font = fontSize + "em sans-serif";
                     ctx.textBaseline = "middle";
 
-                    var text = "{{ $percentageDone }}%",
-                        textX = Math.round((width - ctx.measureText(text).width) / 2),
+                    var percentageDone = {{ $percentageDone }};
+                    var text = Math.round(percentageDone) + "%";
+                    textX = Math.round((width - ctx.measureText(text).width) / 2),
                         textY = height / 2;
 
                     ctx.fillText(text, textX, textY);
@@ -709,31 +712,187 @@
         });
     </script>
 
+    {{-- Hapus Project Pop Up --}}
     <script type="text/javascript">
-        function deleteProject(milestoneId) {
-            // Display a confirmation dialog
-            Swal.fire({
-                title: 'Are you sure?',
-                text: 'You will not be able to recover this user!',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#f34e4e',
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'Cancel'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Silahkan isi logika nya sendiri xixixi
-                    $.ajax({
-                        url: "{{ route('users.delete', '') }}" + '/' + milestoneId,
-                        type: 'DELETE',
-                        data: {
-                            _token: "{{ csrf_token() }}",
-                        },
-                    });
-                    location.reload();
-                }
+        $(document).ready(function() {
+            $(document).on('click', '.hapusProject', function() {
+                var id = $(this).val();
+
+                // Display a confirmation dialog
+                Swal.fire({
+                    title: "Anda yakin?",
+                    text: "Beberapa data mungkin akan ikut terhapus",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#f34e4e',
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'Cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Silahkan isi logika nya sendiri xixixi
+                        $.ajax({
+                            url: "{{ route('projects.destroy', '') }}" + '/' + id,
+                            type: 'DELETE',
+                            data: {
+                                _token: "{{ csrf_token() }}",
+                            },
+                            success: function(response) {
+                                try {
+                                    if (response.message) {
+                                        Swal.fire({
+                                            title: "Sukses!",
+                                            text: response.message,
+                                            icon: 'success',
+                                            confirmButtonText: 'OK'
+                                        }).then((hasil) => {
+                                            if (hasil.isConfirmed) {
+                                                window.location.href =
+                                                    "{{ route('projects.index') }}";
+                                            }
+                                        });
+                                    } else {
+                                        console.error('Terjadi kesalahan: ' + response
+                                            .error
+                                        ); // Tampilkan pesan kesalahan jika ada
+                                    }
+                                } catch (error) {
+                                    console.error(
+                                        'Terjadi kesalahan saat mengolah respons: ' +
+                                        error);
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(
+                                    'Terjadi kesalahan saat menghapus data: ' +
+                                    error);
+                            }
+                        });
+
+                    }
+                });
             });
-        }
+        });
+    </script>
+    {{-- Hapus Milestone Pop Up --}}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(document).on('click', '.hapusMilestone', function() {
+                var id = $(this).val();
+
+                // Display a confirmation dialog
+                Swal.fire({
+                    title: "Anda yakin?",
+                    text: "Data tidak bisa dikembalikan!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#f34e4e',
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'Cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Silahkan isi logika nya sendiri xixixi
+                        $.ajax({
+                            url: "{{ route('milestone.destroy', '') }}" + '/' + id,
+                            type: 'DELETE',
+                            data: {
+                                _token: "{{ csrf_token() }}",
+                            },
+                            success: function(response) {
+                                try {
+                                    if (response.message) {
+                                        Swal.fire({
+                                            title: "Sukses!",
+                                            text: response.message,
+                                            icon: 'success',
+                                            confirmButtonText: 'OK'
+                                        }).then((hasil) => {
+                                            if (hasil.isConfirmed) {
+                                                window.location.reload();
+                                            }
+                                        });
+                                    } else {
+                                        console.error('Terjadi kesalahan: ' + response
+                                            .error
+                                        ); // Tampilkan pesan kesalahan jika ada
+                                    }
+                                } catch (error) {
+                                    console.error(
+                                        'Terjadi kesalahan saat mengolah respons: ' +
+                                        error);
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(
+                                    'Terjadi kesalahan saat menghapus data: ' +
+                                    error);
+                            }
+                        });
+
+                    }
+                });
+            });
+        });
+    </script>
+
+    {{-- Hapus Production Cost Pop Up --}}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(document).on('click', '.hapusPCost', function() {
+                var id = $(this).val();
+
+                // Display a confirmation dialog
+                Swal.fire({
+                    title: "Anda yakin?",
+                    text: "Data tidak bisa dikembalikan!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#f34e4e',
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'Cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Silahkan isi logika nya sendiri xixixi
+                        $.ajax({
+                            url: "{{ route('production-cost.destroy', '') }}" + '/' + id,
+                            type: 'DELETE',
+                            data: {
+                                _token: "{{ csrf_token() }}",
+                            },
+                            success: function(response) {
+                                try {
+                                    if (response.message) {
+                                        Swal.fire({
+                                            title: "Sukses!",
+                                            text: response.message,
+                                            icon: 'success',
+                                            confirmButtonText: 'OK'
+                                        }).then((hasil) => {
+                                            if (hasil.isConfirmed) {
+                                                window.location.reload();
+                                            }
+                                        });
+                                    } else {
+                                        console.error('Terjadi kesalahan: ' + response
+                                            .error
+                                        ); // Tampilkan pesan kesalahan jika ada
+                                    }
+                                } catch (error) {
+                                    console.error(
+                                        'Terjadi kesalahan saat mengolah respons: ' +
+                                        error);
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(
+                                    'Terjadi kesalahan saat menghapus data: ' +
+                                    error);
+                            }
+                        });
+
+                    }
+                });
+            });
+        });
     </script>
 
     {{-- Milestone edit --}}

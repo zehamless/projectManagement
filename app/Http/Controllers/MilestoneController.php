@@ -95,4 +95,16 @@ class MilestoneController extends Controller
         $project = $id;
         return view('projects.createMilestone', compact('project'));
     }
+
+    // Hapus milestone
+    public function destroy($id)
+    {
+        try {
+            $milestone = Milestone::findOrFail($id);
+            $milestone->delete();
+            return response()->json(['message' => 'Milestone berhasil dihapus.']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Terjadi kesalahan saat menghapus Milestone.'], 500);
+        }
+    }
 }

@@ -76,4 +76,16 @@ class ProductionCostController extends Controller
         // Mengembalikan data p_cost sebagai respons JSON
         return response()->json($p_cost);
     }
+
+    // Hapus production cost
+    public function destroy($id)
+    {
+        try {
+            $productionCost = ProductionCost::findOrFail($id);
+            $productionCost->delete();
+            return response()->json(['message' => 'Production Cost berhasil dihapus.']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Terjadi kesalahan saat menghapus Production Cost.'], 500);
+        }
+    }
 }

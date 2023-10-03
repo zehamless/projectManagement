@@ -38,6 +38,7 @@ Route::group(['prefix' => 'projects'], function () {
     Route::delete('/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
     Route::get('/createProductionCost/{id}', [ProductionCostController::class, 'create'])->name('production-cost.create');
     Route::post('/production-cost', [ProductionCostController::class, 'store'])->name('production-cost.store');
+    Route::delete('/production-cost/{id}', [ProductionCostController::class, 'destroy'])->name('production-cost.destroy');
 });
 // Milestone
 Route::get('/get-milestone-data/{id}', [MilestoneController::class, 'getMilestoneData'])->name("milestone.get");
@@ -79,6 +80,7 @@ Route::prefix('milestone')->group(function () {
     Route::get('/create/{id}', [MilestoneController::class, 'create'])->name('milestone.create');
     Route::post('/store', [MilestoneController::class, 'store'])->name('milestone.store');
     Route::put('/', [MilestoneController::class, 'update'])->name('milestone.update');
+    Route::delete('/{id}', [MilestoneController::class, 'destroy'])->name('milestone.destroy');
 });
 
 
