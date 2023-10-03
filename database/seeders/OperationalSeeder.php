@@ -15,7 +15,7 @@ class OperationalSeeder extends Seeder
      */
     public function run(): void
     {
-        $users = User::all()->pluck('id')->toArray();
+        $users = User::limit(10)->pluck('id')->toArray();
         $projectId = Project::first()->id;
         $operational = Operational::create([
             'project_id' => $projectId,
