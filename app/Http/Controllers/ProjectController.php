@@ -150,7 +150,7 @@ class ProjectController extends Controller
         $project = Project::findOrFail($id);
 
         // Ambil data proyek, serta data customer_id, customerContact_id, companyName, dan customerContactName
-        $projectData = Project::select('projects.*', 'customers.id as customer_id', 'customer_contacts.id as customerContactId', 'customers.companyName', 'customer_contacts.name as contactName')
+        $projectData = Project::select('projects.*', 'customers.id as customer_id', 'customer_contacts.id as customerContactId', 'customers.companyName as companyName', 'customer_contacts.name as contactName')
             ->leftJoin('customers', 'projects.customer_id', '=', 'customers.id')
             ->leftJoin('customer_contacts', 'customers.id', '=', 'customer_contacts.customer_id')
             ->where('projects.id', $id)
@@ -216,9 +216,12 @@ class ProjectController extends Controller
     // Menghapus project dari database
     public function destroy($id)
     {
-        $project = Project::findOrFail($id);
-        $project->delete();
-
-        return redirect('/projects/projects')->with('success', 'Project berhasil dihapus.');
+        try {
+            $project = Project::findOrFail($id);
+            $project->delete();
+            return response()->json(['message' => 'Project berhasil dihapus.']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Terjadi kesalahan saat menghapus proyek.'], 500);
+        }
     }
 }

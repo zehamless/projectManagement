@@ -13,7 +13,7 @@ class CustomerController extends Controller
         if ($request->ajax()) {
             $data = Customer::select('id', 'companyName');
             return DataTables::of($data)
-            ->addIndexColumn()
+                ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     // Definisikan tombol aksi di sini (detail, edit, hapus)
                     $btn = '<a href="#" class="edit btn btn-info btn-sm">Edit</a>';
@@ -24,33 +24,32 @@ class CustomerController extends Controller
                 ->make(true);
         }
 
-        return view('customer.index');
+        $createRoute = route('customer.create');
+        return view('customer.index', compact('createRoute'));
     }
 
     // Menampilkan formulir untuk membuat data baru
     public function create()
     {
 
-        return view('customer.createCustomer', );
+        return view('customer.createCustomer');
     }
 
-    // Menyimpan data baru ke database
     public function store(Request $request)
     {
-        // Validasi input data
+        // Validasi input
         $request->validate([
-            'companyName' => 'required|string|max:255',
+            'companyName' => 'required',
         ]);
-       try {
-        $customer = Customer::create([
+
+        // Simpan data pelanggan ke database
+        Customer::create([
             'companyName' => $request->input('companyName'),
         ]);
 
-        return redirect()->route('customer.index')->with('success', 'Data customer berhasil ditambahkan.');
-        } catch (\Exception $e) {
-        return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
-        }
-        }
+        $indexRoute = route('customer.index'); // Sesuaikan dengan nama rute index Anda
+        return redirect($indexRoute)->with('success', 'Data customer berhasil ditambahkan.');
+    }
 
     // Menampilkan detail data
     public function show($id)
@@ -80,9 +79,9 @@ class CustomerController extends Controller
     // Menghapus data dari database
     public function destroy($id)
     {
-    $customer = Customer::findOrFail($id);
-    $customer->delete();
+        $customer = Customer::findOrFail($id);
+        $customer->delete();
 
-    return redirect()->route('customer.index')->with('success', 'Customer berhasil dihapus.');
+        return redirect()->route('customer.index')->with('success', 'Customer berhasil dihapus.');
     }
 }

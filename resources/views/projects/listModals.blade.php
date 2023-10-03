@@ -81,15 +81,17 @@
     </form>
 
     {{-- modals edit production cost --}}
-    <form action="" class="parsley-examples" novalidate="" method="post" enctype="multipart/form-data">
+<form action="{{ route('cost.update') }}" class="parsley-examples"
+        novalidate="" method="post" enctype="multipart/form-data">
         @csrf
+        @method('PUT')
         <div id="edit-cost-modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
             style="overflow:hidden;">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">
-                            Edit Field Service Log</h4>
+                            Edit Production Cost</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
@@ -100,25 +102,31 @@
                             <div class="mb-3">
                                 <label for="userName" class="form-label">Projects<span
                                         class="text-danger">*</span></label>
-                                <input type="hidden" name="project_id" value="">
-                                <input type="text" name="label" parsley-trigger="change" required
-                                    class="form-control" readonly value="">
+                                <input type="hidden" name="project_id" value="{{ $projectData->id }}"
+                                    id="project_id">
+                                <input type="hidden" name="cost_id" value="" id="cost_id">
+                                <input type="text" name="project_name" id="project_name"
+                                    value="{{ $projectData['label'] }}" parsley-trigger="change" class="form-control"
+                                    readonly value="">
                             </div>
 
                             {{-- form input description --}}
                             <div class="mb-3">
-                                <label for="description" class="form-label">Description<span
+                                <label for="description_cost" class="form-label">Description<span
                                         class="text-danger">*</span></label>
-                                <textarea type="text" name="description" parsley-trigger="change" required placeholder="Enter description"
-                                    class="form-control"> </textarea>
+                                <textarea type="text" name="description" parsley-trigger="change" id="description_cost" required
+                                    placeholder="Enter description" class="form-control"> </textarea>
                             </div>
 
                             {{-- form input amount --}}
                             <div class="mb-3">
-                                <label for="amount" class="form-label">Amount<span
+                                <label for="amount_cost" class="form-label">Amount<span
                                         class="text-danger">*</span></label>
-                                <input type="text" name="amount" parsley-trigger="change" required
-                                    placeholder="Enter amount" class="form-control">
+                                <div class="flex input-group">
+                                    <span class="input-group-text">Rp.</span>
+                                    <input type="text" name="amount" id="amount_cost" parsley-trigger="change"
+                                        required placeholder="Enter amount" class="form-control">
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">
