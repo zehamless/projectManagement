@@ -175,4 +175,8 @@ Route::get('/projects/createOperational', function () {
     return view('projects.createOperational');
 });
 
+Route::get('calendar', function () {
+    return view('calendar');
+});
+
 require __DIR__ . '/auth.php';
