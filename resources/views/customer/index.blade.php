@@ -35,10 +35,6 @@
                         <div class="card-body">
                             <div class="row table-title">
                                 <div class="col-sm-8">
-                                    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
-                                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                                    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-
                                     <h4 class="mt-0">Data Customer</h4>
                                 </div>
                                 <div class="col-sm-4 text-end">
@@ -76,7 +72,7 @@
         var table = $('#dataTable').DataTable({
             autoWidth: false,
             processing: true,
-            responsive: false,
+            responsive: true,
             serverSide: true,
             scrollX: true,
             ajax: "{{ route('customer.index') }}",
@@ -107,13 +103,13 @@
                             </div>
                             <div class="btn-group btn-group-sm" style="float: none;">
                                 <a href="{{ url('customer/edit') }}/${full.id}">
-                                    <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light" title="Edit Data" style="background-color: #3E8BFF;">
+                                    <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light" title="Edit Data" style="padding: 0.25rem 0.8rem;">
                                         <span class="mdi mdi-pencil"></span>
                                     </button>
                                 </a>
                             </div>
                             <div class="btn-group btn-group-sm" style="float: none;">
-                                <button type="button" class="tabledit-edit-button btn btn-danger waves-effect waves-light" id="sa-warning" style="padding: 0.25rem 0.8rem;" title="Hapus Customer" onclick="deleteCustomer(${full.id})">
+                                <button type="button" class="tabledit-edit-button btn btn-danger waves-effect waves-light" id="sa-warning" style="padding: 0.25rem 0.8rem;" title="Hapus Customer" onclick="deleteCustomer(${data})">
                                     <span class="mdi mdi-trash-can-outline"></span>
                                 </button>
                             </div>`;
@@ -125,21 +121,17 @@
 
     function deleteCustomer(id) {
         if (confirm('Apakah Anda yakin ingin menghapus customer ini?')) {
-            // Kirim permintaan penghapusan ke server
             $.ajax({
-                url: `{{ route('customer.destroy', ['id' => 'full.id']) }}/${id}`,
+                url: "{{ route('customer.destroy', '') }}/" + id,
                 type: 'DELETE',
                 data: {
-                    "_token": "{{ csrf_token() }}"
+                    _token: "{{ csrf_token() }}"
                 },
                 success: function(response) {
-                    // Lakukan sesuatu setelah penghapusan berhasil
                     console.log(response);
-                    // Misalnya, muat ulang tabel atau tindakan lainnya
                 },
                 error: function(error) {
                     console.error(error);
-                    // Handle kesalahan, tampilkan pesan kesalahan atau lakukan tindakan lainnya
                 }
             });
         }
