@@ -109,7 +109,7 @@
                                 </a>
                             </div>
                             <div class="btn-group btn-group-sm" style="float: none;">
-                                <button type="button" class="tabledit-edit-button btn btn-danger waves-effect waves-light" id="sa-warning" style="padding: 0.25rem 0.8rem;" title="Hapus Customer" onclick="deleteCustomer(${full.id})">
+                                <button type="button" class="tabledit-edit-button btn btn-danger waves-effect waves-light" id="sa-warning" style="padding: 0.25rem 0.8rem;" title="Hapus Customer" onclick="deleteCustomer(${data})">
                                     <span class="mdi mdi-trash-can-outline"></span>
                                 </button>
                             </div>`;
@@ -121,21 +121,17 @@
 
     function deleteCustomer(id) {
         if (confirm('Apakah Anda yakin ingin menghapus customer ini?')) {
-            // Kirim permintaan penghapusan ke server
             $.ajax({
-                url: `{{ route('customer.destroy', ['id' => 'full.id']) }}/${id}`,
+                url: "{{ route('customer.destroy', '') }}/" + id,
                 type: 'DELETE',
                 data: {
-                    "_token": "{{ csrf_token() }}"
+                    _token: "{{ csrf_token() }}"
                 },
                 success: function(response) {
-                    // Lakukan sesuatu setelah penghapusan berhasil
                     console.log(response);
-                    // Misalnya, muat ulang tabel atau tindakan lainnya
                 },
                 error: function(error) {
                     console.error(error);
-                    // Handle kesalahan, tampilkan pesan kesalahan atau lakukan tindakan lainnya
                 }
             });
         }
