@@ -984,7 +984,7 @@
             let data; // Define data variable in a broader scope
 
             $.ajax({
-                url: "{{ route('users.index', 'users') }}",
+                url: "{{ route('users.index', '') }}" + "/" + operational,
                 type: "GET",
                 success: function (responseData) {
                     console.log(responseData);
