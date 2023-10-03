@@ -175,6 +175,10 @@ Route::get('/projects/createOperational', function () {
     return view('projects.createOperational');
 });
 
+Route::get('/projects/createPayment', function () {
+    return view('projects.createPayment');
+});
+
 Route::get('calendar', function () {
     return view('calendar');
 });
