@@ -3,7 +3,7 @@
 
     <!-- LOGO -->
     <div class="logo-box">
-        <a href="index.html" class="logo logo-light text-center">
+        <a href="{{ url('/') }}" class="logo logo-light text-center">
             <span class="logo-sm">
                 <img src="{{ asset('images/logo_trafindo_only.png') }}" alt="" height="30">
             </span>
@@ -11,7 +11,7 @@
                 <img src="{{ asset('images/logo_trafindo_full.png') }}" alt="" height="40">
             </span>
         </a>
-        <a href="index.html" class="logo logo-dark text-center">
+        <a href="{{ url('/') }}" class="logo logo-dark text-center">
             <span class="logo-sm">
                 <img src="{{ asset('images/logo_trafindo_only.png') }}" alt="" height="30">
             </span>
@@ -47,7 +47,7 @@
         <!--- Sidemenu -->
         <div id="sidebar-menu">
 
-            <ul id="side-menu">
+            <ul id="side-menu" >
 
                 <li class="menu-title">Navigation</li>
 
@@ -75,7 +75,7 @@
                 </li>
 
                 <li class="{{ Request::is('calendar/*') ? 'menuitem-active' : ''}}">
-                    <a href="apps-calendar.html">
+                    <a href="{{ url('calendar') }}">
                         <i class="mdi mdi-calendar-blank-outline"></i>
                         <span> Calendar </span>
                     </a>
@@ -88,6 +88,13 @@
                     </a>
                 </li>
 
+                <li class="{{ Request::is('summary/*') ? 'menuitem-active' : ''}}">
+                    <a href="{{ url('summary') }}">
+                        <i class="mdi mdi-bulletin-board"></i>
+                        <span> Summary </span>
+                    </a>
+                </li>
+
                 <li class="menu-title mt-2">Account Management</li>
 
                 <li class="{{ Request::is('admin/*') ? 'menuitem-active' : ''}}">
@@ -96,25 +103,26 @@
                         <span> Data Akun </span>
                     </a>
                 </li>
+                <li class="profile-section">
+                    <div class=" user-box text-start">
+                        <div class="row px-3">
+                            <div class="col-3 profile-photo-column">
+                                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="user-img" title="Mat Helme"
+                                    class="rounded img-thumbnail avatar-md">
+                            </div>
+                            <div class="col-7">
+                                <h5 class="mb-1">Garcia Patel</h5>
+                                <p class="text-muted left-user-info mb-0">Admin</p>
+                            </div>
+                            <div class="col-2 my-auto">
+                                <a href="{{ url('login') }}">
+                                    <i class="fe-log-out logout-font" title="Logout System"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
             </ul>
-        </div>
-
-        <div class="profile-section user-box text-start">
-            <div class="row px-3">
-                <div class="col-3 profile-photo-column">
-                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="user-img" title="Mat Helme"
-                        class="rounded img-thumbnail avatar-md">
-                </div>
-                <div class="col-7">
-                    <h5 class="mb-1">Garcia Patel</h5>
-                    <p class="text-muted left-user-info mb-0">Admin</p>
-                </div>
-                <div class="col-2 my-auto">
-                    <a href="{{ url('login') }}">
-                        <i class="fe-log-out logout-font" title="Logout System"></i>
-                    </a>
-                </div>
-            </div>
         </div>
 
         <div class="clearfix"></div>

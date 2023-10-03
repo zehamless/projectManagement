@@ -65,7 +65,6 @@ Route::get('/testPage', function () {
 });
 
 
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -88,10 +87,10 @@ Route::prefix('customer')->group(function () {
     Route::get('/', [CustomerController::class, 'index'])->name('customer.index');
     Route::get('/create', [CustomerController::class, 'create'])->name('customer.create');
     Route::post('/store', [CustomerController::class, 'store'])->name('customer.store');
-    Route::get('/show', [CustomerController::class, 'show'])->name('customer.show');
-    Route::get('/edit', [CustomerController::class, 'edit'])->name('customer.edit');
+    Route::get('/show/{id}', [CustomerController::class, 'show'])->name('customer.show');
+    Route::get('/edit/{id}', [CustomerController::class, 'edit'])->name('customer.edit');
     Route::get('/update', [CustomerController::class, 'update'])->name('customer.update');
-    Route::delete('/delete/{name}', [CustomerController::class, 'destroy'])->name('customer.destroy');
+    Route::delete('/delete/{id}', [CustomerController::class, 'destroy'])->name('customer.destroy');
 });
 
 Route::prefix('customerContact')->group(function () {
@@ -115,7 +114,7 @@ Route::prefix('admin')->group(function () {
     Route::delete('/roles', [RoleController::class, 'delete'])->name('roles.delete');
     Route::get('/roles/{role}', [RoleController::class, 'showRole'])->name('roles.show');
 
-    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/users/{parameter?}', [UserController::class, 'index'])->name('users.index');
     Route::get('/users/create', [UserController::class, 'createForm'])->name('users.createForm');
     Route::post('/users', [UserController::class, 'store'])->name('users.store');
     Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
@@ -143,7 +142,10 @@ Route::prefix('operational')->group(function () {
         Route::delete('/{expense}', [OperationalExpensesController::class, 'delete'])->name('operational.expense.delete');
         Route::get('/show/{expense}', [OperationalExpensesController::class, 'show'])->name('operational.expense.show');
     });
-    Route::patch('/technician/{operational}', [OperationalController::class, 'detachTeam'])->name('operational.detach-team');
+    Route::prefix('technician')->group(function () {
+        Route::patch('/{operational}', [OperationalController::class, 'detachTeam'])->name('operational.detach-team');
+        Route::patch('/attach/{operational}', [OperationalController::class, 'attachTeam'])->name('operational.attach-team');
+    });
 });
 
 
@@ -174,6 +176,14 @@ Route::get('/projects/createMilestone', function () {
 
 Route::get('/projects/createOperational', function () {
     return view('projects.createOperational');
+});
+
+Route::get('/projects/createPayment', function () {
+    return view('projects.createPayment');
+});
+
+Route::get('calendar', function () {
+    return view('calendar');
 });
 
 require __DIR__ . '/auth.php';

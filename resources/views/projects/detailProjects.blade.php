@@ -328,6 +328,7 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Payment Type</th>
+                                                <th>Progress</th>
                                                 <th>Description</th>
                                                 <th class="text-center">Status</th>
                                                 <th class="text-center" width="160">Actions</th>
@@ -337,6 +338,7 @@
                                             <tr>
                                                 <th scope="row">1</th>
                                                 <td>DP</td>
+                                                <td>30%</td>
                                                 <td>Tanda jadi pembayaran trafo</td>
                                                 <td class="text-center"><span class="badge bg-success">Done</span></td>
                                                 <td class="text-center">
@@ -364,6 +366,7 @@
                                             <tr>
                                                 <th scope="row">2</th>
                                                 <td>Tahap 1</td>
+                                                <td>50%</td>
                                                 <td>Bayar sisa pembayaran tahap 1</td>
                                                 <td class="text-center"><span class="badge bg-success">Done</span></td>
                                                 <td class="text-center">
@@ -391,6 +394,7 @@
                                             <tr>
                                                 <th scope="row">3</th>
                                                 <td>Tahap 2 - Pelunasan</td>
+                                                <td>20%</td>
                                                 <td>Melunasi sisa pembayaran</td>
                                                 <td class="text-center"><span class="badge bg-warning">Progress</span>
                                                 </td>
