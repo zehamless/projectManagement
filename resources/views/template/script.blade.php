@@ -74,6 +74,9 @@
 
 <!-- Init js for file upload-->
 <script src="{{ asset('templateAdmin/Admin/dist/assets/js/pages/form-fileuploads.init.js') }}"></script>
+<script src="
+https://cdn.jsdelivr.net/npm/attrchange@1.0.1/attrchange.min.js
+"></script>
 
 {{-- Script buat tanggal --}}
 <script>
@@ -115,5 +118,35 @@
         
     }
 </script>
+
+<script>
+    const body = document.querySelector("body");
+
+    $(document).ready(function () {
+        $(".button-menu-mobile").on('click', function () {
+            $("body").addClass("sidebar-enable");
+            body.setAttribute("data-leftbar-size", "default");
+        });
+    });
+</script>
+
+{{-- <script>
+    var sidebar = document.getElementsByClassName('sidebar-enable')
+
+    $('body').on('sidebar-enable', function() {
+        // do stuff
+        if(sidebar){
+        $(document).ready(function () {
+            $(".button-menu-mobile").on('click', function () {
+                $("body").removeClass("sidebar-enable");
+            });
+            console.log('clicked');
+        });
+    }
+    });
+
+    
+    
+</script> --}}
 
 @yield('pageScript')

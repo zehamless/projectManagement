@@ -7,13 +7,13 @@
             <!-- Start Content-->
             <div class="container-fluid">
 
-                <div class="row gap-3">
-                    <div class="col-md-6 col-lg-3">
+                <div class="row ">
+                    <div class="col-lg-3">
                         <div class="card">
                             <div class="card-body">
                                 <div class="row align-items-center">
                                     <div class="col-4 text-center">
-                                        <i class="fas fa-list-check fa-3x"></i>
+                                        <i class="mdi mdi-book-check-outline fa-4x"></i>
                                     </div>
                                     <div class="col-8">
                                         <h4 class="fw-bold">Total Projects</h4>
@@ -24,12 +24,12 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6 col-lg-3">
+                    <div class="col-lg-3">
                         <div class="card">
                             <div class="card-body">
                                 <div class="row align-items-center">
                                     <div class="col-4 text-center">
-                                        <i class="far fa-user fa-3x"></i>
+                                        <i class="far fa-user fa-4x"></i>
                                     </div>
                                     <div class="col-8">
                                         <h4 class="fw-bold">Total Users</h4>
