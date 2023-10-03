@@ -41,11 +41,6 @@ class CustomerController extends Controller
         $request->validate([
             'companyName' => 'required|string|max:255',
         ]);
-
-        // Membuat dan menyimpan data baru
-        //$customer = new Customer();
-       // $customer->companyName = $request->input('companyName');
-       // $customer->save();
        try {
         $customer = Customer::create([
             'companyName' => $request->input('companyName'),
@@ -56,9 +51,6 @@ class CustomerController extends Controller
         return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
         }
-
-       // return redirect()->route('customer.index')
-        //    ->with('success', 'Data customer berhasil ditambahkan.');}
 
     // Menampilkan detail data
     public function show($id)
