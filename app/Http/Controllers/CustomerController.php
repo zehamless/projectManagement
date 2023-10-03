@@ -13,6 +13,7 @@ class CustomerController extends Controller
         if ($request->ajax()) {
             $data = Customer::select('id', 'companyName');
             return DataTables::of($data)
+            ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     // Definisikan tombol aksi di sini (detail, edit, hapus)
                     $btn = '<a href="#" class="edit btn btn-info btn-sm">Edit</a>';
