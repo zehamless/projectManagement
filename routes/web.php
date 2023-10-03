@@ -186,4 +186,8 @@ Route::get('calendar', function () {
     return view('calendar');
 });
 
+Route::get('approval', function () {
+    return view('approval');
+});
+
 require __DIR__ . '/auth.php';
