@@ -15,7 +15,10 @@ class OperationalSeeder extends Seeder
      */
     public function run(): void
     {
-        $users = User::limit(10)->pluck('id')->toArray();
+        //get 5 users who has role technician
+        $users = User::whereHas('hasroles', function ($q) {
+            $q->where('name', 'Technician');
+        })->get()->take(5);
         $projectId = Project::first()->id;
         $operational = Operational::create([
             'project_id' => $projectId,
@@ -30,6 +33,20 @@ class OperationalSeeder extends Seeder
         ]);
         foreach ($users as $user) {
             $operational->team()->attach($user);
+        }
+        $operational1 = Operational::create([
+            'project_id' => $projectId,
+            'date' => '2021-01-02',
+            'spk_code' => 'SPK Code 2',
+            'spk_number' => 'SPK Number 2',
+            'type' => 'type01',
+            'description' => 'desc',
+            'transportation_mode' => 'car',
+            'vehicle_number' => 'be1088ce',
+            'created_by' => 'admin',
+        ]);
+        foreach ($users as $user) {
+            $operational1->team()->attach($user);
         }
     }
 }
