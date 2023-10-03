@@ -44,13 +44,19 @@
     type="text/css" />
 <link href="{{ asset('templateAdmin/Admin/dist/assets/libs/select2/css/select2.min.css') }}" rel="stylesheet"
     type="text/css" />
-<link href="{{ asset('templateAdmin/Admin/dist/assets/libs/selectize/css/selectize.bootstrap3.css') }}"
-    rel="stylesheet" type="text/css" />
+<link href="{{ asset('templateAdmin/Admin/dist/assets/libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet"
+    type="text/css" />
 <!-- Plugins css -->
 <link href="{{ asset('templateAdmin/Admin/dist/assets/libs/mohithg-switchery/switchery.min.css') }}" rel="stylesheet"
     type="text/css" />
-<link href="{{ asset('templateAdmin/Admin/distassets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css') }}"
+<link href="{{ asset('templateAdmin/Admin/dist/assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css') }}" --}}
     rel="stylesheet" type="text/css" />
+<link href="{{ asset('templateAdmin/Admin/dist/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+
+{{-- calendar styling --}}
+<link href="{{ asset('templateAdmin/Admin/dist/assets/libs/fullcalendar/main.min.css') }}" rel="stylesheet"
+    type="text/css" />
+
 {{--
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> --}}
 {{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
@@ -68,8 +74,8 @@
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
 </script>
 
+
 <!-- icons -->
-<link href="{{ asset('templateAdmin/Admin/dist/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -125,10 +131,6 @@
         border-radius: 30% !important;
     }
 
-    .profile-section {
-        bottom: 0;
-    }
-
     .logout-font {
         font-size: 18px;
         font-weight: 100;
@@ -142,7 +144,6 @@
     .profile-section {
         position: absolute;
         bottom: 50px;
-        width: 100%;
     }
 
     .btn-addItems {
@@ -163,5 +164,27 @@
     .title-text {
         margin-bottom: unset;
         font-weight: 100;
+    }
+
+    .dataTables_scrollHeadInner, .table{
+        width:100%!important
+    }
+
+    /* styling profile secrtion */
+    @media screen and (max-width: 768px) {
+        .profile-section {
+            margin-top: 20px;
+            position: unset;
+            bottom: unset;
+        }
+    }
+
+    /* styling profile section */
+    @media screen and (max-height: 650px) {
+        .profile-section {
+            margin-top: 20px;
+            position: unset;
+            bottom: unset;
+        }
     }
 </style>

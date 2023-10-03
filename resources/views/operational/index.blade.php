@@ -38,6 +38,10 @@
             border: #FF3E3E;
             color: white;
         }
+
+        .row{
+            --ct-gutter-x: 0rem !important;
+        }
     </style>
 
     <div class="content-page">
@@ -73,7 +77,7 @@
                     <div class="col-12">
                         <div class="card card-nbm">
                             <div class="card-body card-nbm">
-                                <div class="row">
+                                <div id="operational-section" class="row">
                                     <div class="row">
                                         <div class="col-md-12 mb-3">
                                             <h4 class="header-title mb-2">Operational</h4>
@@ -186,7 +190,7 @@
                                                                                 </button>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="table-responsive">
+                                                                        <div class="">
                                                                             <table
                                                                                 class="table table-striped table-hover mb-0"
                                                                                 id="table-agendas">
@@ -201,6 +205,7 @@
                                                                                     </th>
                                                                                 </tr>
                                                                                 </thead>
+                                                                                
                                                                                 <tbody>
                                                                                 </tbody>
                                                                             </table>
@@ -233,9 +238,9 @@
                                                                             </div>
 
                                                                         </div>
-                                                                        <div class="table-responsive">
+                                                                        <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap5">
                                                                             <table
-                                                                                class="table table-bordered dt-responsive table-hover table-responsive nowrap dataTable no-footer dtr-inline"
+                                                                                class="table table-striped table-hover dt-responsive table-hover table-responsive nowrap dataTable no-footer dtr-inline"
                                                                                 id="table-expenses">
                                                                                 <thead>
                                                                                 <tr>
@@ -630,9 +635,11 @@
             console.log(expense);
             // let operational = $('#select-operational').val();
             let table = $('#table-expenses').DataTable({
+                autoWidth: false,
                 processing: true,
                 serverSide: true,
                 responsive: true,
+                scrollX: true,
                 "bDestroy": true,
                 ajax: "{{ route('operational.expense.index', '') }}" + "/" + expense,
                 columns: [

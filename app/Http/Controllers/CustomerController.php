@@ -4,83 +4,73 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class CustomerController extends Controller
 {
-    // Menampilkan daftar data
     public function index(Request $request)
     {
-        // Mulai dengan query untuk model Customer
-        $query = Customer::query()->orderBy('created_at', 'desc');
-
-        // Mengecek apakah ada kata kunci pencarian
-        if ($request->has('search')) {
-            $search = $request->input('search');
-
-            $query->where(function ($query) use ($search) {
-                $query->where('companyName', 'like', "%$search%");
-            });
+        if ($request->ajax()) {
+            $data = Customer::select('id', 'companyName');
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    // Definisikan tombol aksi di sini (detail, edit, hapus)
+                    $btn = '<a href="#" class="edit btn btn-info btn-sm">Edit</a>';
+                    $btn .= '<a href="#" class="delete btn btn-danger btn-sm">Delete</a>';
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
         }
 
-        // Ambil hasil query
-        $customer = $query->get();
-
-        return view('customer.index', compact('customer'));
+        $createRoute = route('customer.create');
+        return view('customer.index', compact('createRoute'));
     }
 
     // Menampilkan formulir untuk membuat data baru
     public function create()
     {
-        
-        return view('customer.createCustomer', );
+
+        return view('customer.createCustomer');
     }
 
-    // Menyimpan data baru ke database
     public function store(Request $request)
     {
-        // Validasi input data
+        // Validasi input
         $request->validate([
-            'companyName' => 'required|string|max:255',
+            'companyName' => 'required',
         ]);
 
-        // Membuat dan menyimpan data baru
-        //$customer = new Customer();
-       // $customer->companyName = $request->input('companyName');
-       // $customer->save();
-       try {
-        $customer = Customer::create([
+        // Simpan data pelanggan ke database
+        Customer::create([
             'companyName' => $request->input('companyName'),
         ]);
 
-        return redirect()->route('customer.index')->with('success', 'Data customer berhasil ditambahkan.');
-        } catch (\Exception $e) {
-        return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
-        }
-        }
-
-       // return redirect()->route('customer.index')
-        //    ->with('success', 'Data customer berhasil ditambahkan.');}
+        $indexRoute = route('customer.index'); // Sesuaikan dengan nama rute index Anda
+        return redirect($indexRoute)->with('success', 'Data customer berhasil ditambahkan.');
+    }
 
     // Menampilkan detail data
-    public function show(Customer $customer)
+    public function show($id)
     {
         return view('customer.detailCustomer', compact('customer'));
     }
 
     // Menampilkan formulir untuk mengedit data
-    public function edit(Customer $customer)
+    public function edit($id)
     {
         return view('customer.edit', compact('customer'));
     }
 
     // Memperbarui data dalam database
-    public function update(Request $request, Customer $customer)
+    public function update(Request $request, Customer $id)
     {
         $request->validate([
             'companyName' => 'required',
         ]);
 
-        $customer->update($request->all());
+        $id->update($request->all());
 
         return redirect()->route('customer.index')
             ->with('success', 'Data customer berhasil diperbarui.');
@@ -89,9 +79,9 @@ class CustomerController extends Controller
     // Menghapus data dari database
     public function destroy($id)
     {
-    $customer = Customer::findOrFail($id);
-    $customer->delete();
+        $customer = Customer::findOrFail($id);
+        $customer->delete();
 
-    return redirect()->route('customer.index')->with('success', 'Customer berhasil dihapus.');
+        return redirect()->route('customer.index')->with('success', 'Customer berhasil dihapus.');
     }
 }
