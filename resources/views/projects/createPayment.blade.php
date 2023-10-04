@@ -10,33 +10,39 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                <form action="" method="POST" class="parsley-examples"
-                                    novalidate>
+                                <form action="{{ route('top.store') }}" method="post" enctype="multipart/form-data"
+                                    class="parsley-examples" novalidate="">
                                     @csrf
-                                    {{-- form input payment type --}}
                                     <div class="mb-3">
-                                        <label class="form-label">Payment Type<span
+                                        <label for="userName" class="form-label">Projects<span
                                                 class="text-danger">*</span></label>
-                                        <input type="hidden" name="project_id" value="">
+                                        <input type="hidden" name="project_id" value="{{ $projectId }}">
                                         <input type="text" name="label" parsley-trigger="change" required
-                                            class="form-control" >
-                                        {{-- @error('label')
+                                            class="form-control" readonly value="{{ $label }}">
+                                        @error('label')
                                             <p style="color: red;">{{ $message }}</p>
-                                        @enderror --}}
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Payment Type<span class="text-danger">*</span></label>
+                                        <input type="text" placeholder="Enter Payment Type" name="type"
+                                            parsley-trigger="change" required class="form-control">
+                                        @error('type')
+                                            <p style="color: red;">{{ $message }}</p>
+                                        @enderror
                                     </div>
 
-                                    {{-- form input progress --}}
+                                    {{-- form input Progress --}}
                                     <div class="mb-3">
-                                        <label class="form-label">Progress<span
-                                                class="text-danger">*</span></label>
+                                        <label class="form-label">Progress<span class="text-danger">*</span></label>
                                         <div class="flex input-group">
                                             <input type="number" name="progress" parsley-trigger="change" required
-                                            placeholder="Enter amount" class="form-control">
+                                                placeholder="Enter percentage" class="form-control">
                                             <span class="input-group-text">%</span>
                                         </div>
-                                        {{-- @error('label')
+                                        @error('progress')
                                             <p style="color: red;">{{ $message }}</p>
-                                        @enderror --}}
+                                        @enderror
                                     </div>
 
                                     {{-- form input description --}}
@@ -45,22 +51,20 @@
                                                 class="text-danger">*</span></label>
                                         <input type="text" name="description" parsley-trigger="change" required
                                             placeholder="Enter description" class="form-control">
-                                        {{-- @error('description')
+                                        @error('description')
                                             <p style="color: red;">{{ $message }}</p>
-                                        @enderror --}}
+                                        @enderror
                                     </div>
-                                    
+
                                     {{-- form input status payment --}}
                                     <div class="mb-3">
-                                        <label for="progress" class="form-label">Status<span
+                                        <label for="setatus" class="form-label">Status<span
                                                 class="text-danger">*</span></label>
-                                        <select class="form-control" id="progress" name="progress" parsley-trigger="change" required>
+                                        <select class="form-control" id="setatus" name="status" parsley-trigger="change"
+                                            required>
                                             <option value="On Progress">On Progress</option>
                                             <option value="Done">Done</option>
                                         </select>
-                                        {{-- @error('progress')
-                                            <p style="color: red;">{{ $message }}</p>
-                                        @enderror --}}
                                     </div>
 
                                     {{-- form input file bukti pembayaran --}}
@@ -68,17 +72,17 @@
                                         <label class="form-label">Bukti Pembayaran</label>
                                         <input type="file" name="file" parsley-trigger="change" data-plugins="dropify"
                                             data-height="150" class="form-control" id="bukti-pembayaran">
-                                        {{-- @error('file')
+                                        @error('file')
                                             <p style="color: red;">{{ $message }}</p>
-                                        @enderror --}}
+                                        @enderror
                                     </div>
 
                                     <div class="text-end">
                                         <a href="{{ url('projects') }}">
                                             <button type="button" class="btn btn-secondary waves-effect">Cancel</button>
                                         </a>
-                                        <button class="btn btn-save waves-effect waves-light px-4" type="submit"
-                                            onclick="">Save</button>
+                                        <button class="btn btn-save waves-effect waves-light px-4"
+                                            type="submit">Save</button>
                                     </div>
                                 </form>
                             </div>

@@ -86,6 +86,7 @@ Route::prefix('milestone')->group(function () {
 Route::prefix('top')->group(function () {
     Route::get('/create/{id}', [TopController::class, 'create'])->name('top.create');
     Route::post('/store', [TopController::class, 'store'])->name('top.store');
+    Route::get('/get-payment-data/{id}', [TopController::class, 'getTopData'])->name("top.get");
     Route::put('/', [TopController::class, 'update'])->name('top.update');
     Route::delete('/{id}', [TopController::class, 'destroy'])->name('top.destroy');
 });
@@ -154,8 +155,8 @@ Route::prefix('operational')->group(function () {
         Route::patch('/{operational}', [OperationalController::class, 'detachTeam'])->name('operational.detach-team');
         Route::patch('/attach/{operational}', [OperationalController::class, 'attachTeam'])->name('operational.attach-team');
     });
-    Route::prefix('agenda')->group(function(){
-       Route::get('/get/{operational}',[OperationalAgendaController::class,'index'])->name('operational.agenda.index');
+    Route::prefix('agenda')->group(function () {
+        Route::get('/get/{operational}', [OperationalAgendaController::class, 'index'])->name('operational.agenda.index');
     });
 });
 
@@ -180,9 +181,6 @@ Route::get('/projects/createOperational', function () {
 });
 
 
-Route::get('/projects/createPayment', function () {
-    return view('projects.createPayment');
-});
 
 Route::get('calendar', function () {
     return view('calendar');
