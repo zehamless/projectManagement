@@ -146,23 +146,21 @@
                     orderable: false,
                     searchable: false,
                     render: function(data, type, full, meta) {
-                        console.log(full);
+                        console.log(data);
                         return `
                             <div class="btn-group btn-group-sm" style="float: none;">
-                                <a href="{{ url('customer/show') }}/${full.id}">
+                                <a href="{{ route('customer.show', '') }}/${full.id}">
                                     <button type="button" class="tabledit-edit-button btn btn-info waves-effect waves-light" title="Detail Customer" style="padding: 0.25rem 0.8rem;">
                                         <span class="mdi mdi-eye"></span>
                                     </button>
                                 </a>
                             </div>
                             <div class="btn-group btn-group-sm" style="float: none;">
-                                <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light" 
-                                    title="Edit Customer" 
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#edit-customer-modal"
-                                    style="padding: 0.25rem 0.8rem; background-color: #3E8BFF;">
-                                    <span class="mdi mdi-pencil"></span>
-                                </button>
+                                <a href="{{ url('customer.edit') }}/${full.id}">
+                                    <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light" title="Edit Data" style="padding: 0.25rem 0.8rem;">
+                                        <span class="mdi mdi-pencil"></span>
+                                    </button>
+                                </a>
                             </div>
                             <div class="btn-group btn-group-sm" style="float: none;">
                                 <button type="button" class="tabledit-edit-button btn btn-danger waves-effect waves-light" id="sa-warning" style="padding: 0.25rem 0.8rem;" title="Hapus Customer" onclick="deleteCustomer('${data}')">
@@ -196,27 +194,21 @@
 
 <script type="text/javascript">
     function deleteCustomer(id) {
-        // Display a confirmation dialog
-        Swal.fire({
-            title: 'Apakah Anda yakin ingin menghapus customer ini?',
-            text: 'Data yang dihapus tidak bisa dikembalikan!',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#f34e4e',
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'Cancel'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: "{{ route('customer.destroy', '') }}/" + id,
-                    type: 'DELETE',
-                    data: {
-                        _token: "{{ csrf_token() }}"
-                    },
-                });
-                location.reload();
-            }
-        });
+        if (confirm('Apakah Anda yakin ingin menghapus customer ini?')) {
+            $.ajax({
+                url: "{{ route('customer.destroy', '') }}" + "/" + id,
+                type: 'DELETE',
+                data: {
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(error) {
+                    console.error(error);
+                }
+            });
+        }
     }
 </script>
 @endsection
