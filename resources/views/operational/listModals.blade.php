@@ -13,16 +13,8 @@
                     </div>
                     <div class="modal-body">
                         <div class="row">
-                            <div class="row">
-                            </div>
-                            <div class="col-md-12">
-                                <div class="mb-3 text-start">
-                                    <label for="field-1" class="form-label">Operational<span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="operational"
-                                           placeholder="get value default dari operational id" readonly>
-                                </div>
-                            </div>
+
+                            {{-- form input description --}}
                             <div class="col-md-12">
                                 <div class="mb-3 text-start">
                                     <label for="field-2" class="form-label">Description</label>
@@ -30,6 +22,8 @@
                                               parsley-trigger="change" required=""></textarea>
                                 </div>
                             </div>
+
+                            {{-- form input due date --}}
                             <div class="col-md-12">
                                 <div class="mb-3 text-start">
                                     <label for="field-3" class="form-label">Due Date<span
@@ -38,12 +32,17 @@
                                            placeholder="Due Date" parsley-trigger="change" required="">
                                 </div>
                             </div>
+
+                            {{-- form input status payment --}}
                             <div class="col-md-12">
                                 <div class="mb-3 text-start">
-                                    <label for="field-3" class="form-label">Due Date<span
+                                    <label for="progress" class="form-label">Status<span
                                             class="text-danger">*</span></label>
-                                    <input type="date" class="form-control datepicker" id="due-date"
-                                           placeholder="Due Date" parsley-trigger="change" required="">
+                                    <select class="form-control" id="progress" name="progress" parsley-trigger="change" required>
+                                        <option value="Planned" selected disabled>Planned</option>
+                                        <option value="On Progress">On Progress</option>
+                                        <option value="Done">Done</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
