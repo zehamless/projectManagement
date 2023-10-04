@@ -91,6 +91,7 @@ Route::prefix('customer')->group(function () {
     Route::get('/edit/{id}', [CustomerController::class, 'edit'])->name('customer.edit');
     Route::put('/update/{id}', [CustomerController::class, 'update'])->name('customer.update');
     Route::delete('/delete/{id}', [CustomerController::class, 'destroy'])->name('customer.destroy');
+    Route::get('/customer/detail/{id}', [CustomerController::class, 'detail'])->name('customer.detail');
 });
 
 Route::prefix('customerContact')->group(function () {

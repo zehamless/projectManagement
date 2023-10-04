@@ -92,24 +92,24 @@
                     orderable: false,
                     searchable: false,
                     render: function(data, type, full, meta) {
-                        console.log(full);
+                        console.log(data);
                         return `
                             <div class="btn-group btn-group-sm" style="float: none;">
-                                <a href="{{ url('customer/show') }}/${full.id}">
+                                <a href="{{ route('customer.show', '') }}/${full.id}">
                                     <button type="button" class="tabledit-edit-button btn btn-info waves-effect waves-light" title="Detail Customer" style="padding: 0.25rem 0.8rem;">
                                         <span class="mdi mdi-eye"></span>
                                     </button>
                                 </a>
                             </div>
                             <div class="btn-group btn-group-sm" style="float: none;">
-                                <a href="{{ url('customer/edit') }}/${full.id}">
+                                <a href="{{ url('customer.edit') }}/${full.id}">
                                     <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light" title="Edit Data" style="padding: 0.25rem 0.8rem;">
                                         <span class="mdi mdi-pencil"></span>
                                     </button>
                                 </a>
                             </div>
                             <div class="btn-group btn-group-sm" style="float: none;">
-                                <button type="button" class="tabledit-edit-button btn btn-danger waves-effect waves-light" id="sa-warning" style="padding: 0.25rem 0.8rem;" title="Hapus Customer" onclick="deleteCustomer(${data})">
+                                <button type="button" class="tabledit-edit-button btn btn-danger waves-effect waves-light" id="sa-warning" style="padding: 0.25rem 0.8rem;" title="Hapus Customer" onclick="deleteCustomer(${full.id})">
                                     <span class="mdi mdi-trash-can-outline"></span>
                                 </button>
                             </div>`;
@@ -122,7 +122,7 @@
     function deleteCustomer(id) {
         if (confirm('Apakah Anda yakin ingin menghapus customer ini?')) {
             $.ajax({
-                url: "{{ route('customer.destroy', '') }}/" + id,
+                url: "{{ route('customer.destroy', '') }}" + "/" + id,
                 type: 'DELETE',
                 data: {
                     _token: "{{ csrf_token() }}"
