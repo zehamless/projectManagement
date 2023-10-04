@@ -168,7 +168,7 @@
                                             class="text-danger">*</span></label>
                                     <input type="date" name="nick" parsley-trigger="change" required=""
                                         placeholder="Enter service date" class="form-control datepicker"
-                                        id="userName">
+                                        id="service-date">
                                 </div>
 
                                 {{-- form input project label --}}

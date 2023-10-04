@@ -308,12 +308,13 @@
             });
         });
     </script>
+
     <script type="text/javascript">
         function deleteUser(userId) {
             // Display a confirmation dialog
             Swal.fire({
-                title: 'Are you sure?',
-                text: 'You will not be able to recover this user!',
+                title: 'Apakah Anda yakin ingin menghapus user ini?',
+                text: 'Data yang dihapus tidak bisa dikembalikan!',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#f34e4e',
@@ -334,6 +335,7 @@
             });
         }
     </script>
+
     <script type="text/javascript">
         function editUser(userId) {
             var modal = $("#con-close-modal");

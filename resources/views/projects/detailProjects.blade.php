@@ -49,6 +49,8 @@
 
                         @if (session('success'))
                             <div id="success-alert"></div>
+                        @elseif(session('error'))
+                            <div id="error-alert"></div>
                         @endif
 
                         {{-- card table milestones --}}
@@ -237,7 +239,7 @@
                                                 <td>SPK Code</td>
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-sm" style="float: none;">
-                                                        <button title="edit data" type="button" data-bs-toggle="modal"
+                                                        <button type="button" data-bs-toggle="modal"
                                                             data-bs-target="#edit-service-modal"
                                                             title="Edit Field Service Log"
                                                             class="tabledit-edit-button btn btn-primary waves-effect waves-light"
@@ -262,7 +264,7 @@
                                                 <td>SPK Code</td>
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-sm" style="float: none;">
-                                                        <button title="edit data" type="button" data-bs-toggle="modal"
+                                                        <button type="button" data-bs-toggle="modal"
                                                             data-bs-target="#edit-service-modal"
                                                             title="Edit Field Service Log"
                                                             class="tabledit-edit-button btn btn-primary waves-effect waves-light"
@@ -287,7 +289,7 @@
                                                 <td>SPK Code</td>
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-sm" style="float: none;">
-                                                        <button title="edit data" type="button" data-bs-toggle="modal"
+                                                        <button type="button" data-bs-toggle="modal"
                                                             data-bs-target="#edit-service-modal"
                                                             title="Edit Field Service Log"
                                                             class="tabledit-edit-button btn btn-primary waves-effect waves-light"
