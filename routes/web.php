@@ -148,6 +148,8 @@ Route::prefix('operational')->group(function () {
     });
     Route::prefix('agenda')->group(function(){
        Route::get('/get/{operational}',[OperationalAgendaController::class,'index'])->name('operational.agenda.index');
+       Route::delete('/{agenda}', [OperationalAgendaController::class, 'delete'])->name('operational.agenda.delete');
+       Route::post('/store', [OperationalAgendaController::class, 'store'])->name('operational.agenda.store');
     });
 });
 

@@ -86,11 +86,10 @@ class OperationalAgendaController extends Controller
         ], 200);
     }
 
-    public function delete(OperationalAgenda $operationalAgenda)
+    public function delete(OperationalAgenda $agenda)
     {
 
-        // Hapus data dari tabel "operational_agenda"
-        $operationalAgenda->delete();
+        $agenda->delete();
 
         return response()->json([
             'success' => 'Operational Agenda deleted successfully!'

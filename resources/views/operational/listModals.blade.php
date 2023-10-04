@@ -1,8 +1,6 @@
 <div class="listModals">
 
     {{-- modals work plan --}}
-    <form action="" class="parsley-examples" novalidate="" method="post" enctype="multipart/form-data">
-        @csrf
         <div id="add-work-modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
              style="overflow:hidden;">
             <div class="modal-dialog modal-dialog-centered">
@@ -40,12 +38,20 @@
                                            placeholder="Due Date" parsley-trigger="change" required="">
                                 </div>
                             </div>
+                            <div class="col-md-12">
+                                <div class="mb-3 text-start">
+                                    <label for="field-3" class="form-label">Due Date<span
+                                            class="text-danger">*</span></label>
+                                    <input type="date" class="form-control datepicker" id="due-date"
+                                           placeholder="Due Date" parsley-trigger="change" required="">
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">
                                 Close
                             </button>
-                            <button type="submit" class="btn btn-save waves-effect waves-light">
+                            <button type="submit" class="btn btn-save waves-effect waves-light" id="agendaButton">
                                 Save
                                 changes
                             </button>
@@ -55,7 +61,6 @@
             </div>
             <!-- /.modal -->
         </div>
-    </form>
 
     {{-- modals operational expenses --}}
     <div id="add-expenses-modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"

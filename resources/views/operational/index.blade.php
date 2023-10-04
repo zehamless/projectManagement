@@ -39,7 +39,7 @@
             color: white;
         }
 
-        .row{
+        .row {
             --ct-gutter-x: 0rem !important;
         }
     </style>
@@ -205,7 +205,7 @@
                                                                                     </th>
                                                                                 </tr>
                                                                                 </thead>
-                                                                                
+
                                                                                 <tbody>
                                                                                 </tbody>
                                                                             </table>
@@ -238,7 +238,8 @@
                                                                             </div>
 
                                                                         </div>
-                                                                        <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap5">
+                                                                        <div id="datatable_wrapper"
+                                                                             class="dataTables_wrapper dt-bootstrap5">
                                                                             <table
                                                                                 class="table table-striped table-hover dt-responsive table-hover table-responsive nowrap dataTable no-footer dtr-inline"
                                                                                 id="table-expenses">
@@ -825,7 +826,7 @@
             button.off('click');
 
             // Bind click event to the button
-            button.on('click', function () {
+            button.on('click', () => {
                 addExpense();
             });
 
@@ -1010,6 +1011,80 @@
             })
         }
 
+    </script>
+    <script type="text/javascript">
+        function deleteAgenda(agenda) {
+            swal.fire({
+                title: 'Are you sure?',
+                text: 'You will not be able to recover this action!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#f34e4e',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios({
+                        method: 'DELETE',
+                        url: "{{ route('operational.agenda.delete', '') }}" + "/" + agenda,
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                        },
+                    }).then(function (response) {
+                        console.log(response);
+                        Swal.fire(
+                            'Deleted!',
+                            'Your expense has been deleted.',
+                            'success'
+                        )
+                        $('#table-agendas').DataTable().ajax.reload();
+                    }).catch(function (error) {
+                        console.log(error);
+                        swal.fire("Error!", "Please try again", "error");
+                    })
+                }
+            })
+
+        }
+    </script>
+    <script type="text/javascript">
+        const modal = $('#add-work-modal');
+        const button = modal.find('#agendaButton');
+        const operational = $('#select-operational').val();
+
+        const description = modal.find('#description')
+        const dueDate = modal.find('#due_date')
+        const status = modal.
+
+        function showAgendaForm() {
+
+            button.off('click')
+            button.on('click', () => {
+                addAgenda()
+            })
+
+            button.text('Add WorkPlan')
+            description.val('')
+            dueDate.val('')
+
+        }
+
+        function addAgenda() {
+            if (operational == null || operational == ""){
+                swal.fire("Error!", "Please select operational", "error");
+                return;
+            }
+            axios({
+                method: "POST",
+                url: "{{ route('operational.agenda.store') }}",
+                data: {
+                    _token: "{{csrf_token()}}",
+                    operational_id: operational,
+                    due_date: dueDate.val(),
+                    description: description.val(),
+                }
+            })
+        }
     </script>
 
 @endsection
