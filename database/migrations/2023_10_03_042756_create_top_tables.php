@@ -18,6 +18,7 @@ return new class extends Migration
             $table->decimal('progress');
             $table->string('description');
             $table->string('status');
+            $table->string('file')->nullable();
             $table->timestamps();
 
             // Tambahkan constraint foreign key ke tabel projects dan set cascade onDelete

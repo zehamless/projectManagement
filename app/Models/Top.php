@@ -11,5 +11,6 @@ class Top extends Model
     use HasFactory;
     use HasUuids;
 
-    protected $fillable = ['id',];
+    protected $fillable = ['id', 'project_id', 'type', 'progress', 'description', 'status', 'file'];
+    protected $table = 'top';
 }
