@@ -105,26 +105,12 @@ class ProjectController extends Controller
         $so = $request->filled('so-1') ? $request->input('so-1') . "/" . $request->input('so-2') . "/" . $request->input('so-3') : "Nomor SO Belum diisi";
         $memo = $request->input('memo-1') . "/" . $request->input('memo-2') . "/" . $request->input('memo-3') . "/" . $request->input('memo-4') . "/" . $request->input('memo-5');
 
-        // Cek apakah pelanggan sudah ada di database berdasarkan nama
-        $customer = Customer::firstOrCreate(['companyName' => $request->input('customers')]);
-
-        $customerContact = CustomerContact::firstOrNew([
-            'name' => $request->input('customers-name'),
-        ]);
-
-        if (!$customerContact->exists) {
-            // Kontak pelanggan belum ada dalam database, maka atur kolom-kolom yang diperlukan
-            $customerContact->customer_id = $customer->id;
-            $customerContact->phone = "Belum diisi";
-            $customerContact->save();
-        }
 
         // Simpan data ke dalam database
         $project = new Project;
         $project->label = $request->input('label');
-        $project->label = $request->input('label');
-        $project->customer_id = $customer->id; // Menggunakan ID pelanggan yang ada atau yang baru dibuat
-        $project->customer_contact_id = $customerContact->id; // Menggunakan ID kontak pelanggan yang ada atau yang baru dibuat
+        $project->customer_id = $request->input('customers'); // Menggunakan ID pelanggan yang ada atau yang baru dibuat
+        $project->customer_contact_id = $request->input('customers-name'); // Menggunakan ID kontak pelanggan yang ada atau yang baru dibuat
         $project->project_manager = $request->input('project_manager');
         $project->sales_executive = $request->input('sales_executive');
         $project->location = $request->input('location');
@@ -157,22 +143,15 @@ class ProjectController extends Controller
             ->first();
 
         // Ambil semua Milestone yang terkait dengan proyek ini dan urutkan berdasarkan created_at terbaru
-        $milestones = $project->milestones;
-
+        $milestones = $project->milestones()->orderBy('created_at', 'desc')->get();
         $doneMilestones = $milestones->where('progress', 'Done')->count();
-
-        // Hitung total jumlah Milestone
         $totalMilestones = $milestones->count();
-
-        // Perhitungan real cost
         $realCost = $project->productionCost->sum('amount');
-
-        // Hitung persentase untuk setiap kategori
         $percentageDone = $totalMilestones > 0 ? ($doneMilestones / $totalMilestones) * 100 : 0;
-
         $productionCost = $project->productionCost()->orderBy('created_at', 'desc')->get();
-
-        return view('projects.detailProjects', compact('milestones', 'projectData', 'productionCost', 'percentageDone', 'realCost'));
+        $tops = $project->top()->orderBy('created_at', 'desc')->get();
+        $topProgress = $tops->where('status', 'Done')->sum('progress');
+        return view('projects.detailProjects', compact('milestones', 'projectData', 'productionCost', 'tops', 'percentageDone', 'realCost', 'topProgress'));
     }
 
 
