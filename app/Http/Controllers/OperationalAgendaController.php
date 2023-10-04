@@ -57,10 +57,11 @@ class OperationalAgendaController extends Controller
         ], 200);
     }
 
-    public function show(OperationalAgenda $operationalAgenda)
+    public function show(Request $request, string $agenda)
     {
-        // Tampilkan detail data
-        return view('operational_agenda.show');
+        $attrAgenda = OperationalAgenda::where('id', $agenda)->get();
+
+        return response()->json($attrAgenda);
     }
 
     public function edit(OperationalAgenda $operationalAgenda)
@@ -69,7 +70,7 @@ class OperationalAgendaController extends Controller
         return view('operational_agenda.edit', compact('operationalAgenda'));
     }
 
-    public function update(Request $request, OperationalAgenda $operationalAgenda)
+    public function update(Request $request, OperationalAgenda $agenda)
     {
         // Validasi data yang dikirim dari formulir
         $request->validate([
@@ -79,7 +80,7 @@ class OperationalAgendaController extends Controller
         ]);
 
         // Perbarui data yang ada dalam tabel "operational_agenda"
-        $operationalAgenda->update($request->all());
+        $agenda->update($request->all());
 
         return response()->json([
             'success' => 'Operational Agenda updated successfully!'

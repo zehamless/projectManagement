@@ -151,6 +151,7 @@ Route::prefix('operational')->group(function () {
        Route::delete('/{agenda}', [OperationalAgendaController::class, 'delete'])->name('operational.agenda.delete');
        Route::post('/store', [OperationalAgendaController::class, 'store'])->name('operational.agenda.store');
        Route::patch('/{agenda}', [OperationalAgendaController::class, 'update'])->name('operational.agenda.update');
+         Route::get('/show/{agenda}', [OperationalAgendaController::class, 'show'])->name('operational.agenda.show');
     });
 });
 
