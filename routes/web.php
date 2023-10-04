@@ -12,6 +12,7 @@ use App\Http\Controllers\ProductionCostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\TopController;
 use App\Http\Controllers\UserController;
 use App\Material;
 use App\Models\Role;
@@ -82,6 +83,14 @@ Route::prefix('milestone')->group(function () {
     Route::delete('/{id}', [MilestoneController::class, 'destroy'])->name('milestone.destroy');
 });
 
+Route::prefix('top')->group(function () {
+    Route::get('/create/{id}', [TopController::class, 'create'])->name('top.create');
+    Route::post('/store', [TopController::class, 'store'])->name('top.store');
+    Route::get('/get-payment-data/{id}', [TopController::class, 'getTopData'])->name("top.get");
+    Route::put('/', [TopController::class, 'update'])->name('top.update');
+    Route::delete('/{id}', [TopController::class, 'destroy'])->name('top.destroy');
+});
+
 
 Route::prefix('customer')->group(function () {
     Route::get('/', [CustomerController::class, 'index'])->name('customer.index');
@@ -147,8 +156,8 @@ Route::prefix('operational')->group(function () {
         Route::patch('/{operational}', [OperationalController::class, 'detachTeam'])->name('operational.detach-team');
         Route::patch('/attach/{operational}', [OperationalController::class, 'attachTeam'])->name('operational.attach-team');
     });
-    Route::prefix('agenda')->group(function(){
-       Route::get('/get/{operational}',[OperationalAgendaController::class,'index'])->name('operational.agenda.index');
+    Route::prefix('agenda')->group(function () {
+        Route::get('/get/{operational}', [OperationalAgendaController::class, 'index'])->name('operational.agenda.index');
     });
 });
 
@@ -173,9 +182,6 @@ Route::get('/projects/createOperational', function () {
 });
 
 
-Route::get('/projects/createPayment', function () {
-    return view('projects.createPayment');
-});
 
 Route::get('calendar', function () {
     return view('calendar');

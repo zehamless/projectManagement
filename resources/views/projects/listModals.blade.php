@@ -81,8 +81,8 @@
     </form>
 
     {{-- modals edit production cost --}}
-<form action="{{ route('cost.update') }}" class="parsley-examples"
-        novalidate="" method="post" enctype="multipart/form-data">
+    <form action="{{ route('cost.update') }}" class="parsley-examples" novalidate="" method="post"
+        enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div id="edit-cost-modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
@@ -168,7 +168,7 @@
                                             class="text-danger">*</span></label>
                                     <input type="date" name="nick" parsley-trigger="change" required=""
                                         placeholder="Enter service date" class="form-control datepicker"
-                                        id="userName">
+                                        id="service-date">
                                 </div>
 
                                 {{-- form input project label --}}
@@ -313,5 +313,94 @@
             <!-- /.modal -->
         </div>
     </form>
+
+    {{-- modals edit payment --}}
+    <form action="{{ route('top.update') }}" class="parsley-examples" novalidate="" method="post"
+        enctype="multipart/form-data">
+        @csrf
+        @method('PUT')
+        <div id="edit-payment-modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true" style="overflow:hidden;">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Edit Payment</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            {{-- Form input payment type --}}
+                            <div class="mb-3">
+                                <label class="form-label" for="type_payment">Payment Type</label>
+                                <input type="hidden" id="id_payment" name="id" value="">
+                                <input type="hidden" name="project_id" value="{{ $projectData->id }}">
+                                <input type="text" name="type" id="type_payment" parsley-trigger="change"
+                                    required placeholder="Enter payment type..." class="form-control">
+                                @error('type')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            {{-- Form input progress --}}
+                            <div class="mb-3">
+                                <label class="form-label" for="progress_payment">Progress</label>
+                                <div class="flex input-group">
+                                    <input type="number" name="progress" parsley-trigger="change" required
+                                        placeholder="Enter progress percentage.." id="progress_payment"
+                                        class="form-control">
+                                    <span class="input-group-text">%</span>
+                                </div>
+                                @error('progress')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            {{-- Form input description --}}
+                            <div class="mb-3">
+                                <label for="description_payment" class="form-label">Description<span
+                                        class="text-danger">*</span></label>
+                                <input type="text" name="description" parsley-trigger="change" required
+                                    placeholder="Enter description" id="description_payment" class="form-control">
+                                @error('description')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            {{-- Form input status payment --}}
+                            <div class="mb-3">
+                                <label for="status_payment" class="form-label">Status<span
+                                        class="text-danger">*</span></label>
+                                <select class="form-control" name="status" id="status_payment"
+                                    parsley-trigger="change" required>
+                                    <option value="On Progress">On Progress</option>
+                                    <option value="Done">Done</option>
+                                </select>
+                                @error('status')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            {{-- Form input file bukti pembayaran --}}
+                            <div class="mb-3">
+                                <label class="form-label">Bukti Pembayaran</label>
+                                <input type="file" name="file" parsley-trigger="change" data-plugins="dropify"
+                                    data-height="150" class="form-control" id="bukti-pembayaran">
+                                @error('file')
+                                    <p style="color: red;">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary waves-effect"
+                            data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-save waves-effect waves-light">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
 
 </div>

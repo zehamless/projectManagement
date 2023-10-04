@@ -49,6 +49,8 @@
 
                         @if (session('success'))
                             <div id="success-alert"></div>
+                        @elseif(session('error'))
+                            <div id="error-alert"></div>
                         @endif
 
                         {{-- card table milestones --}}
@@ -237,7 +239,7 @@
                                                 <td>SPK Code</td>
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-sm" style="float: none;">
-                                                        <button title="edit data" type="button" data-bs-toggle="modal"
+                                                        <button type="button" data-bs-toggle="modal"
                                                             data-bs-target="#edit-service-modal"
                                                             title="Edit Field Service Log"
                                                             class="tabledit-edit-button btn btn-primary waves-effect waves-light"
@@ -262,8 +264,8 @@
                                                 <td>SPK Code</td>
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-sm" style="float: none;">
-                                                        <button title="edit data" type="button" data-bs-toggle="modal"
-                                                            data-bs-target="#add-service-modal"
+                                                        <button type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#edit-service-modal"
                                                             title="Edit Field Service Log"
                                                             class="tabledit-edit-button btn btn-primary waves-effect waves-light"
                                                             style="background-color: #3E8BFF;">
@@ -287,8 +289,8 @@
                                                 <td>SPK Code</td>
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-sm" style="float: none;">
-                                                        <button title="edit data" type="button" data-bs-toggle="modal"
-                                                            data-bs-target="#add-service-modal"
+                                                        <button type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#edit-service-modal"
                                                             title="Edit Field Service Log"
                                                             class="tabledit-edit-button btn btn-primary waves-effect waves-light"
                                                             style="background-color: #3E8BFF;">
@@ -317,7 +319,7 @@
                                         <h4 class="mt-0 header-title">Term Of Payment</h4>
                                     </div>
                                     <div class="col-sm-4">
-                                        <a href="{{ url('projects/createPayment') }}"
+                                        <a href="{{ route('top.create', ['id' => $projectData->id]) }}"
                                             class="btn btn-createItems w-md waves-effect waves-light mb-3"><i
                                                 class="mdi mdi-plus"></i>Add Payment</a>
                                     </div>
@@ -335,91 +337,52 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>DP</td>
-                                                <td>30%</td>
-                                                <td>Tanda jadi pembayaran trafo</td>
-                                                <td class="text-center"><span class="badge bg-success">Done</span></td>
-                                                <td class="text-center">
-                                                    <div class="btn-group btn-group-sm" style="float: none;">
-                                                        <button title="unduh file" type="button"
-                                                            class="tabledit-edit-button btn btn-success waves-effect waves-light">
-                                                            <span class="mdi mdi-file-download-outline"></span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="btn-group btn-group-sm" style="float: none;">
-                                                        <button title="edit data" type="button"
-                                                            class="tabledit-edit-button btn btn-primary waves-effect waves-light"
-                                                            style="background-color: #3E8BFF;">
-                                                            <span class="mdi mdi-pencil"></span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="btn-group btn-group-sm" style="float: none;">
-                                                        <button title="hapus data" type="button"
-                                                            class="tabledit-edit-button btn btn-danger">
-                                                            <span class="mdi mdi-trash-can-outline"></span>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Tahap 1</td>
-                                                <td>50%</td>
-                                                <td>Bayar sisa pembayaran tahap 1</td>
-                                                <td class="text-center"><span class="badge bg-success">Done</span></td>
-                                                <td class="text-center">
-                                                    <div class="btn-group btn-group-sm" style="float: none;">
-                                                        <button title="unduh file" type="button"
-                                                            class="tabledit-edit-button btn btn-success waves-effect waves-light">
-                                                            <span class="mdi mdi-file-download-outline"></span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="btn-group btn-group-sm" style="float: none;">
-                                                        <button title="edit data" type="button"
-                                                            class="tabledit-edit-button btn btn-primary waves-effect waves-light"
-                                                            style="background-color: #3E8BFF;">
-                                                            <span class="mdi mdi-pencil"></span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="btn-group btn-group-sm" style="float: none;">
-                                                        <button title="hapus data" type="button"
-                                                            class="tabledit-edit-button btn btn-danger">
-                                                            <span class="mdi mdi-trash-can-outline"></span>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Tahap 2 - Pelunasan</td>
-                                                <td>20%</td>
-                                                <td>Melunasi sisa pembayaran</td>
-                                                <td class="text-center"><span class="badge bg-warning">Progress</span>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="btn-group btn-group-sm" style="float: none;">
-                                                        <button title="untuk mengunduh file" type="button"
-                                                            class="tabledit-edit-button btn btn-success waves-effect waves-light">
-                                                            <span class="mdi mdi-file-download-outline"></span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="btn-group btn-group-sm" style="float: none;">
-                                                        <button type="button"
-                                                            class="tabledit-edit-button btn btn-primary waves-effect waves-light"
-                                                            style="background-color: #3E8BFF;">
-                                                            <span class="mdi mdi-pencil"></span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="btn-group btn-group-sm" style="float: none;">
-                                                        <button type="button"
-                                                            class="tabledit-edit-button btn btn-danger">
-                                                            <span class="mdi mdi-trash-can-outline"></span>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                            @if ($tops->isEmpty())
+                                                <tr>
+                                                    <td colspan="6" align="center">Belum ada payment</td>
+                                                </tr>
+                                            @else
+                                                @php($index = 1)
+                                                @foreach ($tops as $top)
+                                                    <tr>
+                                                        <th scope="row"></th>
+                                                        <td>{{ $top['type'] }}</td>
+                                                        <td>{{ $top['progress'] }}</td>
+                                                        <td>{{ $top['description'] }}</td>
+                                                        <td class="text-center">
+                                                            <span
+                                                                class="badge {{ $top['status'] === 'Done' ? 'bg-success' : 'bg-warning' }}">
+                                                                {{ $top['status'] }}
+                                                            </span>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <div class="btn-group btn-group-sm" style="float: none;">
+                                                                <button title="unduh file" type="button"
+                                                                    class="tabledit-edit-button btn btn-success waves-effect waves-light">
+                                                                    <span class="mdi mdi-file-download-outline"></span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="btn-group btn-group-sm" style="float: none;">
+                                                                <button title="edit data" type="button"
+                                                                    data-bs-toggle="modal" value="{{ $top['id'] }}"
+                                                                    data-bs-target="#edit-payment-modal"
+                                                                    title="Edit Payment"
+                                                                    class="tabledit-edit-button paymentEdit btn btn-primary waves-effect waves-light"
+                                                                    style="background-color: #3E8BFF;">
+                                                                    <span class="mdi mdi-pencil"></span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="btn-group btn-group-sm" style="float: none;">
+                                                                <button title="hapus data" type="button"
+                                                                    value="{{ $top['id'] }}"
+                                                                    class="tabledit-edit-button hapusPayment btn btn-danger">
+                                                                    <span class="mdi mdi-trash-can-outline"></span>
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
                                         </tbody>
                                     </table>
                                 </div>
@@ -566,7 +529,8 @@
                                                         @if ($realCost > $projectData->expense_budget)
                                                             <p class="text-light"
                                                                 style="font-size: 10px; border-radius: 10px; margin-left: 5px; padding:2px 4px; background-color: red;">
-                                                                + <span {{-- rumus = real production cost = prelim cost - production cost --}}
+                                                                + <span {{-- rumus=real production cost=prelim cost - production
+                                                            cost --}}
                                                                     class="rupiah">{{ $realCost - $projectData->expense_budget }}</span>
                                                             </p>
                                                         @endif
@@ -664,8 +628,8 @@
 
     <script>
         // Sample data
-        var data = [70, 20];
-        var labels = ["Paid", "Not Paid"];
+        var progress = {{ $topProgress }};
+        var notProgress = 100 - progress;
 
 
         var ctx = document.getElementById("donut-chart2").getContext("2d");
@@ -675,7 +639,7 @@
             data: {
                 labels: labels,
                 datasets: [{
-                    data: data,
+                    data: [progress, notProgress],
                     backgroundColor: ["#FE3E3E", "#F3F2F2"], // Customize segment colors
                 }, ],
             },
@@ -705,8 +669,8 @@
                     ctx.font = fontSize + "em sans-serif";
                     ctx.textBaseline = "middle";
 
-                    var text = "75%",
-                        textX = Math.round((width - ctx.measureText(text).width) / 2),
+                    var text = Math.round(progress) + "%";
+                    textX = Math.round((width - ctx.measureText(text).width) / 2),
                         textY = height / 2;
 
                     ctx.fillText(text, textX, textY);
@@ -730,7 +694,9 @@
                     showCancelButton: true,
                     confirmButtonColor: '#f34e4e',
                     confirmButtonText: 'Yes, delete it!',
-                    cancelButtonText: 'Cancel'
+                    cancelButtonText: 'Cancel',
+                    backrop: 'static',
+                    allowOutsideClick: false
                 }).then((result) => {
                     if (result.isConfirmed) {
                         // Silahkan isi logika nya sendiri xixixi
@@ -791,7 +757,9 @@
                     showCancelButton: true,
                     confirmButtonColor: '#f34e4e',
                     confirmButtonText: 'Yes, delete it!',
-                    cancelButtonText: 'Cancel'
+                    cancelButtonText: 'Cancel',
+                    backrop: 'static',
+                    allowOutsideClick: false
                 }).then((result) => {
                     if (result.isConfirmed) {
                         // Silahkan isi logika nya sendiri xixixi
@@ -852,12 +820,77 @@
                     showCancelButton: true,
                     confirmButtonColor: '#f34e4e',
                     confirmButtonText: 'Yes, delete it!',
-                    cancelButtonText: 'Cancel'
+                    cancelButtonText: 'Cancel',
+                    backrop: 'static',
+                    allowOutsideClick: false
                 }).then((result) => {
                     if (result.isConfirmed) {
                         // Silahkan isi logika nya sendiri xixixi
                         $.ajax({
                             url: "{{ route('production-cost.destroy', '') }}" + '/' + id,
+                            type: 'DELETE',
+                            data: {
+                                _token: "{{ csrf_token() }}",
+                            },
+                            success: function(response) {
+                                try {
+                                    if (response.message) {
+                                        Swal.fire({
+                                            title: "Sukses!",
+                                            text: response.message,
+                                            icon: 'success',
+                                            confirmButtonText: 'OK'
+                                        }).then((hasil) => {
+                                            if (hasil.isConfirmed) {
+                                                window.location.reload();
+                                            }
+                                        });
+                                    } else {
+                                        console.error('Terjadi kesalahan: ' + response
+                                            .error
+                                        ); // Tampilkan pesan kesalahan jika ada
+                                    }
+                                } catch (error) {
+                                    console.error(
+                                        'Terjadi kesalahan saat mengolah respons: ' +
+                                        error);
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(
+                                    'Terjadi kesalahan saat menghapus data: ' +
+                                    error);
+                            }
+                        });
+
+                    }
+                });
+            });
+        });
+    </script>
+
+    {{-- Hapus Payment Pop Up --}}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(document).on('click', '.hapusPayment', function() {
+                var id = $(this).val();
+
+                // Display a confirmation dialog
+                Swal.fire({
+                    title: "Anda yakin?",
+                    text: "Data tidak bisa dikembalikan!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#f34e4e',
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'Cancel',
+                    backrop: 'static',
+                    allowOutsideClick: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Silahkan isi logika nya sendiri xixixi
+                        $.ajax({
+                            url: "{{ route('top.destroy', '') }}" + '/' + id,
                             type: 'DELETE',
                             data: {
                                 _token: "{{ csrf_token() }}",
@@ -937,6 +970,30 @@
                         $("#description_cost").val(response.description);
                         $("#amount_cost").val(parseInt(response
                             .amount)); // Menggunakan parseInt() untuk menghapus angka desimal
+                    },
+                    error: function(response) {
+                        alert("Error: " + response.statusText);
+                    }
+                });
+            });
+        });
+    </script>
+
+    {{-- Payment edit --}}
+    <script>
+        $(document).ready(function() {
+            $(document).on('click', '.paymentEdit', function() {
+                var id = $(this).val(); // Menggunakan data-id yang baru
+                $.ajax({
+                    type: "GET",
+                    url: "/top/get-payment-data/" + id,
+                    dataType: "json",
+                    success: function(response) {
+                        $("#id_payment").val(response.id);
+                        $("#type_payment").val(response.type);
+                        $("#progress_payment").val(response.progress);
+                        $("#description_payment").val(response.description);
+                        $("#status_payment").val(response.status);
                     },
                     error: function(response) {
                         alert("Error: " + response.statusText);
