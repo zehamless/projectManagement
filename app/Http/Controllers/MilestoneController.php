@@ -85,11 +85,6 @@ class MilestoneController extends Controller
         return response()->json($milestone);
     }
 
-
-
-
-
-
     public function create($id)
     {
         $project = $id;
