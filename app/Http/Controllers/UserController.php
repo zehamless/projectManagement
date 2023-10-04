@@ -25,19 +25,18 @@ class UserController extends Controller
      */
     public function index($operational = null)
     {
-        $users = User::with('hasroles')->get();
+        $users = User::with('hasroles');
         if (\request()->ajax()) {
             if ($operational !== null) {
-//                $users1 = User::with('hasroles')->whereHas('hasroles',function ($query){
-//                    $query->where('id',5);
-//                })->get();
-                //get user with role operational and doesnt have operational
-                $users1 = User::with('hasroles')->whereHas('hasroles', function ($query) {
-                    $query->where('id', 5);
-                })->whereDoesntHave('operational')->get();
+                $users1 = User::whereHas('hasroles', function ($q) {
+                    $q->where('name', 'Technician');
+                })->whereDoesntHave('operational', function ($q) use ($operational) {
+                    $q->where('id', $operational);
+                })->get();
+
                 return response()->json($users1);
             } else {
-                return DataTables::of($users)
+                return DataTables::of($users->get())
                     ->addIndexColumn()
                     ->addColumn('roles', function (User $user) {
                         return $user->hasroles->map(function (Role $role) {

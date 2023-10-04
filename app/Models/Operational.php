@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\OperationalAgenda;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -25,13 +26,20 @@ class Operational extends Model
         'approved_by',
     ];
 
+    /**
+     * @return HasMany
+     */
     public function expenses(): HasMany
     {
         return $this->hasMany(OperationalExpense::class, 'operational_id');
     }
-    public function agendas()
+
+    /**
+     * @return HasMany
+     */
+    public function agendas(): HasMany
     {
-        return $this->hasMany(Agenda::class);
+        return $this->hasMany(OperationalAgenda::class, 'operational_id');
     }
 
     /**
@@ -41,6 +49,10 @@ class Operational extends Model
     {
         return $this->belongsToMany(User::class, 'operational_team', 'operational_id', 'user_id');
     }
+
+    /**
+     * @return HasMany
+     */
     public function materials()
     {
         return $this->hasMany(Material::class);

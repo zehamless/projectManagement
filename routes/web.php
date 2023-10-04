@@ -97,7 +97,7 @@ Route::prefix('customer')->group(function () {
     Route::post('/store', [CustomerController::class, 'store'])->name('customer.store');
     Route::get('/show/{id}', [CustomerController::class, 'show'])->name('customer.show');
     Route::get('/edit/{id}', [CustomerController::class, 'edit'])->name('customer.edit');
-    Route::get('/update', [CustomerController::class, 'update'])->name('customer.update');
+    Route::put('/update/{id}', [CustomerController::class, 'update'])->name('customer.update');
     Route::delete('/delete/{id}', [CustomerController::class, 'destroy'])->name('customer.destroy');
 });
 
@@ -154,18 +154,11 @@ Route::prefix('operational')->group(function () {
         Route::patch('/{operational}', [OperationalController::class, 'detachTeam'])->name('operational.detach-team');
         Route::patch('/attach/{operational}', [OperationalController::class, 'attachTeam'])->name('operational.attach-team');
     });
+    Route::prefix('agenda')->group(function(){
+       Route::get('/get/{operational}',[OperationalAgendaController::class,'index'])->name('operational.agenda.index');
+    });
 });
 
-
-Route::prefix('operationalAgenda')->group(function () {
-    Route::get('/', [OperationalAgendaController::class, 'index'])->name('operational_agenda.index');
-    Route::get('/create', [OperationalAgendaController::class, 'create'])->name('operational_agenda.create');
-    Route::post('/store', [OperationalAgendaController::class, 'store'])->name('operational_agenda.store');
-    Route::get('/show', [OperationalAgendaController::class, 'show'])->name('operational_agenda.show');
-    Route::get('/edit', [OperationalAgendaController::class, 'edit'])->name('operational_agenda.edit');
-    Route::get('/update', [OperationalAgendaController::class, 'update'])->name('operational_agenda.update');
-    Route::get('/delete', [OperationalAgendaController::class, 'delete'])->name('operational_agenda.delete');
-});
 
 Route::prefix('materials')->group(function () {
     Route::get('/', [MaterialController::class, 'index'])->name('materials.index');
@@ -185,6 +178,7 @@ Route::get('/projects/createMilestone', function () {
 Route::get('/projects/createOperational', function () {
     return view('projects.createOperational');
 });
+
 
 Route::get('/projects/createPayment', function () {
     return view('projects.createPayment');
