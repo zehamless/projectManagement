@@ -12,6 +12,7 @@ use App\Http\Controllers\ProductionCostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\TopController;
 use App\Http\Controllers\UserController;
 use App\Material;
 use App\Models\Role;
@@ -80,6 +81,13 @@ Route::prefix('milestone')->group(function () {
     Route::post('/store', [MilestoneController::class, 'store'])->name('milestone.store');
     Route::put('/', [MilestoneController::class, 'update'])->name('milestone.update');
     Route::delete('/{id}', [MilestoneController::class, 'destroy'])->name('milestone.destroy');
+});
+
+Route::prefix('top')->group(function () {
+    Route::get('/create/{id}', [TopController::class, 'create'])->name('top.create');
+    Route::post('/store', [TopController::class, 'store'])->name('top.store');
+    Route::put('/', [TopController::class, 'update'])->name('top.update');
+    Route::delete('/{id}', [TopController::class, 'destroy'])->name('top.destroy');
 });
 
 
