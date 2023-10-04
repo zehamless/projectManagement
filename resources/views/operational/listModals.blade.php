@@ -104,7 +104,7 @@
                                     <label for="field-1" class="form-label">Date<span
                                             class="text-danger">*</span>
                                     </label>
-                                    <input type="date" class="form-control" id="expense-date" placeholder="date"
+                                    <input type="date" class="form-control datepicker" id="expense-date" placeholder="date"
                                            name="expense-date"
                                            parsley-trigger="change" required="">
                                 </div>

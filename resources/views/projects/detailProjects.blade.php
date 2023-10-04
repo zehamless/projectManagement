@@ -48,7 +48,9 @@
                 <div class="col-xl-8 tables-col">
 
                     @if (session('success'))
-                    <div id="success-alert"></div>
+                        <div id="success-alert"></div>
+                    @elseif(session('error'))
+                        <div id="error-alert"></div>
                     @endif
 
                     {{-- card table milestones --}}

@@ -119,6 +119,23 @@ https://cdn.jsdelivr.net/npm/attrchange@1.0.1/attrchange.min.js
     }
 </script>
 
+{{-- script untuk manggil alert jika tidak ada error --}}
+<script>
+    var alertSuccess = document.getElementById('error-alert');
+    
+    if(alertSuccess){
+        $(document).ready(function(){
+        Swal.fire({
+            title: "Ooops..",
+            text: "{{ session('success') }}",
+            icon: "error",
+        });
+        });
+    }else{
+        
+    }
+</script>
+
 <script>
     const body = document.querySelector("body");
 
@@ -129,6 +146,8 @@ https://cdn.jsdelivr.net/npm/attrchange@1.0.1/attrchange.min.js
         });
     });
 </script>
+
+
 
 {{-- <script>
     var sidebar = document.getElementsByClassName('sidebar-enable')
