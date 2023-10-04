@@ -39,7 +39,7 @@
                                     <label for="progress" class="form-label">Status<span
                                             class="text-danger">*</span></label>
                                     <select class="form-control" id="progress" name="progress" parsley-trigger="change" required>
-                                        <option value="Planned" selected disabled>Planned</option>
+                                        <option value="Planned" selected>Planned</option>
                                         <option value="On Progress">On Progress</option>
                                         <option value="Done">Done</option>
                                     </select>

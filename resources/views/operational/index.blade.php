@@ -184,6 +184,7 @@
                                                                                 <button type="button"
                                                                                         data-bs-toggle="modal"
                                                                                         data-bs-target="#add-work-modal"
+                                                                                        onclick="showAgendaForm()"
                                                                                         class="btn btn-save w-md waves-effect waves-light px-4 btn-addMaterial">
                                                                                     <i class="mdi mdi-plus"></i>Add
                                                                                     Work Plan
@@ -714,7 +715,7 @@
             const button = modal.find('#expenseButton');
             button.innerHTML = 'Save Changes';
             button.off('click');
-            button.click(function () {
+            button.click(() => {
                 updateExpense(expense);
             });
 
@@ -1048,40 +1049,99 @@
         }
     </script>
     <script type="text/javascript">
-        const modal = $('#add-work-modal');
-        const button = modal.find('#agendaButton');
-        const operational = $('#select-operational').val();
-
-        const description = modal.find('#description')
-        const dueDate = modal.find('#due_date')
-        const status = modal.
 
         function showAgendaForm() {
+            const modal = $('#add-work-modal');
+            const button = modal.find('#agendaButton');
 
-            button.off('click')
+            const description = modal.find('#description');
+            const dueDate = modal.find('#due_date');
+
+            button.off('click');
             button.on('click', () => {
-                addAgenda()
-            })
+                addAgenda();
+            });
 
-            button.text('Add WorkPlan')
-            description.val('')
-            dueDate.val('')
-
+            button.text('Add WorkPlan');
+            description.val('');
         }
 
         function addAgenda() {
-            if (operational == null || operational == ""){
+            const modal = $('#add-work-modal');
+            const description = modal.find('#description').val();
+            const dueDate = modal.find('#due-date').val();
+            let status = $('#progress').val();
+            const operational = $('#select-operational').val();
+            console.log(status)
+
+            if (!operational) {
                 swal.fire("Error!", "Please select operational", "error");
                 return;
             }
-            axios({
-                method: "POST",
-                url: "{{ route('operational.agenda.store') }}",
-                data: {
-                    _token: "{{csrf_token()}}",
-                    operational_id: operational,
-                    due_date: dueDate.val(),
-                    description: description.val(),
+
+            axios.post("{{ route('operational.agenda.store') }}", {
+                _token: "{{ csrf_token() }}",
+                operational_id: operational,
+                due_date: dueDate,
+                description: description,
+                status: status
+            })
+                .then(function (response) {
+                    Swal.fire('Added!', 'Agenda has been added.', 'success');
+                    $('#table-agendas').DataTable().ajax.reload();
+                    modal.modal('hide');
+                })
+                .catch(function (error) {
+                        swal.fire("Error!", "Please try again", "error");
+                });
+        }
+
+    </script>
+
+    <script type="text/javascript">
+        const modal = $('#add-work-modal');
+
+        function editAgenda(agenda) {
+            const button = modal.find('#agendaButton');
+            button.innerHTML = 'Save Changes'
+            button.off('click')
+            button.on('click', () => {
+                updateAgenda(agenda);
+            })
+        }
+
+        function updateAgenda(agenda) {
+            swal.fire({
+                title: 'Are you sure?',
+                text: 'You will not be able to recover this action!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, update it!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios({
+                        method: "PATCH",
+                        url: "{{ route('operational.agenda.update', '') }}" + "/" + agenda,
+                        data: {
+                            _token: "{{csrf_token()}}",
+                            due_date: modal.find('#due_date').val(),
+                            description: modal.find('#description').val(),
+                            status: modal.find('#status').val(),
+                        }
+                    })
+                        .then(function (response) {
+                            Swal.fire(
+                                'Updated!',
+                                'Agenda has been updated.',
+                                'success'
+                            )
+                            $('#table-agendas').DataTable().ajax.reload();
+                            modal.modal('hide');
+                        })
+                        .catch(function (error) {
+                            swal.fire("Error!", "Please try again", "error");
+                        })
                 }
             })
         }
