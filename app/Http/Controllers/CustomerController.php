@@ -44,13 +44,17 @@ class CustomerController extends Controller
             'companyName' => $request->input('companyName'),
         ]);
 
-        $indexRoute = route('customer.index'); // Sesuaikan dengan nama rute index Anda
+        $indexRoute = route('customer.index');
         return redirect($indexRoute)->with('success', 'Data customer berhasil ditambahkan.');
     }
 
     public function show($id)
     {
-        return view('customer.detailCustomer', compact('customer'));
+        $customer = Customer::find($id);
+        $customerContacts = $customer->contacts;
+        //$relatedProjects = $customer->project;
+
+        return view('customer.detailCustomer', compact('customer', 'customerContacts'));
     }
 
     public function edit($id)

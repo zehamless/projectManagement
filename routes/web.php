@@ -12,6 +12,7 @@ use App\Http\Controllers\ProductionCostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\TopController;
 use App\Http\Controllers\UserController;
 use App\Material;
 use App\Models\Role;
@@ -82,6 +83,14 @@ Route::prefix('milestone')->group(function () {
     Route::delete('/{id}', [MilestoneController::class, 'destroy'])->name('milestone.destroy');
 });
 
+Route::prefix('top')->group(function () {
+    Route::get('/create/{id}', [TopController::class, 'create'])->name('top.create');
+    Route::post('/store', [TopController::class, 'store'])->name('top.store');
+    Route::get('/get-payment-data/{id}', [TopController::class, 'getTopData'])->name("top.get");
+    Route::put('/', [TopController::class, 'update'])->name('top.update');
+    Route::delete('/{id}', [TopController::class, 'destroy'])->name('top.destroy');
+});
+
 
 Route::prefix('customer')->group(function () {
     Route::get('/', [CustomerController::class, 'index'])->name('customer.index');
@@ -91,6 +100,7 @@ Route::prefix('customer')->group(function () {
     Route::get('/edit/{id}', [CustomerController::class, 'edit'])->name('customer.edit');
     Route::put('/update/{id}', [CustomerController::class, 'update'])->name('customer.update');
     Route::delete('/delete/{id}', [CustomerController::class, 'destroy'])->name('customer.destroy');
+    Route::get('/customer/detail/{id}', [CustomerController::class, 'detail'])->name('customer.detail');
 });
 
 Route::prefix('customerContact')->group(function () {
@@ -176,9 +186,6 @@ Route::get('/projects/createOperational', function () {
 });
 
 
-Route::get('/projects/createPayment', function () {
-    return view('projects.createPayment');
-});
 
 Route::get('calendar', function () {
     return view('calendar');

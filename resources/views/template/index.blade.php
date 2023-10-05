@@ -20,6 +20,11 @@
     data-topbar-color="light" data-leftbar-position="fixed" data-leftbar-color="light" data-leftbar-size='default'
     data-sidebar-user='true' onclick="" >
 
+    {{-- loading page --}}
+    {{-- <div class="d-flex justify-content-center loader">
+        <div class="loader-child" role="status"></div>
+    </div> --}}
+    
     <!-- Begin page -->
     <div id="wrapper">
         @include(' template.navbar') 
