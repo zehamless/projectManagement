@@ -17,7 +17,7 @@ class OperationalExpensesController extends Controller
     {
 
         if ($request->ajax()){
-            $expense = OperationalExpense::where('operational_id', $operational)->get();
+            $expense = OperationalExpense::where('operational_id', $operational)->orderByDesc('created_at')->get();
             return DataTables::of($expense)
                 ->addIndexColumn()
                 ->toJson();

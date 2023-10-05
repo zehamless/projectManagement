@@ -27,10 +27,11 @@
                             {{-- form input due date --}}
                             <div class="col-md-12">
                                 <div class="mb-3 text-start">
-                                    <label for="field-3" class="form-label">Due Date<span
+                                    <label for="due-date" class="form-label">Due Date<span
                                             class="text-danger">*</span></label>
-                                    <input type="date" class="form-control datepicker" id="due-date"
-                                           placeholder="Due Date" parsley-trigger="change" required="">
+                                    <input type="date" class="form-control" id="due-date" placeholder="Due date"
+                                           name="due-date"
+                                           parsley-trigger="change" required>
                                 </div>
                             </div>
 
