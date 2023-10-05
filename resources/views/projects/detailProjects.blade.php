@@ -225,6 +225,7 @@
                                                 <th>Project Label</th>
                                                 <th>Service Type</th>
                                                 <th>SPK Code</th>
+                                                <th class="text-center">Amount</th>
                                                 <th class="text-center" width="140">Actions</th>
                                             </tr>
                                         </thead>
@@ -236,6 +237,7 @@
                                                 <td>Project Label</td>
                                                 <td>Service Type</td>
                                                 <td>SPK Code</td>
+                                                <td class="text-center">Rp 1.000.000</td>
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-sm" style="float: none;">
                                                         <button type="button" data-bs-toggle="modal"
@@ -261,6 +263,7 @@
                                                 <td>Project Label</td>
                                                 <td>Service Type</td>
                                                 <td>SPK Code</td>
+                                                <td class="text-center">Rp 5.200.000</td>
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-sm" style="float: none;">
                                                         <button type="button" data-bs-toggle="modal"
@@ -286,6 +289,7 @@
                                                 <td>Project Label</td>
                                                 <td>Service Type</td>
                                                 <td>SPK Code</td>
+                                                <td class="text-center">Rp 5.030.000</td>
                                                 <td class="text-center">
                                                     <div class="btn-group btn-group-sm" style="float: none;">
                                                         <button type="button" data-bs-toggle="modal"
@@ -509,6 +513,7 @@
                                                     <p class="title-text">Real Service Cost</p>
                                                     {{-- Rumus : Real Service Cost = Budget Service - Service Cost --}}
                                                     <p class="details-text rupiah"></p>
+                                                    <p class="details-text rupiah">3450000</p>
                                                 </th>
                                             </tr>
                                             <tr>
