@@ -40,8 +40,7 @@
                                     <h4 class="mt-0">Data Customer</h4>
                                 </div>
                                 <div class="col-sm-4 text-end">
-                                    <a href="{{ $createRoute }}"
-                                        class="btn btn-addItems w-md waves-effect waves-light mb-3 px-3">
+                                    <a href="{{ $createRoute }}" class="btn btn-addItems w-md waves-effect waves-light mb-3 px-3">
                                         <i class="mdi mdi-plus" title="Menambahkan Customer"></i>Add Customer
                                     </a>
                                 </div>
@@ -60,17 +59,16 @@
                         </div>
 
                         {{-- modal edit customer --}}
-                        <form action="" class="parsley-examples" novalidate="" enctype="multipart/form-data">
-                            <div id="edit-customer-modal" class="modal fade" role="dialog"
-                                aria-labelledby="myModalLabel" aria-hidden="true" style="overflow:hidden;">
+                        <form action="{{ route('customer.update') }}" class="parsley-examples" novalidate="" method="post" enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+                            <div id="edit-customer-modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="overflow:hidden;">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h4 class="modal-title">
-                                                Add
-                                                Expenses</h4>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
+                                                Edit Customer</h4>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
 
@@ -80,18 +78,16 @@
                                                     {{-- form input customer name --}}
                                                     <div class="mb-3">
 
-                                                        <label for="companyName" class="form-label">Company Name<span
-                                                                class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control" id="companyName"
-                                                            name="companyName" parsley-trigger="change" required="">
+                                                        <label for="companyName" class="form-label">Company Name<span class="text-danger"></span></label>
+                                                        <input type="hidden" id="customer_id" name="id">
+                                                        <input type="text" class="form-control" name="companyName" id="customer_companyName" parsley-trigger="change" required="">
                                                     </div>
 
                                                 </div>
                                             </div>
 
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary waves-effect"
-                                                    data-bs-dismiss="modal">
+                                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">
                                                     Close
                                                 </button>
                                                 <button type="submit" class="btn btn-save waves-effect waves-light">
@@ -116,8 +112,7 @@
 @endsection
 
 @section('pageScript')
-<link href="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-1.13.6/r-2.5.0/sc-2.2.0/sp-2.2.0/sl-1.7.0/datatables.min.css"
-    rel="stylesheet">
+<link href="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-1.13.6/r-2.5.0/sc-2.2.0/sp-2.2.0/sl-1.7.0/datatables.min.css" rel="stylesheet">
 <script src="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-1.13.6/r-2.5.0/sc-2.2.0/sp-2.2.0/sl-1.7.0/datatables.min.js">
 </script>
 
@@ -157,7 +152,8 @@
                             </div>
                             <div class="btn-group btn-group-sm" style="float: none;">
                                 <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light"
-                                data-bs-toggle="modal" data-bs-target="#edit-customer-modal" 
+                                value="${full.id}"
+                                data-bs-toggle="modal" data-bs-target="#edit-customer-modal"
                                 title="Edit Customer" style="padding: 0.25rem 0.8rem;">
                                     <span class="mdi mdi-pencil"></span>
                             </div>
@@ -171,43 +167,47 @@
             ]
         });
     });
-
-    // function deleteCustomer(id) {
-    //     if (confirm('Apakah Anda yakin ingin menghapus customer ini?')) {
-    //         $.ajax({
-    //             url: "{{ route('customer.destroy', '') }}/" + id,
-    //             type: 'DELETE',
-    //             data: {
-    //                 _token: "{{ csrf_token() }}"
-    //             },
-    //             success: function(response) {
-    //                 console.log(response);
-    //             },
-    //             error: function(error) {
-    //                 console.error(error);
-    //             }
-    //         });
-    //     }
-    // }
 </script>
 
 <script type="text/javascript">
     function deleteCustomer(id) {
         if (confirm('Apakah Anda yakin ingin menghapus customer ini?')) {
             $.ajax({
-                url: "{{ route('customer.destroy', '') }}" + "/" + id,
+                url: "{{ route('customer.destroy', '') }}/" + id,
                 type: 'DELETE',
                 data: {
                     _token: "{{ csrf_token() }}"
                 },
                 success: function(response) {
                     console.log(response);
+                    $('#dataTable').DataTable().ajax.reload();
                 },
                 error: function(error) {
                     console.error(error);
+                    $('#dataTable').DataTable().ajax.reload();
                 }
             });
         }
     }
+</script>
+
+<script>
+    $(document).ready(function() {
+        $(document).on('click', '.tabledit-edit-button', function() {
+            var id = $(this).val(); // Menggunakan data-id yang baru
+            $.ajax({
+                type: "GET",
+                url: "/customer/get-customer-data/" + id,
+                dataType: "json",
+                success: function(response) {
+                    $("#customer_id").val(id);
+                    $("#customer_companyName").val(response.companyName);
+                },
+                error: function(response) {
+                    alert("Error: " + response.statusText);
+                }
+            });
+        });
+    });
 </script>
 @endsection

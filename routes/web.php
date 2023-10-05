@@ -98,9 +98,10 @@ Route::prefix('customer')->group(function () {
     Route::post('/store', [CustomerController::class, 'store'])->name('customer.store');
     Route::get('/show/{id}', [CustomerController::class, 'show'])->name('customer.show');
     Route::get('/edit/{id}', [CustomerController::class, 'edit'])->name('customer.edit');
-    Route::put('/update/{id}', [CustomerController::class, 'update'])->name('customer.update');
+    Route::put('/update', [CustomerController::class, 'update'])->name('customer.update');
     Route::delete('/delete/{id}', [CustomerController::class, 'destroy'])->name('customer.destroy');
     Route::get('/customer/detail/{id}', [CustomerController::class, 'detail'])->name('customer.detail');
+    Route::get('/get-customer-data/{id}', [CustomerController::class, 'getCustomerData'])->name("customer.get");
 });
 
 Route::prefix('customerContact')->group(function () {
