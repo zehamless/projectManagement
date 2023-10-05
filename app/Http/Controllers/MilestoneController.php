@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Milestone;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use File;
+use Illuminate\Support\Facades\Response as FacadesResponse;
+use Response;
 
 class MilestoneController extends Controller
 {
@@ -31,7 +35,7 @@ class MilestoneController extends Controller
         // Simpan file
         if ($request->hasFile('file')) {
             $file = $request->file('file');
-            $fileName = time() . '.' . $file->getClientOriginalExtension();
+            $fileName = 'milestone_' . time() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('milestone_files'), $fileName);
             $milestone->file = $fileName;
         }
@@ -62,7 +66,7 @@ class MilestoneController extends Controller
         // Upload file jika ada
         if ($request->hasFile('file')) {
             $file = $request->file('file');
-            $fileName = $file->getClientOriginalName();
+            $fileName = 'milestone_' . $file->getClientOriginalName();
             $file->storeAs('milestone_files', $fileName, 'public');
             $milestone->file = $fileName;
             $milestone->save();
@@ -100,6 +104,18 @@ class MilestoneController extends Controller
             return response()->json(['message' => 'Milestone berhasil dihapus.']);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Terjadi kesalahan saat menghapus Milestone.'], 500);
+        }
+    }
+
+    //Download File
+    public function downloadfile($file)
+    {
+        $filePath = public_path('milestone_files/' . $file);
+
+        if (file_exists($filePath)) {
+            return response()->download($filePath, $file);
+        } else {
+            return abort(404, 'File not found');
         }
     }
 }

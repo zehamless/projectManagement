@@ -81,6 +81,7 @@ Route::prefix('milestone')->group(function () {
     Route::post('/store', [MilestoneController::class, 'store'])->name('milestone.store');
     Route::put('/', [MilestoneController::class, 'update'])->name('milestone.update');
     Route::delete('/{id}', [MilestoneController::class, 'destroy'])->name('milestone.destroy');
+    Route::get('file/{file}', [MilestoneController::class, 'downloadfile'])->name('milestone.file');
 });
 
 Route::prefix('top')->group(function () {
@@ -89,6 +90,7 @@ Route::prefix('top')->group(function () {
     Route::get('/get-payment-data/{id}', [TopController::class, 'getTopData'])->name("top.get");
     Route::put('/', [TopController::class, 'update'])->name('top.update');
     Route::delete('/{id}', [TopController::class, 'destroy'])->name('top.destroy');
+    Route::get('file/{file}', [TopController::class, 'downloadfile'])->name('top.file');
 });
 
 
