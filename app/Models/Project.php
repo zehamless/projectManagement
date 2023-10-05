@@ -58,6 +58,11 @@ class Project extends Model
         return $this->hasMany(Top::class, 'project_id');
     }
 
+    public function operational()
+    {
+        return $this->hasMany(Operational::class, 'project_id');
+    }
+
 
     // Definisi relasi dengan Sales Executive
     public function salesExecutive()
