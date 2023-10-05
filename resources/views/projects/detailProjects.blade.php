@@ -210,7 +210,7 @@
                                         <h4 class="mt-0 header-title">Field Service Log</h4>
                                     </div>
                                     <div class="col-sm-4">
-                                        <a href="{{ url('projects/createOperational') }}"
+                                        <a href="{{ route('top.create', ['id' => $projectData->id]) }}"
                                             class="btn btn-createItems w-md waves-effect waves-light mb-3"><i
                                                 class="mdi mdi-plus"></i>Add Operational</a>
                                     </div>
@@ -222,7 +222,6 @@
                                                 <th>#</th>
                                                 <th>SPK Number</th>
                                                 <th>Service Date</th>
-                                                <th>Project Label</th>
                                                 <th>Service Type</th>
                                                 <th>SPK Code</th>
                                                 <th class="text-center">Amount</th>
@@ -230,84 +229,41 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>SPK Number</td>
-                                                <td>Service Date</td>
-                                                <td>Project Label</td>
-                                                <td>Service Type</td>
-                                                <td>SPK Code</td>
-                                                <td class="text-center">Rp 1.000.000</td>
-                                                <td class="text-center">
-                                                    <div class="btn-group btn-group-sm" style="float: none;">
-                                                        <button type="button" data-bs-toggle="modal"
-                                                            data-bs-target="#edit-service-modal"
-                                                            title="Edit Field Service Log"
-                                                            class="tabledit-edit-button btn btn-primary waves-effect waves-light"
-                                                            style="background-color: #3E8BFF;">
-                                                            <span class="mdi mdi-pencil"></span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="btn-group btn-group-sm" style="float: none;">
-                                                        <button title="hapus data" type="button"
-                                                            class="tabledit-edit-button btn btn-danger">
-                                                            <span class="mdi mdi-trash-can-outline"></span>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>SPK Number</td>
-                                                <td>Service Date</td>
-                                                <td>Project Label</td>
-                                                <td>Service Type</td>
-                                                <td>SPK Code</td>
-                                                <td class="text-center">Rp 5.200.000</td>
-                                                <td class="text-center">
-                                                    <div class="btn-group btn-group-sm" style="float: none;">
-                                                        <button type="button" data-bs-toggle="modal"
-                                                            data-bs-target="#edit-service-modal"
-                                                            title="Edit Field Service Log"
-                                                            class="tabledit-edit-button btn btn-primary waves-effect waves-light"
-                                                            style="background-color: #3E8BFF;">
-                                                            <span class="mdi mdi-pencil"></span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="btn-group btn-group-sm" style="float: none;">
-                                                        <button title="hapus data" type="button"
-                                                            class="tabledit-edit-button btn btn-danger">
-                                                            <span class="mdi mdi-trash-can-outline"></span>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>SPK Number</td>
-                                                <td>Service Date</td>
-                                                <td>Project Label</td>
-                                                <td>Service Type</td>
-                                                <td>SPK Code</td>
-                                                <td class="text-center">Rp 5.030.000</td>
-                                                <td class="text-center">
-                                                    <div class="btn-group btn-group-sm" style="float: none;">
-                                                        <button type="button" data-bs-toggle="modal"
-                                                            data-bs-target="#edit-service-modal"
-                                                            title="Edit Field Service Log"
-                                                            class="tabledit-edit-button btn btn-primary waves-effect waves-light"
-                                                            style="background-color: #3E8BFF;">
-                                                            <span class="mdi mdi-pencil"></span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="btn-group btn-group-sm" style="float: none;">
-                                                        <button title="hapus data" type="button"
-                                                            class="tabledit-edit-button btn btn-danger">
-                                                            <span class="mdi mdi-trash-can-outline"></span>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                            @if ($operationals->isEmpty())
+                                                <tr>
+                                                    <td colspan="7" align="center">Belum ada operational service</td>
+                                                </tr>
+                                            @else
+                                                @php($index = 1)
+                                                @foreach ($operationals as $operational)
+                                                    <tr>
+                                                        <th scope="row">{{ $index++ }}</th>
+                                                        <td>{{ $operational['spk_code'] }}
+                                                        </td>
+                                                        <td>{{ $operational['date'] }}</td>
+                                                        <td>{{ $operational['type'] }}</td>
+                                                        <td>{{ $operational['spk_number'] }}</td>
+                                                        <td class="text-center">Rp 1.000.000</td>
+                                                        <td class="text-center">
+                                                            <div class="btn-group btn-group-sm" style="float: none;">
+                                                                <button type="button" data-bs-toggle="modal"
+                                                                    data-bs-target="#edit-service-modal"
+                                                                    title="Edit Field Service Log"
+                                                                    class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                                                    style="background-color: #3E8BFF;">
+                                                                    <span class="mdi mdi-pencil"></span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="btn-group btn-group-sm" style="float: none;">
+                                                                <button title="hapus data" type="button"
+                                                                    class="tabledit-edit-button btn btn-danger">
+                                                                    <span class="mdi mdi-trash-can-outline"></span>
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
                                         </tbody>
                                     </table>
                                 </div>
@@ -510,6 +466,13 @@
                                             </tr>
                                             <tr>
                                                 <th scope="row">
+                                                    <p class="title-text">Service Budget</p>
+                                                    <p class="details-text rupiah">{{ $projectData['expense_budget'] }}
+                                                    </p>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">
                                                     <p class="title-text">Real Service Cost</p>
                                                     {{-- Rumus : Real Service Cost = Budget Service - Service Cost --}}
                                                     <p class="details-text rupiah"></p>
@@ -517,27 +480,20 @@
                                                 </th>
                                             </tr>
                                             <tr>
-                                                <th scope="row">
-                                                    <p class="title-text">Production Cost</p>
-                                                    <p class="details-text rupiah">{{ $projectData['expense_budget'] }}
-                                                    </p>
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row"
-                                                    class="{{ $realCost > $projectData->expense_budget ? 'text-danger' : 'text-success' }} rupiah">
+                                                <td scope="row" style="font-size: 20px;"
+                                                    class="{{ $realCost > $projectData->preliminary_cost ? 'text-danger' : 'text-success' }} rupiah">
                                                     <p class="title-text">Real Production Cost</p>
                                                     <div style="display: flex; align-items: start;">
                                                         <p class="rupiah" style="font-weight: bold;">
-                                                            {{ $realCost }}</p>
-                                                        @if ($realCost > $projectData->expense_budget)
-                                                            <p class="text-light"
-                                                                style="font-size: 10px; border-radius: 10px; margin-left: 5px; padding:2px 4px; background-color: red;">
-                                                                + <span {{-- rumus=real production cost=prelim cost - production
-                                                            cost --}}
-                                                                    class="rupiah">{{ $realCost - $projectData->expense_budget }}</span>
-                                                            </p>
-                                                        @endif
+                                                            {{ $realCost }}
+                                                        </p>
+                                                        <p class="text-light"
+                                                            style="font-size: 15px; border-radius: 10px; margin-left: 5px; padding: 2px 4px; background-color: {{ $realCost <= $projectData->preliminary_cost ? 'green' : 'red' }}">
+                                                            {{ $realCost <= $projectData->preliminary_cost ? '+' : '-' }}
+                                                            <span class="rupiah">
+                                                                {{ abs($realCost - $projectData->preliminary_cost) }}</span>
+                                                        </p>
+
                                                     </div>
                                                 </td>
                                             </tr>
