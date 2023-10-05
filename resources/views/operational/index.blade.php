@@ -459,7 +459,35 @@
 @section('pageScript')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.agendasForm').parsley();
+            $('.expensesForm').parsley();
+            //if form id is addAgenda and form is valid
+            $('.agendasForm').on('submit', function (event) {
+                event.preventDefault();
+                if ($('.agendasForm').parsley().isValid()) {
+                    if ($(this).attr('id') == 'addAgenda') {
+                        addAgenda();
+                    } else if ($(this).attr('id') == 'updateAgenda') {
+                        updateAgenda($(this).attr('data-id'));
+                    }
+                }
+            });
 
+            $('.expensesForm').on('submit', function (event) {
+                event.preventDefault();
+                if ($('.expensesForm').parsley().isValid()) {
+                    if ($(this).attr('id') == 'addExpense') {
+                        addExpense();
+                    } else if ($(this).attr('id') == 'updateExpense') {
+                        updateExpense($(this).attr('data-id'));
+                    }
+                }
+            });
+
+        })
+    </script>
     <script type="text/javascript">
         function getOperationals(salesOrder) {
             if (salesOrder !== "" && salesOrder != null) {
@@ -714,10 +742,10 @@
             let modal = $('#add-expenses-modal');
             const button = modal.find('#expenseButton');
             button.innerHTML = 'Save Changes';
-            button.off('click');
-            button.click(() => {
-                updateExpense(expense);
-            });
+
+            $('.expensesForm').parsley().reset()
+            $('.expensesForm').attr('id', 'updateExpense')
+            $('.expensesForm').attr('data-id', expense)
 
             let operational = $('#select-operational').val();
             let operationalText = $('#select-operational option:selected').text();
@@ -785,6 +813,7 @@
 
     </script>
     <script type="text/javascript">
+
         function deleteExpense(expense) {
             swal.fire({
                 title: 'Are you sure?',
@@ -823,13 +852,8 @@
             const modal = $('#add-expenses-modal');
             const button = modal.find('#expenseButton');
 
-            // Unbind click event to prevent multiple bindings
-            button.off('click');
-
-            // Bind click event to the button
-            button.on('click', () => {
-                addExpense();
-            });
+            $('.expensesForm').parsley().reset();
+            $('.expensesForm').attr('id', 'addExpense');
 
             // Change the inner HTML of the button element.
             button.text('Add Expense');
@@ -1049,23 +1073,6 @@
         }
     </script>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('.agendasForm').parsley();
-            //if form id is addAgenda and form is valid
-            $('.agendasForm').on('submit', function (event) {
-                event.preventDefault();
-                if ($('.agendasForm').parsley().isValid()) {
-                    if ($(this).attr('id') == 'addAgenda') {
-                        addAgenda();
-                    } else if ($(this).attr('id') == 'updateAgenda') {
-                        updateAgenda($(this).attr('data-id'));
-                    }
-                }
-            });
-
-        })
-    </script>
 
     <script type="text/javascript">
 
@@ -1114,15 +1121,6 @@
                 })
                 .catch(function (error) {
                     console.log(error)
-                    if (error.response.status === 422) {
-                        const errors = error.response.data.errors;
-                        $.each(errors, function (key, value) {
-                            console.log(key, value);
-                            const inputField = modal.find(`[id="${key}"]`);
-                            inputField.siblings('.parsley-errors-list').text(value[0]);
-                            // You can customize the error message display further if needed.
-                        });
-                    }
                     swal.fire("Error!", "Please try again", "error");
                 });
         }
@@ -1136,7 +1134,7 @@
             const button = modal.find('#agendaButton');
             button.innerHTML = 'Save Changes'
 
-            $('.agendasForm').parsley().reset(
+            $('.agendasForm').parsley().reset();
             $('.agendasForm').attr('id', 'updateAgenda');
             $('.agendasForm').attr('data-id', agenda);
             axios({
