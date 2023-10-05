@@ -21,17 +21,21 @@
     data-sidebar-user='true' onclick="" >
 
     {{-- loading page --}}
-    {{-- <div class="d-flex justify-content-center loader">
+    <div id="loading-indicator">
+    <div class="d-flex justify-content-center loader" >
         <div class="loader-child" role="status"></div>
-    </div> --}}
-    
+    </div>
+    </div>
+    {{-- end loading page --}}
+
+
     <!-- Begin page -->
     <div id="wrapper">
-        @include(' template.navbar') 
-        @yield('content') 
-        @include('template.footer') 
+        @include(' template.navbar')
+        @yield('content')
+        @include('template.footer')
     {{-- tutup div wrapper ada di file
-    footer.blade.php --}} 
+    footer.blade.php --}}
     </div>
     @include('template.script')
 </body>

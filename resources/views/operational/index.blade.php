@@ -1142,23 +1142,8 @@
                 url: "{{ route('operational.agenda.show', '') }}" + "/" + agenda,
             })
                 .then(function (response) {
-                    // Get the yyyy/mm/dd date string from an HTML element.
-                    const yyyyMmDdDateString = response.data[0].due_date;
-                    console.log(yyyyMmDdDateString)
-
-// Split the yyyy/mm/dd date string into an array.
-                    const yyyyMmDdDateArray = yyyyMmDdDateString.split("-");
-
-// Reverse the order of the array elements.
-                    const ddMmYyyyDateArray = yyyyMmDdDateArray.reverse();
-
-// Join the array elements back into a string, using "/" as the separator.
-                    const ddMmYyyyDateString = ddMmYyyyDateArray.join("/");
-
-// Set the text of an HTML element to the dd/mm/yyyy date string.
-                    modal.find('#due-date').val(ddMmYyyyDateString);
-                    console.log(response);
-                    // modal.find('#due-date').val(response.data[0].due_date);
+                    modal.find('#due-date').val(response.data[0].due_date);
+                    console.log(response.data[0].due_date)
                     modal.find('#description').val(response.data[0].description);
                     modal.find('#progress').val(response.data[0].status);
                     modal.find('#updateAgenda').attr("data-id", response.data[0].id)
