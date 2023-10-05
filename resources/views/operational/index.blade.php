@@ -39,7 +39,7 @@
             color: white;
         }
 
-        .row{
+        .row {
             --ct-gutter-x: 0rem !important;
         }
     </style>
@@ -184,6 +184,7 @@
                                                                                 <button type="button"
                                                                                         data-bs-toggle="modal"
                                                                                         data-bs-target="#add-work-modal"
+                                                                                        onclick="showAgendaForm()"
                                                                                         class="btn btn-save w-md waves-effect waves-light px-4 btn-addMaterial">
                                                                                     <i class="mdi mdi-plus"></i>Add
                                                                                     Work Plan
@@ -205,7 +206,7 @@
                                                                                     </th>
                                                                                 </tr>
                                                                                 </thead>
-                                                                                
+
                                                                                 <tbody>
                                                                                 </tbody>
                                                                             </table>
@@ -238,7 +239,8 @@
                                                                             </div>
 
                                                                         </div>
-                                                                        <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap5">
+                                                                        <div id="datatable_wrapper"
+                                                                             class="dataTables_wrapper dt-bootstrap5">
                                                                             <table
                                                                                 class="table table-striped table-hover dt-responsive table-hover table-responsive nowrap dataTable no-footer dtr-inline"
                                                                                 id="table-expenses">
@@ -457,7 +459,35 @@
 @section('pageScript')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.agendasForm').parsley();
+            $('.expensesForm').parsley();
+            //if form id is addAgenda and form is valid
+            $('.agendasForm').on('submit', function (event) {
+                event.preventDefault();
+                if ($('.agendasForm').parsley().isValid()) {
+                    if ($(this).attr('id') == 'addAgenda') {
+                        addAgenda();
+                    } else if ($(this).attr('id') == 'updateAgenda') {
+                        updateAgenda($(this).attr('data-id'));
+                    }
+                }
+            });
 
+            $('.expensesForm').on('submit', function (event) {
+                event.preventDefault();
+                if ($('.expensesForm').parsley().isValid()) {
+                    if ($(this).attr('id') == 'addExpense') {
+                        addExpense();
+                    } else if ($(this).attr('id') == 'updateExpense') {
+                        updateExpense($(this).attr('data-id'));
+                    }
+                }
+            });
+
+        })
+    </script>
     <script type="text/javascript">
         function getOperationals(salesOrder) {
             if (salesOrder !== "" && salesOrder != null) {
@@ -712,10 +742,10 @@
             let modal = $('#add-expenses-modal');
             const button = modal.find('#expenseButton');
             button.innerHTML = 'Save Changes';
-            button.off('click');
-            button.click(function () {
-                updateExpense(expense);
-            });
+
+            $('.expensesForm').parsley().reset()
+            $('.expensesForm').attr('id', 'updateExpense')
+            $('.expensesForm').attr('data-id', expense)
 
             let operational = $('#select-operational').val();
             let operationalText = $('#select-operational option:selected').text();
@@ -783,6 +813,7 @@
 
     </script>
     <script type="text/javascript">
+
         function deleteExpense(expense) {
             swal.fire({
                 title: 'Are you sure?',
@@ -821,13 +852,8 @@
             const modal = $('#add-expenses-modal');
             const button = modal.find('#expenseButton');
 
-            // Unbind click event to prevent multiple bindings
-            button.off('click');
-
-            // Bind click event to the button
-            button.on('click', function () {
-                addExpense();
-            });
+            $('.expensesForm').parsley().reset();
+            $('.expensesForm').attr('id', 'addExpense');
 
             // Change the inner HTML of the button element.
             button.text('Add Expense');
@@ -1010,6 +1036,173 @@
             })
         }
 
+    </script>
+    <script type="text/javascript">
+        function deleteAgenda(agenda) {
+            swal.fire({
+                title: 'Are you sure?',
+                text: 'You will not be able to recover this action!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#f34e4e',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios({
+                        method: 'DELETE',
+                        url: "{{ route('operational.agenda.delete', '') }}" + "/" + agenda,
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                        },
+                    }).then(function (response) {
+                        console.log(response);
+                        Swal.fire(
+                            'Deleted!',
+                            'Your expense has been deleted.',
+                            'success'
+                        )
+                        $('#table-agendas').DataTable().ajax.reload();
+                    }).catch(function (error) {
+                        console.log(error);
+                        swal.fire("Error!", "Please try again", "error");
+                    })
+                }
+            })
+
+        }
+    </script>
+
+
+    <script type="text/javascript">
+
+        function showAgendaForm() {
+            const modal = $('#add-work-modal');
+
+            const description = modal.find('#description');
+            const dueDate = modal.find('#due_date');
+            const status = modal.find('#progress');
+            const button = modal.find('#agendaButton');
+
+            $('.agendasForm').parsley().reset();
+            $('.agendasForm').attr('id', 'addAgenda');
+
+            button.text('Add Agenda')
+            description.val('');
+            dueDate.val('');
+            status.val('Planned');
+
+        }
+
+        function addAgenda() {
+            const modal = $('#add-work-modal');
+            const description = modal.find('#description').val();
+            const dueDate = modal.find('#due-date').val();
+            let status = $('#progress').val();
+            const operational = $('#select-operational').val();
+            console.log(status)
+
+            if (!operational) {
+                swal.fire("Error!", "Please select operational", "error");
+                return;
+            }
+
+            axios.post("{{ route('operational.agenda.store') }}", {
+                _token: "{{ csrf_token() }}",
+                operational_id: operational,
+                due_date: dueDate,
+                description: description,
+                status: status
+            })
+                .then(function (response) {
+                    Swal.fire('Added!', 'Agenda has been added.', 'success');
+                    $('#table-agendas').DataTable().ajax.reload();
+                    modal.modal('hide');
+                })
+                .catch(function (error) {
+                    console.log(error)
+                    swal.fire("Error!", "Please try again", "error");
+                });
+        }
+
+    </script>
+
+    <script type="text/javascript">
+        const modal = $('#add-work-modal');
+
+        function editAgenda(agenda) {
+            const button = modal.find('#agendaButton');
+            button.innerHTML = 'Save Changes'
+
+            $('.agendasForm').parsley().reset();
+            $('.agendasForm').attr('id', 'updateAgenda');
+            $('.agendasForm').attr('data-id', agenda);
+            axios({
+                method: 'GET',
+                url: "{{ route('operational.agenda.show', '') }}" + "/" + agenda,
+            })
+                .then(function (response) {
+                    // Get the yyyy/mm/dd date string from an HTML element.
+                    const yyyyMmDdDateString = response.data[0].due_date;
+                    console.log(yyyyMmDdDateString)
+
+// Split the yyyy/mm/dd date string into an array.
+                    const yyyyMmDdDateArray = yyyyMmDdDateString.split("-");
+
+// Reverse the order of the array elements.
+                    const ddMmYyyyDateArray = yyyyMmDdDateArray.reverse();
+
+// Join the array elements back into a string, using "/" as the separator.
+                    const ddMmYyyyDateString = ddMmYyyyDateArray.join("/");
+
+// Set the text of an HTML element to the dd/mm/yyyy date string.
+                    modal.find('#due-date').val(ddMmYyyyDateString);
+                    console.log(response);
+                    // modal.find('#due-date').val(response.data[0].due_date);
+                    modal.find('#description').val(response.data[0].description);
+                    modal.find('#progress').val(response.data[0].status);
+                    modal.find('#updateAgenda').attr("data-id", response.data[0].id)
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+        }
+
+        function updateAgenda(agenda) {
+            swal.fire({
+                title: 'Are you sure?',
+                text: 'You will not be able to recover this action!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, update it!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios({
+                        method: "PATCH",
+                        url: "{{ route('operational.agenda.update', '') }}" + "/" + agenda,
+                        data: {
+                            _token: "{{csrf_token()}}",
+                            due_date: modal.find('#due-date').val(),
+                            description: modal.find('#description').val(),
+                            status: modal.find('#progress').val(),
+                        }
+                    })
+                        .then(function (response) {
+                            Swal.fire(
+                                'Updated!',
+                                'Agenda has been updated.',
+                                'success'
+                            )
+                            $('#table-agendas').DataTable().ajax.reload();
+                            modal.modal('hide');
+                        })
+                        .catch(function (error) {
+                            swal.fire("Error!", "Please try again", "error");
+                        })
+                }
+            })
+        }
     </script>
 
 @endsection

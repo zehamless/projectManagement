@@ -1,8 +1,7 @@
 <div class="listModals">
 
     {{-- modals work plan --}}
-    <form action="" class="parsley-examples" novalidate="" method="post" enctype="multipart/form-data">
-        @csrf
+    <form class="agendasForm" data-parsley-validate>
         <div id="add-work-modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
              style="overflow:hidden;">
             <div class="modal-dialog modal-dialog-centered">
@@ -21,7 +20,7 @@
                                 <div class="mb-3 text-start">
                                     <label for="field-2" class="form-label">Description</label>
                                     <textarea class="form-control" id="description" placeholder="Description"
-                                              parsley-trigger="change" required=""></textarea>
+                                              parsley-trigger="change" required></textarea>
                                 </div>
                             </div>
 
@@ -40,20 +39,20 @@
                                 <div class="mb-3 text-start">
                                     <label for="progress" class="form-label">Status<span
                                             class="text-danger">*</span></label>
-                                    <select class="form-control" id="progress" name="progress" parsley-trigger="change" required>
-                                        <option value="Planned" selected disabled>Planned</option>
+                                    <select class="form-control" id="progress" name="progress" parsley-trigger="change"
+                                            required>
+                                        <option value="Planned" selected>Planned</option>
                                         <option value="On Progress">On Progress</option>
                                         <option value="Done">Done</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
-                        
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">
                                 Close
                             </button>
-                            <button type="submit" class="btn btn-save waves-effect waves-light">
+                            <button type="submit" class="btn btn-save waves-effect waves-light" id="agendaButton">
                                 Save
                                 changes
                             </button>
@@ -64,9 +63,8 @@
             <!-- /.modal -->
         </div>
     </form>
-
     {{-- modals operational expenses --}}
-    <form action="" class="parsley-examples" novalidate="" method="post" enctype="multipart/form-data">
+    <form class="expensesForm" data-parsley-validate>
         <div id="add-expenses-modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
              style="overflow:hidden;">
             <div class="modal-dialog modal-dialog-centered">
@@ -83,20 +81,12 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="mb-3 text-start">
-                                    <label for="field-1" class="form-label" id="operational-label">Operational<span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="expense-id" name="expense-id"
-                                           placeholder="get value default dari parent project name" readonly>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="mb-3 text-start">
                                     <label for="field-1" class="form-label">Item<span
                                             class="text-danger">*</span>
                                     </label>
                                     <input type="text" class="form-control" id="expense-item" placeholder="Item"
                                            name="expense-item"
-                                           parsley-trigger="change" required="">
+                                           parsley-trigger="change" required>
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -104,9 +94,9 @@
                                     <label for="field-1" class="form-label">Date<span
                                             class="text-danger">*</span>
                                     </label>
-                                    <input type="date" class="form-control datepicker" id="expense-date" placeholder="date"
+                                    <input type="date" class="form-control" id="expense-date" placeholder="date"
                                            name="expense-date"
-                                           parsley-trigger="change" required="">
+                                           parsley-trigger="change" required>
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -115,7 +105,7 @@
                                             class="text-danger">*</span></label>
                                     <input type="text" class="form-control" id="expense-amount" placeholder="Amount"
                                            name="expense-amount"
-                                           parsley-trigger="change" required="">
+                                           parsley-trigger="change" required>
                                 </div>
                             </div>
                         </div>
@@ -134,7 +124,6 @@
             <!-- /.modal -->
         </div>
     </form>
-
     {{-- modals material utilized --}}
     <form action="" class="parsley-examples" novalidate="" method="post" enctype="multipart/form-data">
         @csrf
@@ -241,7 +230,8 @@
                         <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">
                             Close
                         </button>
-                        <button type="submit" class="btn btn-save waves-effect waves-light" id="technician-button" onclick="attachTeam()">
+                        <button type="submit" class="btn btn-save waves-effect waves-light" id="technician-button"
+                                onclick="attachTeam()">
                             Save
                             changes
                         </button>
