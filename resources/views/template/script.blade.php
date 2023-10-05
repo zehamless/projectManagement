@@ -105,7 +105,7 @@ https://cdn.jsdelivr.net/npm/attrchange@1.0.1/attrchange.min.js
 {{-- script untuk manggil alert jika berhasil create/edit --}}
 <script>
     var alertSuccess = document.getElementById('success-alert');
-    
+
     if(alertSuccess){
         $(document).ready(function(){
         Swal.fire({
@@ -115,14 +115,14 @@ https://cdn.jsdelivr.net/npm/attrchange@1.0.1/attrchange.min.js
         });
         });
     }else{
-        
+
     }
 </script>
 
 {{-- script untuk manggil alert jika tidak ada error --}}
 <script>
     var alertSuccess = document.getElementById('error-alert');
-    
+
     if(alertSuccess){
         $(document).ready(function(){
         Swal.fire({
@@ -132,7 +132,7 @@ https://cdn.jsdelivr.net/npm/attrchange@1.0.1/attrchange.min.js
         });
         });
     }else{
-        
+
     }
 </script>
 
@@ -164,8 +164,20 @@ https://cdn.jsdelivr.net/npm/attrchange@1.0.1/attrchange.min.js
     }
     });
 
-    
-    
+
+
 </script> --}}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#loading-indicator').hide();
+        $(document).on('ajaxStart', function() {
+            $('#loading-indicator').show();
+        });
+
+        $(document).on('ajaxStop', function() {
+            $('#loading-indicator').hide();
+        });
+    });
+</script>
 
 @yield('pageScript')
