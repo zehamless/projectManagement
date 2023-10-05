@@ -83,8 +83,6 @@ class CustomerController extends Controller
         $customer = Customer::find($id);
         $customer->delete();
 
-        // $indexRoute = route('customer.index');
-        // return redirect($indexRoute)->with('success', 'Data customer berhasil dihapus.');
-        return response()->json(['message' => 'Data customer berhasil dihapus.']);
+        return redirect()->route('customer.index')->with('success', 'Data customer berhasil dihapus.');
     }
 }
