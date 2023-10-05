@@ -1,6 +1,7 @@
 <div class="listModals">
 
     {{-- modals work plan --}}
+    <form class="agendasForm" data-parsley-validate>
         <div id="add-work-modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
              style="overflow:hidden;">
             <div class="modal-dialog modal-dialog-centered">
@@ -19,7 +20,7 @@
                                 <div class="mb-3 text-start">
                                     <label for="field-2" class="form-label">Description</label>
                                     <textarea class="form-control" id="description" placeholder="Description"
-                                              parsley-trigger="change" required=""></textarea>
+                                              parsley-trigger="change" required></textarea>
                                 </div>
                             </div>
 
@@ -60,7 +61,7 @@
             </div>
             <!-- /.modal -->
         </div>
-
+    </form>
     {{-- modals operational expenses --}}
     <div id="add-expenses-modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
          style="overflow:hidden;">

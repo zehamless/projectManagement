@@ -37,7 +37,7 @@ class OperationalAgendaController extends Controller
     public function store(Request $request)
     {
         // Validasi dan simpan data baru
-        $request->validate([
+        $validation = $request->validate([
             'operational_id' => 'required',
             'description' => 'required',
             'due_date' => 'required',

@@ -1050,21 +1050,37 @@
     </script>
 
     <script type="text/javascript">
+        $(document).ready(function () {
+            $('.agendasForm').parsley();
+            //if form id is addAgenda and form is valid
+            $('.agendasForm').on('submit', function (event) {
+                event.preventDefault();
+                if ($('.agendasForm').parsley().isValid()) {
+                    if ($(this).attr('id') == 'addAgenda') {
+                        addAgenda();
+                    } else if ($(this).attr('id') == 'updateAgenda') {
+                        updateAgenda($(this).attr('data-id'));
+                    }
+                }
+            });
+
+        })
+    </script>
+
+    <script type="text/javascript">
 
         function showAgendaForm() {
             const modal = $('#add-work-modal');
-            const button = modal.find('#agendaButton');
 
             const description = modal.find('#description');
             const dueDate = modal.find('#due_date');
             const status = modal.find('#progress');
+            const button = modal.find('#agendaButton');
 
-            button.off('click');
-            button.on('click', () => {
-                addAgenda();
-            });
+            $('.agendasForm').parsley().reset();
+            $('.agendasForm').attr('id', 'addAgenda');
 
-            button.text('Add WorkPlan');
+            button.text('Add Agenda')
             description.val('');
             dueDate.val('');
             status.val('Planned');
@@ -1097,7 +1113,17 @@
                     modal.modal('hide');
                 })
                 .catch(function (error) {
-                        swal.fire("Error!", "Please try again", "error");
+                    console.log(error)
+                    if (error.response.status === 422) {
+                        const errors = error.response.data.errors;
+                        $.each(errors, function (key, value) {
+                            console.log(key, value);
+                            const inputField = modal.find(`[id="${key}"]`);
+                            inputField.siblings('.parsley-errors-list').text(value[0]);
+                            // You can customize the error message display further if needed.
+                        });
+                    }
+                    swal.fire("Error!", "Please try again", "error");
                 });
         }
 
@@ -1109,11 +1135,10 @@
         function editAgenda(agenda) {
             const button = modal.find('#agendaButton');
             button.innerHTML = 'Save Changes'
-            button.off('click')
-            button.on('click', () => {
-                updateAgenda(agenda);
-            })
 
+            $('.agendasForm').parsley().reset(
+            $('.agendasForm').attr('id', 'updateAgenda');
+            $('.agendasForm').attr('data-id', agenda);
             axios({
                 method: 'GET',
                 url: "{{ route('operational.agenda.show', '') }}" + "/" + agenda,
