@@ -234,23 +234,23 @@
                                             id="userName">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="userName" class="form-label">Preliminary Cost<span
-                                                class="text-danger">*</span></label>
-                                        <input type="text" name="preliminary_cost" parsley-trigger="change"
-                                            required="" placeholder="Masukkan PCost" class="form-control"
-                                            id="userName">
-                                    </div>
-                                    <div class="mb-3">
                                         <label for="userName" class="form-label">Purchase Order Amount<span
                                                 class="text-danger">*</span></label>
                                         <input type="text" name="po_amount" parsley-trigger="change" required=""
-                                            placeholder="Enter user name" class="form-control" id="userName">
+                                            placeholder="Masukkan Purchase Order Amount" class="form-control" id="userName">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="userName" class="form-label">Expense Budget<span
+                                        <label for="userName" class="form-label">Preliminary Cost<span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" name="preliminary_cost" parsley-trigger="change"
+                                            required="" placeholder="Masukkan Preliminary Cost" class="form-control"
+                                            id="userName">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="userName" class="form-label">Service Budget<span
                                                 class="text-danger">*</span></label>
                                         <input type="text" name="expense_budget" parsley-trigger="change"
-                                            required="" placeholder="Enter user name" class="form-control"
+                                            required="" placeholder="Masukkan Service Budget" class="form-control"
                                             id="userName">
                                     </div>
                                     <div class="text-end">
