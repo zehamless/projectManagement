@@ -100,8 +100,10 @@ Route::prefix('customer')->group(function () {
     Route::post('/store', [CustomerController::class, 'store'])->name('customer.store');
     Route::get('/show/{id}', [CustomerController::class, 'show'])->name('customer.show');
     Route::get('/edit/{id}', [CustomerController::class, 'edit'])->name('customer.edit');
-    Route::put('/update/{id}', [CustomerController::class, 'update'])->name('customer.update');
+    Route::put('/update', [CustomerController::class, 'update'])->name('customer.update');
     Route::delete('/delete/{id}', [CustomerController::class, 'destroy'])->name('customer.destroy');
+    Route::get('/customer/detail/{id}', [CustomerController::class, 'detail'])->name('customer.detail');
+    Route::get('/get-customer-data/{id}', [CustomerController::class, 'getCustomerData'])->name("customer.get");
 });
 
 Route::prefix('customerContact')->group(function () {
@@ -157,8 +159,12 @@ Route::prefix('operational')->group(function () {
         Route::patch('/{operational}', [OperationalController::class, 'detachTeam'])->name('operational.detach-team');
         Route::patch('/attach/{operational}', [OperationalController::class, 'attachTeam'])->name('operational.attach-team');
     });
-    Route::prefix('agenda')->group(function () {
-        Route::get('/get/{operational}', [OperationalAgendaController::class, 'index'])->name('operational.agenda.index');
+    Route::prefix('agenda')->group(function(){
+       Route::get('/get/{operational}',[OperationalAgendaController::class,'index'])->name('operational.agenda.index');
+       Route::delete('/{agenda}', [OperationalAgendaController::class, 'delete'])->name('operational.agenda.delete');
+       Route::post('/store', [OperationalAgendaController::class, 'store'])->name('operational.agenda.store');
+       Route::patch('/{agenda}', [OperationalAgendaController::class, 'update'])->name('operational.agenda.update');
+         Route::get('/show/{agenda}', [OperationalAgendaController::class, 'show'])->name('operational.agenda.show');
     });
 });
 

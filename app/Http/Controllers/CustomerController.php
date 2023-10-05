@@ -44,13 +44,17 @@ class CustomerController extends Controller
             'companyName' => $request->input('companyName'),
         ]);
 
-        $indexRoute = route('customer.index'); // Sesuaikan dengan nama rute index Anda
+        $indexRoute = route('customer.index');
         return redirect($indexRoute)->with('success', 'Data customer berhasil ditambahkan.');
     }
 
     public function show($id)
     {
-        return view('customer.detailCustomer', compact('customer'));
+        $customer = Customer::find($id);
+        $customerContacts = $customer->contacts;
+        //$relatedProjects = $customer->project;
+
+        return view('customer.detailCustomer', compact('customer', 'customerContacts'));
     }
 
     public function edit($id)
@@ -59,19 +63,31 @@ class CustomerController extends Controller
         return view('customer.edit', compact('customer'));
     }
 
-    public function update(Request $request, Customer $id)
+    public function update(Request $request)
     {
         $request->validate([
             'companyName' => 'required',
         ]);
 
-        $customer = Customer::find($id);
+        $customer = Customer::find($request->input('id'));
         $customer->update([
             'companyName' => $request->input('companyName'),
         ]);
 
-        $indexRoute = route('customer.index');
-        return redirect($indexRoute)->with('success', 'Data customer berhasil diperbarui.');
+        return redirect()->route('customer.index')->with('success', 'Data customer berhasil diperbarui.');
+    }
+
+    public function getCustomerData($id)
+    {
+        // Cari data milestone berdasarkan ID
+        $customer = Customer::find($id);
+
+        if (!$customer) {
+            return response()->json(['error' => 'Customer not found'], 404);
+        }
+
+        // Mengembalikan data cu$customer sebagai respons JSON
+        return response()->json($customer);
     }
 
     public function destroy($id)
@@ -79,8 +95,6 @@ class CustomerController extends Controller
         $customer = Customer::find($id);
         $customer->delete();
 
-        // $indexRoute = route('customer.index');
-        // return redirect($indexRoute)->with('success', 'Data customer berhasil dihapus.');
-        return response()->json(['message' => 'Data customer berhasil dihapus.']);
+        return redirect()->route('customer.index')->with('success', 'Data customer berhasil dihapus.');
     }
 }

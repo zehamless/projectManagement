@@ -12,7 +12,8 @@ class Customer extends Model
     use HasUuids;
     // Kolom yang dapat diisi (jika perlu)
     protected $fillable = [
-        'companyName',
+        'id',
+        'companyName'
     ];
     public function contacts()
 {

@@ -127,7 +127,7 @@ https://cdn.jsdelivr.net/npm/attrchange@1.0.1/attrchange.min.js
         $(document).ready(function() {
             Swal.fire({
                 title: "Ooops..",
-                text: "{{ session('error') }}",
+                text: "{{ session('success') }}",
                 icon: "error",
             });
         });
@@ -184,5 +184,17 @@ https://cdn.jsdelivr.net/npm/attrchange@1.0.1/attrchange.min.js
 
 
 </script> --}}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#loading-indicator').hide();
+        $(document).on('ajaxStart', function() {
+            $('#loading-indicator').show();
+        });
+
+        $(document).on('ajaxStop', function() {
+            $('#loading-indicator').hide();
+        });
+    });
+</script>
 
 @yield('pageScript')
