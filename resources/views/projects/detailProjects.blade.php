@@ -116,7 +116,6 @@
                                                                     data-bs-toggle="modal"
                                                                     data-bs-target="#edit-milestone-modal"
                                                                     value="{{ $milestone['id'] }}"
-                                                                    title="Edit Field Service Log"
                                                                     class="tabledit-edit-button milestoneEdit btn btn-primary waves-effect waves-light"
                                                                     style="background-color: #3E8BFF;">
                                                                     <span class="mdi mdi-pencil"></span>
