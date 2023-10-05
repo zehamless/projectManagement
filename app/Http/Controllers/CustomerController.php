@@ -63,19 +63,31 @@ class CustomerController extends Controller
         return view('customer.edit', compact('customer'));
     }
 
-    public function update(Request $request, Customer $id)
+    public function update(Request $request)
     {
         $request->validate([
             'companyName' => 'required',
         ]);
 
-        $customer = Customer::find($id);
+        $customer = Customer::find($request->input('id'));
         $customer->update([
             'companyName' => $request->input('companyName'),
         ]);
 
-        $indexRoute = route('customer.index');
-        return redirect($indexRoute)->with('success', 'Data customer berhasil diperbarui.');
+        return redirect()->route('customer.index')->with('success', 'Data customer berhasil diperbarui.');
+    }
+
+    public function getCustomerData($id)
+    {
+        // Cari data milestone berdasarkan ID
+        $customer = Customer::find($id);
+
+        if (!$customer) {
+            return response()->json(['error' => 'Customer not found'], 404);
+        }
+
+        // Mengembalikan data cu$customer sebagai respons JSON
+        return response()->json($customer);
     }
 
     public function destroy($id)
