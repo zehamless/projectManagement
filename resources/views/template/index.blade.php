@@ -16,17 +16,22 @@
     @include('template.header')
 </head>
 
-<body class="loading" data-layout-color="light" data-layout-mode="default" data-layout-size="fluid"
-    data-topbar-color="light" data-leftbar-position="fixed" data-leftbar-color="light" data-leftbar-size='default'
-    data-sidebar-user='true' onclick="" >
+<body class="loading" data-layout-color="light" data-layout-mode="default" data-layout-size="fluid" data-topbar-color="light"
+    data-leftbar-position="fixed" data-leftbar-color="light" data-leftbar-size='default' data-sidebar-user='true'
+    onclick="">
 
     <!-- Begin page -->
     <div id="wrapper">
-        @include(' template.navbar') 
-        @yield('content') 
-        @include('template.footer') 
-    {{-- tutup div wrapper ada di file
-    footer.blade.php --}} 
+        @include(' template.navbar')
+        @if (session('success'))
+            <div id="success-alert"></div>
+        @elseif(session('error'))
+            <div id="error-alert"></div>
+        @endif
+        @yield('content')
+        @include('template.footer')
+        {{-- tutup div wrapper ada di file
+    footer.blade.php --}}
     </div>
     @include('template.script')
 </body>
