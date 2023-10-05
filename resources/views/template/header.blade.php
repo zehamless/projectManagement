@@ -49,8 +49,8 @@
 <!-- Plugins css -->
 <link href="{{ asset('templateAdmin/Admin/dist/assets/libs/mohithg-switchery/switchery.min.css') }}" rel="stylesheet"
     type="text/css" />
-<link href="{{ asset('templateAdmin/Admin/dist/assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css') }}" --}}
-    rel="stylesheet" type="text/css" />
+<link href="{{ asset('templateAdmin/Admin/dist/assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css') }}"
+    --}} rel="stylesheet" type="text/css" />
 <link href="{{ asset('templateAdmin/Admin/dist/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
 
 {{-- calendar styling --}}
@@ -166,9 +166,38 @@
         font-weight: 100;
     }
 
-    .dataTables_scrollHeadInner, .table{
-        width:100%!important
+    .dataTables_scrollHeadInner,
+    .table {
+        width: 100% !important
     }
+
+    /* Style for the loader container */
+    .loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.7);
+        /* Semi-transparent white background */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        /* Ensure it's above other elements */
+    }
+
+    /* Style for the spinner or loading graphic */
+    .loader-child {
+        /* border-top: 4px solid #ff0000; */
+        /* Blue color for the spinner */
+        background-image:  url("{{ asset('images/loading-page.gif') }}") ;
+        width: 200px;
+        height: 200px;
+        animation: infinite;
+        /* Animation for the spinner */
+    }
+
 
     /* styling profile secrtion */
     @media screen and (max-width: 768px) {

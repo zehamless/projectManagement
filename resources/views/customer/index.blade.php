@@ -60,7 +60,7 @@
                         </div>
 
                         {{-- modal edit customer --}}
-                        <form action="" class="parsley-examples" novalidate="" enctype="multipart/form-data" >
+                        <form action="" class="parsley-examples" novalidate="" enctype="multipart/form-data">
                             <div id="edit-customer-modal" class="modal fade" role="dialog"
                                 aria-labelledby="myModalLabel" aria-hidden="true" style="overflow:hidden;">
                                 <div class="modal-dialog modal-dialog-centered">
@@ -156,11 +156,10 @@
                                 </a>
                             </div>
                             <div class="btn-group btn-group-sm" style="float: none;">
-                                <a href="{{ url('customer.edit') }}/${full.id}">
-                                    <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light" title="Edit Data" style="padding: 0.25rem 0.8rem;">
-                                        <span class="mdi mdi-pencil"></span>
-                                    </button>
-                                </a>
+                                <button type="button" class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                data-bs-toggle="modal" data-bs-target="#edit-customer-modal" 
+                                title="Edit Customer" style="padding: 0.25rem 0.8rem;">
+                                    <span class="mdi mdi-pencil"></span>
                             </div>
                             <div class="btn-group btn-group-sm" style="float: none;">
                                 <button type="button" class="tabledit-edit-button btn btn-danger waves-effect waves-light" id="sa-warning" style="padding: 0.25rem 0.8rem;" title="Hapus Customer" onclick="deleteCustomer('${data}')">
