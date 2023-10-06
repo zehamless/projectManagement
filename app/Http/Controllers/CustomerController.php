@@ -92,9 +92,12 @@ class CustomerController extends Controller
 
     public function destroy($id)
     {
-        $customer = Customer::find($id);
-        $customer->delete();
-
-        return redirect()->route('customer.index')->with('success', 'Data customer berhasil dihapus.');
+        try {
+            $customer = Customer::findOrFail($id);
+            $customer->delete();
+            return response()->json(['message' => 'customer berhasil dihapus.']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Terjadi kesalahan saat menghapus customer.'], 500);
+        }
     }
 }
