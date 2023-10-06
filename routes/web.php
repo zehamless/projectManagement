@@ -61,14 +61,21 @@ Route::get('/RoleSelect', function () {
     return view('rolecustomelogin');
 });
 
-Route::get('/testPage', function () {
-    return view('testPage.index');
+//cara penggunaan middleware "hasRole:role1, role2, dst"
+Route::prefix('test')->group(function(){
+   Route::get('/admin', function (){
+       return view('testPage.index');
+   })->middleware(['auth', 'hasRole:Admin'])->name('testPage.index');
+   Route::get('/admin/technician', function (){
+       return view('testPage.index');
+   })->middleware(['auth', 'hasRole:Admin,Technician'])->name('testPage.index');
 });
+
 
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'isAdmin'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

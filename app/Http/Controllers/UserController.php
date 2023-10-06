@@ -155,12 +155,12 @@ class UserController extends Controller
 
     public function getTechnician($operational)
     {
-        $users1 = User::whereHas('hasroles', function ($q) {
+        $users = User::whereHas('hasroles', function ($q) {
             $q->where('name', 'Technician');
         })->whereDoesntHave('operational', function ($q) use ($operational) {
             $q->where('id', $operational);
         })->get();
 
-        return response()->json($users1);
+        return response()->json($users);
     }
 }
