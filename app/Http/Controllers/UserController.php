@@ -23,28 +23,18 @@ class UserController extends Controller
      * @return Application|Factory|View|\Illuminate\Foundation\Application|\Illuminate\Http\JsonResponse
      * @throws \Exception
      */
-    public function index($operational = null)
+    public function index()
     {
         $users = User::with('hasroles');
         if (\request()->ajax()) {
-            if ($operational !== null) {
-                $users1 = User::whereHas('hasroles', function ($q) {
-                    $q->where('name', 'Technician');
-                })->whereDoesntHave('operational', function ($q) use ($operational) {
-                    $q->where('id', $operational);
-                })->get();
-
-                return response()->json($users1);
-            } else {
-                return DataTables::of($users->get())
-                    ->addIndexColumn()
-                    ->addColumn('roles', function (User $user) {
-                        return $user->hasroles->map(function (Role $role) {
-                            return $role->name;
-                        })->implode(', ');
-                    })
-                    ->toJson();
-            }
+            return DataTables::of($users->get())
+                ->addIndexColumn()
+                ->addColumn('roles', function (User $user) {
+                    return $user->hasroles->map(function (Role $role) {
+                        return $role->name;
+                    })->implode(', ');
+                })
+                ->toJson();
         }
         return view('admin.olahAkun', compact('users'));
     }
@@ -138,15 +128,14 @@ class UserController extends Controller
         if ($request->roles) {
             $users->hasroles()->sync($request->roles);
         }
-//        return redirect()->route('users.index')->with('success', 'User berhasil diupdate');
-        return session()->flash('success', 'User berhasil diupdate');
+        return response()->json(['success' => 'User berhasil diupdate']);
     }
 
     /**
      * @param User $user
-     * @return RedirectResponse
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function delete(User $user): RedirectResponse
+    public function delete(User $user): \Illuminate\Http\JsonResponse
     {
         if ($user->signature) {
             \Storage::delete($user->signature);
@@ -155,7 +144,7 @@ class UserController extends Controller
             $user->hasroles()->detach();
         }
         $user->delete();
-//        return redirect()->route('users.index')->with('success', 'User berhasil dihapus');
+        return response()->json(['success' => 'User berhasil dihapus']);
     }
 
     public function show($user)
@@ -164,4 +153,14 @@ class UserController extends Controller
         return response()->json($users);
     }
 
+    public function getTechnician($operational)
+    {
+        $users1 = User::whereHas('hasroles', function ($q) {
+            $q->where('name', 'Technician');
+        })->whereDoesntHave('operational', function ($q) use ($operational) {
+            $q->where('id', $operational);
+        })->get();
+
+        return response()->json($users1);
+    }
 }

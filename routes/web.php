@@ -124,13 +124,14 @@ Route::prefix('admin')->group(function () {
     Route::delete('/roles', [RoleController::class, 'delete'])->name('roles.delete');
     Route::get('/roles/{role}', [RoleController::class, 'showRole'])->name('roles.show');
 
-    Route::get('/users/{parameter?}', [UserController::class, 'index'])->name('users.index');
+    Route::get('/users/', [UserController::class, 'index'])->name('users.index');
     Route::get('/users/create', [UserController::class, 'createForm'])->name('users.createForm');
     Route::post('/users', [UserController::class, 'store'])->name('users.store');
     Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
     Route::get('/users/{user}/edit', [UserController::class, 'updateForm'])->name('users.updateForm');
     Route::patch('/users/{user}', [UserController::class, 'update'])->name('users.update');
     Route::delete('/users/{user}', [UserController::class, 'delete'])->name('users.delete');
+    Route::get('/users/getTechnician/{operational}', [UserController::class, 'getTechnician'])->name('users.getTechnician');
 });
 
 Route::prefix('operational')->group(function () {
@@ -168,7 +169,7 @@ Route::prefix('operational')->group(function () {
 
 Route::prefix('materials')->group(function () {
     Route::get('/', [MaterialController::class, 'index'])->name('materials.index');
-    Route::get('/create', [MaterialController::class, 'create'])->name('materials.update');
+    Route::get('/create', [MaterialController::class, 'create'])->name('materials.create');
     Route::post('/store', [MaterialController::class, 'store'])->name('materials.store');
     Route::get('/show', [MaterialController::class, 'show'])->name('materials.show');
     Route::get('/edit', [MaterialController::class, 'edit'])->name('materials.edit');

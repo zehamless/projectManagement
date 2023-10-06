@@ -44,7 +44,7 @@
 
                 <div class="row">
                     <div class="col-sm-7">
-                        <a href="{{ url('admin/users/create') }}"
+                        <a href="{{ route('users.createForm') }}"
                             class="btn btn-createAccount w-md waves-effect waves-light mb-3 px-4"><i class="mdi mdi-plus"></i>
                             Create Account</a>
                     </div>
@@ -329,8 +329,19 @@
                         data: {
                             _token: "{{ csrf_token() }}",
                         },
+                    success: function() {
+                        $('#datatable').DataTable().ajax.reload();
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        )
+                    },
+                    error: function(xhr, textStatus, errorThrown) {
+                        console.error(xhr.responseText);
+                        // Handle errors here if needed.
+                    }
                     });
-                    location.reload();
                 }
             });
         }
@@ -339,12 +350,13 @@
     <script type="text/javascript">
         function editUser(userId) {
             var modal = $("#con-close-modal");
+            console.log(userId)
             // Make an Ajax request to get the data.
             $.ajax({
                 url: "{{ route('users.show', '') }}" + "/" + userId,
                 method: "GET",
                 success: function(data) {
-                    try {
+                    console.log(data)
                         var userData = data[0];
                         if (userData && userData.hasroles) {
                             // Clear existing options in the select element
@@ -363,9 +375,6 @@
                         } else {
                             console.error("Data not found");
                         }
-                    } catch (error) {
-                        console.error("Error parsing JSON: " + error);
-                    }
                 },
                 error: function() {
                     console.error("Failed to fetch data");
@@ -458,12 +467,21 @@
                             signature: signature,
                         },
                         success: function() {
-                            // Reload the page
-                            location.reload();
+                            modal.modal("hide");
+                            $('#datatable').DataTable().ajax.reload();
+                            swal.fire({
+                                title: "Success!",
+                                text: "User has been updated.",
+                                icon: "success",
+                            });
                         },
                         error: function(xhr, textStatus, errorThrown) {
                             console.error(xhr.responseText);
-                            // Handle errors here if needed.
+                            swal.fire({
+                                title: "Error!",
+                                text: "User failed to update.",
+                                icon: "error",
+                            });
                         }
                     });
 
