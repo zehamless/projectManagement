@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\Top;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
 
 class TopController extends Controller
 {
@@ -48,7 +50,7 @@ class TopController extends Controller
         // Menghitung total progress pembayaran saat ini pada proyek
         $currentProgress = Top::where('project_id', $projectId)->sum('progress');
         if (($currentProgress + $progress) > 100) {
-            return back()->with('error', 'Total progress melebihi batas maksimum.');
+            return redirect()->back()->with('error', 'Total progress melebihi batas maksimum.');
         }
 
         // Jika validasi berhasil, tambahkan data Top
@@ -63,8 +65,8 @@ class TopController extends Controller
         // Simpan file jika status adalah "Done"
         if ($request->input('status') === 'Done' && $request->hasFile('file')) {
             $file = $request->file('file');
-            $fileName = time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('milestone_files'), $fileName);
+            $fileName = 'payment_' . time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('payment_files'), $fileName);
             $top->file = $fileName;
         }
 
@@ -96,14 +98,29 @@ class TopController extends Controller
     public function update(Request $request)
     {
         // Validasi data yang dikirimkan oleh pengguna
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'project_id' => 'required|exists:projects,id',
             'type' => 'string|required',
             'description' => 'string|required',
             'progress' => 'required|numeric|min:0',
             'status' => 'required|in:On Progress,Done', // Validasi status
-            'file' => $request->input('status') === 'Done' ? 'required|file|mimes:jpg,png,jpeg,pdf' : 'nullable|mimes:jpg,png,jpeg,pdf',
+            'file' => [
+                function ($attribute, $value, $fail) use ($request) {
+                    if ($request->input('status') === 'Done' && !$request->hasFile('file')) {
+                        $fail('Sertakan bukti pembayaran jika progress sudah selesai.');
+                    }
+                },
+                'nullable',
+                'mimes:jpg,png,jpeg,pdf',
+            ],
+        ], [
+            'file.required' => 'Sertakan bukti pembayaran jika progress sudah selesai.',
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('projects.show', ['id' => $request->input('project_id')])
+                ->with('error', 'Gagal memperbarui')->withErrors($validator)->withInput();
+        }
 
         $projectId = $request->input('project_id');
         $progress = $request->input('progress');
@@ -111,8 +128,10 @@ class TopController extends Controller
         // Menghitung total progress pembayaran saat ini pada proyek
         $currentProgress = Top::where('project_id', $projectId)->sum('progress');
         if (($currentProgress + $progress) > 100) {
-            return back()->with('error', 'Total progress melebihi batas maksimum.');
+            return redirect()->route('projects.show', ['id' => $projectId])
+                ->with('error', 'Total progress melebihi batas maksimum.');
         }
+
 
         // Jika validasi berhasil, perbarui data Top
         $top = Top::findOrFail($request->input('id'));
@@ -122,11 +141,19 @@ class TopController extends Controller
         $top->progress = $progress;
         $top->status = $request->input('status');
 
+
+        // Hapus file sebelumnya jika ada
+        if ($top->file && $request->hasFile('file')) {
+            $previousFilePath = public_path('payment_files/' . $top->file);
+            if (file_exists($previousFilePath)) {
+                unlink($previousFilePath);
+            }
+        }
         // Simpan file jika status adalah "Done"
         if ($request->input('status') === 'Done' && $request->hasFile('file')) {
             $file = $request->file('file');
-            $fileName = time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('milestone_files'), $fileName);
+            $fileName = 'payment_' . time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('payment_files'), $fileName);
             $top->file = $fileName;
         } elseif ($request->input('status') === 'On Progress' && $request->has('file_removed')) {
             // Hapus file jika status diubah dari "Done" ke "On Progress"
@@ -135,8 +162,10 @@ class TopController extends Controller
 
         $top->save();
 
-        return redirect()->route('projects.show', ['id' => $projectId])->with('success', 'Payment berhasil diperbarui.');
+        return redirect()->route('projects.show', ['id' => $projectId])
+            ->with('success', 'Payment berhasil diperbarui.');
     }
+
 
     public function getTopData($id)
     {
@@ -163,6 +192,18 @@ class TopController extends Controller
             return response()->json(['message' => 'Payment berhasil dihapus.']);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Terjadi kesalahan saat menghapus payment.'], 500);
+        }
+    }
+
+    // Download file
+    public function downloadfile($file)
+    {
+        $filePath = public_path('payment_files/' . $file);
+
+        if (file_exists($filePath)) {
+            return response()->download($filePath, $file);
+        } else {
+            return abort(404, 'File not found');
         }
     }
 }

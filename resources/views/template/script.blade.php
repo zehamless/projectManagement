@@ -105,48 +105,65 @@ https://cdn.jsdelivr.net/npm/attrchange@1.0.1/attrchange.min.js
 {{-- script untuk manggil alert jika berhasil create/edit --}}
 <script>
     var alertSuccess = document.getElementById('success-alert');
-    
-    if(alertSuccess){
-        $(document).ready(function(){
-        Swal.fire({
-            title: "Complete!",
-            text: "{{ session('success') }}",
-            icon: "success",
+
+    if (alertSuccess) {
+        $(document).ready(function() {
+            Swal.fire({
+                title: "Complete!",
+                text: "{{ session('success') }}",
+                icon: "success",
+            });
         });
-        });
-    }else{
-        
+    } else {
+
     }
 </script>
 
 {{-- script untuk manggil alert jika tidak ada error --}}
 <script>
     var alertSuccess = document.getElementById('error-alert');
-    
-    if(alertSuccess){
-        $(document).ready(function(){
-        Swal.fire({
-            title: "Ooops..",
-            text: "{{ session('success') }}",
-            icon: "error",
+
+    if (alertSuccess) {
+        $(document).ready(function() {
+            Swal.fire({
+                title: "Ooops..",
+                text: "{{ session('success') }}",
+                icon: "error",
+            });
         });
-        });
-    }else{
-        
+    } else {
+
     }
 </script>
 
 <script>
     const body = document.querySelector("body");
 
-    $(document).ready(function () {
-        $(".button-menu-mobile").on('click', function () {
+    $(document).ready(function() {
+        $(".button-menu-mobile").on('click', function() {
             $("body").addClass("sidebar-enable");
             body.setAttribute("data-leftbar-size", "default");
         });
     });
 </script>
 
+{{-- Script ubah angka jadi persentase --}}
+<script>
+    $(document).ready(function() {
+        // Mengambil elemen dengan class "persentasiAngka"
+        var $persentasiAngka = $('.persentasiAngka');
+
+        // Mengubah teks angka menjadi persentase desimal
+        $persentasiAngka.each(function() {
+            var angka = parseFloat($(this).text());
+            if (!isNaN(angka)) {
+                // Menggunakan toFixed untuk memformat angka menjadi 1 angka desimal
+                var persentase = angka % 1 === 0 ? angka.toFixed(0) : angka.toFixed(1);
+                $(this).text(persentase + '%');
+            }
+        });
+    });
+</script>
 
 
 {{-- <script>
@@ -164,8 +181,20 @@ https://cdn.jsdelivr.net/npm/attrchange@1.0.1/attrchange.min.js
     }
     });
 
-    
-    
+
+
 </script> --}}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#loading-indicator').hide();
+        $(document).on('ajaxStart', function() {
+            $('#loading-indicator').show();
+        });
+
+        $(document).on('ajaxStop', function() {
+            $('#loading-indicator').hide();
+        });
+    });
+</script>
 
 @yield('pageScript')

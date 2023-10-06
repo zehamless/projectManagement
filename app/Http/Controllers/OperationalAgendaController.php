@@ -21,7 +21,7 @@ class OperationalAgendaController extends Controller
     public function index(Request $request, $operational)
     {
         if ($request->ajax()){
-            $agenda = OperationalAgenda::where('operational_id', $operational)->get();
+            $agenda = OperationalAgenda::where('operational_id', $operational)->orderByDesc('created_at')->get();
             return DataTables::of($agenda)
                 ->addIndexColumn()
                 ->toJson();

@@ -81,6 +81,7 @@ Route::prefix('milestone')->group(function () {
     Route::post('/store', [MilestoneController::class, 'store'])->name('milestone.store');
     Route::put('/', [MilestoneController::class, 'update'])->name('milestone.update');
     Route::delete('/{id}', [MilestoneController::class, 'destroy'])->name('milestone.destroy');
+    Route::get('file/{file}', [MilestoneController::class, 'downloadfile'])->name('milestone.file');
 });
 
 Route::prefix('top')->group(function () {
@@ -89,6 +90,7 @@ Route::prefix('top')->group(function () {
     Route::get('/get-payment-data/{id}', [TopController::class, 'getTopData'])->name("top.get");
     Route::put('/', [TopController::class, 'update'])->name('top.update');
     Route::delete('/{id}', [TopController::class, 'destroy'])->name('top.destroy');
+    Route::get('file/{file}', [TopController::class, 'downloadfile'])->name('top.file');
 });
 
 
@@ -135,15 +137,15 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::prefix('operational')->group(function () {
-    Route::get('/', [OperationalController::class, 'index'])->name('operational.index');
-    Route::get('/create', [OperationalController::class, 'createForm'])->name('operational.createForm');
-    Route::post('/store', [OperationalController::class, 'store'])->name('operational.store');
-    Route::get('/show/{operational}', [OperationalController::class, 'show'])->name('operational.show');
-    Route::get('/{operational}/edit', [OperationalController::class, 'updateForm'])->name('operational.update-form');
-    Route::patch('/{operational}', [OperationalController::class, 'update'])->name('operational.update');
-    Route::delete('/{operational}', [OperationalController::class, 'delete'])->name('operational.delete');
-    Route::post('/approve/{operational}', [OperationalController::class, 'approve'])->name('operational.approve');
-    Route::get('/getOperational/{salesOrder}', [OperationalController::class, 'getOperational'])->name('operational.get-operational');
+    Route::get('/', [OperationalController::class, 'index'])->name('operational.index'); //?
+    Route::get('/create', [OperationalController::class, 'createForm'])->name('operational.createForm'); //!
+    Route::post('/store', [OperationalController::class, 'store'])->name('operational.store'); //!
+    Route::get('/show/{operational}', [OperationalController::class, 'show'])->name('operational.show'); //?
+    Route::get('/{operational}/edit', [OperationalController::class, 'updateForm'])->name('operational.update-form'); //!
+    Route::patch('/{operational}', [OperationalController::class, 'update'])->name('operational.update'); //~
+    Route::delete('/{operational}', [OperationalController::class, 'delete'])->name('operational.delete'); //~
+    Route::post('/approve/{operational}', [OperationalController::class, 'approve'])->name('operational.approve'); //~
+    Route::get('/getOperational/{salesOrder}', [OperationalController::class, 'getOperational'])->name('operational.get-operational'); //? --
     Route::get('/getTeam/{operational}', [OperationalController::class, 'getTeam'])->name('operational.get-team');
     Route::prefix('expense')->group(function () {
         Route::get('/get/{operational}', [OperationalExpensesController::class, 'index'])->name('operational.expense.index');
@@ -157,12 +159,12 @@ Route::prefix('operational')->group(function () {
         Route::patch('/{operational}', [OperationalController::class, 'detachTeam'])->name('operational.detach-team');
         Route::patch('/attach/{operational}', [OperationalController::class, 'attachTeam'])->name('operational.attach-team');
     });
-    Route::prefix('agenda')->group(function(){
-       Route::get('/get/{operational}',[OperationalAgendaController::class,'index'])->name('operational.agenda.index');
-       Route::delete('/{agenda}', [OperationalAgendaController::class, 'delete'])->name('operational.agenda.delete');
-       Route::post('/store', [OperationalAgendaController::class, 'store'])->name('operational.agenda.store');
-       Route::patch('/{agenda}', [OperationalAgendaController::class, 'update'])->name('operational.agenda.update');
-         Route::get('/show/{agenda}', [OperationalAgendaController::class, 'show'])->name('operational.agenda.show');
+    Route::prefix('agenda')->group(function () {
+        Route::get('/get/{operational}', [OperationalAgendaController::class, 'index'])->name('operational.agenda.index');
+        Route::delete('/{agenda}', [OperationalAgendaController::class, 'delete'])->name('operational.agenda.delete');
+        Route::post('/store', [OperationalAgendaController::class, 'store'])->name('operational.agenda.store');
+        Route::patch('/{agenda}', [OperationalAgendaController::class, 'update'])->name('operational.agenda.update');
+        Route::get('/show/{agenda}', [OperationalAgendaController::class, 'show'])->name('operational.agenda.show');
     });
 });
 
