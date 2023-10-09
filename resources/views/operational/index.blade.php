@@ -46,6 +46,7 @@
 
     <div class="content-page">
         <div class="content">
+{{--            {{dd($spkNumber_id)}}--}}
 
             <!-- Start Content-->
             <div class="container-fluid">
@@ -87,7 +88,7 @@
                                             <select id="select-operational" class="form-select mb-2"
                                                 onchange="detailOperational(this.value, false)">
                                                 @isset($spkNumber)
-                                                    <option value="{{ $spkNumber }}" selected>{{ $spkNumber }}</option>
+                                                    <option value="{{ $spkNumber_id }}" selected>{{ $spkNumber }}</option>
                                                 @else
                                                     <option selected value="">Silahkan Pilih SO</option>
                                                 @endisset
@@ -494,6 +495,10 @@
                     }
                 }
             });
+            if($('#select-operational').val() != "") {
+                detailOperational($('#select-operational').val());
+                console.log($('#select-operational').val());
+            }
 
         })
     </script>
