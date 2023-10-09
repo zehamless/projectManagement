@@ -58,9 +58,9 @@ Route::get('/staff', function () {
     return view('staff');
 });
 
-Route::get('/RoleSelect', function () {
-    return view('rolecustomelogin');
-});
+//Route::get('/RoleSelect', function () {
+//    return view('rolecustomelogin');
+//});
 
 //cara penggunaan middleware "hasRole:role1, role2, dst"
 Route::prefix('test')->group(function(){

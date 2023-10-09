@@ -49,7 +49,9 @@ class hasRoleMiddlewareTest extends TestCase
     public function testrole()
     {
         $user = User::with('hasroles')->first();
-        $userRole = $user->hasroles();
+        $userRole = $user->hasroles->map(function ($role) {
+            return $role->name;
+        })->implode(', ');
         dd($userRole);
     }
 

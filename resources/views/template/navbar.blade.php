@@ -122,9 +122,12 @@
                                 <p class="text-muted left-user-info mb-0">Admin</p>
                             </div>
                             <div class="col-2 my-auto">
-                                <a href="{{ url('login') }}">
-                                    <i class="fe-log-out logout-font" title="Logout System"></i>
+                                <form method="POST" action="{{route('logout')}}">
+                                    @csrf
+                                <a>
+                                    <button class="fe-log-out logout-font" title="Logout System" type="submit"></button>
                                 </a>
+                                </form>
                             </div>
                         </div>
                     </div>

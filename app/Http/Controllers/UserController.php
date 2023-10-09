@@ -6,6 +6,7 @@ use App\Mail\SendMail;
 use App\Mail\SendPassword;
 use App\Models\Role;
 use App\Models\User;
+use Auth;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -163,5 +164,4 @@ class UserController extends Controller
 
         return response()->json($users);
     }
-
 }
