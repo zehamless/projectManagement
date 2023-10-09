@@ -127,13 +127,24 @@ https://cdn.jsdelivr.net/npm/attrchange@1.0.1/attrchange.min.js
         $(document).ready(function() {
             Swal.fire({
                 title: "Ooops..",
-                text: "{{ session('success') }}",
+                text: "{{ session('error') }}",
                 icon: "error",
             });
         });
     } else {
 
     }
+</script>
+
+{{-- Ubah angka jadi persentase --}}
+<script>
+    $(document).ready(function() {
+        $('.persentasiAngka').each(function() {
+            var decimalNumber = parseFloat($(this).text());
+            var percentage = (decimalNumber * 100).toFixed(1) + "%";
+            $(this).text(percentage);
+        });
+    });
 </script>
 
 <script>
@@ -147,24 +158,22 @@ https://cdn.jsdelivr.net/npm/attrchange@1.0.1/attrchange.min.js
     });
 </script>
 
-{{-- Script ubah angka jadi persentase --}}
+{{-- Format tanggal indonesia --}}
 <script>
     $(document).ready(function() {
-        // Mengambil elemen dengan class "persentasiAngka"
-        var $persentasiAngka = $('.persentasiAngka');
-
-        // Mengubah teks angka menjadi persentase desimal
-        $persentasiAngka.each(function() {
-            var angka = parseFloat($(this).text());
-            if (!isNaN(angka)) {
-                // Menggunakan toFixed untuk memformat angka menjadi 1 angka desimal
-                var persentase = angka % 1 === 0 ? angka.toFixed(0) : angka.toFixed(1);
-                $(this).text(persentase + '%');
-            }
+        $('.formatTanggal').each(function() {
+            var tanggal = $(this).text();
+            var date = new Date(tanggal);
+            var options = {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            };
+            var tanggalFormatted = date.toLocaleDateString('id-ID', options);
+            $(this).text(tanggalFormatted);
         });
     });
 </script>
-
 
 {{-- <script>
     var sidebar = document.getElementsByClassName('sidebar-enable')

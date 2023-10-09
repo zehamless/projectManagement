@@ -16,8 +16,7 @@ class ProjectController extends Controller
     // Menampilkan daftar project
     public function index(Request $request)
     {
-        $query = Project::with('customer')
-            ->orderBy('created_at', 'desc');
+        $query = Project::with(['customer', 'projectManager', 'salesExecutive']);
 
         if ($request->has('search')) {
             $search = $request->input('search');
@@ -27,17 +26,27 @@ class ProjectController extends Controller
                     ->orWhereHas('customer', function ($query) use ($search) {
                         $query->where('companyName', 'like', "%$search%");
                     })
-                    ->orWhere('project_manager', 'like', "%$search%")
-                    ->orWhere('sales_executive', 'like', "%$search%")
+                    ->orWhere(function ($query) use ($search) {
+                        $query->whereHas('projectManager', function ($query) use ($search) {
+                            $query->where('first_name', 'like', "%$search%")
+                                ->orWhere('last_name', 'like', "%$search%");
+                        })
+                            ->orWhereHas('salesExecutive', function ($query) use ($search) {
+                                $query->where('first_name', 'like', "%$search%")
+                                    ->orWhere('last_name', 'like', "%$search%");
+                            });
+                    })
                     ->orWhere('so', 'like', "%$search%");
             });
         }
 
         $projects = $query->whereHas('customer')->get();
+        if ($request->has('search') && $projects->count() === 0) {
+            return redirect()->route('projects.index')->with('error', 'Tidak ada project ditemukan!');
+        }
 
         return view('projects.projects', compact('projects'));
     }
-
 
 
     // Menampilkan form untuk membuat project baru
@@ -133,27 +142,30 @@ class ProjectController extends Controller
 
     public function show($id)
     {
-        $project = Project::findOrFail($id);
+        $project = Project::with(['projectManager', 'salesExecutive'])
+            ->findOrFail($id);
 
         // Ambil data proyek, serta data customer_id, customerContact_id, companyName, dan customerContactName
         $projectData = Project::select('projects.*', 'customers.id as customer_id', 'customer_contacts.id as customerContactId', 'customers.companyName as companyName', 'customer_contacts.name as contactName')
             ->leftJoin('customers', 'projects.customer_id', '=', 'customers.id')
-            ->leftJoin('customer_contacts', 'customers.id', '=', 'customer_contacts.customer_id')
+            ->leftJoin('customer_contacts', 'projects.customer_contact_id', '=', 'customer_contacts.id')
             ->where('projects.id', $id)
             ->first();
 
         // Ambil semua Milestone yang terkait dengan proyek ini dan urutkan berdasarkan created_at terbaru
-        $milestones = $project->milestones()->orderBy('created_at', 'desc')->get();
+        $milestones = $project->milestones()->orderBy('created_at', 'asc')->get();
         $doneMilestones = $milestones->where('progress', 'Done')->count();
         $totalMilestones = $milestones->count();
         $realCost = $project->productionCost->sum('amount');
         $percentageDone = $totalMilestones > 0 ? ($doneMilestones / $totalMilestones) * 100 : 0;
         $productionCost = $project->productionCost()->orderBy('created_at', 'desc')->get();
-        $operationals = $project->operational()->orderBy('created_at', 'desc')->get();
-        $tops = $project->top()->orderBy('created_at', 'desc')->get();
+        $operationals = $project->operationals()->orderBy('created_at', 'desc')->get();
+        $tops = $project->tops()->orderBy('created_at', 'desc')->get();
         $topProgress = $tops->where('status', 'Done')->sum('progress');
-        return view('projects.detailProjects', compact('milestones', 'projectData', 'productionCost', 'tops', 'operationals', 'percentageDone', 'realCost', 'topProgress'));
+
+        return view('projects.detailProjects', compact('milestones', 'projectData', 'productionCost', 'tops', 'operationals', 'percentageDone', 'realCost', 'topProgress', 'project'));
     }
+
 
 
 
@@ -192,6 +204,14 @@ class ProjectController extends Controller
 
         return redirect('/projects/projects')->with('success', 'Project berhasil diperbarui.');
     }
+
+    public function getProjects()
+    {
+        $projects = Project::pluck('label', 'id');
+
+        return response()->json(['projects' => $projects]);
+    }
+
 
     // Menghapus project dari database
     public function destroy($id)

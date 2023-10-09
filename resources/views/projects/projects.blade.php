@@ -92,8 +92,12 @@
                                     </div>
                                     <div class="mt-0 project-title">{{ $project['label'] }}</div>
                                     <p class="font-13">{{ $project['customer']['companyName'] }}</p>
-                                    <p class="text-muted font-15">Project Manager : {{ $project['project_manager'] }}</p>
-                                    <p class="text-muted font-15">Sales Executive : {{ $project['sales_executive'] }}</p>
+                                    <p class="text-muted font-15">Project Manager :
+                                        {{ $project->projectManager->first_name }} {{ $project->projectManager->last_name }}
+                                    </p>
+                                    <p class="text-muted font-15">Sales Executive :
+                                        {{ $project->salesExecutive->first_name }} {{ $project->salesExecutive->last_name }}
+                                    </p>
 
                                     <ul class="list-inline">
                                         <li class="list-inline-item me-4">
@@ -102,7 +106,7 @@
                                         </li>
                                         <li class="list-inline-item operational-cost">
                                             <h4 class="mb-0 rupiah">{{ $project['expense_budget'] }}</h4>
-                                            <p class="text-muted">Operational Cost</p>
+                                            <p class="text-muted">Service Budget</p>
                                         </li>
                                     </ul>
 

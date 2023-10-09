@@ -40,7 +40,7 @@ class Project extends Model
     // Definisi relasi dengan Project Manager
     public function projectManager()
     {
-        return $this->belongsTo('App\Models\User', 'project_manager_id');
+        return $this->belongsTo('App\Models\User', 'project_manager');
     }
 
     public function milestones()
@@ -53,20 +53,20 @@ class Project extends Model
         return $this->hasMany(ProductionCost::class, 'project_id');
     }
 
-    public function top()
+    public function tops()
     {
         return $this->hasMany(Top::class, 'project_id');
     }
 
-    public function operational()
+    public function operationals()
     {
         return $this->hasMany(Operational::class, 'project_id');
     }
 
 
-    // Definisi relasi dengan Sales Executive
+    // Definisi relasi dengan Sales Executives
     public function salesExecutive()
     {
-        return $this->belongsTo('App\Models\User', 'sales_executive_id');
+        return $this->belongsTo('App\Models\User', 'sales_executive');
     }
 }
