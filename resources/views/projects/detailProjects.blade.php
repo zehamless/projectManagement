@@ -450,7 +450,7 @@
                                     </div>
                                     <div class="col-4 text-end">
                                         <div class="btn-group btn-group-sm" style="float: none;">
-                                            <a href="{{ route('projects.createProjects') }}">
+                                            <a href="{{ route('projects.editProjects', ['id' => $project->id]) }}">
                                                 <button title="edit data" type="button"
                                                     class="tabledit-edit-button btn btn-primary waves-effect waves-light"
                                                     style="background-color: #3E8BFF; padding: 0.28rem 0.8rem;">
