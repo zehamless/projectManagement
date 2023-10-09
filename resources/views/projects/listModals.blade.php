@@ -80,6 +80,88 @@
         </div>
     </form>
 
+    {{-- modals edit document record --}}
+    <form action="" class="parsley-examples" novalidate="" method="post"
+        enctype="multipart/form-data">
+        @csrf
+        @method('PUT')
+        <div id="edit-record-modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+            style="overflow:hidden;">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">
+                            Edit Document Record</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body milestoneEditModal">
+                        <div class="row">
+
+                            {{-- form input hidden project id --}}
+                            <input type="hidden" name="milestone_id" id="milestone_id" value="">
+
+                            {{-- form input submitted date --}}
+                            <div class="mb-3">
+                                <label for="submitted_date" class="form-label">Submitted Date<span
+                                        class="text-danger">*</span></label>
+                                <input type="date" name="submitted_date" parsley-trigger="change" required=""
+                                    placeholder="Masukkan tanggal" class="form-control datepicker" id="submitted_date">
+                            </div>
+
+                            {{-- form input description --}}
+                            <div class="mb-3">
+                                <label for="userName" class="form-label">Description<span
+                                        class="text-danger">*</span></label>
+                                <input type="text" name="description" parsley-trigger="change" required=""
+                                    placeholder="Tambahkan deskripsi" id="description" class="form-control"
+                                    value="">
+                            </div>
+
+                            {{-- form input due date --}}
+                            <div class="mb-3">
+                                <label for="due_date" class="form-label">Due Date<span
+                                        class="text-danger">*</span></label>
+                                <input type="date" name="due_date" parsley-trigger="change" required=""
+                                    placeholder="Masukkan tanggal" class="form-control datepicker" id="due_date">
+                            </div>
+
+                            {{-- form input progress --}}
+                            <div class="mb-3">
+                                <label for="progress" class="form-label">Progress<span
+                                        class="text-danger">*</span></label>
+                                <select class="form-control" id="progress" name="progress">
+                                    <option value="Planned">Planned</option>
+                                    <option value="On Progress">On Progress</option>
+                                    <option value="Done">Done</option>
+                                </select>
+                            </div>
+
+                            {{-- form input file attachment --}}
+                            <div class="mb-3">
+                                <label for="userName" class="form-label">File Attachment<span
+                                        class="text-danger">*</span></label>
+                                <input type="file" name="file" parsley-trigger="change" required=""
+                                    data-plugins="dropify" data-height="150" class="form-control" id="fileAttachment">
+                            </div>
+                        </div>
+
+                        {{-- button cancel dan save --}}
+                        <div class="modal-footer">
+                            {{-- button cancel --}}
+                            <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">
+                                Close
+                            </button>
+
+                            {{-- button save --}}
+                            <button type="submit" class="btn btn-save waves-effect waves-light">Save Changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal -->
+        </div>
+    </form>
+
     {{-- modals edit production cost --}}
     <form action="{{ route('cost.update') }}" class="parsley-examples" novalidate="" method="post"
         enctype="multipart/form-data">
