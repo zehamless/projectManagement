@@ -10,14 +10,9 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                <form action="" method="POST" class="parsley-examples" novalidate="">
+                                <form action="{{ route('operational.store') }}" method="POST" class="parsley-examples"
+                                    novalidate="">
                                     @csrf
-                                    <div class="mb-3">
-                                        <label for="userName" class="form-label">Service Date<span
-                                                class="text-danger">*</span></label>
-                                        <input type="date" name="date" parsley-trigger="change" required=""
-                                            placeholder="Enter service date" class="form-control datepicker" id="userName">
-                                    </div>
                                     <div class="mb-3">
                                         <label for="projectId" class="form-label">Project Label<span
                                                 class="text-danger">*</span></label>
@@ -29,11 +24,24 @@
                                                 <option selected>Pilih Proyek</option>
                                             @endisset
                                         </select>
+                                        @error('project_id')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="mb-3">
-                                        <label for="userName" class="form-label">Service Type<span
+                                        <label for="date" class="form-label">Service Date<span
                                                 class="text-danger">*</span></label>
-                                        <select name="" parsley-trigger="change" required="" class="form-control">
+                                        <input type="date" name="date" parsley-trigger="change" required=""
+                                            placeholder="Enter service date" class="form-control datepicker" id="date">
+                                        @error('date')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="type" class="form-label">Service Type<span
+                                                class="text-danger">*</span></label>
+                                        <select name="type" parsley-trigger="change" required="" id="type"
+                                            class="form-control">
                                             <option>Pre-Commisioning</option>
                                             <option>Comissioning</option>
                                             <option>Maintenance</option>
@@ -43,9 +51,12 @@
                                             <option>Warranty</option>
                                             <option>Persiapan Project</option>
                                         </select>
+                                        @error('type')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="mb-3">
-                                        <label for="userName" class="form-label">Transportation Mode<span
+                                        <label for="transportation_mode" class="form-label">Transportation Mode<span
                                                 class="text-danger">*</span></label>
                                         <select name="transportation_mode" id="transportation_mode" parsley-trigger="change"
                                             required="" class="form-control">
@@ -54,18 +65,25 @@
                                             <option value="kereta_api">Kereta Api</option>
                                             <option value="lain_lain">Lain-Lain</option>
                                         </select>
+                                        @error('transportation_mode')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
 
                                     <div class="mb-3" id="vehicle_number_container" style="display: none;">
-                                        <label for="userName" class="form-label">Vehicle Number<span
+                                        <label for="vehicle_number" class="form-label">Vehicle Number<span
                                                 class="text-danger">*</span></label>
-                                        <input type="text" name="vehicle_number" placeholder="Enter vehicle number"
-                                            parsley-trigger="change" class="form-control">
+                                        <input type="text" name="vehicle_number" value="-"
+                                            placeholder="Enter vehicle number" parsley-trigger="change"
+                                            class="form-control">
+                                        @error('vehicle_number')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="mb-3">
-                                        <label for="spkCode" class="form-label">SPK Code<span
+                                        <label for="spk_code" class="form-label">SPK Code<span
                                                 class="text-danger">*</span></label>
-                                        <select name="spk_code" id="spkCode" parsley-trigger="change" required=""
+                                        <select name="spk_code" id="spk_code" parsley-trigger="change" required=""
                                             class="form-control">
                                             <option>-- Select SPK Code --</option>
                                             <option value="A">A</option>
@@ -78,30 +96,43 @@
                                             <option value="PSA">PSA</option>
                                             <option value="CT/VT">CT/VT</option>
                                         </select>
+                                        @error('spk_code')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="spkNumber" class="form-label">SPK Number<span
+                                        <label for="spk_number" class="form-label">SPK Number<span
                                                 class="text-danger">*</span></label>
                                         <div class="input-group">
                                             <span class="input-group-text" id="code">Code</span>
                                             <input type="text" placeholder="Enter SPK Number" name="spk_number"
                                                 id="spk_number" class="form-control" style="outline: none;">
+                                            @error('spk_number')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="mb-3">
                                         <label for="description" class="form-label">Description<span
                                                 class="text-danger">*</span></label>
                                         <textarea name="description" id="description" parsley-trigger="change" required="" class="form-control"></textarea>
+                                        @error('description')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">Created By<span
                                                 class="text-danger">*</span></label>
                                         <select name="created_by" parsley-trigger="change" required=""
                                             class="form-control">
-                                            <option>User 1</option>
-                                            <option>User 2</option>
+                                            <option selected value="{{ auth()->id() }}">
+                                                {{ auth()->user()->first_name }}
+                                            </option>
                                         </select>
+                                        @error('created_by')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="text-end">
                                         @isset($projectId)
@@ -110,7 +141,8 @@
                                                 Cancel
                                             </a>
                                         @else
-                                            <a href="{{ route('operational.index') }}" class="btn btn-secondary waves-effect">
+                                            <a href="{{ route('operational.index') }}"
+                                                class="btn btn-secondary waves-effect">
                                                 Cancel
                                             </a>
                                         @endisset
@@ -172,8 +204,8 @@
     {{-- SPK CODE dan SPK NUMBER --}}
     <script>
         $(document).ready(function() {
-            $("#spkCode").change(function() {
-                var code = $("#spkCode").val()
+            $("#spk_code").change(function() {
+                var code = $("#spk_code").val()
                 $("#code").text(code + " - ");
             })
         });

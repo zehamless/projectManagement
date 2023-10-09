@@ -146,7 +146,7 @@ Route::prefix('operational')->group(function () {
     Route::get('/create', function () {
         return view('projects.createOperational');
     })->name('createOperational');
-    Route::post('/store', [OperationalController::class, 'store'])->name('operational.store'); //!
+    Route::post('/store', [OperationalController::class, 'store'])->name('operational.store');
     Route::get('/show/{operational}', [OperationalController::class, 'show'])->name('operational.show'); //?
     Route::get('/{operational}/edit', [OperationalController::class, 'updateForm'])->name('operational.update-form'); //!
     Route::patch('/{operational}', [OperationalController::class, 'update'])->name('operational.update'); //~
