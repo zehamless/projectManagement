@@ -46,6 +46,149 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xl-8 tables-col">
+                        
+
+                        {{-- card term of payment --}}
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row table-title">
+                                    <div class="col-sm-8">
+                                        <h4 class="mt-0 header-title">Term Of Payment</h4>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <a href="{{ route('top.create', ['id' => $projectData->id]) }}"
+                                            class="btn btn-createItems w-md waves-effect waves-light mb-3"><i
+                                                class="mdi mdi-plus"></i>Add Payment</a>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Payment Type</th>
+                                                <th>Progress</th>
+                                                <th>Description</th>
+                                                <th class="text-center">Status</th>
+                                                <th class="text-center" width="160">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if ($tops->isEmpty())
+                                                <tr>
+                                                    <td colspan="6" align="center">Belum ada payment</td>
+                                                </tr>
+                                            @else
+                                                @php($index = 1)
+                                                @foreach ($tops as $top)
+                                                    <tr>
+                                                        <th scope="row">{{ $index++ }}</th>
+                                                        <td>{{ $top['type'] }}</td>
+                                                        <td class="persentasiAngka">{{ $top['progress'] }}%</td>
+                                                        <td>{{ $top['description'] }}</td>
+                                                        <td class="text-center">
+                                                            <span
+                                                                class="badge {{ $top['status'] === 'Done' ? 'bg-success' : 'bg-warning' }}">
+                                                                {{ $top['status'] }}
+                                                            </span>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <div class="btn-group btn-group-sm" style="float: none;">
+                                                                <button title="unduh file" type="button"
+                                                                    class="tabledit-edit-button btn btn-success waves-effect waves-light">
+                                                                    <span class="mdi mdi-file-download-outline"></span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="btn-group btn-group-sm" style="float: none;">
+                                                                <button title="edit data" type="button"
+                                                                    data-bs-toggle="modal" value="{{ $top['id'] }}"
+                                                                    data-bs-target="#edit-payment-modal"
+                                                                    title="Edit Payment"
+                                                                    class="tabledit-edit-button paymentEdit btn btn-primary waves-effect waves-light"
+                                                                    style="background-color: #3E8BFF;">
+                                                                    <span class="mdi mdi-pencil"></span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="btn-group btn-group-sm" style="float: none;">
+                                                                <button title="hapus data" type="button"
+                                                                    value="{{ $top['id'] }}"
+                                                                    class="tabledit-edit-button hapusPayment btn btn-danger">
+                                                                    <span class="mdi mdi-trash-can-outline"></span>
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- card table production cost --}}
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row table-title">
+                                    <div class="col-sm-8">
+                                        <h4 class="mt-0 header-title">Production Cost</h4>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <a href="{{ url('projects/createProductionCost', ['id' => $projectData->id]) }}"
+                                            class="btn btn-createItems w-md waves-effect waves-light mb-3"><i
+                                                class="mdi mdi-plus"></i>Add Cost</a>
+                                    </div>
+                                </div>
+
+                                <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Description</th>
+                                                <th>Amount</th>
+                                                <th class="text-center" width="140">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if ($productionCost->isEmpty())
+                                                <tr>
+                                                    <td colspan="4" align="center">Belum ada production cost</td>
+                                                </tr>
+                                            @else
+                                                @php($index = 1)
+                                                @foreach ($productionCost as $cost)
+                                                    <tr>
+                                                        <th scope="row">{{ $index++ }}</th>
+                                                        <td>{{ $cost['description'] }}</td>
+                                                        <td class="rupiah">{{ $cost['amount'] }}</td>
+                                                        <td class="text-center">
+                                                            <div class="btn-group btn-group-sm" style="float: none;">
+                                                                <button title="Edit Production Cost" type="button"
+                                                                    data-bs-toggle="modal" data-bs-target="#edit-cost-modal"
+                                                                    class="tabledit-edit-button costEdit btn btn-primary waves-effect waves-light"
+                                                                    value="{{ $cost['id'] }}"
+                                                                    style="background-color: #3E8BFF;">
+                                                                    <span class="mdi mdi-pencil"></span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="btn-group btn-group-sm" style="float: none;">
+                                                                <button title="Hapus Operational Cost" type="button"
+                                                                    value="{{ $cost->id }}"
+                                                                    class="tabledit-edit-button hapusPCost btn btn-danger">
+                                                                    <span class="mdi mdi-trash-can-outline"></span>
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
 
                         {{-- card table milestones --}}
                         <div class="card">
@@ -131,18 +274,18 @@
                                 </div>
                             </div>
                         </div>
-
-                        {{-- card table production cost --}}
+                        
+                        {{-- card table record document --}}
                         <div class="card">
                             <div class="card-body">
                                 <div class="row table-title">
                                     <div class="col-sm-8">
-                                        <h4 class="mt-0 header-title">Production Cost</h4>
+                                        <h4 class="mt-0 header-title">Record Document</h4>
                                     </div>
                                     <div class="col-sm-4">
-                                        <a href="{{ url('projects/createProductionCost', ['id' => $projectData->id]) }}"
+                                        <a href="{{ url('projects/createRecord') }}"
                                             class="btn btn-createItems w-md waves-effect waves-light mb-3"><i
-                                                class="mdi mdi-plus"></i>Add Cost</a>
+                                                class="mdi mdi-plus" title="Menambahkan milestone"></i>Add Record</a>
                                     </div>
                                 </div>
 
@@ -151,45 +294,65 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
+                                                <th>Entry Date</th>
                                                 <th>Description</th>
-                                                <th>Amount</th>
-                                                <th class="text-center" width="140">Actions</th>
+                                                <th>Due Date</th>
+                                                <th class="text-center">Status</th>
+                                                <th class="text-center" width="160">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @if ($productionCost->isEmpty())
+                                            {{-- @if ($milestones->isEmpty())
                                                 <tr>
-                                                    <td colspan="4" align="center">Belum ada production cost</td>
+                                                    <td colspan="6" align="center">Belum ada milestone</td>
                                                 </tr>
                                             @else
                                                 @php($index = 1)
-                                                @foreach ($productionCost as $cost)
+                                                @foreach ($milestones as $milestone) --}}
                                                     <tr>
-                                                        <th scope="row">{{ $index++ }}</th>
-                                                        <td>{{ $cost['description'] }}</td>
-                                                        <td class="rupiah">{{ $cost['amount'] }}</td>
+                                                        <th scope="row">1</th>
+                                                        <td class="formatTanggal"></td>
+                                                        <td>dummy desc</td>
+                                                        <td class="formatTanggal"></td>
+                                                        <td class="text-center">
+                                                            <span
+                                                                class="badge bg-success
+                                                                {{-- @if ($milestone['progress'] == 'Done') bg-success
+                                                                @elseif($milestone['progress'] == 'Planned')
+                                                                bg-primary
+                                                                @elseif($milestone['progress'] == 'On Progress')
+                                                                bg-warning @endif --}}
+                                                            ">done</span>
+                                                        </td>
                                                         <td class="text-center">
                                                             <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <button title="Edit Production Cost" type="button"
-                                                                    data-bs-toggle="modal" data-bs-target="#edit-cost-modal"
-                                                                    class="tabledit-edit-button costEdit btn btn-primary waves-effect waves-light"
-                                                                    value="{{ $cost['id'] }}"
+                                                                <a href=""
+                                                                    title="Download File Record" type="button"
+                                                                    class="tabledit-edit-button btn btn-success waves-effect waves-light"
+                                                                    download>
+                                                                    <span class="mdi mdi-file-download-outline"></span>
+                                                                </a>
+                                                            </div>
+                                                            <div class="btn-group btn-group-sm" style="float: none;">
+                                                                <button title="Edit Record" type="button"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#edit-record-modal"
+                                                                    class="tabledit-edit-button btn btn-primary waves-effect waves-light"
                                                                     style="background-color: #3E8BFF;">
                                                                     <span class="mdi mdi-pencil"></span>
                                                                 </button>
                                                             </div>
                                                             <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <button title="Hapus Operational Cost" type="button"
-                                                                    value="{{ $cost->id }}"
-                                                                    class="tabledit-edit-button hapusPCost btn btn-danger">
+                                                                <button id="deleteButton" title="Hapus Record"
+                                                                    type="button" value=""
+                                                                    class="tabledit-edit-button btn btn-danger">
                                                                     <span class="mdi mdi-trash-can-outline"></span>
                                                                 </button>
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                @endforeach
-                                            @endif
-
+                                                {{-- @endforeach
+                                            @endif --}}
                                         </tbody>
                                     </table>
                                 </div>
@@ -251,84 +414,6 @@
                                                             <div class="btn-group btn-group-sm" style="float: none;">
                                                                 <button title="hapus data" type="button"
                                                                     class="tabledit-edit-button btn btn-danger">
-                                                                    <span class="mdi mdi-trash-can-outline"></span>
-                                                                </button>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            @endif
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                        {{-- card term of payment --}}
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row table-title">
-                                    <div class="col-sm-8">
-                                        <h4 class="mt-0 header-title">Term Of Payment</h4>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <a href="{{ route('top.create', ['id' => $projectData->id]) }}"
-                                            class="btn btn-createItems w-md waves-effect waves-light mb-3"><i
-                                                class="mdi mdi-plus"></i>Add Payment</a>
-                                    </div>
-                                </div>
-                                <div class="table-responsive">
-                                    <table class="table mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Payment Type</th>
-                                                <th>Progress</th>
-                                                <th>Description</th>
-                                                <th class="text-center">Status</th>
-                                                <th class="text-center" width="160">Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @if ($tops->isEmpty())
-                                                <tr>
-                                                    <td colspan="6" align="center">Belum ada payment</td>
-                                                </tr>
-                                            @else
-                                                @php($index = 1)
-                                                @foreach ($tops as $top)
-                                                    <tr>
-                                                        <th scope="row">{{ $index++ }}</th>
-                                                        <td>{{ $top['type'] }}</td>
-                                                        <td class="persentasiAngka">{{ $top['progress'] }}%</td>
-                                                        <td>{{ $top['description'] }}</td>
-                                                        <td class="text-center">
-                                                            <span
-                                                                class="badge {{ $top['status'] === 'Done' ? 'bg-success' : 'bg-warning' }}">
-                                                                {{ $top['status'] }}
-                                                            </span>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <button title="unduh file" type="button"
-                                                                    class="tabledit-edit-button btn btn-success waves-effect waves-light">
-                                                                    <span class="mdi mdi-file-download-outline"></span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <button title="edit data" type="button"
-                                                                    data-bs-toggle="modal" value="{{ $top['id'] }}"
-                                                                    data-bs-target="#edit-payment-modal"
-                                                                    title="Edit Payment"
-                                                                    class="tabledit-edit-button paymentEdit btn btn-primary waves-effect waves-light"
-                                                                    style="background-color: #3E8BFF;">
-                                                                    <span class="mdi mdi-pencil"></span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <button title="hapus data" type="button"
-                                                                    value="{{ $top['id'] }}"
-                                                                    class="tabledit-edit-button hapusPayment btn btn-danger">
                                                                     <span class="mdi mdi-trash-can-outline"></span>
                                                                 </button>
                                                             </div>
