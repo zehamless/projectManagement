@@ -24,6 +24,13 @@
                         </div>
                     </div>
 
+                    //ini buat hak akses
+                    @Allowed("Admin")
+                    <p>Allowed</p>
+                    @else
+                    <p>sdasd</p>
+                    @endAllowed
+
                     <div class="col-lg-3">
                         <div class="card">
                             <div class="card-body">

@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
@@ -21,6 +24,15 @@ class AuthenticatedSessionController extends Controller
     }
 
     /**
+     * @return View
+     */
+    public function roleSelect(): View
+    {
+        $roles = Auth::user()->hasroles->pluck('name')->toArray();
+        return view('rolecustomelogin', compact('roles'));
+    }
+
+    /**
      * Handle an incoming authentication request.
      */
     public function store(LoginRequest $request): RedirectResponse
@@ -29,7 +41,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        return redirect()->route('roleSelect');
     }
 
     /**
@@ -43,6 +55,17 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect()->route('login');
+    }
+    public function setSession($role)
+    {
+        if(Auth::user()->hasroles->contains('name', $role))
+        {
+            Session::put('role', $role);
+            return redirect()->route('dashboarddashboard.index');
+        }else{
+            Session::put('role', 'none');
+            return redirect()->route('roleSelect');
+        }
     }
 }
