@@ -136,6 +136,7 @@ Route::prefix('admin')->group(function () {
 
 Route::prefix('operational')->group(function () {
     Route::get('/', [OperationalController::class, 'index'])->name('operational.index'); //?
+    Route::get('/showId/{id}', [OperationalController::class, 'showById'])->name('operational.showById'); //?
     Route::get('/create/{id}', [OperationalController::class, 'create'])->name('operational.create');
     Route::get('/create', function () {
         return view('projects.createOperational');

@@ -238,7 +238,14 @@
                                                         <td>{{ $operational['type'] }}</td>
                                                         <td>{{ $operational['spk_number'] }}</td>
                                                         <td class="text-center">Rp 1.000.000</td>
-                                                        <td class="text-center">
+                                                        <td class="text-center truncate-text">
+                                                            <a href="{{ route('operational.showById', ['id' => $operational->id]) }}"
+                                                                class="tabledit-edit-button btn btn-info waves-effect waves-light"
+                                                                title="Detail operational"
+                                                                style="padding: 0.25rem 0.8rem;">
+                                                                <span class="mdi mdi-eye"></span>
+                                                                </button>
+                                                            </a>
                                                             <div class="btn-group btn-group-sm" style="float: none;">
                                                                 <button type="button" data-bs-toggle="modal"
                                                                     data-bs-target="#edit-service-modal"
@@ -438,13 +445,15 @@
                                             <tr>
                                                 <th scope="row">
                                                     <p class="title-text">Start Date</p>
-                                                    <p class="details-text formatTanggal">{{ $projectData['start_date'] }}</p>
+                                                    <p class="details-text formatTanggal">{{ $projectData['start_date'] }}
+                                                    </p>
                                                 </th>
                                             </tr>
                                             <tr>
                                                 <th scope="row">
                                                     <p class="title-text">End Date</p>
-                                                    <p class="details-text formatTanggal">{{ $projectData['end_date'] }}</p>
+                                                    <p class="details-text formatTanggal">{{ $projectData['end_date'] }}
+                                                    </p>
                                                 </th>
                                             </tr>
                                             <tr>

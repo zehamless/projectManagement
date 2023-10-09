@@ -19,6 +19,28 @@ class OperationalController extends Controller
         return view('operational.index', compact('salesOrder'));
     }
 
+    public function showById($id)
+    {
+        $operational = Operational::find($id);
+
+        if (!$operational) {
+            return redirect()->route('projects.index')->with('error', 'Terjadi kesalahan');
+        }
+
+        $projectId = $operational->project_id;
+
+        $project = Project::find($projectId);
+
+        if (!$project) {
+            return redirect()->route('projects.index')->with('error', 'Terjadi kesalahan');
+        }
+
+        $spkNumber = $operational->spk_number;
+        $soNumber = $project->so;
+
+        return view('operational.index', compact('spkNumber', 'soNumber'));
+    }
+
     public function create($id)
     {
         // Mengambil data project berdasarkan ID
@@ -47,23 +69,32 @@ class OperationalController extends Controller
             'spk_number' => 'required',
             'description' => 'required',
             'created_by' => 'required',
-            'vehicle_number' => [
-                Rule::requiredIf(function () use ($request) {
-                    return $request->transportation_mode === 'mobil';
-                }),
-                'regex:/^[A-Za-z0-9]+$/',
-            ],
-        ], [
-            'vehicle_number.required' => 'Vehicle Number is required when Transportation Mode is "mobil".',
-            'vehicle_number.regex' => 'Vehicle Number should only contain alphabets and numbers.',
-            // Menambahkan pesan kesalahan lainnya sesuai kebutuhan
         ]);
+
+        // Setel Vehicle Number menjadi '-' jika Transportation Mode tidak sama dengan 'mobil'
+        $validatedData['vehicle_number'] = ($request->input('transportation_mode') === 'mobil')
+            ? $request->input('vehicle_number')
+            : '-';
+
+        // Validasi Vehicle Number hanya jika Transportation Mode adalah 'mobil'
+        if ($request->input('transportation_mode') === 'mobil') {
+            $request->validate([
+                'vehicle_number' => 'required|regex:/^[A-Za-z0-9]+$/',
+            ], [
+                'vehicle_number.required' => 'Vehicle Number is required when Transportation Mode is "mobil".',
+                'vehicle_number.regex' => 'If using a "mobil" as transportation, you must provide a vehicle number.',
+            ]);
+        }
+
+        // Gabungkan spk_code dan spk_number
+        $combinedSPK = $request->input('spk_code') . '-' . $request->input('spk_number');
+        $validatedData['spk_number'] = $combinedSPK;
         // Simpan data ke dalam database
         Operational::create($validatedData); // Ganti 'Operational' dengan model yang sesuai
 
         // Redirect pengguna ke halaman project.show dengan project_id sebagai parameter jika penyimpanan berhasil
         return redirect()->route('projects.show', ['id' => $validatedData['project_id']])
-            ->with('success', 'Data berhasil disimpan');
+            ->with('success', 'Data operational berhasil ditambahkan');
     }
 
 

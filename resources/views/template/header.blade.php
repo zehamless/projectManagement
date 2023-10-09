@@ -94,6 +94,13 @@
         color: white;
     }
 
+    .truncate-text {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        /* Sesuaikan dengan lebar maksimal yang Anda inginkan */
+    }
+
     li.menuitem-active>a>span {
         font-weight: 800;
         color: white;
