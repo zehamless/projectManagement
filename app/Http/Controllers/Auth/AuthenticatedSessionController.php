@@ -10,6 +10,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
@@ -56,14 +57,15 @@ class AuthenticatedSessionController extends Controller
 
         return redirect()->route('login');
     }
-    public function setSession(Request $role)
+    public function setSession($role)
     {
         if(Auth::user()->hasroles->contains('name', $role))
         {
-            session(['role' => $role]);
-            return response()->json(['success' => 'Role berhasil di set']);
+            Session::put('role', $role);
+            return redirect()->route('dashboarddashboard.index');
         }else{
-            return response()->json(['error' => 'Role tidak ditemukan']);
+            Session::put('role', 'none');
+            return redirect()->route('roleSelect');
         }
     }
 }

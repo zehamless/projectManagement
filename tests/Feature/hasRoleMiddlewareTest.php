@@ -55,4 +55,18 @@ class hasRoleMiddlewareTest extends TestCase
         dd($userRole);
     }
 
+    public function testSession()
+    {
+        $users = User::whereHas('hasroles', function ($q) {
+            $q->where('name', 'Admin');
+        })->first();
+        self::assertNotNull($users);
+        self::assertTrue($users->hasroles->contains('name', 'Admin'));
+        $response = $this->actingAs($users)->post(route('setSession', ['role' => 'Admin']));
+        $response->assertJson(['success' => 'Role berhasil di set']);
+        $response->assertSessionHas('role', 'Admin');
+
+    }
+
+
 }
