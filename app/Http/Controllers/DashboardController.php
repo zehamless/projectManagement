@@ -11,8 +11,11 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // Mengambil 10 proyek terakhir
-        $projects = Project::latest()->take(10)->get();
+        // Mengambil 10 proyek terakhir dengan nama Project Manager dan Sales Executive
+        $projects = Project::with(['projectManager', 'salesExecutive'])
+            ->latest()
+            ->take(10)
+            ->get();
 
         // Menghitung total proyek
         $totalProjects = Project::count();

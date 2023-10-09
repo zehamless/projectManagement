@@ -69,9 +69,7 @@
 
                                     {{-- form input file bukti pembayaran --}}
                                     <div class="mb-3">
-                                        <label class="form-label">Bukti Pembayaran <span
-                                                style="color: #acacac; font-size: 80%;">(Wajib jika progress
-                                                Done)</span></label>
+                                        <label class="form-label">Bukti Pembayaran</label>
                                         <input type="file" name="file" parsley-trigger="change" data-plugins="dropify"
                                             data-height="150" class="form-control" id="bukti-pembayaran">
                                         @error('file')
@@ -80,8 +78,9 @@
                                     </div>
 
                                     <div class="text-end">
-                                        <a href="{{ url('projects') }}">
-                                            <button type="button" class="btn btn-secondary waves-effect">Cancel</button>
+                                        <a href="{{ route('projects.show', ['id' => $projectId]) }}"
+                                            class="btn btn-secondary waves-effect">
+                                            Cancel
                                         </a>
                                         <button class="btn btn-save waves-effect waves-light px-4"
                                             type="submit">Save</button>

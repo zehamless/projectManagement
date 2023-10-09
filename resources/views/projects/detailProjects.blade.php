@@ -47,12 +47,6 @@
                 <div class="row">
                     <div class="col-xl-8 tables-col">
 
-                        @if (session('success'))
-                            <div id="success-alert"></div>
-                        @elseif(session('error'))
-                            <div id="error-alert"></div>
-                        @endif
-
                         {{-- card table milestones --}}
                         <div class="card">
                             <div class="card-body">
@@ -89,9 +83,9 @@
                                                 @foreach ($milestones as $milestone)
                                                     <tr>
                                                         <th scope="row">{{ $index++ }}</th>
-                                                        <td title="Submit date">{{ $milestone['submitted_date'] }}</td>
+                                                        <td class="formatTanggal">{{ $milestone['submitted_date'] }}</td>
                                                         <td>{{ $milestone['description'] }}</td>
-                                                        <td>{{ $milestone['due_date'] }}</td>
+                                                        <td class="formatTanggal">{{ $milestone['due_date'] }}</td>
                                                         <td class="text-center">
                                                             <span
                                                                 class="badge
@@ -210,7 +204,7 @@
                                         <h4 class="mt-0 header-title">Field Service Log</h4>
                                     </div>
                                     <div class="col-sm-4">
-                                        <a href="{{ route('top.create', ['id' => $projectData->id]) }}"
+                                        <a href="{{ route('operational.create', ['id' => $projectData->id]) }}"
                                             class="btn btn-createItems w-md waves-effect waves-light mb-3"><i
                                                 class="mdi mdi-plus"></i>Add Operational</a>
                                     </div>
@@ -240,7 +234,7 @@
                                                         <th scope="row">{{ $index++ }}</th>
                                                         <td>{{ $operational['spk_code'] }}
                                                         </td>
-                                                        <td>{{ $operational['date'] }}</td>
+                                                        <td class="formatTanggal">{{ $operational['date'] }}</td>
                                                         <td>{{ $operational['type'] }}</td>
                                                         <td>{{ $operational['spk_number'] }}</td>
                                                         <td class="text-center">Rp 1.000.000</td>
@@ -304,9 +298,9 @@
                                                 @php($index = 1)
                                                 @foreach ($tops as $top)
                                                     <tr>
-                                                        <th scope="row"></th>
+                                                        <th scope="row">{{ $index++ }}</th>
                                                         <td>{{ $top['type'] }}</td>
-                                                        <td>{{ $top['progress'] }}</td>
+                                                        <td class="persentasiAngka">{{ $top['progress'] }}%</td>
                                                         <td>{{ $top['description'] }}</td>
                                                         <td class="text-center">
                                                             <span
@@ -430,25 +424,27 @@
                                             <tr>
                                                 <th scope="row">
                                                     <p class="title-text">Project Manager</p>
-                                                    <p class="details-text">{{ $projectData['project_manager'] }}</p>
+                                                    <p class="details-text">{{ $project->projectManager->first_name }}
+                                                        {{ $project->projectManager->last_name }}</p>
                                                 </th>
                                             </tr>
                                             <tr>
                                                 <th scope="row">
                                                     <p class="title-text">Sales Executive</p>
-                                                    <p class="details-text">{{ $projectData['sales_executive'] }}</p>
+                                                    <p class="details-text">{{ $project->salesExecutive->first_name }}
+                                                        {{ $project->salesExecutive->last_name }}</p>
                                                 </th>
                                             </tr>
                                             <tr>
                                                 <th scope="row">
                                                     <p class="title-text">Start Date</p>
-                                                    <p class="details-text">{{ $projectData['start_date'] }}</p>
+                                                    <p class="details-text formatTanggal">{{ $projectData['start_date'] }}</p>
                                                 </th>
                                             </tr>
                                             <tr>
                                                 <th scope="row">
                                                     <p class="title-text">End Date</p>
-                                                    <p class="details-text">{{ $projectData['end_date'] }}</p>
+                                                    <p class="details-text formatTanggal">{{ $projectData['end_date'] }}</p>
                                                 </th>
                                             </tr>
                                             <tr>
@@ -563,7 +559,7 @@
                         ctx = chart.ctx;
 
                     ctx.restore();
-                    var fontSize = (height / 120).toFixed(2);
+                    var fontSize = (height / 100).toFixed(2);
                     ctx.font = fontSize + "em sans-serif";
                     ctx.textBaseline = "middle";
 
@@ -625,7 +621,7 @@
                         ctx = chart.ctx;
 
                     ctx.restore();
-                    var fontSize = (height / 120).toFixed(2);
+                    var fontSize = (height / 100).toFixed(2);
                     ctx.font = fontSize + "em sans-serif";
                     ctx.textBaseline = "middle";
 

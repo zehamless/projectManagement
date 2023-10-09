@@ -40,13 +40,14 @@ Route::group(['prefix' => 'projects'], function () {
     Route::get('/createProductionCost/{id}', [ProductionCostController::class, 'create'])->name('production-cost.create');
     Route::post('/production-cost', [ProductionCostController::class, 'store'])->name('production-cost.store');
     Route::delete('/production-cost/{id}', [ProductionCostController::class, 'destroy'])->name('production-cost.destroy');
+    Route::get('/get-projects', [ProjectController::class, 'getProjects'])->name('getProjects');
 });
 // Milestone
 Route::get('/get-milestone-data/{id}', [MilestoneController::class, 'getMilestoneData'])->name("milestone.get");
 // Pcost json
 Route::get('/get-cost-data/{id}', [ProductionCostController::class, 'getPCostData'])->name("cost.get");
 Route::put('production/update/', [ProductionCostController::class, 'update'])->name('cost.update');
-Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+Route::get('/', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard')->name('dashboard.index');
 
 
 Route::prefix('customer')->group(function () {
@@ -65,10 +66,6 @@ Route::get('/testPage', function () {
     return view('testPage.index');
 });
 
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -139,7 +136,10 @@ Route::prefix('admin')->group(function () {
 
 Route::prefix('operational')->group(function () {
     Route::get('/', [OperationalController::class, 'index'])->name('operational.index'); //?
-    Route::get('/create', [OperationalController::class, 'createForm'])->name('operational.createForm'); //!
+    Route::get('/create/{id}', [OperationalController::class, 'create'])->name('operational.create');
+    Route::get('/create', function () {
+        return view('projects.createOperational');
+    })->name('createOperational');
     Route::post('/store', [OperationalController::class, 'store'])->name('operational.store'); //!
     Route::get('/show/{operational}', [OperationalController::class, 'show'])->name('operational.show'); //?
     Route::get('/{operational}/edit', [OperationalController::class, 'updateForm'])->name('operational.update-form'); //!
