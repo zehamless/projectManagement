@@ -16,7 +16,10 @@ class OperationalController extends Controller
     public function index()
     {
         $salesOrder = Project::select('id', 'so')->get();
-        return view('operational.index', compact('salesOrder'));
+        $spkNumber = null;
+        $spkNumber_id = null;
+        $soNumber = null;
+        return view('operational.index', compact('salesOrder','spkNumber', 'spkNumber_id', 'soNumber', ));
     }
 
     public function showById($id)
@@ -34,11 +37,12 @@ class OperationalController extends Controller
         if (!$project) {
             return redirect()->route('projects.index')->with('error', 'Terjadi kesalahan');
         }
-
+        $salesOrder = Project::select('id', 'so')->get();
         $spkNumber = $operational->spk_number;
+        $spkNumber_id = $id;
         $soNumber = $project->so;
 
-        return view('operational.index', compact('spkNumber', 'soNumber'));
+        return view('operational.index', compact('spkNumber', 'spkNumber_id', 'soNumber', 'salesOrder'));
     }
 
     public function create($id)
