@@ -47,7 +47,7 @@
         <!--- Sidemenu -->
         <div id="sidebar-menu">
 
-            <ul id="side-menu" >
+            <ul id="side-menu">
 
                 <li class="menu-title">Navigation</li>
 
@@ -60,7 +60,8 @@
 
                 <li class="menu-title mt-2">Apps</li>
 
-                <li class="{{ Request::is('projects/*') || Request::is('milestone/*') || Request::is('top/*') ? 'menuitem-active' : ''}}">
+                <li
+                    class="{{ Request::is('projects/*') || Request::is('milestone/*') || Request::is('top/*') ? 'menuitem-active' : ''}}">
                     <a href="{{ url('projects') }}">
                         <i class="mdi mdi-briefcase-variant-outline"></i>
                         <span> Projects </span>
@@ -110,12 +111,13 @@
                         <span> Data Akun </span>
                     </a>
                 </li>
+                
                 <li class="profile-section">
                     <div class=" user-box text-start">
                         <div class="row px-3">
                             <div class="col-3 profile-photo-column">
-                                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="user-img" title="Mat Helme"
-                                    class="rounded img-thumbnail avatar-md">
+                                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                                    alt="user-img" title="Mat Helme" class="rounded img-thumbnail avatar-md">
                             </div>
                             <div class="col-7">
                                 <h5 class="mb-1">Garcia Patel</h5>
@@ -124,9 +126,7 @@
                             <div class="col-2 my-auto">
                                 <form method="POST" action="{{route('logout')}}">
                                     @csrf
-                                <a>
-                                    <button class="fe-log-out logout-font" title="Logout System" type="submit"></button>
-                                </a>
+                                    <button class="fe-log-out logout-font btn-logout" title="Logout System" type="submit"></button>
                                 </form>
                             </div>
                         </div>

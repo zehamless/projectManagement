@@ -111,9 +111,6 @@
         color: white;
         border-radius: 15px !important;
     }
-
-    /* navbar styling end */
-
     #sidebar-menu>ul>li>a:hover {
         background-color: red;
         color: white;
@@ -122,12 +119,6 @@
     #sidebar-menu>ul>li>a:active {
         color: red;
     }
-
-    /* #sidebar-menu>ul>li>a:visited {
-        color: red;
-    } */
-
-    /* navbar styling end */
 
     .btn-save {
         background-color: #FF3E3E;
@@ -162,6 +153,11 @@
         background-color: #FF3E3E;
         border: #FF3E3E;
         color: white;
+    }
+
+    .btn-logout{
+        border: unset; 
+        background-color: unset;
     }
 
     .table-title {
