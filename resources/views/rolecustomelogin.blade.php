@@ -80,7 +80,7 @@
                                         <button type="button"
                                             class="btn btn-soft-danger waves-effect waves-light px-3">Log in</button>
                                     </div>
-
+                                    //ini buat role custom
                                     @foreach($roles as $role)
                                         <a type="button" href="{{route('login', $role)}}"
                                            class="btn btn-outline-danger waves-effect mb-2 rounded-3">Supervisor</a>
