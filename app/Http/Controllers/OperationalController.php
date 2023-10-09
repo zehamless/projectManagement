@@ -36,9 +36,10 @@ class OperationalController extends Controller
         }
 
         $spkNumber = $operational->spk_number;
+        $spkNumber_id = $id;
         $soNumber = $project->so;
 
-        return view('operational.index', compact('spkNumber', 'soNumber'));
+        return view('operational.index', compact('spkNumber', 'spkNumber_id', 'soNumber'));
     }
 
     public function create($id)
