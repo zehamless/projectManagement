@@ -116,6 +116,10 @@
         color: red;
     }
 
+    /* #sidebar-menu>ul>li>a:visited {
+        color: red;
+    } */
+
     /* navbar styling end */
 
     .btn-save {
