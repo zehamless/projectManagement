@@ -32,9 +32,10 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'projects'], function () {
     Route::get('/', [ProjectController::class, 'index'])->name('projects.index');
     Route::get('/createProjects', [ProjectController::class, 'create'])->name('projects.createProjects');
+    Route::get('/editProjects/{id}', [ProjectController::class, 'edit'])->name('projects.editProjects');
     Route::post('/', [ProjectController::class, 'store'])->name('projects.store');
     Route::get('/detail/{id}', [ProjectController::class, 'show'])->name('projects.show');
-    Route::get('/{id}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
+    // Route::get('/{id}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
     Route::put('/{id}', [ProjectController::class, 'update'])->name('projects.update');
     Route::delete('/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
     Route::get('/createProductionCost/{id}', [ProductionCostController::class, 'create'])->name('production-cost.create');
