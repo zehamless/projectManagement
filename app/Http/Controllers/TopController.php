@@ -37,11 +37,9 @@ class TopController extends Controller
             'project_id' => 'required|exists:projects,id',
             'type' => 'string|required',
             'description' => 'string|required',
-            'progress' => 'required|numeric|min:0',
+            'progress' => 'numeric|required|numeric|min:0',
             'status' => 'required|in:On Progress,Done', // Validasi status
-            'file' => $request->input('status') === 'Done' ? 'required|file|mimes:jpg,png,jpeg,pdf' : 'nullable|mimes:jpg,png,jpeg,pdf',
-        ], [
-            'file.required' => 'Sertakan bukti pembayaran jika payment sudah selesai.'
+            'file' => 'nullable|mimes:jpg,png,jpeg,pdf|max:5120'
         ]);
 
         $projectId = $request->input('project_id');
@@ -102,7 +100,7 @@ class TopController extends Controller
             'project_id' => 'required|exists:projects,id',
             'type' => 'string|required',
             'description' => 'string|required',
-            'progress' => 'required|numeric|min:0',
+            'progress' => 'numeric|required|numeric|min:0',
             'status' => 'required|in:On Progress,Done', // Validasi status
             'file' => [
                 function ($attribute, $value, $fail) use ($request) {

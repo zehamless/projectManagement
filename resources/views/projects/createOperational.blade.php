@@ -10,21 +10,24 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                <form action="" method="post" class="parsley-examples" novalidate="">
+                                <form action="" method="POST" class="parsley-examples" novalidate="">
                                     @csrf
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">Service Date<span
                                                 class="text-danger">*</span></label>
-                                        <input type="date" name="nick" parsley-trigger="change" required=""
+                                        <input type="date" name="date" parsley-trigger="change" required=""
                                             placeholder="Enter service date" class="form-control datepicker" id="userName">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="userName" class="form-label">Project Label<span
+                                        <label for="projectId" class="form-label">Project Label<span
                                                 class="text-danger">*</span></label>
-                                        <select name="" parsley-trigger="change" required="" class="form-control">
-                                            <option>PT ABC</option>
-                                            <option>PT XYZ</option>
-                                            <option>PT DEF</option>
+                                        <select name="project_id" id="projectId" parsley-trigger="change" required=""
+                                            class="form-control">
+                                            @isset($projectId)
+                                                <option value="{{ $projectId }}" selected>{{ $label }}</option>
+                                            @else
+                                                <option selected>Pilih Proyek</option>
+                                            @endisset
                                         </select>
                                     </div>
                                     <div class="mb-3">
@@ -57,12 +60,12 @@
                                         <label for="userName" class="form-label">Vehicle Number<span
                                                 class="text-danger">*</span></label>
                                         <input type="text" name="vehicle_number" placeholder="Enter vehicle number"
-                                            parsley-trigger="change" required="" class="form-control">
+                                            parsley-trigger="change" class="form-control">
                                     </div>
                                     <div class="mb-3">
                                         <label for="spkCode" class="form-label">SPK Code<span
                                                 class="text-danger">*</span></label>
-                                        <select name="spkCode" id="spkCode" parsley-trigger="change" required=""
+                                        <select name="spk_code" id="spkCode" parsley-trigger="change" required=""
                                             class="form-control">
                                             <option>-- Select SPK Code --</option>
                                             <option value="A">A</option>
@@ -87,45 +90,30 @@
                                         </div>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="userName" class="form-label">Description<span
+                                        <label for="description" class="form-label">Description<span
                                                 class="text-danger">*</span></label>
-                                        <textarea name="" parsley-trigger="change" required="" class="form-control"></textarea>
+                                        <textarea name="description" id="description" parsley-trigger="change" required="" class="form-control"></textarea>
                                     </div>
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">Created By<span
                                                 class="text-danger">*</span></label>
-                                        <select name="" parsley-trigger="change" required=""
+                                        <select name="created_by" parsley-trigger="change" required=""
                                             class="form-control">
                                             <option>User 1</option>
                                             <option>User 2</option>
                                         </select>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="userName" class="form-label">Technician<span
-                                                class="text-danger">*</span></label>
-                                        <select id="select-technician" class="form-control" name=""
-                                            style="color: black;">
-                                            <option value="">Technician 1</option>
-                                            <option value="">Technician 2</option>
-                                            <option value="">Technician 3</option>
-                                            <option value="">Technician 4</option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="userName" class="form-label">Material<span
-                                                class="text-danger">*</span></label>
-                                        <select id="select-material" class="form-control" name=""
-                                            style="color: black;">
-                                            <option value="">Material 1</option>
-                                            <option value="">Material 2</option>
-                                            <option value="">Material 3</option>
-                                            <option value="">Material 4</option>
-                                        </select>
-                                    </div>
                                     <div class="text-end">
-                                        <a href="{{ url('projects') }}">
-                                            <button type="button" class="btn btn-secondary waves-effect">Cancel</button>
-                                        </a>
+                                        @isset($projectId)
+                                            <a href="{{ route('projects.show', ['id' => $projectId]) }}"
+                                                class="btn btn-secondary waves-effect">
+                                                Cancel
+                                            </a>
+                                        @else
+                                            <a href="{{ route('operational.index') }}" class="btn btn-secondary waves-effect">
+                                                Cancel
+                                            </a>
+                                        @endisset
                                         <button class="btn btn-save waves-effect waves-light px-4" type="submit"
                                             onclick="saveConfirmation()">Save</button>
                                     </div>
@@ -142,6 +130,11 @@
 
 {{-- script js halaman detail project --}}
 @section('pageScript')
+    <!-- Include Select2 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
+    <!-- Include Select2 JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script>
         $(document).ready(function() {
             $('#select-technician').select2({
@@ -183,6 +176,31 @@
                 var code = $("#spkCode").val()
                 $("#code").text(code + " - ");
             })
+        });
+    </script>
+
+    {{-- Get data project --}}
+    <script>
+        $(document).ready(function() {
+            $('#projectId').select2(); // Optional, jika Anda menggunakan plugin Select2
+
+            // Jika tidak ada parameter ID proyek, ambil daftar proyek melalui Ajax
+            console.log("Yahuuu")
+            @unless (isset($projectId))
+                $.ajax({
+                    url: "{{ route('getProjects') }}",
+                    type: "GET",
+                    success: function(response) {
+                        if (response.projects) {
+                            var options = "<option value=''>Pilih Proyek</option>";
+                            $.each(response.projects, function(id, label) {
+                                options += "<option value='" + id + "'>" + label + "</option>";
+                            });
+                            $('#projectId').html(options);
+                        }
+                    }
+                });
+            @endunless
         });
     </script>
 @endsection

@@ -28,6 +28,10 @@ return new class extends Migration
             $table->foreign('customer_id')->references('id')->on('customers')->cascadeOnDelete();
             $table->uuid('customer_contact_id');
             $table->foreign('customer_contact_id')->references('id')->on('customer_contacts')->cascadeOnDelete();
+            $table->uuid('project_manager');
+            $table->foreign('project_manager')->references('id')->on('users')->cascadeOnDelete();
+            $table->uuid('sales_executive');
+            $table->foreign('sales_executive')->references('id')->on('users')->cascadeOnDelete();
         });
         Schema::table('operationals', function (Blueprint $table) {
             $table->uuid('project_id')->after('id');

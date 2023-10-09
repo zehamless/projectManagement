@@ -63,8 +63,9 @@
                                         @enderror
                                     </div>
                                     <div class="text-end">
-                                        <a href="{{ url('projects') }}">
-                                            <button type="button" class="btn btn-secondary waves-effect">Cancel</button>
+                                        <a href="{{ route('projects.show', ['id' => $project]) }}"
+                                            class="btn btn-secondary waves-effect">
+                                            Cancel
                                         </a>
                                         <button class="btn btn-save waves-effect waves-light px-4" type="submit"
                                             onclick="saveConfirmation()">Save</button>

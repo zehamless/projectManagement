@@ -383,9 +383,7 @@
 
                             {{-- Form input file bukti pembayaran --}}
                             <div class="mb-3">
-                                <label class="form-label">Bukti Pembayaran <span
-                                        style="color: #acacac; font-size: 80%;">(Wajib jika progress
-                                        Done)</span></label>
+                                <label class="form-label">Bukti Pembayaran</label>
                                 <input type="file" name="file" parsley-trigger="change" data-plugins="dropify"
                                     data-height="150" class="form-control" id="bukti-pembayaran">
                                 @error('file')

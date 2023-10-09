@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Customer;
 use App\Models\CustomerContact;
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -20,6 +21,13 @@ class ProjectsSeeder extends Seeder
         $customer = Customer::first();
         $this->call(CustomerContactSeeder::class);
         $customer_contact = CustomerContact::first();
+        $project_manager = User::whereHas('hasroles', function ($q) {
+            $q->where('name', 'Project Manager');
+        })->get()->first();
+        $sales_executive = User::whereHas('hasroles', function ($q) {
+            $q->where('name', 'Sales Executive');
+        })->get()->first();
+
         Project::create([
             'po' => 'Project 1',
             'customer_id' => $customer->id,
@@ -28,8 +36,8 @@ class ProjectsSeeder extends Seeder
             'label' => 'Label 1',
             'so' => 'SO 1',
             'location' => 'Location 1',
-            'project_manager' => 'Project Manager 1',
-            'sales_executive' => 'Sales Executive 1',
+            'project_manager' => $project_manager->id,
+            'sales_executive' => $sales_executive->id,
             'start_date' => '2021-01-01',
             'end_date' => '2021-01-01',
             'preliminary_cost' => '1000000',

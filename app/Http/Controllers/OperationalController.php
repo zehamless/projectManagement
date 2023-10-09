@@ -17,9 +17,21 @@ class OperationalController extends Controller
         return view('operational.index', compact('salesOrder'));
     }
 
-    public function createForm()
+    public function create($id)
     {
-        return view('operational.create');
+        // Mengambil data project berdasarkan ID
+        $project = Project::find($id);
+
+        // Memeriksa apakah project ditemukan
+        if (!$project) {
+            return redirect()->route('projects.index')->with('error', 'Project tidak ditemukan.');
+        }
+
+        // Mengambil label dan ID project
+        $label = $project->label;
+        $projectId = $project->id;
+        $title = "Add Operational";
+        return view('projects.createOperational', compact('title', 'label', 'projectId'));
     }
 
     public function store(Request $request)
