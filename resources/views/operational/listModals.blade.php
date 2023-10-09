@@ -126,8 +126,7 @@
         </div>
     </form>
     {{-- modals material utilized --}}
-    <form action="" class="parsley-examples" novalidate="" method="post" enctype="multipart/form-data">
-        @csrf
+    <form class="meterialForm" data-parsley-validate>
         <div id="add-material-modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel"
              aria-hidden="true" style="overflow:hidden;">
             <div class="modal-dialog modal-dialog-centered">
@@ -142,14 +141,6 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="row">
-                            </div>
-                            <div class="col-md-12">
-                                <div class="mb-3 text-start">
-                                    <label for="field-1" class="form-label">Operational<span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="memo_number"
-                                           placeholder="get value default dari operational id" readonly>
-                                </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="mb-3 text-start">

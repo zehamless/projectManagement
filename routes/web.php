@@ -131,6 +131,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/users/{user}/edit', [UserController::class, 'updateForm'])->name('users.updateForm');
     Route::patch('/users/{user}', [UserController::class, 'update'])->name('users.update');
     Route::delete('/users/{user}', [UserController::class, 'delete'])->name('users.delete');
+    Route::get('/users/getTechnician/{operational}', [UserController::class, 'getTechnician'])->name('users.getTechnician');
 });
 
 Route::prefix('operational')->group(function () {
@@ -171,7 +172,7 @@ Route::prefix('operational')->group(function () {
 
 Route::prefix('materials')->group(function () {
     Route::get('/', [MaterialController::class, 'index'])->name('materials.index');
-    Route::get('/create', [MaterialController::class, 'create'])->name('materials.update');
+    Route::get('/create', [MaterialController::class, 'create'])->name('materials.create');
     Route::post('/store', [MaterialController::class, 'store'])->name('materials.store');
     Route::get('/show', [MaterialController::class, 'show'])->name('materials.show');
     Route::get('/edit', [MaterialController::class, 'edit'])->name('materials.edit');

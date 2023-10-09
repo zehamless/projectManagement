@@ -912,7 +912,7 @@
             let data; // Define data variable in a broader scope
 
             $.ajax({
-                url: "{{ route('users.index', '') }}" + "/" + operational,
+                url: "{{ route('users.getTechnician', '') }}" + "/" + operational,
                 type: "GET",
                 success: function (responseData) {
                     console.log(responseData);
@@ -956,12 +956,12 @@
                 },
             }).then(function (response) {
                 console.log(response);
+                $('#add-technician-modal').modal('hide');
                 Swal.fire(
                     'Added!',
                     'Technician has been added.',
                     'success'
                 );
-                $('#add-technician-modal').modal('hide');
                 detailOperational(operational)
             }).catch(function (error) {
                 console.log(error);
