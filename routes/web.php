@@ -189,7 +189,9 @@ Route::get('/projects/createOperational', function () {
     return view('projects.createOperational');
 });
 
-
+Route::get('/projects/createRecord', function () {
+    return view('projects.createRecord');
+});
 
 Route::get('calendar', function () {
     return view('calendar');
