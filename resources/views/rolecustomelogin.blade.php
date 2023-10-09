@@ -68,8 +68,11 @@
                                     <div class="d-flex flex-column mt-4">
                                         <button type="button"
                                             class="btn btn-outline-danger waves-effect mb-2 rounded-3">Project Manager</button>
-                                        <button type="button"
-                                            class="btn btn-outline-danger waves-effect mb-2 rounded-3">Supervisor</button>
+
+
+                                        <a type="button" href="{{route('login')}}"
+                                            class="btn btn-outline-danger waves-effect mb-2 rounded-3">Supervisor</a>
+
                                         <button type="button"
                                             class="btn btn-outline-danger waves-effect  mb-2 rounded-3">Manager</button>
                                     </div>
@@ -77,6 +80,11 @@
                                         <button type="button"
                                             class="btn btn-soft-danger waves-effect waves-light px-3">Log in</button>
                                     </div>
+                                    //ini buat role custom
+                                    @foreach($roles as $role)
+                                        <a type="button" href="{{route('setSession', ['role' => $role])}}"
+                                           class="btn btn-outline-danger waves-effect mb-2 rounded-3">{{$role}}</a>
+                                    @endforeach
 
                                     <!-- end row -->
                                 </form>
@@ -104,6 +112,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Add Popper.js script if required -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+
 </body>
 
 </html>

@@ -59,12 +59,18 @@ Route::get('/staff', function () {
     return view('staff');
 });
 
-Route::get('/RoleSelect', function () {
-    return view('rolecustomelogin');
-});
+//Route::get('/RoleSelect', function () {
+//    return view('rolecustomelogin');
+//});
 
-Route::get('/testPage', function () {
-    return view('testPage.index');
+//cara penggunaan middleware "hasRole:role1, role2, dst"
+Route::prefix('test')->group(function(){
+   Route::get('/admin', function (){
+       return view('testPage.index');
+   })->middleware(['auth', 'hasRole:Admin'])->name('testPage.index');
+   Route::get('/admin/technician', function (){
+       return view('testPage.index');
+   })->middleware(['auth', 'hasRole:Admin,Technician'])->name('testPage.index');
 });
 
 
@@ -137,6 +143,7 @@ Route::prefix('admin')->group(function () {
 
 Route::prefix('operational')->group(function () {
     Route::get('/', [OperationalController::class, 'index'])->name('operational.index'); //?
+    Route::get('/showId/{id}', [OperationalController::class, 'showById'])->name('operational.showById'); //?
     Route::get('/create/{id}', [OperationalController::class, 'create'])->name('operational.create');
     Route::get('/create', function () {
         return view('projects.createOperational');

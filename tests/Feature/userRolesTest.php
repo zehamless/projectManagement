@@ -36,12 +36,13 @@ class userRolesTest extends TestCase
     {
         $this->seed([RoleSeeder::class, userSeed::class]);
 
-        $user = User::where('first_name', 'John')->first();
+        $user = User::first();
         $roles = Role::all();
 
         $user->hasroles()->attach([1,2,3]);
         self::assertNotEmpty($user->hasroles);
         self::assertSame($user->hasroles->count(), 3);
+        
     }
 
     public function test_detachRole()

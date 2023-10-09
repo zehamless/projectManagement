@@ -13,6 +13,9 @@
                                 <form action="{{ route('operational.store') }}" method="POST" class="parsley-examples"
                                     novalidate="">
                                     @csrf
+                                    @error('vehicle_number')
+                                        <p class="alert-danger alert">{{ $message }}</p>
+                                    @enderror
                                     <div class="mb-3">
                                         <label for="projectId" class="form-label">Project Label<span
                                                 class="text-danger">*</span></label>
@@ -76,9 +79,6 @@
                                         <input type="text" name="vehicle_number" value="-"
                                             placeholder="Enter vehicle number" parsley-trigger="change"
                                             class="form-control">
-                                        @error('vehicle_number')
-                                            <div class="text-danger">{{ $message }}</div>
-                                        @enderror
                                     </div>
                                     <div class="mb-3">
                                         <label for="spk_code" class="form-label">SPK Code<span
@@ -126,8 +126,9 @@
                                                 class="text-danger">*</span></label>
                                         <select name="created_by" parsley-trigger="change" required=""
                                             class="form-control">
-                                            <option selected value="{{ auth()->id() }}">
-                                                {{ auth()->user()->first_name }}
+                                            <option selected
+                                                value="{{ auth()->user()->first_name . ' ' . auth()->user()->last_name }}">
+                                                {{ auth()->user()->first_name . ' ' . auth()->user()->last_name }}
                                             </option>
                                         </select>
                                         @error('created_by')
