@@ -68,8 +68,11 @@
                                     <div class="d-flex flex-column mt-4">
                                         <button type="button"
                                             class="btn btn-outline-danger waves-effect mb-2 rounded-3">Project Manager</button>
-                                        <button type="button"
-                                            class="btn btn-outline-danger waves-effect mb-2 rounded-3">Supervisor</button>
+
+
+                                        <a type="button" href="{{route('login')}}"
+                                            class="btn btn-outline-danger waves-effect mb-2 rounded-3">Supervisor</a>
+
                                         <button type="button"
                                             class="btn btn-outline-danger waves-effect  mb-2 rounded-3">Manager</button>
                                     </div>
@@ -104,6 +107,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Add Popper.js script if required -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+
 </body>
 
 </html>

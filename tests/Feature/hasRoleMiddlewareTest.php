@@ -46,5 +46,11 @@ class hasRoleMiddlewareTest extends TestCase
         $response->assertStatus(302);
     }
 
+    public function testrole()
+    {
+        $user = User::with('hasroles')->first();
+        $userRole = $user->hasroles();
+        dd($userRole);
+    }
 
 }

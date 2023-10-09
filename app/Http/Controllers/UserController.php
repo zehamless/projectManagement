@@ -163,4 +163,5 @@ class UserController extends Controller
 
         return response()->json($users);
     }
+
 }
