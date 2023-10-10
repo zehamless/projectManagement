@@ -44,8 +44,8 @@
     type="text/css" />
 <link href="{{ asset('templateAdmin/Admin/dist/assets/libs/select2/css/select2.min.css') }}" rel="stylesheet"
     type="text/css" />
-<link href="{{ asset('templateAdmin/Admin/dist/assets/libs/selectize/css/selectize.bootstrap3.css') }}" rel="stylesheet"
-    type="text/css" />
+<link href="{{ asset('templateAdmin/Admin/dist/assets/libs/selectize/css/selectize.bootstrap3.css') }}"
+    rel="stylesheet" type="text/css" />
 <!-- Plugins css -->
 <link href="{{ asset('templateAdmin/Admin/dist/assets/libs/mohithg-switchery/switchery.min.css') }}" rel="stylesheet"
     type="text/css" />
@@ -94,6 +94,13 @@
         color: white;
     }
 
+    .truncate-text {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        /* Sesuaikan dengan lebar maksimal yang Anda inginkan */
+    }
+
     li.menuitem-active>a>span {
         font-weight: 800;
         color: white;
@@ -104,9 +111,6 @@
         color: white;
         border-radius: 15px !important;
     }
-
-    /* navbar styling end */
-
     #sidebar-menu>ul>li>a:hover {
         background-color: red;
         color: white;
@@ -115,8 +119,6 @@
     #sidebar-menu>ul>li>a:active {
         color: red;
     }
-
-    /* navbar styling end */
 
     .btn-save {
         background-color: #FF3E3E;
@@ -151,6 +153,11 @@
         background-color: #FF3E3E;
         border: #FF3E3E;
         color: white;
+    }
+
+    .btn-logout{
+        border: unset; 
+        background-color: unset;
     }
 
     .table-title {
@@ -191,7 +198,7 @@
     .loader-child {
         /* border-top: 4px solid #ff0000; */
         /* Blue color for the spinner */
-        background-image:  url("{{ asset('images/loading-page.gif') }}") ;
+        background-image: url("{{ asset('images/loading-page.gif') }}");
         width: 200px;
         height: 200px;
         animation: infinite;

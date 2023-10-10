@@ -7,6 +7,8 @@ use App\Models\Project;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use PhpParser\Node\Scalar\String_;
 
 class OperationalController extends Controller
@@ -17,40 +19,85 @@ class OperationalController extends Controller
         return view('operational.index', compact('salesOrder'));
     }
 
-    public function createForm()
+    public function showById($id)
     {
-        return view('operational.create');
+        $operational = Operational::find($id);
+
+        if (!$operational) {
+            return redirect()->route('projects.index')->with('error', 'Terjadi kesalahan');
+        }
+
+        $projectId = $operational->project_id;
+
+        $project = Project::find($projectId);
+
+        if (!$project) {
+            return redirect()->route('projects.index')->with('error', 'Terjadi kesalahan');
+        }
+        $salesOrder = Project::select('id', 'so')->get();
+        $spkNumber = $operational->spk_number;
+        $spkNumber_id = $id;
+        $soNumber = $project->so;
+
+        return view('operational.index', compact('spkNumber', 'spkNumber_id', 'soNumber', 'salesOrder'));
+    }
+
+    public function create($id)
+    {
+        // Mengambil data project berdasarkan ID
+        $project = Project::find($id);
+
+        // Memeriksa apakah project ditemukan
+        if (!$project) {
+            return redirect()->route('projects.index')->with('error', 'Project tidak ditemukan.');
+        }
+
+        // Mengambil label dan ID project
+        $label = $project->label;
+        $projectId = $project->id;
+        $title = "Add Operational";
+        return view('projects.createOperational', compact('title', 'label', 'projectId'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'date' => 'required',
-            'spk_code' => 'required|string|max:10',
-            'spk_number' => 'max:10',
+        $validatedData = $request->validate([
+            'project_id' => 'required|exists:projects,id',
+            'date' => 'required|date',
             'type' => 'required',
-            'team' => 'required|array',
-            'description' => 'string|max:255',
-            'transportation_mode' => 'required|string',
-            'vehicle_number' => 'required|max:12|string',
-            'created_by' => 'required|string',
+            'transportation_mode' => 'required',
+            'spk_code' => 'required',
+            'spk_number' => 'required',
+            'description' => 'required',
+            'created_by' => 'required',
         ]);
 
+        // Setel Vehicle Number menjadi '-' jika Transportation Mode tidak sama dengan 'mobil'
+        $validatedData['vehicle_number'] = ($request->input('transportation_mode') === 'mobil')
+            ? $request->input('vehicle_number')
+            : '-';
 
-        $operational = Operational::create([
-            'project_id' => $request->project_id,
-            'date' => $request->date,
-            'spk_code' => $request->spk_code,
-            'spk_number' => $request->spk_number,
-            'type' => $request->type,
-            'description' => $request->description,
-            'transportation_mode' => $request->transportation_mode,
-            'vehicle_number' => $request->vehicle_number,
-            'created_by' => $request->created_by,
-        ]);
-        $operational->team()->sync($request->team);
-        return redirect()->route('operational.index')->with('success', 'Operational created successfully.');
+        // Validasi Vehicle Number hanya jika Transportation Mode adalah 'mobil'
+        if ($request->input('transportation_mode') === 'mobil') {
+            $request->validate([
+                'vehicle_number' => 'required|regex:/^[A-Za-z0-9]+$/',
+            ], [
+                'vehicle_number.required' => 'Vehicle Number is required when Transportation Mode is "mobil".',
+                'vehicle_number.regex' => 'If using a "mobil" as transportation, you must provide a vehicle number.',
+            ]);
+        }
+
+        // Gabungkan spk_code dan spk_number
+        $combinedSPK = $request->input('spk_code') . '-' . $request->input('spk_number');
+        $validatedData['spk_number'] = $combinedSPK;
+        // Simpan data ke dalam database
+        Operational::create($validatedData); // Ganti 'Operational' dengan model yang sesuai
+
+        // Redirect pengguna ke halaman project.show dengan project_id sebagai parameter jika penyimpanan berhasil
+        return redirect()->route('projects.show', ['id' => $validatedData['project_id']])
+            ->with('success', 'Data operational berhasil ditambahkan');
     }
+
 
     public function updateForm(Operational $operational)
     {

@@ -18,8 +18,6 @@ return new class extends Migration
             $table->string('so');
             $table->string('label');
             $table->string('location');
-            $table->string('project_manager');
-            $table->string('sales_executive');
             $table->date('start_date');
             $table->date('end_date');
             $table->decimal('preliminary_cost', 12, 2);

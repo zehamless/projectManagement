@@ -26,7 +26,7 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                <form action="{{ route('projects.store') }}" method="post" class="parsley-examples"
+                                <form action="" method="post" class="parsley-examples"
                                     novalidate="">
                                     @csrf
 
@@ -50,30 +50,30 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="userName" class="form-label">Purchase Oder Number<span
+                                                <label for="purchase-order-number" class="form-label">Purchase Oder Number<span
                                                         class="text-danger">*</span></label>
                                                 <input type="text" onfocus="highlightInput(this)"
                                                     oninput="moveToNext(this, 'po-2')" onblur="resetInput(this)"
                                                     name="po-1" parsley-trigger="change" required="" placeholder="256"
-                                                    class="form-control input-code" id="userName">
+                                                    class="form-control input-code">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="userName" class="form-label"><span
+                                                <label for="purchase-order-number" class="form-label"><span
                                                         class="text-danger">*</span></label>
                                                 <input type="text" onfocus="highlightInput(this)"
                                                     onblur="resetInput(this)" name="po-2"
                                                     oninput="moveToNext(this, '', 'po-1')" parsley-trigger="change"
                                                     required="" placeholder="Code Purchase"
-                                                    class="form-control input-code" id="userName">
+                                                    class="form-control input-code">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-md-3">
                                             <div>
-                                                <label for="userName" class="form-label">Memo Number</label>
+                                                <label for="memo-number" class="form-label">Memo Number</label>
                                                 <input type="text" maxlength="3" onfocus="highlightInput(this)"
                                                     onblur="resetInput(this)" name="memo-1" id="memo-1"
                                                     parsley-trigger="change" placeholder="S1"
@@ -83,7 +83,7 @@
                                         </div>
                                         <div class="col-md-2">
                                             <div>
-                                                <label for="userName" class="form-label">&nbsp;</label>
+                                                <label for="memo-number" class="form-label">&nbsp;</label>
                                                 <input type="text" maxlength="3" onfocus="highlightInput(this)"
                                                     onblur="resetInput(this)" name="memo-2" id="memo-2"
                                                     parsley-trigger="change" placeholder="23"
@@ -93,7 +93,7 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div>
-                                                <label for="userName" class="form-label">&nbsp;</label>
+                                                <label for="memo-number" class="form-label">&nbsp;</label>
                                                 <input type="text" maxlength="3" onfocus="highlightInput(this)"
                                                     onblur="resetInput(this)" name="memo-3" id="memo-3"
                                                     parsley-trigger="change" placeholder="Sales Order Code"
@@ -103,7 +103,7 @@
                                         </div>
                                         <div class="col-md-2">
                                             <div>
-                                                <label for="userName" class="form-label">&nbsp;</label>
+                                                <label for="memo-number" class="form-label">&nbsp;</label>
                                                 <input type="text" maxlength="3" onfocus="highlightInput(this)"
                                                     onblur="resetInput(this)" name="memo-4" id="memo-4"
                                                     parsley-trigger="change" placeholder="Sales Order Code"
@@ -113,7 +113,7 @@
                                         </div>
                                         <div class="col-md-2">
                                             <div>
-                                                <label for="userName" class="form-label">&nbsp;</label>
+                                                <label for="memo-number" class="form-label">&nbsp;</label>
                                                 <input type="text" maxlength="3" onfocus="highlightInput(this)"
                                                     oninput="moveToNext(this, '', 'memo-4')" onblur="resetInput(this)"
                                                     name="memo-5" id="memo-5" parsley-trigger="change"
@@ -127,30 +127,30 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="mb-3">
-                                                <label for="userName" class="form-label">Sales Oder Number</label>
+                                                <label for="sales-order-number" class="form-label">Sales Oder Number</label>
                                                 <input type="text" maxlength="2" onfocus="highlightInput(this)"
                                                     onblur="resetInput(this)" name="so-1" id="so-1"
                                                     oninput="moveToNext(this, 'so-2', 'so-1')" parsley-trigger="change"
-                                                    placeholder="S1" class="form-control input-code" id="userName">
+                                                    placeholder="S1" class="form-control input-code" >
                                                 <span class="help-block"><small>(Optional)</small></span>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="mb-3">
-                                                <label for="userName" class="form-label">&nbsp;</label>
+                                                <label for="sales-order-number" class="form-label">&nbsp;</label>
                                                 <input type="text" maxlength="2" onfocus="highlightInput(this)"
                                                     onblur="resetInput(this)" name="so-2" id="so-2"
                                                     oninput="moveToNext(this, 'so-3', 'so-2')" parsley-trigger="change"
-                                                    placeholder="23" class="form-control input-code" id="userName">
+                                                    placeholder="23" class="form-control input-code">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="mb-3">
-                                                <label for="userName" class="form-label">&nbsp;</label>
+                                                <label for="sales-order-number" class="form-label">&nbsp;</label>
                                                 <input type="text" onfocus="highlightInput(this)"
                                                     onblur="resetInput(this)" name="so-3" id="so-3"
                                                     parsley-trigger="change" placeholder="Sales Order Code"
-                                                    class="form-control input-code" id="userName">
+                                                    class="form-control input-code">
                                             </div>
                                         </div>
                                     </div>
@@ -158,27 +158,27 @@
                                         <label for="emailAddress" class="form-label">Project Name<span
                                                 class="text-danger">*</span></label>
                                         <input type="text" name="label" parsley-trigger="change" required=""
-                                            placeholder="Masukkan Project Name" class="form-control" id="emailAddress">
+                                            placeholder="Masukkan Project Name" class="form-control" value="">
                                         @error('label')
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
                                     </div>
                                     <div class="mb-3">
-                                        <label for="userName" class="form-label">Customers<span
+                                        <label for="customers" class="form-label">Customers<span
                                                 class="text-danger">*</span></label>
                                         <select id="customers" class="form-control" name="customers"
                                             style="color: black;">
                                             <option>--Pilih Customer--</option>
                                             <option value="createNewCustomer">Buat baru</option>
-                                            @foreach ($customers as $customer)
+                                            {{-- @foreach ($customers as $customer)
                                                 <option value="{{ $customer->id }}">{{ $customer['companyName'] }}</option>
-                                            @endforeach
+                                            @endforeach --}}
 
 
                                         </select>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="userName" class="form-label">Customers Contact Name<span
+                                        <label for="customers-contact-name" class="form-label">Customers Contact Name<span
                                                 class="text-danger">*</span></label>
                                         <select id="customers-name" class="form-control" name="customers-name"
                                             style="color: black;">
@@ -214,45 +214,40 @@
                                         </select>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="userName" class="form-label">Location<span
+                                        <label for="location" class="form-label">Location<span
                                                 class="text-danger">*</span></label>
                                         <input type="text" name="location" parsley-trigger="change" required=""
-                                            placeholder="Masukkan lokasi" class="form-control" id="userName">
+                                            placeholder="Masukkan lokasi" class="form-control">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="userName" class="form-label">Start Date<span
+                                        <label for="start-date" class="form-label">Start Date<span
                                                 class="text-danger">*</span></label>
                                         <input type="date" name="start_date" parsley-trigger="change" required=""
-                                            placeholder="Masukkan tanggal" class="form-control datepicker"
-                                            id="userName">
+                                            placeholder="Masukkan tanggal" class="form-control datepicker">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="userName" class="form-label">End Date<span
+                                        <label for="end-date" class="form-label">End Date<span
                                                 class="text-danger">*</span></label>
                                         <input type="date" name="end_date" parsley-trigger="change" required=""
-                                            placeholder="Masukkan tanggal" class="form-control datepicker"
-                                            id="userName">
+                                            placeholder="Masukkan tanggal" class="form-control datepicker">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="userName" class="form-label">Purchase Order Amount<span
+                                        <label for="purchase-order-amount" class="form-label">Purchase Order Amount<span
                                                 class="text-danger">*</span></label>
                                         <input type="text" name="po_amount" parsley-trigger="change" required=""
-                                            placeholder="Masukkan Purchase Order Amount" class="form-control"
-                                            id="userName">
+                                            placeholder="Masukkan Purchase Order Amount" class="form-control">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="userName" class="form-label">Preliminary Cost<span
+                                        <label for="preliminary-cost" class="form-label">Preliminary Cost<span
                                                 class="text-danger">*</span></label>
                                         <input type="text" name="preliminary_cost" parsley-trigger="change"
-                                            required="" placeholder="Masukkan Preliminary Cost" class="form-control"
-                                            id="userName">
+                                            required="" placeholder="Masukkan Preliminary Cost" class="form-control">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="userName" class="form-label">Service Budget<span
+                                        <label for="service-budget" class="form-label">Service Budget<span
                                                 class="text-danger">*</span></label>
                                         <input type="text" name="expense_budget" parsley-trigger="change"
-                                            required="" placeholder="Masukkan Service Budget" class="form-control"
-                                            id="userName">
+                                            required="" placeholder="Masukkan Service Budget" class="form-control">
                                     </div>
                                     <div class="text-end">
                                         <a href="{{ url('projects') }}">

@@ -46,6 +46,7 @@
 
     <div class="content-page">
         <div class="content">
+            {{--            {{dd($spkNumber_id)}}--}}
 
             <!-- Start Content-->
             <div class="container-fluid">
@@ -61,7 +62,13 @@
                                                 onchange="getOperationals(this.value)">
                                             <option selected value="">Pilih Sales Order Number</option>
                                             @foreach ($salesOrder as $item)
-                                                <option value="{{ $item->id }}">{{ $item->so }}</option>
+                                                <option value="{{ $item->id }}"
+                                                        @isset ($soNumber)
+                                                            @if($soNumber == $item->so)
+                                                            selected
+                                                            @endif
+                                                    @endisset
+                                                >{{ $item->so }}</option>
                                             @endforeach
                                         </select>
 
@@ -83,7 +90,12 @@
                                             <h4 class="header-title mb-2">Operational</h4>
                                             <select id="select-operational" class="form-select mb-2"
                                                     onchange="detailOperational(this.value, false)">
-                                                <option selected value="">Silahkan Pilih SO</option>
+                                                @isset($spkNumber)
+                                                    <option value="{{ $spkNumber_id }}"
+                                                            selected>{{ $spkNumber }}</option>
+                                                @else
+                                                    <option selected value="">Silahkan Pilih SO</option>
+                                                @endisset
 
                                             </select>
                                         </div> <!-- end col -->
@@ -143,8 +155,7 @@
                                                     <ul class="nav nav-tabs card-header-tabs" role="tablist">
                                                         <li class="nav-item">
                                                             <button type="button" class="nav-link active show"
-                                                                    href="#work"
-                                                                    role="tab" data-toggle="tab">Work Plan
+                                                                    href="#work" role="tab" data-toggle="tab">Work Plan
                                                             </button>
                                                         </li>
                                                         <li class="nav-item">
@@ -171,7 +182,8 @@
 
                                                 <div class="card-body tab-content">
                                                     {{-- isi tab work plan --}}
-                                                    <div role="tabpanel" class="tab-pane fade active show" id="work">
+                                                    <div role="tabpanel" class="tab-pane fade active show"
+                                                         id="work">
                                                         <div class="row text-start">
                                                             <div class="col-lg-12">
                                                                 <div class="card">
@@ -201,7 +213,8 @@
                                                                                     <th>Description</th>
                                                                                     <th>Due Date</th>
                                                                                     <th>Status</th>
-                                                                                    <th class="text-center" width="140">
+                                                                                    <th class="text-center"
+                                                                                        width="140">
                                                                                         Actions
                                                                                     </th>
                                                                                 </tr>
@@ -250,7 +263,8 @@
                                                                                     <th>Expense Date</th>
                                                                                     <th>Expense Item</th>
                                                                                     <th>Amount</th>
-                                                                                    <th class="text-center" width="140">
+                                                                                    <th class="text-center"
+                                                                                        width="140">
                                                                                         Actions
                                                                                     </th>
                                                                                 </tr>
@@ -294,7 +308,8 @@
                                                                                     <th>Operational</th>
                                                                                     <th>Memo Number</th>
                                                                                     <th>Delivery Order Number</th>
-                                                                                    <th class="text-center" width="140">
+                                                                                    <th class="text-center"
+                                                                                        width="140">
                                                                                         Actions
                                                                                     </th>
                                                                                 </tr>
@@ -316,8 +331,8 @@
                                                                                                     type="button"
                                                                                                     class="tabledit-edit-button btn btn-primary waves-effect waves-light"
                                                                                                     style="background-color: #3E8BFF;">
-                                                                                                <span
-                                                                                                    class="mdi mdi-pencil"></span>
+                                                                                                    <span
+                                                                                                        class="mdi mdi-pencil"></span>
                                                                                             </button>
                                                                                         </div>
                                                                                         <div
@@ -327,8 +342,8 @@
                                                                                                     title="Hapus Material"
                                                                                                     type="button"
                                                                                                     class="tabledit-edit-button btn btn-danger">
-                                                                                                <span
-                                                                                                    class="mdi mdi-trash-can-outline"></span>
+                                                                                                    <span
+                                                                                                        class="mdi mdi-trash-can-outline"></span>
                                                                                             </button>
                                                                                         </div>
                                                                                     </td>
@@ -344,8 +359,8 @@
                                                                                                 type="button"
                                                                                                 class="tabledit-edit-button btn btn-primary waves-effect waves-light"
                                                                                                 style="background-color: #3E8BFF;">
-                                                                                            <span
-                                                                                                class="mdi mdi-pencil"></span>
+                                                                                                <span
+                                                                                                    class="mdi mdi-pencil"></span>
                                                                                         </button>
                                                                                     </div>
                                                                                     <div class="btn-group btn-group-sm"
@@ -354,8 +369,8 @@
                                                                                                 title="Hapus Material"
                                                                                                 type="button"
                                                                                                 class="tabledit-edit-button btn btn-danger">
-                                                                                            <span
-                                                                                                class="mdi mdi-trash-can-outline"></span>
+                                                                                                <span
+                                                                                                    class="mdi mdi-trash-can-outline"></span>
                                                                                         </button>
                                                                                     </div>
                                                                                 </td>
@@ -371,8 +386,8 @@
                                                                                                 type="button"
                                                                                                 class="tabledit-edit-button btn btn-primary waves-effect waves-light"
                                                                                                 style="background-color: #3E8BFF;">
-                                                                                            <span
-                                                                                                class="mdi mdi-pencil"></span>
+                                                                                                <span
+                                                                                                    class="mdi mdi-pencil"></span>
                                                                                         </button>
                                                                                     </div>
                                                                                     <div class="btn-group btn-group-sm"
@@ -381,8 +396,8 @@
                                                                                                 title="Hapus Material"
                                                                                                 type="button"
                                                                                                 class="tabledit-edit-button btn btn-danger">
-                                                                                            <span
-                                                                                                class="mdi mdi-trash-can-outline"></span>
+                                                                                                <span
+                                                                                                    class="mdi mdi-trash-can-outline"></span>
                                                                                         </button>
                                                                                     </div>
                                                                                 </td>
@@ -426,7 +441,8 @@
                                                                                     <th>#</th>
                                                                                     <th>Name</th>
                                                                                     <th>Division</th>
-                                                                                    <th class="text-center" width="140">
+                                                                                    <th class="text-center"
+                                                                                        width="140">
                                                                                         Actions
                                                                                     </th>
                                                                                 </tr>
@@ -485,27 +501,38 @@
                     }
                 }
             });
+            if ($('#select-operational').val() != "") {
+                detailOperational($('#select-operational').val());
+                getOperationals($('#sales-order').val(), $('#select-operational').val());
+                console.log($('#select-operational').val());
+            }
 
         })
     </script>
     <script type="text/javascript">
-        function getOperationals(salesOrder) {
-            if (salesOrder !== "" && salesOrder != null) {
+        function getOperationals(salesOrder, operational) {
+            if (salesOrder && salesOrder !== "") {
                 $.ajax({
-                    url: "{{ route('operational.get-operational', '') }}" + "/" + salesOrder,
+                    url: `{{ route('operational.get-operational', '') }}/${salesOrder}`,
                     type: "GET",
                     success: function (data) {
                         console.log(data);
-                        $(`#select-operational`).empty();
-                        $(`#select-operational`).append(`<option selected value="">Pilih Operational</option>`);
-                        $.each(data, function (key, value) {
-                            var option = new Option(value.spk_number, value.id, false, false);
-                            $("#select-operational").append(option)
+                        const selectOperational = $("#select-operational");
+                        selectOperational.empty();
+                        selectOperational.append($('<option>', {
+                            value: "",
+                            text: "Pilih Operational",
+                            selected: true
+                        }));
+                        data.forEach(function (value) {
+                            const option = new Option(value.spk_number, value.id, operational == value.id, operational == value.id);
+                            selectOperational.append(option);
                         });
                     }
                 });
             }
         }
+
     </script>
     <script type="text/javascript">
         function detailOperational(operational) {
@@ -672,13 +699,12 @@
                 scrollX: true,
                 "bDestroy": true,
                 ajax: "{{ route('operational.expense.index', '') }}" + "/" + expense,
-                columns: [
-                    {
-                        data: 'DT_RowIndex',
-                        name: 'DT_RowIndex',
-                        orderable: false,
-                        searchable: false,
-                    },
+                columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex',
+                    orderable: false,
+                    searchable: false,
+                },
                     {
                         data: 'date',
                         name: 'date'
@@ -810,10 +836,8 @@
                 }
             })
         }
-
     </script>
     <script type="text/javascript">
-
         function deleteExpense(expense) {
             swal.fire({
                 title: 'Are you sure?',
@@ -912,7 +936,7 @@
             let data; // Define data variable in a broader scope
 
             $.ajax({
-                url: "{{ route('users.index', '') }}" + "/" + operational,
+                url: "{{ route('users.getTechnician', '') }}" + "/" + operational,
                 type: "GET",
                 success: function (responseData) {
                     console.log(responseData);
@@ -956,12 +980,12 @@
                 },
             }).then(function (response) {
                 console.log(response);
+                $('#add-technician-modal').modal('hide');
                 Swal.fire(
                     'Added!',
                     'Technician has been added.',
                     'success'
                 );
-                $('#add-technician-modal').modal('hide');
                 detailOperational(operational)
             }).catch(function (error) {
                 console.log(error);
@@ -977,13 +1001,12 @@
                 responsive: true,
                 "bDestroy": true,
                 ajax: "{{ route('operational.agenda.index', '') }}" + "/" + operational,
-                columns: [
-                    {
-                        data: 'DT_RowIndex',
-                        name: 'DT_RowIndex',
-                        orderable: false,
-                        searchable: false,
-                    },
+                columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex',
+                    orderable: false,
+                    searchable: false,
+                },
                     {
                         data: 'description',
                         name: 'description'
@@ -1035,7 +1058,6 @@
                 ]
             })
         }
-
     </script>
     <script type="text/javascript">
         function deleteAgenda(agenda) {
@@ -1075,7 +1097,6 @@
 
 
     <script type="text/javascript">
-
         function showAgendaForm() {
             const modal = $('#add-work-modal');
 
@@ -1124,7 +1145,6 @@
                     swal.fire("Error!", "Please try again", "error");
                 });
         }
-
     </script>
 
     <script type="text/javascript">
@@ -1167,7 +1187,7 @@
                         method: "PATCH",
                         url: "{{ route('operational.agenda.update', '') }}" + "/" + agenda,
                         data: {
-                            _token: "{{csrf_token()}}",
+                            _token: "{{ csrf_token() }}",
                             due_date: modal.find('#due-date').val(),
                             description: modal.find('#description').val(),
                             status: modal.find('#progress').val(),
@@ -1189,5 +1209,4 @@
             })
         }
     </script>
-
 @endsection

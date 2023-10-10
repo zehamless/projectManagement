@@ -32,21 +32,23 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'projects'], function () {
     Route::get('/', [ProjectController::class, 'index'])->name('projects.index');
     Route::get('/createProjects', [ProjectController::class, 'create'])->name('projects.createProjects');
+    Route::get('/editProjects/{id}', [ProjectController::class, 'edit'])->name('projects.editProjects');
     Route::post('/', [ProjectController::class, 'store'])->name('projects.store');
     Route::get('/detail/{id}', [ProjectController::class, 'show'])->name('projects.show');
-    Route::get('/{id}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
+    // Route::get('/{id}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
     Route::put('/{id}', [ProjectController::class, 'update'])->name('projects.update');
     Route::delete('/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
     Route::get('/createProductionCost/{id}', [ProductionCostController::class, 'create'])->name('production-cost.create');
     Route::post('/production-cost', [ProductionCostController::class, 'store'])->name('production-cost.store');
     Route::delete('/production-cost/{id}', [ProductionCostController::class, 'destroy'])->name('production-cost.destroy');
+    Route::get('/get-projects', [ProjectController::class, 'getProjects'])->name('getProjects');
 });
 // Milestone
 Route::get('/get-milestone-data/{id}', [MilestoneController::class, 'getMilestoneData'])->name("milestone.get");
 // Pcost json
 Route::get('/get-cost-data/{id}', [ProductionCostController::class, 'getPCostData'])->name("cost.get");
 Route::put('production/update/', [ProductionCostController::class, 'update'])->name('cost.update');
-Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+Route::get('/', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard')->name('dashboard.index');
 
 
 Route::prefix('customer')->group(function () {
@@ -57,18 +59,20 @@ Route::get('/staff', function () {
     return view('staff');
 });
 
-Route::get('/RoleSelect', function () {
-    return view('rolecustomelogin');
+//Route::get('/RoleSelect', function () {
+//    return view('rolecustomelogin');
+//});
+
+//cara penggunaan middleware "hasRole:role1, role2, dst"
+Route::prefix('test')->group(function(){
+   Route::get('/admin', function (){
+       return view('testPage.index');
+   })->middleware(['auth', 'hasRole:Admin'])->name('testPage.index');
+   Route::get('/admin/technician', function (){
+       return view('testPage.index');
+   })->middleware(['auth', 'hasRole:Admin,Technician'])->name('testPage.index');
 });
 
-Route::get('/testPage', function () {
-    return view('testPage.index');
-});
-
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -127,19 +131,24 @@ Route::prefix('admin')->group(function () {
     Route::delete('/roles', [RoleController::class, 'delete'])->name('roles.delete');
     Route::get('/roles/{role}', [RoleController::class, 'showRole'])->name('roles.show');
 
-    Route::get('/users/{parameter?}', [UserController::class, 'index'])->name('users.index');
+    Route::get('/users/', [UserController::class, 'index'])->name('users.index');
     Route::get('/users/create', [UserController::class, 'createForm'])->name('users.createForm');
     Route::post('/users', [UserController::class, 'store'])->name('users.store');
     Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
     Route::get('/users/{user}/edit', [UserController::class, 'updateForm'])->name('users.updateForm');
     Route::patch('/users/{user}', [UserController::class, 'update'])->name('users.update');
     Route::delete('/users/{user}', [UserController::class, 'delete'])->name('users.delete');
+    Route::get('/users/getTechnician/{operational}', [UserController::class, 'getTechnician'])->name('users.getTechnician');
 });
 
 Route::prefix('operational')->group(function () {
     Route::get('/', [OperationalController::class, 'index'])->name('operational.index'); //?
-    Route::get('/create', [OperationalController::class, 'createForm'])->name('operational.createForm'); //!
-    Route::post('/store', [OperationalController::class, 'store'])->name('operational.store'); //!
+    Route::get('/showId/{id}', [OperationalController::class, 'showById'])->name('operational.showById'); //?
+    Route::get('/create/{id}', [OperationalController::class, 'create'])->name('operational.create');
+    Route::get('/create', function () {
+        return view('projects.createOperational');
+    })->name('createOperational');
+    Route::post('/store', [OperationalController::class, 'store'])->name('operational.store');
     Route::get('/show/{operational}', [OperationalController::class, 'show'])->name('operational.show'); //?
     Route::get('/{operational}/edit', [OperationalController::class, 'updateForm'])->name('operational.update-form'); //!
     Route::patch('/{operational}', [OperationalController::class, 'update'])->name('operational.update'); //~
@@ -171,7 +180,7 @@ Route::prefix('operational')->group(function () {
 
 Route::prefix('materials')->group(function () {
     Route::get('/', [MaterialController::class, 'index'])->name('materials.index');
-    Route::get('/create', [MaterialController::class, 'create'])->name('materials.update');
+    Route::get('/create', [MaterialController::class, 'create'])->name('materials.create');
     Route::post('/store', [MaterialController::class, 'store'])->name('materials.store');
     Route::get('/show', [MaterialController::class, 'show'])->name('materials.show');
     Route::get('/edit', [MaterialController::class, 'edit'])->name('materials.edit');
@@ -188,7 +197,9 @@ Route::get('/projects/createOperational', function () {
     return view('projects.createOperational');
 });
 
-
+Route::get('/projects/createRecord', function () {
+    return view('projects.createRecord');
+});
 
 Route::get('calendar', function () {
     return view('calendar');

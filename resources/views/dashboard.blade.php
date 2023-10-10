@@ -24,6 +24,13 @@
                         </div>
                     </div>
 
+                    //ini buat hak akses
+                    @Allowed("Admin")
+                    <p>Allowed</p>
+                    @else
+                    <p>sdasd</p>
+                    @endAllowed
+
                     <div class="col-lg-3">
                         <div class="card">
                             <div class="card-body">
@@ -70,8 +77,10 @@
                                                     <td>{{ $project['label'] }}</td>
                                                     <td>{{ $project['start_date'] }}</td>
                                                     <td>{{ $project['end_date'] }}</td>
-                                                    <td>{{ $project['project_manager'] }}</td>
-                                                    <td>{{ $project['sales_executive'] }}</td>
+                                                    <td>{{ $project->projectManager->first_name }}
+                                                        {{ $project->projectManager->last_name }}</td>
+                                                    <td>{{ $project->salesExecutive->first_name }}
+                                                        {{ $project->salesExecutive->last_name }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

@@ -46,85 +46,73 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xl-8 tables-col">
+                        
 
-                        @if (session('success'))
-                            <div id="success-alert"></div>
-                        @elseif(session('error'))
-                            <div id="error-alert"></div>
-                        @endif
-
-                        {{-- card table milestones --}}
+                        {{-- card term of payment --}}
                         <div class="card">
                             <div class="card-body">
                                 <div class="row table-title">
                                     <div class="col-sm-8">
-                                        <h4 class="mt-0 header-title">Milestone</h4>
+                                        <h4 class="mt-0 header-title">Term Of Payment</h4>
                                     </div>
                                     <div class="col-sm-4">
-                                        <a href="{{ route('milestone.create', ['id' => $projectData->id]) }}"
+                                        <a href="{{ route('top.create', ['id' => $projectData->id]) }}"
                                             class="btn btn-createItems w-md waves-effect waves-light mb-3"><i
-                                                class="mdi mdi-plus" title="Menambahkan milestone"></i>Add Milestone</a>
+                                                class="mdi mdi-plus"></i>Add Payment</a>
                                     </div>
                                 </div>
-
                                 <div class="table-responsive">
                                     <table class="table mb-0">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Entry Date</th>
+                                                <th>Payment Type</th>
+                                                <th>Progress</th>
                                                 <th>Description</th>
-                                                <th>Due Date</th>
                                                 <th class="text-center">Status</th>
                                                 <th class="text-center" width="160">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @if ($milestones->isEmpty())
+                                            @if ($tops->isEmpty())
                                                 <tr>
-                                                    <td colspan="6" align="center">Belum ada milestone</td>
+                                                    <td colspan="6" align="center">Belum ada payment</td>
                                                 </tr>
                                             @else
                                                 @php($index = 1)
-                                                @foreach ($milestones as $milestone)
+                                                @foreach ($tops as $top)
                                                     <tr>
                                                         <th scope="row">{{ $index++ }}</th>
-                                                        <td title="Submit date">{{ $milestone['submitted_date'] }}</td>
-                                                        <td>{{ $milestone['description'] }}</td>
-                                                        <td>{{ $milestone['due_date'] }}</td>
+                                                        <td>{{ $top['type'] }}</td>
+                                                        <td class="persentasiAngka">{{ $top['progress'] }}%</td>
+                                                        <td>{{ $top['description'] }}</td>
                                                         <td class="text-center">
                                                             <span
-                                                                class="badge
-                                                                @if ($milestone['progress'] == 'Done') bg-success
-                                                                @elseif($milestone['progress'] == 'Planned')
-                                                                bg-primary
-                                                                @elseif($milestone['progress'] == 'On Progress')
-                                                                bg-warning @endif
-                                                            ">{{ $milestone['progress'] }}</span>
+                                                                class="badge {{ $top['status'] === 'Done' ? 'bg-success' : 'bg-warning' }}">
+                                                                {{ $top['status'] }}
+                                                            </span>
                                                         </td>
                                                         <td class="text-center">
                                                             <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <a href="{{ asset('images/milestone_files/' . $milestone->file) }}"
-                                                                    title="Download Gambar Milestone" type="button"
-                                                                    class="tabledit-edit-button btn btn-success waves-effect waves-light"
-                                                                    download>
+                                                                <button title="unduh file" type="button"
+                                                                    class="tabledit-edit-button btn btn-success waves-effect waves-light">
                                                                     <span class="mdi mdi-file-download-outline"></span>
-                                                                </a>
+                                                                </button>
                                                             </div>
                                                             <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <button title="Untuk mengedit milestone" type="button"
-                                                                    data-bs-toggle="modal"
-                                                                    data-bs-target="#edit-milestone-modal"
-                                                                    value="{{ $milestone['id'] }}"
-                                                                    class="tabledit-edit-button milestoneEdit btn btn-primary waves-effect waves-light"
+                                                                <button title="edit data" type="button"
+                                                                    data-bs-toggle="modal" value="{{ $top['id'] }}"
+                                                                    data-bs-target="#edit-payment-modal"
+                                                                    title="Edit Payment"
+                                                                    class="tabledit-edit-button paymentEdit btn btn-primary waves-effect waves-light"
                                                                     style="background-color: #3E8BFF;">
                                                                     <span class="mdi mdi-pencil"></span>
                                                                 </button>
                                                             </div>
                                                             <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <button id="deleteButton" title="Untuk menghapus milestone"
-                                                                    type="button" value="{{ $milestone['id'] }}"
-                                                                    class="tabledit-edit-button hapusMilestone btn btn-danger">
+                                                                <button title="hapus data" type="button"
+                                                                    value="{{ $top['id'] }}"
+                                                                    class="tabledit-edit-button hapusPayment btn btn-danger">
                                                                     <span class="mdi mdi-trash-can-outline"></span>
                                                                 </button>
                                                             </div>
@@ -202,6 +190,175 @@
                             </div>
                         </div>
 
+                        {{-- card table milestones --}}
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row table-title">
+                                    <div class="col-sm-8">
+                                        <h4 class="mt-0 header-title">Milestone</h4>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <a href="{{ route('milestone.create', ['id' => $projectData->id]) }}"
+                                            class="btn btn-createItems w-md waves-effect waves-light mb-3"><i
+                                                class="mdi mdi-plus" title="Menambahkan milestone"></i>Add Milestone</a>
+                                    </div>
+                                </div>
+
+                                <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Entry Date</th>
+                                                <th>Description</th>
+                                                <th>Due Date</th>
+                                                <th class="text-center">Status</th>
+                                                <th class="text-center" width="160">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if ($milestones->isEmpty())
+                                                <tr>
+                                                    <td colspan="6" align="center">Belum ada milestone</td>
+                                                </tr>
+                                            @else
+                                                @php($index = 1)
+                                                @foreach ($milestones as $milestone)
+                                                    <tr>
+                                                        <th scope="row">{{ $index++ }}</th>
+                                                        <td class="formatTanggal">{{ $milestone['submitted_date'] }}</td>
+                                                        <td>{{ $milestone['description'] }}</td>
+                                                        <td class="formatTanggal">{{ $milestone['due_date'] }}</td>
+                                                        <td class="text-center">
+                                                            <span
+                                                                class="badge
+                                                                @if ($milestone['progress'] == 'Done') bg-success
+                                                                @elseif($milestone['progress'] == 'Planned')
+                                                                bg-primary
+                                                                @elseif($milestone['progress'] == 'On Progress')
+                                                                bg-warning @endif
+                                                            ">{{ $milestone['progress'] }}</span>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <div class="btn-group btn-group-sm" style="float: none;">
+                                                                <a href="{{ asset('images/milestone_files/' . $milestone->file) }}"
+                                                                    title="Download Gambar Milestone" type="button"
+                                                                    class="tabledit-edit-button btn btn-success waves-effect waves-light"
+                                                                    download>
+                                                                    <span class="mdi mdi-file-download-outline"></span>
+                                                                </a>
+                                                            </div>
+                                                            <div class="btn-group btn-group-sm" style="float: none;">
+                                                                <button title="Untuk mengedit milestone" type="button"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#edit-milestone-modal"
+                                                                    value="{{ $milestone['id'] }}"
+                                                                    class="tabledit-edit-button milestoneEdit btn btn-primary waves-effect waves-light"
+                                                                    style="background-color: #3E8BFF;">
+                                                                    <span class="mdi mdi-pencil"></span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="btn-group btn-group-sm" style="float: none;">
+                                                                <button id="deleteButton" title="Untuk menghapus milestone"
+                                                                    type="button" value="{{ $milestone['id'] }}"
+                                                                    class="tabledit-edit-button hapusMilestone btn btn-danger">
+                                                                    <span class="mdi mdi-trash-can-outline"></span>
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        {{-- card table record document --}}
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row table-title">
+                                    <div class="col-sm-8">
+                                        <h4 class="mt-0 header-title">Record Document</h4>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <a href="{{ url('projects/createRecord') }}"
+                                            class="btn btn-createItems w-md waves-effect waves-light mb-3"><i
+                                                class="mdi mdi-plus" title="Menambahkan milestone"></i>Add Record</a>
+                                    </div>
+                                </div>
+
+                                <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Entry Date</th>
+                                                <th>Description</th>
+                                                <th>Due Date</th>
+                                                <th class="text-center">Status</th>
+                                                <th class="text-center" width="160">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {{-- @if ($milestones->isEmpty())
+                                                <tr>
+                                                    <td colspan="6" align="center">Belum ada milestone</td>
+                                                </tr>
+                                            @else
+                                                @php($index = 1)
+                                                @foreach ($milestones as $milestone) --}}
+                                                    <tr>
+                                                        <th scope="row">1</th>
+                                                        <td class="formatTanggal"></td>
+                                                        <td>dummy desc</td>
+                                                        <td class="formatTanggal"></td>
+                                                        <td class="text-center">
+                                                            <span
+                                                                class="badge bg-success
+                                                                {{-- @if ($milestone['progress'] == 'Done') bg-success
+                                                                @elseif($milestone['progress'] == 'Planned')
+                                                                bg-primary
+                                                                @elseif($milestone['progress'] == 'On Progress')
+                                                                bg-warning @endif --}}
+                                                            ">done</span>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <div class="btn-group btn-group-sm" style="float: none;">
+                                                                <a href=""
+                                                                    title="Download File Record" type="button"
+                                                                    class="tabledit-edit-button btn btn-success waves-effect waves-light"
+                                                                    download>
+                                                                    <span class="mdi mdi-file-download-outline"></span>
+                                                                </a>
+                                                            </div>
+                                                            <div class="btn-group btn-group-sm" style="float: none;">
+                                                                <button title="Edit Record" type="button"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#edit-record-modal"
+                                                                    class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                                                    style="background-color: #3E8BFF;">
+                                                                    <span class="mdi mdi-pencil"></span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="btn-group btn-group-sm" style="float: none;">
+                                                                <button id="deleteButton" title="Hapus Record"
+                                                                    type="button" value=""
+                                                                    class="tabledit-edit-button btn btn-danger">
+                                                                    <span class="mdi mdi-trash-can-outline"></span>
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                {{-- @endforeach
+                                            @endif --}}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
                         {{-- card table operational form --}}
                         <div class="card">
                             <div class="card-body">
@@ -210,7 +367,7 @@
                                         <h4 class="mt-0 header-title">Field Service Log</h4>
                                     </div>
                                     <div class="col-sm-4">
-                                        <a href="{{ route('top.create', ['id' => $projectData->id]) }}"
+                                        <a href="{{ route('operational.create', ['id' => $projectData->id]) }}"
                                             class="btn btn-createItems w-md waves-effect waves-light mb-3"><i
                                                 class="mdi mdi-plus"></i>Add Operational</a>
                                     </div>
@@ -240,11 +397,18 @@
                                                         <th scope="row">{{ $index++ }}</th>
                                                         <td>{{ $operational['spk_code'] }}
                                                         </td>
-                                                        <td>{{ $operational['date'] }}</td>
+                                                        <td class="formatTanggal">{{ $operational['date'] }}</td>
                                                         <td>{{ $operational['type'] }}</td>
                                                         <td>{{ $operational['spk_number'] }}</td>
                                                         <td class="text-center">Rp 1.000.000</td>
-                                                        <td class="text-center">
+                                                        <td class="text-center truncate-text">
+                                                            <a href="{{ route('operational.showById', ['id' => $operational->id]) }}"
+                                                                class="tabledit-edit-button btn btn-info waves-effect waves-light"
+                                                                title="Detail operational"
+                                                                style="padding: 0.25rem 0.8rem;">
+                                                                <span class="mdi mdi-eye"></span>
+                                                                </button>
+                                                            </a>
                                                             <div class="btn-group btn-group-sm" style="float: none;">
                                                                 <button type="button" data-bs-toggle="modal"
                                                                     data-bs-target="#edit-service-modal"
@@ -257,84 +421,6 @@
                                                             <div class="btn-group btn-group-sm" style="float: none;">
                                                                 <button title="hapus data" type="button"
                                                                     class="tabledit-edit-button btn btn-danger">
-                                                                    <span class="mdi mdi-trash-can-outline"></span>
-                                                                </button>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            @endif
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                        {{-- card term of payment --}}
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row table-title">
-                                    <div class="col-sm-8">
-                                        <h4 class="mt-0 header-title">Term Of Payment</h4>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <a href="{{ route('top.create', ['id' => $projectData->id]) }}"
-                                            class="btn btn-createItems w-md waves-effect waves-light mb-3"><i
-                                                class="mdi mdi-plus"></i>Add Payment</a>
-                                    </div>
-                                </div>
-                                <div class="table-responsive">
-                                    <table class="table mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Payment Type</th>
-                                                <th>Progress</th>
-                                                <th>Description</th>
-                                                <th class="text-center">Status</th>
-                                                <th class="text-center" width="160">Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @if ($tops->isEmpty())
-                                                <tr>
-                                                    <td colspan="6" align="center">Belum ada payment</td>
-                                                </tr>
-                                            @else
-                                                @php($index = 1)
-                                                @foreach ($tops as $top)
-                                                    <tr>
-                                                        <th scope="row"></th>
-                                                        <td>{{ $top['type'] }}</td>
-                                                        <td>{{ $top['progress'] }}</td>
-                                                        <td>{{ $top['description'] }}</td>
-                                                        <td class="text-center">
-                                                            <span
-                                                                class="badge {{ $top['status'] === 'Done' ? 'bg-success' : 'bg-warning' }}">
-                                                                {{ $top['status'] }}
-                                                            </span>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <button title="unduh file" type="button"
-                                                                    class="tabledit-edit-button btn btn-success waves-effect waves-light">
-                                                                    <span class="mdi mdi-file-download-outline"></span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <button title="edit data" type="button"
-                                                                    data-bs-toggle="modal" value="{{ $top['id'] }}"
-                                                                    data-bs-target="#edit-payment-modal"
-                                                                    title="Edit Payment"
-                                                                    class="tabledit-edit-button paymentEdit btn btn-primary waves-effect waves-light"
-                                                                    style="background-color: #3E8BFF;">
-                                                                    <span class="mdi mdi-pencil"></span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <button title="hapus data" type="button"
-                                                                    value="{{ $top['id'] }}"
-                                                                    class="tabledit-edit-button hapusPayment btn btn-danger">
                                                                     <span class="mdi mdi-trash-can-outline"></span>
                                                                 </button>
                                                             </div>
@@ -364,7 +450,7 @@
                                     </div>
                                     <div class="col-4 text-end">
                                         <div class="btn-group btn-group-sm" style="float: none;">
-                                            <a href="{{ route('projects.createProjects') }}">
+                                            <a href="{{ route('projects.editProjects', ['id' => $project->id]) }}">
                                                 <button title="edit data" type="button"
                                                     class="tabledit-edit-button btn btn-primary waves-effect waves-light"
                                                     style="background-color: #3E8BFF; padding: 0.28rem 0.8rem;">
@@ -430,25 +516,29 @@
                                             <tr>
                                                 <th scope="row">
                                                     <p class="title-text">Project Manager</p>
-                                                    <p class="details-text">{{ $projectData['project_manager'] }}</p>
+                                                    <p class="details-text">{{ $project->projectManager->first_name }}
+                                                        {{ $project->projectManager->last_name }}</p>
                                                 </th>
                                             </tr>
                                             <tr>
                                                 <th scope="row">
                                                     <p class="title-text">Sales Executive</p>
-                                                    <p class="details-text">{{ $projectData['sales_executive'] }}</p>
+                                                    <p class="details-text">{{ $project->salesExecutive->first_name }}
+                                                        {{ $project->salesExecutive->last_name }}</p>
                                                 </th>
                                             </tr>
                                             <tr>
                                                 <th scope="row">
                                                     <p class="title-text">Start Date</p>
-                                                    <p class="details-text">{{ $projectData['start_date'] }}</p>
+                                                    <p class="details-text formatTanggal">{{ $projectData['start_date'] }}
+                                                    </p>
                                                 </th>
                                             </tr>
                                             <tr>
                                                 <th scope="row">
                                                     <p class="title-text">End Date</p>
-                                                    <p class="details-text">{{ $projectData['end_date'] }}</p>
+                                                    <p class="details-text formatTanggal">{{ $projectData['end_date'] }}
+                                                    </p>
                                                 </th>
                                             </tr>
                                             <tr>
@@ -563,7 +653,7 @@
                         ctx = chart.ctx;
 
                     ctx.restore();
-                    var fontSize = (height / 120).toFixed(2);
+                    var fontSize = (height / 100).toFixed(2);
                     ctx.font = fontSize + "em sans-serif";
                     ctx.textBaseline = "middle";
 
@@ -625,7 +715,7 @@
                         ctx = chart.ctx;
 
                     ctx.restore();
-                    var fontSize = (height / 120).toFixed(2);
+                    var fontSize = (height / 100).toFixed(2);
                     ctx.font = fontSize + "em sans-serif";
                     ctx.textBaseline = "middle";
 
