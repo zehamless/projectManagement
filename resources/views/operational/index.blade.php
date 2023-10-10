@@ -46,7 +46,6 @@
 
     <div class="content-page">
         <div class="content">
-{{--            {{dd($spkNumber_id)}}--}}
 
             <!-- Start Content-->
             <div class="container-fluid">
@@ -495,7 +494,7 @@
                     }
                 }
             });
-            if($('#select-operational').val() != "") {
+            if ($('#select-operational').val() != "") {
                 detailOperational($('#select-operational').val());
                 console.log($('#select-operational').val());
             }
