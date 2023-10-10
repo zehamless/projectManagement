@@ -81,8 +81,8 @@
                                                         {{-- form input customer name --}}
                                                         <div class="mb-3">
 
-                                                            <label for="companyName" class="form-label">Company Name<span
-                                                                    class="text-danger"></span></label>
+                                                            <label for="companyName" class="form-label">Company
+                                                                Name<span class="text-danger"></span></label>
                                                             <input type="hidden" id="customer_id" name="id">
                                                             <input type="text" class="form-control" name="companyName"
                                                                 id="customer_companyName" parsley-trigger="change"
@@ -152,11 +152,10 @@
                             console.log(data);
                             return `
                             <div class="btn-group btn-group-sm" style="float: none;">
-                                <a href="{{ route('customer.show', '') }}/${full.id}">
-                                    <button type="button" class="tabledit-edit-button btn btn-info waves-effect waves-light" title="Detail Customer" style="padding: 0.25rem 0.8rem;">
+                                    <button type="button" class="tabledit-edit-button btn btn-info waves-effect waves-light"
+                                    value="${full.id}" data-bs-target="#detail-customer-modal" title="Detail Customer" style="padding: 0.25rem 0.8rem;">
                                         <span class="mdi mdi-eye"></span>
                                     </button>
-                                </a>
                             </div>
                             <div class="btn-group btn-group-sm" style="float: none;">
                                 <button type="button" class="tabledit-edit-button editCustomer btn btn-primary waves-effect waves-light"

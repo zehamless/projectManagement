@@ -52,9 +52,9 @@ class CustomerController extends Controller
     {
         $customer = Customer::find($id);
         $customerContacts = $customer->contacts;
-        //$relatedProjects = $customer->project;
+        $relatedProjects = $customer->projects;
 
-        return view('customer.detailCustomer', compact('customer', 'customerContacts'));
+        return view('customer.show', compact('customer', 'customerContacts', 'relatedProjects'));
     }
 
     public function edit($id)
