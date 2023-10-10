@@ -175,6 +175,9 @@ Route::prefix('operational')->group(function () {
         Route::patch('/{agenda}', [OperationalAgendaController::class, 'update'])->name('operational.agenda.update');
         Route::get('/show/{agenda}', [OperationalAgendaController::class, 'show'])->name('operational.agenda.show');
     });
+    Route::get('/preview', function(){
+        return view('operational.operationalDocument');
+    }); //?
 });
 
 
