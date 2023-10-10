@@ -323,11 +323,10 @@
             $('#customers').on('change', function() {
                 var customer_id = $(this).val();
                 var $customerContact = $('#customers-name');
-
                 if (customer_id === 'createNewCustomer') {
                     // Redirect ke halaman pembuatan customer
                     window.location.href = "{{ route('customer.create') }}";
-                } else if (customer_id) {
+                } else {
                     $customerContact.prop('disabled', false);
                     $.ajax({
                         url: '/customerContact/get-customer-contacts/' + customer_id,
@@ -342,10 +341,8 @@
                                 $('#customers-name').append('<option value="' + value
                                     .id + '">' + value.name + '</option>');
                             });
-                        }
+                        },
                     });
-                } else {
-                    $customerContact.prop('disabled', true);
                 }
             });
         });
