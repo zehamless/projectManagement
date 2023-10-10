@@ -10,6 +10,7 @@ class CustomerContact extends Model
 {
     use HasUuids;
     protected $fillable = [
+        'id',
         'customer_id',
         'name',
         'phone'

@@ -10,7 +10,7 @@ class CustomerContactController extends Controller
     public function index()
     {
         $customerContacts = CustomerContact::all();
-        return view('customer_contacts.index', compact('customerContacts'));
+        return view('customerContact.index', compact('customerContact'));
     }
 
     public function create()
@@ -28,18 +28,18 @@ class CustomerContactController extends Controller
 
         CustomerContact::create($request->all());
 
-        return redirect()->route('customer.index')
+        return redirect()->route('customerContact.index')
             ->with('success', 'Customer contact created successfully.');
     }
 
     public function show(CustomerContact $customerContact)
     {
-        return view('customer_contacts.show', compact('customerContact'));
+        return view('customerContact.show', compact('customerContact'));
     }
 
     public function edit(CustomerContact $customerContact)
     {
-        return view('customer_contacts.edit', compact('customerContact'));
+        return view('customerContact.edit', compact('customerContact'));
     }
 
     public function update(Request $request, CustomerContact $customerContact)
@@ -52,21 +52,15 @@ class CustomerContactController extends Controller
 
         $customerContact->update($request->all());
 
-        return redirect()->route('customer_contacts.index')
+        return redirect()->route('customerContact.index')
             ->with('success', 'Customer contact updated successfully.');
     }
 
-    public function delete(CustomerContact $customerContact)
+    public function destroy(CustomerContact $customerContact)
     {
-        $customerContact->delete();
+        $customerContact->destroy();
 
-        return redirect()->route('customer_contacts.index')
+        return redirect()->route('customerContact.index')
             ->with('success', 'Customer contact deleted successfully.');
-    }
-
-    public function getCustomerContacts($customer_id)
-    {
-        $customerContacts = CustomerContact::where('customer_id', $customer_id)->get();
-        return response()->json($customerContacts);
     }
 }

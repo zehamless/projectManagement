@@ -46,7 +46,6 @@
 
     <div class="content-page">
         <div class="content">
-
             <!-- Start Content-->
             <div class="container-fluid">
                 <div class="row">
@@ -59,13 +58,15 @@
 
                                         <select class="form-select" id="sales-order" onchange="getOperationals(this.value)">
                                             <option selected value="">Pilih Sales Order Number</option>
-                                            @isset($soNumber)
-                                                <option value="{{ $soNumber }}" selected>{{ $soNumber }}</option>
-                                            @else
-                                                @foreach ($salesOrder as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->so }}</option>
-                                                @endforeach
-                                            @endisset
+                                            @foreach ($salesOrder as $item)
+                                                <option value="{{ $item->id }}"
+                                                    @isset($soNumber)
+                                                            @if ($soNumber == $item->so)
+                                                            selected
+                                                            @endif
+                                                    @endisset>
+                                                    {{ $item->so }}</option>
+                                            @endforeach
                                         </select>
 
                                     </div> <!-- end col -->
@@ -496,24 +497,31 @@
             });
             if ($('#select-operational').val() != "") {
                 detailOperational($('#select-operational').val());
+                getOperationals($('#sales-order').val(), $('#select-operational').val());
                 console.log($('#select-operational').val());
             }
 
         })
     </script>
     <script type="text/javascript">
-        function getOperationals(salesOrder) {
-            if (salesOrder !== "" && salesOrder != null) {
+        function getOperationals(salesOrder, operational) {
+            if (salesOrder && salesOrder !== "") {
                 $.ajax({
-                    url: "{{ route('operational.get-operational', '') }}" + "/" + salesOrder,
+                    url: `{{ route('operational.get-operational', '') }}/${salesOrder}`,
                     type: "GET",
                     success: function(data) {
                         console.log(data);
-                        $(`#select-operational`).empty();
-                        $(`#select-operational`).append(`<option selected value="">Pilih Operational</option>`);
-                        $.each(data, function(key, value) {
-                            var option = new Option(value.spk_number, value.id, false, false);
-                            $("#select-operational").append(option)
+                        const selectOperational = $("#select-operational");
+                        selectOperational.empty();
+                        selectOperational.append($('<option>', {
+                            value: "",
+                            text: "Pilih Operational",
+                            selected: true
+                        }));
+                        data.forEach(function(value) {
+                            const option = new Option(value.spk_number, value.id, operational == value
+                                .id, operational == value.id);
+                            selectOperational.append(option);
                         });
                     }
                 });

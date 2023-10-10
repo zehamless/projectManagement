@@ -31,6 +31,80 @@
         <li>
             <h4 class="page-title-main">Dashboard</h4>
         </li>
+    </ul>
+
+    <ul class="list-unstyled topnav-menu float-end mb-0">
+
+        <li class="dropdown notification-list topbar-dropdown">
+            <a class="nav-link dropdown-toggle waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                <i class="fe-bell noti-icon"></i>
+                <span class="badge bg-danger rounded-circle noti-icon-badge">9</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end dropdown-lg">
+
+                <!-- item-->
+                <div class="dropdown-item noti-title">
+                    <h5 class="m-0">
+                        <span class="float-end">
+                            <a href="" class="text-dark">
+                                <small>Clear All</small>
+                            </a>
+                        </span>Notification
+                    </h5>
+                </div>
+
+                <div class="noti-scroll" data-simplebar>
+
+                    <!-- item-->
+                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <div class="notify-icon bg-primary">
+                            <i class="mdi mdi-comment-account-outline"></i>
+                        </div>
+                        <p class="notify-details">Caleb Flakelar commented on Admin
+                            <small class="text-muted">1 min ago</small>
+                        </p>
+                    </a>
+
+                    <!-- item-->
+                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <div class="notify-icon bg-warning">
+                            <i class="mdi mdi-account-plus"></i>
+                        </div>
+                        <p class="notify-details">New user registered.
+                            <small class="text-muted">5 hours ago</small>
+                        </p>
+                    </a>
+
+                    <!-- item-->
+                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <div class="notify-icon bg-info">
+                            <i class="mdi mdi-comment-account-outline"></i>
+                        </div>
+                        <p class="notify-details">Caleb Flakelar commented on Admin
+                            <small class="text-muted">4 days ago</small>
+                        </p>
+                    </a>
+
+                    <!-- item-->
+                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <div class="notify-icon bg-secondary">
+                            <i class="mdi mdi-heart"></i>
+                        </div>
+                        <p class="notify-details">Carlos Crouch liked
+                            <b>Admin</b>
+                            <small class="text-muted">13 days ago</small>
+                        </p>
+                    </a>
+                </div>
+
+                <!-- All-->
+                <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
+                    View all
+                    <i class="fe-arrow-right"></i>
+                </a>
+
+            </div>
+        </li>
 
     </ul>
 
@@ -47,7 +121,7 @@
         <!--- Sidemenu -->
         <div id="sidebar-menu">
 
-            <ul id="side-menu" >
+            <ul id="side-menu">
 
                 <li class="menu-title">Navigation</li>
 
@@ -60,7 +134,8 @@
 
                 <li class="menu-title mt-2">Apps</li>
 
-                <li class="{{ Request::is('projects/*') || Request::is('milestone/*') || Request::is('top/*') ? 'menuitem-active' : ''}}">
+                <li
+                    class="{{ Request::is('projects/*') || Request::is('milestone/*') || Request::is('top/*') ? 'menuitem-active' : ''}}">
                     <a href="{{ url('projects') }}">
                         <i class="mdi mdi-briefcase-variant-outline"></i>
                         <span> Projects </span>
@@ -110,12 +185,13 @@
                         <span> Data Akun </span>
                     </a>
                 </li>
+                
                 <li class="profile-section">
                     <div class=" user-box text-start">
                         <div class="row px-3">
                             <div class="col-3 profile-photo-column">
-                                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="user-img" title="Mat Helme"
-                                    class="rounded img-thumbnail avatar-md">
+                                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                                    alt="user-img" title="Mat Helme" class="rounded img-thumbnail avatar-md">
                             </div>
                             <div class="col-7">
                                 <h5 class="mb-1">Garcia Patel</h5>
@@ -124,9 +200,7 @@
                             <div class="col-2 my-auto">
                                 <form method="POST" action="{{route('logout')}}">
                                     @csrf
-                                <a>
-                                    <button class="fe-log-out logout-font" title="Logout System" type="submit"></button>
-                                </a>
+                                    <button class="fe-log-out logout-font btn-logout" title="Logout System" type="submit"></button>
                                 </form>
                             </div>
                         </div>
