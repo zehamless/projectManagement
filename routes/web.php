@@ -64,13 +64,13 @@ Route::get('/staff', function () {
 //});
 
 //cara penggunaan middleware "hasRole:role1, role2, dst"
-Route::prefix('test')->group(function(){
-   Route::get('/admin', function (){
-       return view('testPage.index');
-   })->middleware(['auth', 'hasRole:Admin'])->name('testPage.index');
-   Route::get('/admin/technician', function (){
-       return view('testPage.index');
-   })->middleware(['auth', 'hasRole:Admin,Technician'])->name('testPage.index');
+Route::prefix('test')->group(function () {
+    Route::get('/admin', function () {
+        return view('testPage.index');
+    })->middleware(['auth', 'hasRole:Admin'])->name('testPage.index');
+    Route::get('/admin/technician', function () {
+        return view('testPage.index');
+    })->middleware(['auth', 'hasRole:Admin,Technician'])->name('testPage.index');
 });
 
 
@@ -175,6 +175,9 @@ Route::prefix('operational')->group(function () {
         Route::patch('/{agenda}', [OperationalAgendaController::class, 'update'])->name('operational.agenda.update');
         Route::get('/show/{agenda}', [OperationalAgendaController::class, 'show'])->name('operational.agenda.show');
     });
+    Route::get('/preview', function(){
+        return view('operational.operationalDocument');
+    }); //?
 });
 
 
