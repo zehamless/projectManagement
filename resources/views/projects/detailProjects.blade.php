@@ -46,7 +46,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xl-8 tables-col">
-                        
+
 
                         {{-- card term of payment --}}
                         <div class="card">
@@ -259,8 +259,9 @@
                                                                 </button>
                                                             </div>
                                                             <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <button id="deleteButton" title="Untuk menghapus milestone"
-                                                                    type="button" value="{{ $milestone['id'] }}"
+                                                                <button id="deleteButton"
+                                                                    title="Untuk menghapus milestone" type="button"
+                                                                    value="{{ $milestone['id'] }}"
                                                                     class="tabledit-edit-button hapusMilestone btn btn-danger">
                                                                     <span class="mdi mdi-trash-can-outline"></span>
                                                                 </button>
@@ -274,7 +275,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         {{-- card table record document --}}
                         <div class="card">
                             <div class="card-body">
@@ -309,49 +310,46 @@
                                             @else
                                                 @php($index = 1)
                                                 @foreach ($milestones as $milestone) --}}
-                                                    <tr>
-                                                        <th scope="row">1</th>
-                                                        <td class="formatTanggal"></td>
-                                                        <td>dummy desc</td>
-                                                        <td class="formatTanggal"></td>
-                                                        <td class="text-center">
-                                                            <span
-                                                                class="badge bg-success
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td class="formatTanggal"></td>
+                                                <td>dummy desc</td>
+                                                <td class="formatTanggal"></td>
+                                                <td class="text-center">
+                                                    <span
+                                                        class="badge bg-success
                                                                 {{-- @if ($milestone['progress'] == 'Done') bg-success
                                                                 @elseif($milestone['progress'] == 'Planned')
                                                                 bg-primary
                                                                 @elseif($milestone['progress'] == 'On Progress')
                                                                 bg-warning @endif --}}
                                                             ">done</span>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <a href=""
-                                                                    title="Download File Record" type="button"
-                                                                    class="tabledit-edit-button btn btn-success waves-effect waves-light"
-                                                                    download>
-                                                                    <span class="mdi mdi-file-download-outline"></span>
-                                                                </a>
-                                                            </div>
-                                                            <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <button title="Edit Record" type="button"
-                                                                    data-bs-toggle="modal"
-                                                                    data-bs-target="#edit-record-modal"
-                                                                    class="tabledit-edit-button btn btn-primary waves-effect waves-light"
-                                                                    style="background-color: #3E8BFF;">
-                                                                    <span class="mdi mdi-pencil"></span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <button id="deleteButton" title="Hapus Record"
-                                                                    type="button" value=""
-                                                                    class="tabledit-edit-button btn btn-danger">
-                                                                    <span class="mdi mdi-trash-can-outline"></span>
-                                                                </button>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                {{-- @endforeach
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="btn-group btn-group-sm" style="float: none;">
+                                                        <a href="" title="Download File Record" type="button"
+                                                            class="tabledit-edit-button btn btn-success waves-effect waves-light"
+                                                            download>
+                                                            <span class="mdi mdi-file-download-outline"></span>
+                                                        </a>
+                                                    </div>
+                                                    <div class="btn-group btn-group-sm" style="float: none;">
+                                                        <button title="Edit Record" type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#edit-record-modal"
+                                                            class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                                            style="background-color: #3E8BFF;">
+                                                            <span class="mdi mdi-pencil"></span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="btn-group btn-group-sm" style="float: none;">
+                                                        <button id="deleteButton" title="Hapus Record" type="button"
+                                                            value="" class="tabledit-edit-button btn btn-danger">
+                                                            <span class="mdi mdi-trash-can-outline"></span>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            {{-- @endforeach
                                             @endif --}}
                                         </tbody>
                                     </table>
@@ -400,7 +398,7 @@
                                                         <td class="formatTanggal">{{ $operational['date'] }}</td>
                                                         <td>{{ $operational['type'] }}</td>
                                                         <td>{{ $operational['spk_number'] }}</td>
-                                                        <td class="text-center">Rp 1.000.000</td>
+                                                        <td class="text-center rupiah">{{ $operational['amount'] }}</td>
                                                         <td class="text-center truncate-text">
                                                             <a href="{{ route('operational.showById', ['id' => $operational->id]) }}"
                                                                 class="tabledit-edit-button btn btn-info waves-effect waves-light"
@@ -413,14 +411,16 @@
                                                                 <button type="button" data-bs-toggle="modal"
                                                                     data-bs-target="#edit-service-modal"
                                                                     title="Edit Field Service Log"
-                                                                    class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                                                                    value="{{ $operational->id }}"
+                                                                    class="tabledit-edit-button editOperational btn btn-primary waves-effect waves-light"
                                                                     style="background-color: #3E8BFF;">
                                                                     <span class="mdi mdi-pencil"></span>
                                                                 </button>
                                                             </div>
                                                             <div class="btn-group btn-group-sm" style="float: none;">
-                                                                <button title="hapus data" type="button"
-                                                                    class="tabledit-edit-button btn btn-danger">
+                                                                <button title="hapus data operational" type="button"
+                                                                    value="{{ $operational->id }}"
+                                                                    class="tabledit-edit-button hapusOperational btn btn-danger">
                                                                     <span class="mdi mdi-trash-can-outline"></span>
                                                                 </button>
                                                             </div>
@@ -562,12 +562,22 @@
                                                 </th>
                                             </tr>
                                             <tr>
-                                                <th scope="row">
+                                                <td scope="row" style="font-size: 20px;"
+                                                    class="{{ $realService > $projectData->expense_budget ? 'text-danger' : 'text-success' }} rupiah">
                                                     <p class="title-text">Real Service Cost</p>
-                                                    {{-- Rumus : Real Service Cost = Budget Service - Service Cost --}}
-                                                    <p class="details-text rupiah"></p>
-                                                    <p class="details-text rupiah">3450000</p>
-                                                </th>
+                                                    <div style="display: flex; align-items: start;">
+                                                        <p class="rupiah" style="font-weight: bold;">
+                                                            {{ $realService }}
+                                                        </p>
+                                                        <p class="text-light"
+                                                            style="font-size: 15px; border-radius: 10px; margin-left: 5px; padding: 2px 4px; display: {{}}; background-color: {{ $realService <= $projectData->expense_budget ? 'green' : 'red' }}">
+                                                            {{ $realService <= $projectData->expense_budget ? '+' : '-' }}
+                                                            <span class="rupiah">
+                                                                {{ abs($realService - $projectData->expense_budget) }}</span>
+                                                        </p>
+
+                                                    </div>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td scope="row" style="font-size: 20px;"
@@ -982,6 +992,69 @@
         });
     </script>
 
+    {{-- Hapus Operational Pop Up --}}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(document).on('click', '.hapusOperational', function() {
+                var id = $(this).val();
+
+                // Display a confirmation dialog
+                Swal.fire({
+                    title: "Anda yakin?",
+                    text: "Beberapa data yang terkait mungkin akan terhapus",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#f34e4e',
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'Cancel',
+                    backrop: 'static',
+                    allowOutsideClick: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Silahkan isi logika nya sendiri xixixi
+                        $.ajax({
+                            url: "{{ route('operational.destroy', '') }}" + '/' + id,
+                            type: 'DELETE',
+                            data: {
+                                _token: "{{ csrf_token() }}",
+                            },
+                            success: function(response) {
+                                try {
+                                    if (response.message) {
+                                        Swal.fire({
+                                            title: "Sukses!",
+                                            text: response.message,
+                                            icon: 'success',
+                                            confirmButtonText: 'OK'
+                                        }).then((hasil) => {
+                                            if (hasil.isConfirmed) {
+                                                window.location.reload();
+                                            }
+                                        });
+                                    } else {
+                                        console.error('Terjadi kesalahan: ' + response
+                                            .error
+                                        ); // Tampilkan pesan kesalahan jika ada
+                                    }
+                                } catch (error) {
+                                    console.error(
+                                        'Terjadi kesalahan saat mengolah respons: ' +
+                                        error);
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(
+                                    'Terjadi kesalahan saat menghapus data: ' +
+                                    error);
+                            }
+                        });
+
+                    }
+                });
+            });
+        });
+    </script>
+
     {{-- Milestone edit --}}
     <script>
         $(document).ready(function() {
@@ -1050,6 +1123,69 @@
                     }
                 });
             });
+        });
+    </script>
+
+    {{-- Operational edit --}}
+    <script>
+        $(document).ready(function() {
+            $(document).on('click', '.editOperational', function() {
+                var id = $(this).val(); // Menggunakan data-id yang baru
+                $.ajax({
+                    type: "GET",
+                    url: "/operational/get-operational-data/" + id,
+                    dataType: "json",
+                    success: function(response) {
+                        $("#type_operational option[value='" + response.type + "']").prop(
+                            'selected', true);
+                        $("#transportation_mode_operational option[value='" + response
+                            .transportation_mode + "']").prop('selected', true);
+                        $("#spk_code_operational option[value='" + response.spk_code + "']")
+                            .prop('selected', true);
+                        $("#id_operational").val(response.id);
+                        $("#vehicle_number_operational").val(response.vehicle_number);
+                        $("#description_operational").val(response.description);
+                        $("#created_by_operational").val(response.created_by);
+                        $("#spk_number_operational").val(response.spk_number.split('-')[1]);
+                        $("#date_operational").val(response.date);
+                        $("#code-Spk").text(
+                            response.spk_code + " - ");
+                        var initialMode = $("#transportation_mode_operational")
+                            .val(); // Mendapatkan nilai awal
+                        if (initialMode === 'mobil') {
+                            $("#vehicle_number_container").show();
+                        } else {
+                            $("#vehicle_number_container").hide();
+                        }
+                    },
+                    error: function(response) {
+                        alert("Error: " + response.statusText);
+                    }
+                });
+            });
+
+            // etting Modal edit operational
+            $("#spk_code_operational").on("change", function() {
+                var selectedCode = $(this).val(); // Mendapatkan nilai yang dipilih dalam dropdown
+                $("#code-Spk").text(
+                    selectedCode + " - "
+                ); // Mengubah teks pada elemen #code-Spk sesuai dengan nilai yang dipilih
+            });
+
+            $("#transportation_mode_operational").on("change", function() {
+                var selectedMode = $(this).val(); // Mendapatkan nilai yang dipilih dalam dropdown
+
+                // Cek apakah mode yang dipilih adalah 'mobil'
+                if (selectedMode === 'mobil') {
+                    // Jika 'mobil' dipilih, tampilkan elemen #vehicle_number_container
+                    $("#vehicle_number_container").show();
+                } else {
+                    // Jika bukan 'mobil', sembunyikan elemen #vehicle_number_container
+                    $("#vehicle_number_container").hide();
+                }
+            });
+
+
         });
     </script>
 @endsection
