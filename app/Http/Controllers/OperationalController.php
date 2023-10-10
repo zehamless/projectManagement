@@ -34,12 +34,12 @@ class OperationalController extends Controller
         if (!$project) {
             return redirect()->route('projects.index')->with('error', 'Terjadi kesalahan');
         }
-
+        $salesOrder = Project::select('id', 'so')->get();
         $spkNumber = $operational->spk_number;
         $spkNumber_id = $id;
         $soNumber = $project->so;
 
-        return view('operational.index', compact('spkNumber', 'spkNumber_id', 'soNumber'));
+        return view('operational.index', compact('spkNumber', 'spkNumber_id', 'soNumber', 'salesOrder'));
     }
 
     public function create($id)
