@@ -157,13 +157,14 @@ class ProjectController extends Controller
         $doneMilestones = $milestones->where('progress', 'Done')->count();
         $totalMilestones = $milestones->count();
         $realCost = $project->productionCost->sum('amount');
+        $realService = $project->operationals->sum('amount');
         $percentageDone = $totalMilestones > 0 ? ($doneMilestones / $totalMilestones) * 100 : 0;
         $productionCost = $project->productionCost()->orderBy('created_at', 'desc')->get();
         $operationals = $project->operationals()->orderBy('created_at', 'desc')->get();
         $tops = $project->tops()->orderBy('created_at', 'desc')->get();
         $topProgress = $tops->where('status', 'Done')->sum('progress');
 
-        return view('projects.detailProjects', compact('milestones', 'projectData', 'productionCost', 'tops', 'operationals', 'percentageDone', 'realCost', 'topProgress', 'project'));
+        return view('projects.detailProjects', compact('milestones', 'projectData', 'productionCost', 'tops', 'operationals', 'percentageDone', 'realCost', 'realService', 'topProgress', 'project'));
     }
 
 
