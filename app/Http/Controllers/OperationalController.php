@@ -16,10 +16,7 @@ class OperationalController extends Controller
     public function index()
     {
         $salesOrder = Project::select('id', 'so')->get();
-        $spkNumber = null;
-        $spkNumber_id = null;
-        $soNumber = null;
-        return view('operational.index', compact('salesOrder','spkNumber', 'spkNumber_id', 'soNumber', ));
+        return view('operational.index', compact('salesOrder'));
     }
 
     public function showById($id)

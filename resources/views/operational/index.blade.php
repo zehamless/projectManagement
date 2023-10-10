@@ -63,9 +63,11 @@
                                             <option selected value="">Pilih Sales Order Number</option>
                                             @foreach ($salesOrder as $item)
                                                 <option value="{{ $item->id }}"
-                                                        @if ($soNumber && $soNumber == $item->so)
+                                                        @isset ($soNumber)
+                                                            @if($soNumber == $item->so)
                                                             selected
-                                                    @endif
+                                                            @endif
+                                                    @endisset
                                                 >{{ $item->so }}</option>
                                             @endforeach
                                         </select>
