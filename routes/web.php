@@ -117,7 +117,7 @@ Route::prefix('customerContact')->group(function () {
     Route::get('/show', [CustomerContactController::class, 'show'])->name('customerContact.show');
     Route::get('/edit', [CustomerContactController::class, 'edit'])->name('customerContact.edit');
     Route::get('/update', [CustomerContactController::class, 'update'])->name('customerContact.update');
-    Route::delete('/delete', [CustomerContactController::class, 'delete'])->name('customerContact.delete');
+    Route::delete('/delete/{id}', [CustomerContactController::class, 'destroy'])->name('customerContact.destroy');
     Route::get('/get-customer-contacts/{customer_id}', [CustomerContactController::class, 'getCustomerContacts'])->name('customerContact.getCustomerContact');;
 });
 
