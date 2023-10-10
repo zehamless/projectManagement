@@ -23,6 +23,7 @@ class Operational extends Model
         'transportation_mode',
         'vehicle_number',
         'created_by',
+        'amount',
         'approved_by',
     ];
 
