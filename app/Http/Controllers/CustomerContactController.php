@@ -56,11 +56,23 @@ class CustomerContactController extends Controller
             ->with('success', 'Customer contact updated successfully.');
     }
 
-    public function destroy(CustomerContact $customerContact)
-    {
-        $customerContact->destroy();
+    // public function destroy(CustomerContact $customerContact)
+    // {
+    //     $customerContact->destroy();
 
-        return redirect()->route('customerContact.index')
-            ->with('success', 'Customer contact deleted successfully.');
+    //     return redirect()->route('customerContact.index')
+    //         ->with('success', 'Customer contact deleted successfully.');
+    // }
+
+    public function getCustomerContacts($customer_id)
+    {
+        $customerContact = CustomerContact::where('customer_id', $customer_id)->get();
+
+        if (!$customerContact) {
+            return response()->json(['error' => 'customerContact not found'], 404);
+        }
+
+        // Mengembalikan data customerContact sebagai respons JSON
+        return response()->json($customerContact);
     }
 }
