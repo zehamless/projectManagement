@@ -38,7 +38,7 @@
         <li class="dropdown notification-list topbar-dropdown">
             <a class="nav-link dropdown-toggle waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                 <i class="fe-bell noti-icon"></i>
-                <span class="badge bg-danger rounded-circle noti-icon-badge">9</span>
+                <span class="badge bg-danger rounded-circle noti-icon-badge">{{auth()->user()->unread_notifications_count}}</span>
             </a>
             <div class="dropdown-menu dropdown-menu-end dropdown-lg">
 
@@ -56,45 +56,20 @@
                 <div class="noti-scroll" data-simplebar>
 
                     <!-- item-->
+                    @foreach(auth()->user()->unreadNotifications as $notification)
+
                     <a href="javascript:void(0);" class="dropdown-item notify-item">
                         <div class="notify-icon bg-primary">
                             <i class="mdi mdi-comment-account-outline"></i>
                         </div>
-                        <p class="notify-details">Caleb Flakelar commented on Admin
-                            <small class="text-muted">1 min ago</small>
+                        <p class="notify-details">
+                            {{ $notification->data['message'] }}
+                            <small class="text-muted">{{ $notification->data['link'] }}</small>
                         </p>
                     </a>
+                    @endforeach
 
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <div class="notify-icon bg-warning">
-                            <i class="mdi mdi-account-plus"></i>
-                        </div>
-                        <p class="notify-details">New user registered.
-                            <small class="text-muted">5 hours ago</small>
-                        </p>
-                    </a>
 
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <div class="notify-icon bg-info">
-                            <i class="mdi mdi-comment-account-outline"></i>
-                        </div>
-                        <p class="notify-details">Caleb Flakelar commented on Admin
-                            <small class="text-muted">4 days ago</small>
-                        </p>
-                    </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <div class="notify-icon bg-secondary">
-                            <i class="mdi mdi-heart"></i>
-                        </div>
-                        <p class="notify-details">Carlos Crouch liked
-                            <b>Admin</b>
-                            <small class="text-muted">13 days ago</small>
-                        </p>
-                    </a>
                 </div>
 
                 <!-- All-->
@@ -185,7 +160,7 @@
                         <span> Data Akun </span>
                     </a>
                 </li>
-                
+
                 <li class="profile-section">
                     <div class=" user-box text-start">
                         <div class="row px-3">
