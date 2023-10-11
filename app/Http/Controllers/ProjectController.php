@@ -136,8 +136,15 @@ class ProjectController extends Controller
         $project->expense_budget = $request->input('expense_budget');
         $project->save();
 
-        $project->salesExecutive->notify(new soProjectNotification($project->label, $project->id));
-        \Notification::send(Auth::user(), new soProjectNotification($project->label, $project->id));
+        if ($so === "Nomor SO Belum diisi"){
+        //Notification
+        $projectID = $project->id;
+        $label = $project->label;
+        $name =  auth()->user()->first_name;
+        $users = User::Role(['Project Manager', 'Sales Executive'])->get();
+        \Illuminate\Support\Facades\Notification::send($users, new soProjectNotification($projectID, $label, $name));
+        }
+
         // Redirect dengan pesan sukses
         return redirect('projects')->with('success', 'Project berhasil ditambahkan');
     }
