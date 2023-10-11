@@ -91,6 +91,7 @@ class OperationalController extends Controller
         // Gabungkan spk_code dan spk_number
         $combinedSPK = $request->input('spk_code') . '-' . $request->input('spk_number');
         $validatedData['spk_number'] = $combinedSPK;
+        $validatedData['amount'] = 0;
         // Simpan data ke dalam database
         Operational::create($validatedData); // Ganti 'Operational' dengan model yang sesuai
 
