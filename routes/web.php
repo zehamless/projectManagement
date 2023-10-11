@@ -175,9 +175,6 @@ Route::prefix('operational')->group(function () {
         Route::patch('/{agenda}', [OperationalAgendaController::class, 'update'])->name('operational.agenda.update');
         Route::get('/show/{agenda}', [OperationalAgendaController::class, 'show'])->name('operational.agenda.show');
     });
-    Route::get('/preview', function(){
-        return view('operational.operationalDocument');
-    }); //?
 });
 
 
@@ -208,8 +205,13 @@ Route::get('calendar', function () {
     return view('calendar');
 });
 
-Route::get('approval', function () {
-    return view('approval');
+Route::get('approval/index', function () {
+    return view('approval.index');
 });
+
+
+Route::get('approval/preview', function(){
+    return view('approval.preview');
+}); //?
 
 require __DIR__ . '/auth.php';
