@@ -68,5 +68,11 @@ class hasRoleMiddlewareTest extends TestCase
 
     }
 
+    public function testName()
+    {
+        $users = User::Role(['Admin', 'Sales Executive'])->get();
+        dd($users);
+    }
+
 
 }

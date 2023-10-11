@@ -10,8 +10,15 @@ class soProjectNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    public function __construct()
+    private $projectID;
+    private $label;
+    private $name;
+
+    public function __construct($projectID, $label, $name)
     {
+        $this->projectID = $projectID;
+        $this->label = $label;
+        $this->name = $name;
     }
 
     public function via($notifiable): array
@@ -21,7 +28,12 @@ class soProjectNotification extends Notification implements ShouldQueue
 
     public function toDatabase($notifiable): array
     {
-        return [];
+        return [
+            'message' => 'SO project ' .'""'. $this->label .'""'. ' perlu diisi', // Include the 'message' key here
+            'created_by' => $this->name,
+            'type' => 'warning',
+            'link' => route('projects.show', $this->projectID)
+        ];
     }
 
     public function toArray($notifiable): array
@@ -30,7 +42,7 @@ class soProjectNotification extends Notification implements ShouldQueue
             'message' => 'SO project'. $this->label .' perlu diisi',
             'created_by' => $this->name,
             'type' => 'warning',
-            'link' => route('projects.show', $this->id)
+            'link' => route('projects.show', $this->projectID)
         ];
     }
 }
