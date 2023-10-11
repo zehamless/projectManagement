@@ -28,7 +28,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+Route::post('marks-as-read/{notification}', [UserController::class, 'marksAsRead'])->name('markNotification');
+Route::get('mark-all-as-read', [UserController::class, 'marksAllAsRead'])->name('markAllNotification');
 Route::group(['prefix' => 'projects'], function () {
     Route::get('/', [ProjectController::class, 'index'])->name('projects.index');
     Route::get('/createProjects', [ProjectController::class, 'create'])->name('projects.createProjects');

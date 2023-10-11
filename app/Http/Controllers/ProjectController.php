@@ -6,8 +6,11 @@ use App\Models\Customer;
 use App\Models\CustomerContact;
 use App\Models\Project;
 use App\Models\User;
+use App\Notifications\soProjectNotification;
+use Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -132,6 +135,15 @@ class ProjectController extends Controller
         $project->po_amount = $request->input('po_amount');
         $project->expense_budget = $request->input('expense_budget');
         $project->save();
+
+        if ($so === "Nomor SO Belum diisi"){
+        //Notification
+        $projectID = $project->id;
+        $label = $project->label;
+        $name =  auth()->user()->first_name;
+        $users = User::Role(['Project Manager', 'Sales Executive'])->get();
+        \Illuminate\Support\Facades\Notification::send($users, new soProjectNotification($projectID, $label, $name));
+        }
 
         // Redirect dengan pesan sukses
         return redirect('projects')->with('success', 'Project berhasil ditambahkan');
