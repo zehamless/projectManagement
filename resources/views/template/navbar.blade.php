@@ -31,6 +31,69 @@
         <li>
             <h4 class="page-title-main">Dashboard</h4>
         </li>
+    </ul>
+
+    <ul class="list-unstyled topnav-menu float-end mb-0">
+
+        <li class="dropdown notification-list topbar-dropdown">
+            <a class="nav-link dropdown-toggle waves-effect waves-light" data-bs-toggle="dropdown" href="#"
+               role="button" aria-haspopup="false" aria-expanded="false">
+                <i class="fe-bell noti-icon"></i>
+                <span
+                    class="badge bg-danger rounded-circle noti-icon-badge">{{auth()->user()->unreadNotifications->count()?? '0'}}</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end dropdown-lg">
+
+                <!-- item-->
+                <div class="dropdown-item noti-title">
+                    <h5 class="m-0">
+                        <span class="float-end">
+                            <a href="{{route('markAllNotification')}}" class="text-dark">
+                                <small>Clear All</small>
+                            </a>
+                        </span>Notification
+                    </h5>
+                </div>
+
+                <div class="notify-scroll" data-simplebar>
+
+                    <!-- item-->
+                    @isset(auth()->user()->unread_notifications_count)
+                        @foreach(auth()->user()->unreadNotifications as $notification)
+                            <a class="dropdown-item notify-item" href="{{$notification->data['link']}}">
+                                <div
+                                    class="notify-icon {{ $notification->data['type'] === 'warning' ? 'bg-warning' : 'bg-primary' }}">
+                                    <i class="mdi mdi-{{ $notification->data['type'] === 'warning' ? 'alert' : 'comment-account-outline' }}"></i>
+                                </div>
+                                <p class="notify-details">
+                                    {{ $notification->data['message']}}
+                                    <small class="text-muted">from {{$notification->data['created_by']}}</small>
+                                </p>
+                            </a>
+                            <button class="btn btn-sm btn-light mark-as-read"
+                                    data-notification-id="{{ $notification->id }}">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        @endforeach
+                    @else
+                        <a class="dropdown-item notify-item">
+                            <div class="notify-icon bg-primary">
+                                <i class="mdi mdi-comment-account-outline"></i>
+                            </div>
+                            <p class="notify-details">
+                                No Notification
+                            </p>
+                    @endisset
+                </div>
+
+                <!-- All-->
+                <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
+                    View all
+                    <i class="fe-arrow-right"></i>
+                </a>
+
+            </div>
+        </li>
 
     </ul>
 
@@ -111,12 +174,13 @@
                         <span> Data Akun </span>
                     </a>
                 </li>
-                
+
                 <li class="profile-section">
                     <div class=" user-box text-start">
                         <div class="row px-3">
                             <div class="col-3 profile-photo-column">
-                                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                                <img
+                                    src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
                                     alt="user-img" title="Mat Helme" class="rounded img-thumbnail avatar-md">
                             </div>
                             <div class="col-7">
@@ -126,7 +190,8 @@
                             <div class="col-2 my-auto">
                                 <form method="POST" action="{{route('logout')}}">
                                     @csrf
-                                    <button class="fe-log-out logout-font btn-logout" title="Logout System" type="submit"></button>
+                                    <button class="fe-log-out logout-font btn-logout" title="Logout System"
+                                            type="submit"></button>
                                 </form>
                             </div>
                         </div>
@@ -142,3 +207,26 @@
 
 </div>
 <!-- Left Sidebar End -->
+@section('pageScript')
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.mark-as-read').click(function () {
+                let notification_id = $(this).data('notification-id');
+                axios({
+                    method: 'POST',
+                    url: "{{ route('markNotification', '') }}" + "/" + notification_id,
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        notification: notification_id
+                    }
+                }).then(function (response) {
+                    console.log(response);
+                    location.reload();
+                }).catch(function (error) {
+                    console.log(error);
+                })
+            })
+        })
+    </script>
+@endsection

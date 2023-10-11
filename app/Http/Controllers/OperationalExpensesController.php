@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Operational;
 use App\Models\OperationalExpense;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class OperationalExpensesController extends Controller
     public function index(Request $request, $operational)
     {
 
-        if ($request->ajax()){
+        if ($request->ajax()) {
             $expense = OperationalExpense::where('operational_id', $operational)->orderByDesc('created_at')->get();
             return DataTables::of($expense)
                 ->addIndexColumn()
@@ -30,12 +31,17 @@ class OperationalExpensesController extends Controller
      */
     public function store(Request $request)
     {
+        $operational = Operational::find($request->operational_id);
+
         $request->validate([
             'operational_id' => 'required',
             'date' => 'required',
             'item' => 'required',
             'amount' => 'required',
         ]);
+
+        $operational->amount += $request->amount;
+        $operational->save();
 
         OperationalExpense::create($request->all());
 
@@ -56,7 +62,7 @@ class OperationalExpensesController extends Controller
             'amount' => 'numeric',
         ]);
 
-       $expense->update($request->all());
+        $expense->update($request->all());
 
         return response()->json([
             'success' => 'Operational Expense updated successfully!'
@@ -75,7 +81,7 @@ class OperationalExpensesController extends Controller
         ], 200);
     }
 
-    public function show(Request $request,string $expense)
+    public function show(Request $request, string $expense)
     {
         $attrExpense = OperationalExpense::where('id', $expense)->get();
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Operational;
 use App\Models\Project;
 use App\Models\User;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -90,6 +91,7 @@ class OperationalController extends Controller
         // Gabungkan spk_code dan spk_number
         $combinedSPK = $request->input('spk_code') . '-' . $request->input('spk_number');
         $validatedData['spk_number'] = $combinedSPK;
+        $validatedData['amount'] = 0;
         // Simpan data ke dalam database
         Operational::create($validatedData); // Ganti 'Operational' dengan model yang sesuai
 
@@ -104,41 +106,58 @@ class OperationalController extends Controller
         return view('operational.update', compact('operational'));
     }
 
-    public function update(Request $request, Operational $operational)
+    public function update(Request $request)
     {
-        $request->validate([
-            'date' => 'date',
-            'spk_code' => 'string|max:10',
-            'spk_number' => 'string|max:10',
-            'type' => 'string',
-            'team' => 'array',
-            'description' => 'max:255',
-            'transportation_mode' => 'string',
-            'vehicle_number' => 'string|max:12',
-        ]);
+        try {
+            // Validasi data yang dikirim dari formulir
+            $validatedData = $request->validate([
+                'id' => 'required',
+                'date' => 'required|date',
+                'type' => 'required',
+                'transportation_mode' => 'required',
+                'spk_code' => 'required',
+                'spk_number' => 'required',
+                'description' => 'required',
+            ]);
 
-        $operational->update([
-            'date' => $request->date ?? $operational->date,
-            'spk_code' => $request->spk_code ?? $operational->spk_code,
-            'spk_number' => $request->spk_number ?? $operational->spk_number,
-            'type' => $request->type ?? $operational->type,
-            'description' => $request->description ?? $operational->description,
-            'transportation' => $request->transportation ?? $operational->transportation,
-            'vehicle_number' => $request->vehicle_number ?? $operational->vehicle_number,
-        ]);
-        if ($request->team) {
-            $operational->team()->sync($request->team);
+            $combinedSPK = $request->input('spk_code') . '-' . $request->input('spk_number');
+            $validatedData['spk_number'] = $combinedSPK;
+            $operational = Operational::findOrFail($request->id);
+
+            // Mengupdate data operational dengan data yang validasi
+            $operational->update($validatedData);
+
+            return redirect()->route('projects.show', ['id' => $request->project_id])->with('success', 'Operational berhasil diubah.');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Terjadi kesalahan saat mengubah Operational: ' . $e->getMessage());
         }
-        return redirect()->route('operational.index')->with('success', 'Operational updated successfully.');
     }
 
-    public function delete(Operational $operational)
+
+    public function getOperationalData($id)
     {
-        if ($operational->team()->exists()) {
-            $operational->team()->detach();
+        // Cari data Operational berdasarkan ID
+        $Operational = Operational::find($id);
+
+        if (!$Operational) {
+            return response()->json(['error' => 'Operational not found'], 404);
         }
-        $operational->delete();
-        return redirect()->route('operational.index')->with('success', 'Operational deleted successfully.');
+
+        // Mengembalikan data Operational sebagai respons JSON
+        return response()->json($Operational);
+    }
+
+    public function destroy(Operational $operational)
+    {
+        try {
+            if ($operational->team()->exists()) {
+                $operational->team()->detach();
+            }
+            $operational->delete();
+            return response()->json(['message' => 'Operational berhasil dihapus.']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Terjadi kesalahan saat menghapus Operational.'], 500);
+        }
     }
 
     public function approve(Request $request, Operational $operational)

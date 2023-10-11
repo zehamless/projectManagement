@@ -81,8 +81,7 @@
     </form>
 
     {{-- modals edit document record --}}
-    <form action="" class="parsley-examples" novalidate="" method="post"
-        enctype="multipart/form-data">
+    <form action="" class="parsley-examples" novalidate="" method="post" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div id="edit-record-modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
@@ -92,7 +91,8 @@
                     <div class="modal-header">
                         <h4 class="modal-title">
                             Edit Document Record</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body milestoneEditModal">
                         <div class="row">
@@ -105,7 +105,8 @@
                                 <label for="submitted_date" class="form-label">Submitted Date<span
                                         class="text-danger">*</span></label>
                                 <input type="date" name="submitted_date" parsley-trigger="change" required=""
-                                    placeholder="Masukkan tanggal" class="form-control datepicker" id="submitted_date">
+                                    placeholder="Masukkan tanggal" class="form-control datepicker"
+                                    id="submitted_date">
                             </div>
 
                             {{-- form input description --}}
@@ -141,7 +142,8 @@
                                 <label for="userName" class="form-label">File Attachment<span
                                         class="text-danger">*</span></label>
                                 <input type="file" name="file" parsley-trigger="change" required=""
-                                    data-plugins="dropify" data-height="150" class="form-control" id="fileAttachment">
+                                    data-plugins="dropify" data-height="150" class="form-control"
+                                    id="fileAttachment">
                             </div>
                         </div>
 
@@ -167,8 +169,8 @@
         enctype="multipart/form-data">
         @csrf
         @method('PUT')
-        <div id="edit-cost-modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
-            style="overflow:hidden;">
+        <div id="edit-cost-modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true" style="overflow:hidden;">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -228,8 +230,10 @@
     </form>
 
     {{-- modals edit fields service log --}}
-    <form action="" class="parsley-examples" novalidate="" method="post" enctype="multipart/form-data">
+    <form action="{{ route('operational.update') }}" class="parsley-examples" novalidate="" method="post"
+        enctype="multipart/form-data">
         @csrf
+        @method('PUT')
         <div id="edit-service-modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel"
             aria-hidden="true" style="overflow:hidden;">
             <div class="modal-dialog modal-dialog-centered modal-xl">
@@ -246,22 +250,21 @@
                             <div class="col-6">
                                 {{-- form input service date --}}
                                 <div class="mb-3">
-                                    <label for="userName" class="form-label">Service Date<span
+                                    <label for="date_operational" class="form-label">Service Date<span
                                             class="text-danger">*</span></label>
-                                    <input type="date" name="nick" parsley-trigger="change" required=""
+                                    <input type="date" name="date" parsley-trigger="change" required=""
                                         placeholder="Enter service date" class="form-control datepicker"
-                                        id="service-date">
+                                        id="date_operational">
                                 </div>
+                                <input type="hidden" name="id" id="id_operational">
 
                                 {{-- form input project label --}}
                                 <div class="mb-3">
                                     <label for="userName" class="form-label">Project Label<span
                                             class="text-danger">*</span></label>
-                                    <select name="" parsley-trigger="change" required=""
-                                        class="form-control">
-                                        <option>PT ABC</option>
-                                        <option>PT XYZ</option>
-                                        <option>PT DEF</option>
+                                    <select name="project_id" parsley-trigger="change" required class="form-control">
+                                        <option value="{{ $projectData->id }}" selected>{{ $projectData->label }}
+                                        </option>
                                     </select>
                                 </div>
 
@@ -269,33 +272,25 @@
                                 <div class="mb-3">
                                     <label for="userName" class="form-label">Service Type<span
                                             class="text-danger">*</span></label>
-                                    <select name="" parsley-trigger="change" required=""
-                                        class="form-control">
-                                        <option>Pre-Commisioning</option>
-                                        <option>Comissioning</option>
-                                        <option>Maintenance</option>
-                                        <option>Contract Service</option>
-                                        <option>Oil Sampling</option>
-                                        <option>Assesment</option>
-                                        <option>Warranty</option>
-                                        <option>Persiapan Project</option>
+                                    <select name="type" parsley-trigger="change" required=""
+                                        class="form-control" id="type_operational">
+                                        <option value="Pre-Commisioning">Pre-Commisioning</option>
+                                        <option value="Comissioning">Comissioning</option>
+                                        <option value="Maintenance">Maintenance</option>
+                                        <option value="Contract Service">Contract Service</option>
+                                        <option value="Oil Sampling">Oil Sampling</option>
+                                        <option value="Assesment">Assesment</option>
+                                        <option value="Warranty">Warranty</option>
+                                        <option value="Persiapan Project">Persiapan Project</option>
                                     </select>
-                                </div>
 
-                                {{-- form input vehicle number --}}
-                                <div class="mb-3" id="vehicle_number_container" style="display: none;">
-                                    <label for="userName" class="form-label">Vehicle Number<span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" name="vehicle_number" placeholder="Enter vehicle number"
-                                        parsley-trigger="change" required="" class="form-control">
                                 </div>
-
                                 {{-- form input SPK Code --}}
                                 <div class="mb-3">
-                                    <label for="spkCode" class="form-label">SPK Code<span
+                                    <label for="spk_code_operational" class="form-label">SPK Code<span
                                             class="text-danger">*</span></label>
-                                    <select name="spkCode" id="spkCode" parsley-trigger="change" required=""
-                                        class="form-control">
+                                    <select name="spk_code" id="spk_code_operational" parsley-trigger="change"
+                                        required="" class="form-control">
                                         <option>-- Select SPK Code --</option>
                                         <option value="A">A</option>
                                         <option value="C">C</option>
@@ -311,12 +306,12 @@
 
                                 {{-- form input SPK Number --}}
                                 <div class="mb-3">
-                                    <label for="spkNumber" class="form-label">SPK Number<span
+                                    <label for="spk_number_operational" class="form-label">SPK Number<span
                                             class="text-danger">*</span></label>
                                     <div class="input-group">
-                                        <span class="input-group-text" id="code">Code</span>
+                                        <span id="code-Spk" class="input-group-text"></span>
                                         <input type="text" placeholder="Enter SPK Number" name="spk_number"
-                                            id="spk_number" class="form-control" style="outline: none;">
+                                            id="spk_number_operational" class="form-control" style="outline: none;">
                                     </div>
                                 </div>
                             </div>
@@ -324,9 +319,9 @@
                             <div class="col-6">
                                 {{-- form input transportation mode --}}
                                 <div class="mb-3">
-                                    <label for="userName" class="form-label">Transportation Mode<span
-                                            class="text-danger">*</span></label>
-                                    <select name="transportation_mode" id="transportation_mode"
+                                    <label for="transportation_mode_operational" class="form-label">Transportation
+                                        Mode<span class="text-danger">*</span></label>
+                                    <select name="transportation_mode" id="transportation_mode_operational"
                                         parsley-trigger="change" required="" class="form-control">
                                         <option value="pesawat">Pesawat</option>
                                         <option value="mobil">Mobil</option>
@@ -335,48 +330,29 @@
                                     </select>
                                 </div>
 
+                                {{-- form input vehicle number --}}
+                                <div class="mb-3" id="vehicle_number_container">
+                                    <label for="userName" class="form-label">Vehicle Number<span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="vehicle_number" id="vehicle_number_operational"
+                                        placeholder="Enter vehicle number" parsley-trigger="change" required=""
+                                        class="form-control">
+                                </div>
+
+
                                 {{-- form input genereate created by user --}}
                                 <div class="mb-3">
-                                    <label for="userName" class="form-label">Created By<span
+                                    <label for="created_by_operational" class="form-label">Created By<span
                                             class="text-danger">*</span></label>
-                                    <select name="" parsley-trigger="change" required=""
-                                        class="form-control">
-                                        <option>User 1</option>
-                                        <option>User 2</option>
-                                    </select>
+                                    <input type="text" name="created" id="created_by_operational" readonly
+                                        parsley-trigger="change" required="" class="form-control">
                                 </div>
-
-                                {{-- form input generate technician --}}
-                                <div class="mb-3">
-                                    <label for="userName" class="form-label">Technician<span
-                                            class="text-danger">*</span></label>
-                                    <select id="select-technician" class="form-control" name=""
-                                        style="color: black;">
-                                        <option value="">Technician 1</option>
-                                        <option value="">Technician 2</option>
-                                        <option value="">Technician 3</option>
-                                        <option value="">Technician 4</option>
-                                    </select>
-                                </div>
-
-                                {{-- form input material --}}
-                                <div class="mb-3">
-                                    <label for="userName" class="form-label">Material<span
-                                            class="text-danger">*</span></label>
-                                    <select id="select-material" class="form-control" name=""
-                                        style="color: black;">
-                                        <option value="">Material 1</option>
-                                        <option value="">Material 2</option>
-                                        <option value="">Material 3</option>
-                                        <option value="">Material 4</option>
-                                    </select>
-                                </div>
-
                                 {{-- form input description --}}
                                 <div class="mb-3">
-                                    <label for="userName" class="form-label">Description<span
+                                    <label for="description_operational" class="form-label">Description<span
                                             class="text-danger">*</span></label>
-                                    <textarea name="" parsley-trigger="change" required="" class="form-control"></textarea>
+                                    <textarea name="description" parsley-trigger="change" id="description_operational" required=""
+                                        class="form-control"></textarea>
                                 </div>
                             </div>
                         </div>

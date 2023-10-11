@@ -282,7 +282,6 @@
     <script>
         $(document).ready(function() {
             $('#customers').select2({
-                placeholder: 'Cari company',
                 multiple: false,
                 dropdownAutoWidth: true,
                 width: '100%',
@@ -320,14 +319,14 @@
     </script>
     <script>
         $(document).ready(function() {
+            var $customerContact = $('#customers-name');
+            $customerContact.prop('disabled', true);
             $('#customers').on('change', function() {
                 var customer_id = $(this).val();
-                var $customerContact = $('#customers-name');
-
                 if (customer_id === 'createNewCustomer') {
                     // Redirect ke halaman pembuatan customer
                     window.location.href = "{{ route('customer.create') }}";
-                } else if (customer_id) {
+                } else {
                     $customerContact.prop('disabled', false);
                     $.ajax({
                         url: '/customerContact/get-customer-contacts/' + customer_id,
@@ -336,16 +335,28 @@
                         success: function(data) {
                             $('#customers-name').empty();
                             $('#customers-name').append(
-                                '<option value="">Pilih Customer Contact</option>');
+                                '<option value="">Pilih Customer Contact</option><option value="createContact">Buat baru</option>'
+                            );
 
                             $.each(data, function(key, value) {
                                 $('#customers-name').append('<option value="' + value
                                     .id + '">' + value.name + '</option>');
                             });
-                        }
+                        },
                     });
-                } else {
-                    $customerContact.prop('disabled', true);
+                }
+            });
+        });
+    </script>
+
+    {{-- Buat kontak baru --}}
+    <script>
+        $(document).ready(function() {
+            $("#customers-name").on("change", function() {
+                var customer_id = $("#customers").val();
+                var contact = $(this).val();
+                if (contact === "createContact") {
+                    window.location.href = `{{ route('customer.create', ['id' => '${customer_id}']) }}`;
                 }
             });
         });

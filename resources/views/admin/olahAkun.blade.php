@@ -219,12 +219,24 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 
     <!-- Include Select2 JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" defer></script>
     <!-- Required datatable js -->
     <link href="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-1.13.6/r-2.5.0/sc-2.2.0/sp-2.2.0/sl-1.7.0/datatables.min.css" rel="stylesheet">
 
     <script src="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-1.13.6/r-2.5.0/sc-2.2.0/sp-2.2.0/sl-1.7.0/datatables.min.js"></script>
-
+    <script>
+        $(document).ready(function() {
+            $('#select-roles').select2({
+                // placeholder: 'role',
+                dropdownParent: $('#con-close-modal'),
+                allowClear: true, // Option to clear selection
+                theme: 'classic', // Use a different theme (change CSS classes)
+                multiple: true,
+                dropdownAutoWidth: true,
+                width: '100%',
+            });
+        });
+    </script>
     <script type="text/javascript">
         $(document).ready(function() {
             var table = $('#datatable').DataTable({
@@ -489,19 +501,7 @@
             })
         }
     </script>
-    <script>
-        $(document).ready(function() {
-            $('#select-roles').select2({
-                // placeholder: 'role',
-                dropdownParent: $('#con-close-modal'),
-                allowClear: true, // Option to clear selection
-                theme: 'classic', // Use a different theme (change CSS classes)
-                multiple: true,
-                dropdownAutoWidth: true,
-                width: '100%',
-            });
-        });
-    </script>
+
     {{-- <script>
     $(document).ready(function() {
             // Initialize Magnific Popup for image links
@@ -528,12 +528,12 @@
         });
     </script>
 
-    <!-- isotope filter plugin -->
-    <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/isotope-layout/isotope.pkgd.min.js') }}"></script>
+{{--    <!-- isotope filter plugin -->--}}
+{{--    <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/isotope-layout/isotope.pkgd.min.js') }}"></script>--}}
 
-    <!-- Magnific Popup-->
-    <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
+{{--    <!-- Magnific Popup-->--}}
+{{--    <script src="{{ asset('templateAdmin/Admin/dist/assets/libs/magnific-popup/jquery.magnific-popup.min.js') }}"></script>--}}
 
-    <!-- Gallery Init-->
-    <script src="{{ asset('templateAdmin/Admin/dist/assets/js/pages/gallery.init.js') }}"></script>
+{{--    <!-- Gallery Init-->--}}
+{{--    <script src="{{ asset('templateAdmin/Admin/dist/assets/js/pages/gallery.init.js') }}"></script>--}}
 @endsection

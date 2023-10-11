@@ -28,7 +28,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+Route::post('marks-as-read/{notification}', [UserController::class, 'marksAsRead'])->name('markNotification');
+Route::get('mark-all-as-read', [UserController::class, 'marksAllAsRead'])->name('markAllNotification');
 Route::group(['prefix' => 'projects'], function () {
     Route::get('/', [ProjectController::class, 'index'])->name('projects.index');
     Route::get('/createProjects', [ProjectController::class, 'create'])->name('projects.createProjects');
@@ -148,11 +149,11 @@ Route::prefix('operational')->group(function () {
     Route::get('/create', function () {
         return view('projects.createOperational');
     })->name('createOperational');
+    Route::get('/get-operational-data/{id}', [OperationalController::class, 'getOperationalData'])->name('operational.getOperationalData');
     Route::post('/store', [OperationalController::class, 'store'])->name('operational.store');
     Route::get('/show/{operational}', [OperationalController::class, 'show'])->name('operational.show'); //?
-    Route::get('/{operational}/edit', [OperationalController::class, 'updateForm'])->name('operational.update-form'); //!
-    Route::patch('/{operational}', [OperationalController::class, 'update'])->name('operational.update'); //~
-    Route::delete('/{operational}', [OperationalController::class, 'delete'])->name('operational.delete'); //~
+    Route::put('/update', [OperationalController::class, 'update'])->name('operational.update'); //~
+    Route::delete('/{operational}', [OperationalController::class, 'destroy'])->name('operational.destroy');
     Route::post('/approve/{operational}', [OperationalController::class, 'approve'])->name('operational.approve'); //~
     Route::get('/getOperational/{salesOrder}', [OperationalController::class, 'getOperational'])->name('operational.get-operational'); //? --
     Route::get('/getTeam/{operational}', [OperationalController::class, 'getTeam'])->name('operational.get-team');
@@ -175,6 +176,9 @@ Route::prefix('operational')->group(function () {
         Route::patch('/{agenda}', [OperationalAgendaController::class, 'update'])->name('operational.agenda.update');
         Route::get('/show/{agenda}', [OperationalAgendaController::class, 'show'])->name('operational.agenda.show');
     });
+    Route::get('/preview', function(){
+        return view('operational.operationalDocument');
+    }); //?
 });
 
 

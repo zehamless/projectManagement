@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Notifications\soProjectNotification;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -61,4 +62,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(operational::class, 'operational_team', 'user_id', 'operational_id');
     }
+
+    // make scope for get user with multiple role using multi parameter
+    public function scopeRole($query, $role)
+    {
+        return $query->whereHas('hasroles', function ($q) use ($role) {
+            $q->whereIn('name', (array)$role);
+        });
+    }
+
+
 }
