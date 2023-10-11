@@ -11,17 +11,9 @@ class CustomerController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Customer::select('id', 'companyName');
+            $data = Customer::all();
             return DataTables::of($data)
                 ->addIndexColumn()
-                // ->addColumn('action', function ($row) {
-                //     $editRoute = route('customer.edit', $row['id']);
-                //     $deleteRoute = route('customer.destroy', $row['id']);
-                //     $btn = "<a href='{$editRoute}' class='edit btn btn-info btn-sm'>Edit</a>";
-                //     $btn .= "<a href='{$deleteRoute}' class='delete btn btn-danger btn-sm'>Delete</a>";
-                //     return $btn;
-                // })
-                // ->rawColumns(['action'])
                 ->toJson();
         }
 
@@ -99,5 +91,14 @@ class CustomerController extends Controller
         } catch (\Exception $e) {
             return response()->json(['error' => 'Terjadi kesalahan saat menghapus customer.'], 500);
         }
+    }
+
+    public function detail($id)
+    {
+        $customer = Customer::find($id);
+        $customerContacts = $customer->contacts;
+        $relatedProjects = $customer->projects;
+
+        return view('customer.detailCustomer', compact('customer', 'customerContacts', 'relatedProjects'));
     }
 }

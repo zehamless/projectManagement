@@ -4,13 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\CustomerContact;
+use Yajra\DataTables\Facades\DataTables;
 
 class CustomerContactController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $customerContacts = CustomerContact::all();
-        return view('customerContact.index', compact('customerContact'));
+        if ($request->ajax()) {
+            $data = CustomerContact::select('id', 'name', 'phone');
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->toJson();
+        }
+
+        $createRoute = route('customerContact.create');
+        return view('customerContact.index', compact('createRoute'));
     }
 
     public function create()
@@ -21,15 +29,17 @@ class CustomerContactController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'customer_id' => 'required',
             'name' => 'required',
-            'phone' => 'required',
+            'phone' => 'required'
         ]);
 
-        CustomerContact::create($request->all());
+        CustomerContact::create([
+            'name' => $request->input('name'),
+            'phone' => $request->input('phone')
+        ]);
 
-        return redirect()->route('customerContact.index')
-            ->with('success', 'Customer contact created successfully.');
+        $indexRoute = route('customerContact.index');
+        return redirect()->route('customerContact.index')->with('success', 'Customer contact created successfully.');
     }
 
     public function show(CustomerContact $customerContact)
@@ -56,11 +66,14 @@ class CustomerContactController extends Controller
             ->with('success', 'Customer contact updated successfully.');
     }
 
-    public function destroy(CustomerContact $customerContact)
+    public function destroy($id)
     {
-        $customerContact->destroy();
-
-        return redirect()->route('customerContact.index')
-            ->with('success', 'Customer contact deleted successfully.');
+        try {
+            $customerContact = CustomerContact::findOrFail($id);
+            $customerContact->delete();
+            return response()->json(['message' => 'customer contact berhasil dihapus.']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Terjadi kesalahan saat menghapus customer contact.']);
+        }
     }
 }
