@@ -107,7 +107,7 @@ Route::prefix('customer')->group(function () {
     Route::get('/edit/{id}', [CustomerController::class, 'edit'])->name('customer.edit');
     Route::put('/update', [CustomerController::class, 'update'])->name('customer.update');
     Route::delete('/delete/{id}', [CustomerController::class, 'destroy'])->name('customer.destroy');
-    Route::get('/customer/detail/{id}', [CustomerController::class, 'detail'])->name('customer.detail');
+    Route::get('/detail/{id}', [CustomerController::class, 'detail'])->name('customer.detail');
     Route::get('/get-customer-data/{id}', [CustomerController::class, 'getCustomerData'])->name("customer.get");
 });
 
@@ -115,7 +115,7 @@ Route::prefix('customerContact')->group(function () {
     Route::get('/', [CustomerContactController::class, 'index'])->name('customerContact.index');
     Route::get('/create', [CustomerContactController::class, 'create'])->name('customerContact.create');
     Route::post('/store', [CustomerContactController::class, 'store'])->name('customerContact.store');
-    Route::get('/show', [CustomerContactController::class, 'show'])->name('customerContact.show');
+    Route::get('/show/', [CustomerContactController::class, 'show'])->name('customerContact.show');
     Route::get('/edit', [CustomerContactController::class, 'edit'])->name('customerContact.edit');
     Route::get('/update', [CustomerContactController::class, 'update'])->name('customerContact.update');
     Route::delete('/delete/{id}', [CustomerContactController::class, 'destroy'])->name('customerContact.destroy');

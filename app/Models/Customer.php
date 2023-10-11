@@ -16,9 +16,9 @@ class Customer extends Model
         'companyName'
     ];
     public function contacts()
-{
-    return $this->hasMany(CustomerContact::class, 'phone', 'companyName');
-}
+    {
+        return $this->hasMany(CustomerContact::class, 'customer_id');
+    }
     public function project()
     {
         return $this->belongsTo(Project::class, 'customer_id');

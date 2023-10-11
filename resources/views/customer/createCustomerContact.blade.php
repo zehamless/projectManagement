@@ -10,15 +10,16 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                <form action="" method="post" enctype="multipart/form-data"
-                                    class="parsley-examples" novalidate="">
+                                <form action="{{ route('customerContact.store') }}" method="POST"
+                                    enctype="multipart/form-data" class="parsley-examples" novalidate="">
                                     @csrf
                                     <input type="hidden" name="" value="">
                                     <div class="mb-3">
                                         <label for="companyName" class="form-label">Company<span
                                                 class="text-danger">*</span></label>
                                         <input type="text" name="name" parsley-trigger="change" required=""
-                                            placeholder="Company Name Generated dari parent id" class="form-control" id="userName">
+                                            placeholder="Company Name Generated dari parent id" class="form-control"
+                                            id="userName">
                                     </div>
                                     <div class="mb-3">
                                         <label for="name" class="form-label">Name<span
