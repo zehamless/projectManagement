@@ -164,4 +164,16 @@ class UserController extends Controller
 
         return response()->json($users);
     }
+
+    public function marksAsRead($notification)
+    {
+        $notifications = auth()->user()->notifications()->findOrFail($notification);
+        $notifications->markAsRead();
+        return response()->json(['success' => 'Notifikasi berhasil dibaca']);
+    }
+    public function marksAllAsRead()
+    {
+        $notifications = auth()->user()->unreadNotifications->markAsRead();
+        return redirect()->back();
+    }
 }

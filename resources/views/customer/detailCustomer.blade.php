@@ -82,7 +82,7 @@
 
                                 <div class="row">
                                     <div class="col-12">
-                                        <h4 class="mt-0 header-title">{{ $customer->companyName }}</h4>
+                                        <h4 class="mt-0 header-title"></h4>
                                     </div>
                                 </div>
 
@@ -95,13 +95,13 @@
                                             <tr>
                                                 <th scope="row">
                                                     <p class="title-text">Customer Contacts Total</p>
-                                                    <p class="details-text">{{ count($customerContacts) }}</p>
+                                                    <p class="details-text"></p>
                                                 </th>
                                             </tr>
                                             <tr>
                                                 <th scope="row">
                                                     <p class="title-text">Related Projects Total</p>
-                                                    <p class="details-text">{{ count($relatedProjects) }}</p>
+                                                    <p class="details-text"></p>
                                                 </th>
                                             </tr>
 
@@ -135,13 +135,17 @@
                 responsive: true,
                 serverSide: true,
                 scrollX: true,
-                ajax: "{{ route('customerContact.index', ['id' => $customerContact->id]) }}",
+                ajax: "{{ route('customerContact.index', ['id' => $customer->id]) }}",
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',
                         searchable: false,
                         orderable: false
                     },
+                    // {
+                    //     data: 'customer_id',
+                    //     name: 'customer_id'
+                    // },
                     {
                         data: 'name',
                         name: 'name'
@@ -245,11 +249,12 @@
                 var id = $(this).val();
                 $.ajax({
                     type: "GET",
-                    url: "/customer/get-customer-data/" + id,
+                    url: "/customer/get-customer-contacts/" + id,
                     dataType: "json",
                     success: function(response) {
                         $("#customer_id").val(id);
-                        $("#customer_companyName").val(response.companyName);
+                        $("#name").val(response.name)
+                        $("#phone").val(response.phone);
                     },
                     error: function(response) {
                         alert("Error: " + response.statusText);
