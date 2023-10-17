@@ -58,7 +58,7 @@
                 <div class="notify-scroll" data-simplebar>
 
                     <!-- item-->
-                    @isset(auth()->user()->unread_notifications_count)
+                    @if(auth()->user()->unread_notifications_count != 0)
                         @foreach(auth()->user()->unreadNotifications as $notification)
                             <a class="dropdown-item notify-item" href="{{$notification->data['link']}}">
                                 <div
@@ -83,7 +83,8 @@
                             <p class="notify-details">
                                 No Notification
                             </p>
-                    @endisset
+                        </a>
+                    @endif
                 </div>
 
                 <!-- All-->
