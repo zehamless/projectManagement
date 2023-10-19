@@ -132,15 +132,15 @@
                     </a>
                 </li>
 
-                <li class="{{ Request::is('operational/*') ? 'menuitem-active' : ''}}">
+                <li class="{{ (Request::is('operational/*') && !Request::is('operational/approval')) ? 'menuitem-active' : '' }}">
                     <a href="{{ url('operational') }}">
                         <i class="mdi mdi-book-clock-outline"></i>
                         <span> Operational </span>
                     </a>
                 </li>
 
-                <li class="{{ Request::is('approval/*') ? 'menuitem-active' : ''}}">
-                    <a href="{{ url('approval') }}">
+                <li class="{{ Request::is('operational/approval/*') ? 'menuitem-active' : ''}}">
+                    <a href="{{ route('operational.approval') }}">
                         <i class="mdi mdi-clipboard-check-multiple-outline"></i>
                         <span> Approval </span>
                     </a>

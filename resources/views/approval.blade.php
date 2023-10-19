@@ -56,52 +56,63 @@
 
 @section('pageScript')
 <script>
-    // Sample data (you can replace this with your own data)
-    const data = [
-        { column1: '1', column2: 'SPK-1-2', column3: 'Maintenance', column4: 'admin', 
-            column5: 'Value 2', column6: '<button type="button" class="btn btn-approval btn-sm">Approve</button>', 
-            column7: '<a href="{{ url('operational/preview') }}" type="button" class="btn btn-success btn-sm">Preview</a>' },
+    {{--// Sample data (you can replace this with your own data)--}}
+    {{--const data = [--}}
+    {{--    { column1: '1', column2: 'SPK-1-2', column3: 'Maintenance', column4: 'admin', --}}
+    {{--        column5: 'Value 2', column6: '<button type="button" class="btn btn-approval btn-sm">Approve</button>', --}}
+    {{--        column7: '<a href="{{ url('operational/preview') }}" type="button" class="btn btn-success btn-sm">Preview</a>' },--}}
 
-        { column1: '2', column2: 'SPK-2-3', column3: 'Oil Replacement', column4: 'admin', 
-            column5: 'Value 2', column6: '<button type="button" class="btn btn-approval btn-sm">Approve</button>', 
-            column7: '<a href="{{ url('operational/preview') }}" type="button" class="btn btn-success btn-sm">Preview</a>' },
-            
-        { column1: '3', column2: 'SPK-4-5', column3: 'Electric Parts', column4: 'admin', 
-            column5: 'Value 2', column6: '<button type="button" class="btn btn-approval btn-sm">Approve</button>', 
-            column7: '<a href="{{ url('operational/preview') }}" type="button" class="btn btn-success btn-sm">Preview</a>' },
-    ];
+    {{--    { column1: '2', column2: 'SPK-2-3', column3: 'Oil Replacement', column4: 'admin', --}}
+    {{--        column5: 'Value 2', column6: '<button type="button" class="btn btn-approval btn-sm">Approve</button>', --}}
+    {{--        column7: '<a href="{{ url('operational/preview') }}" type="button" class="btn btn-success btn-sm">Preview</a>' },--}}
+    {{--        --}}
+    {{--    { column1: '3', column2: 'SPK-4-5', column3: 'Electric Parts', column4: 'admin', --}}
+    {{--        column5: 'Value 2', column6: '<button type="button" class="btn btn-approval btn-sm">Approve</button>', --}}
+    {{--        column7: '<a href="{{ url('operational/preview') }}" type="button" class="btn btn-success btn-sm">Preview</a>' },--}}
+    {{--];--}}
 
-    // Function to populate the table with data
-    function populateTable() {
-        const tableBody = document.querySelector('#dataTable tbody');
+    {{--// Function to populate the table with data--}}
+    {{--function populateTable() {--}}
+    {{--    const tableBody = document.querySelector('#dataTable tbody');--}}
 
-        data.forEach(item => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${item.column1}</td>
-                <td>${item.column2}</td>
-                <td>${item.column3}</td>
-                <td>${item.column4}</td>
-                <td>${item.column5}</td>
-                <td class="text-center">${item.column6}</td>
-                <td class="text-center">${item.column7}</td>
-            `;
-            tableBody.appendChild(row);
-        });
-    }
+    {{--    data.forEach(item => {--}}
+    {{--        const row = document.createElement('tr');--}}
+    {{--        row.innerHTML = `--}}
+    {{--            <td>${item.column1}</td>--}}
+    {{--            <td>${item.column2}</td>--}}
+    {{--            <td>${item.column3}</td>--}}
+    {{--            <td>${item.column4}</td>--}}
+    {{--            <td>${item.column5}</td>--}}
+    {{--            <td class="text-center">${item.column6}</td>--}}
+    {{--            <td class="text-center">${item.column7}</td>--}}
+    {{--        `;--}}
+    {{--        tableBody.appendChild(row);--}}
+    {{--    });--}}
+    {{--}--}}
 
-    // Call the populateTable function to create the table
-    populateTable();
+    {{--// Call the populateTable function to create the table--}}
+    {{--populateTable();--}}
 
     $(document).ready(function(){
         $('#dataTable').DataTable({
             responsive: true,
             autoWidth: false,
-            responsive: false,
+            serverSide: true,
+            processing: true,
             scrollX: true,
+            ajax: "{{ route('operational.approval') }}",
+            columns: [
+                {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                {data: 'spk_number', name: 'spk_number'},
+                {data: 'project.label', name: 'label'},
+                {data: 'created_by', name: 'created_by'},
+                {data: 'date', name: 'date'},
+                {data: 'approve', name: 'approve'},
+                {data: 'preview', name: 'preview'},
+            ]
         });
     });
-    
+
 
 </script>
 @endsection

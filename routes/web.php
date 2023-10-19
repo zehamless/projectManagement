@@ -155,6 +155,7 @@ Route::prefix('operational')->group(function () {
     Route::put('/update', [OperationalController::class, 'update'])->name('operational.update'); //~
     Route::delete('/{operational}', [OperationalController::class, 'destroy'])->name('operational.destroy');
     Route::post('/approve/{operational}', [OperationalController::class, 'approve'])->name('operational.approve'); //~
+    Route::get('/approval', [OperationalController::class, 'approval'])->name('operational.approval'); //~
     Route::get('/getOperational/{salesOrder}', [OperationalController::class, 'getOperational'])->name('operational.get-operational'); //? --
     Route::get('/getTeam/{operational}', [OperationalController::class, 'getTeam'])->name('operational.get-team');
     Route::prefix('expense')->group(function () {
