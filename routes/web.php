@@ -212,7 +212,7 @@ Route::get('approval/index', function () {
 
 
 Route::get('approval/preview', function(){
-    return view('approval.preview');
+    return view('operational.operationalDocument');
 }); //?
 
 require __DIR__ . '/auth.php';

@@ -188,7 +188,7 @@
                             </th>
                         </tr>
 
-                        @for ($i=0; $i<10; $i++) {{-- row technician 1 --}} <tr>
+                        @for ($i=0; $i<3; $i++) {{-- row technician 1 --}} <tr>
                             {{-- column technician name --}}
                             <td>
                                 James Clark
@@ -329,10 +329,10 @@
     </div>
 
 
-    {{--
+    
     <script>
         window.print()
-    </script> --}}
+    </script>
     
 
 </body>
