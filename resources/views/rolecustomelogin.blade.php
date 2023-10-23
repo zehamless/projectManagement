@@ -66,25 +66,12 @@
                                     @csrf
                                     <h4 class="text-center ">Welcome Alex, Choose your Role</h4>
                                     <div class="d-flex flex-column mt-4">
-                                        <button type="button"
-                                            class="btn btn-outline-danger waves-effect mb-2 rounded-3">Project Manager</button>
-
-
-                                        <a type="button" href="{{route('login')}}"
-                                            class="btn btn-outline-danger waves-effect mb-2 rounded-3">Supervisor</a>
-
-                                        <button type="button"
-                                            class="btn btn-outline-danger waves-effect  mb-2 rounded-3">Manager</button>
-                                    </div>
-                                    <div class="d-flex justify-content-end mt-4">
-                                        <button type="button"
-                                            class="btn btn-soft-danger waves-effect waves-light px-3">Log in</button>
-                                    </div>
-                                    //ini buat role custom
+{{--                                    ini buat role custom--}}
                                     @foreach($roles as $role)
                                         <a type="button" href="{{route('setSession', ['role' => $role])}}"
                                            class="btn btn-outline-danger waves-effect mb-2 rounded-3">{{$role}}</a>
                                     @endforeach
+                                    </div>
 
                                     <!-- end row -->
                                 </form>
