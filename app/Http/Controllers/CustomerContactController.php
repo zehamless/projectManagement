@@ -76,4 +76,10 @@ class CustomerContactController extends Controller
             return response()->json(['error' => 'Terjadi kesalahan saat menghapus customer contact.']);
         }
     }
+
+    public function getCustomerContacts($customer_id)
+    {
+        $customerContacts = CustomerContact::where('customer_id', $customer_id)->get();
+        return response()->json($customerContacts);
+    }
 }
