@@ -12,6 +12,10 @@ use App\Http\Controllers\ProductionCostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SistemPenawaran\ApprovalController;
+use App\Http\Controllers\SistemPenawaran\DashboardPenawaranController;
+use App\Http\Controllers\SistemPenawaran\MappingController;
+use App\Http\Controllers\SistemPenawaran\PenawaranController;
 use App\Http\Controllers\TopController;
 use App\Http\Controllers\UserController;
 use App\Material;
@@ -188,6 +192,24 @@ Route::prefix('materials')->group(function () {
     Route::get('/update', [MaterialController::class, 'update'])->name('materials.update');
     Route::get('/delete', [MaterialController::class, 'delete'])->name('materials.delete');
 });
+
+
+// routes sistem administrasi penawaran
+Route::prefix('sistemPenawaran')->group(function () {
+    Route::get('/', [DashboardPenawaranController::class, 'index'])->name('sistemPenawaran.dashboardPenawaran');
+
+    Route::prefix('penawaran')->group(function () {
+        Route::get('/', [PenawaranController::class, 'index'])->name('sistemPenawaran.penawaran.index');
+    });
+    Route::prefix('approval')->group(function () {
+        Route::get('/', [ApprovalController::class, 'index'])->name('sistemPenawaran.approval.index');
+    });
+    Route::prefix('mapping')->group(function () {
+        Route::get('/', [MappingController::class, 'index'])->name('sistemPenawaran.mapping.index');
+    });
+});
+// end routes sistem administrasi penawaran
+
 
 Route::get('/projects/createMilestone', function () {
     return view('projects.createMilestone');
