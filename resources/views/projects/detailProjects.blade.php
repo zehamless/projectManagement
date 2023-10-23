@@ -496,6 +496,42 @@
                                                 </th>
                                             </tr>
                                             <tr>
+                                                <td scope="row" style="font-size: 20px;"
+                                                    class="{{ $realCost > $projectData->preliminary_cost ? 'text-danger' : 'text-success' }} rupiah">
+                                                    <p class="title-text">Real Production Cost</p>
+                                                    <div style="display: flex; align-items: start;">
+                                                        <p class="rupiah" style="font-weight: bold;">
+                                                            {{ $realCost }}
+                                                        </p>
+                                                        <p class="text-light"
+                                                            style="font-size: 15px; border-radius: 10px; margin-left: 5px; padding: 2px 4px; background-color: {{ $realCost <= $projectData->preliminary_cost ? 'green' : 'red' }}">
+                                                            {{ $realCost <= $projectData->preliminary_cost ? '+' : '-' }}
+                                                            <span class="rupiah">
+                                                                {{ abs($realCost - $projectData->preliminary_cost) }}</span>
+                                                        </p>
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td scope="row" style="font-size: 20px;"
+                                                    class="{{ $realService > $projectData->expense_budget ? 'text-danger' : 'text-success' }} rupiah">
+                                                    <p class="title-text">Real Service Cost</p>
+                                                    <div style="display: flex; align-items: start;">
+                                                        <p class="rupiah" style="font-weight: bold;">
+                                                            {{ $realService }}
+                                                        </p>
+                                                        <p class="text-light"
+                                                            style="font-size: 15px; border-radius: 10px; margin-left: 5px; padding: 2px 4px; background-color: {{ $realService <= $projectData->expense_budget ? 'green' : 'red' }}">
+                                                            {{ $realService <= $projectData->expense_budget ? '+' : '-' }}
+                                                            <span class="rupiah">
+                                                                {{ abs($realService - $projectData->expense_budget) }}</span>
+                                                        </p>
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <th scope="row">
                                                     <p class="title-text">Purchase Order Number</p>
                                                     <p class="details-text">{{ $projectData['po'] }}</p>
@@ -561,43 +597,6 @@
                                                     </p>
                                                 </th>
                                             </tr>
-                                            <tr>
-                                                <td scope="row" style="font-size: 20px;"
-                                                    class="{{ $realCost > $projectData->preliminary_cost ? 'text-danger' : 'text-success' }} rupiah">
-                                                    <p class="title-text">Real Production Cost</p>
-                                                    <div style="display: flex; align-items: start;">
-                                                        <p class="rupiah" style="font-weight: bold;">
-                                                            {{ $realCost }}
-                                                        </p>
-                                                        <p class="text-light"
-                                                            style="font-size: 15px; border-radius: 10px; margin-left: 5px; padding: 2px 4px; background-color: {{ $realCost <= $projectData->preliminary_cost ? 'green' : 'red' }}">
-                                                            {{ $realCost <= $projectData->preliminary_cost ? '+' : '-' }}
-                                                            <span class="rupiah">
-                                                                {{ abs($realCost - $projectData->preliminary_cost) }}</span>
-                                                        </p>
-
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row" style="font-size: 20px;"
-                                                    class="{{ $realService > $projectData->expense_budget ? 'text-danger' : 'text-success' }} rupiah">
-                                                    <p class="title-text">Real Service Cost</p>
-                                                    <div style="display: flex; align-items: start;">
-                                                        <p class="rupiah" style="font-weight: bold;">
-                                                            {{ $realService }}
-                                                        </p>
-                                                        <p class="text-light"
-                                                            style="font-size: 15px; border-radius: 10px; margin-left: 5px; padding: 2px 4px; background-color: {{ $realService <= $projectData->expense_budget ? 'green' : 'red' }}">
-                                                            {{ $realService <= $projectData->expense_budget ? '+' : '-' }}
-                                                            <span class="rupiah">
-                                                                {{ abs($realService - $projectData->expense_budget) }}</span>
-                                                        </p>
-
-                                                    </div>
-                                                </td>
-                                            </tr>
-
                                         </tbody>
                                     </table>
                                 </div>
