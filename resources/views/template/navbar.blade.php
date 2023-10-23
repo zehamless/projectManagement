@@ -140,7 +140,7 @@
                 </li>
 
                 <li class="{{ Request::is('approval/*') ? 'menuitem-active' : ''}}">
-                    <a href="{{ url('approval') }}">
+                    <a href="{{ url('approval/index') }}">
                         <i class="mdi mdi-clipboard-check-multiple-outline"></i>
                         <span> Approval </span>
                     </a>

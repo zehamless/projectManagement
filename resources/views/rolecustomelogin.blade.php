@@ -62,11 +62,11 @@
                                     <img src="{{ asset('images/logo_trafindo_full.png') }}" alt="logo_trafindo"
                                         class="logo-trafindo mx-auto" style="max-height: 60px;">
                                 </div>
-                                <form action="{{ url('/') }}" class="parsley-examples">
-                                    @csrf
-                                    <h4 class="text-center ">Welcome Alex, Choose your Role</h4>
-                                    <div class="d-flex flex-column mt-4">
-                                        <button type="button"
+                                {{-- <form action="{{ url('/') }}" class="parsley-examples"> --}}
+                                    {{-- @csrf --}}
+                                    <h4 class="text-center mb-4">Welcome Alex, Choose your Role</h4>
+                                    {{-- <div class="d-flex flex-column mt-4"> --}}
+                                        {{-- <button type="button"
                                             class="btn btn-outline-danger waves-effect mb-2 rounded-3">Project Manager</button>
 
 
@@ -74,22 +74,20 @@
                                             class="btn btn-outline-danger waves-effect mb-2 rounded-3">Supervisor</a>
 
                                         <button type="button"
-                                            class="btn btn-outline-danger waves-effect  mb-2 rounded-3">Manager</button>
-                                    </div>
-                                    <div class="d-flex justify-content-end mt-4">
+                                            class="btn btn-outline-danger waves-effect  mb-2 rounded-3">Manager</button> --}}
+                                    {{-- </div> --}}
+                                    {{-- <div class="d-flex justify-content-end mt-4">
                                         <button type="button"
                                             class="btn btn-soft-danger waves-effect waves-light px-3">Log in</button>
-                                    </div>
-                                    //ini buat role custom
+                                    </div> --}}
+                                    {{-- //ini buat role custom --}}
                                     @foreach($roles as $role)
+                                    <div class="d-flex flex-column">
                                         <a type="button" href="{{route('setSession', ['role' => $role])}}"
                                            class="btn btn-outline-danger waves-effect mb-2 rounded-3">{{$role}}</a>
+                                    </div>
                                     @endforeach
 
-                                    <!-- end row -->
-                                </form>
-                                    <!-- end row -->
-                                </form>
 
 
                             </div> <!-- end card-body -->
