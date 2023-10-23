@@ -18,8 +18,11 @@
 <link href="{{ asset('templateAdmin/Admin/dist/assets/libs/mohithg-switchery/switchery.min.css') }}" rel="stylesheet"
     type="text/css" />
 <link href="{{ asset('templateAdmin/Admin/dist/assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css') }}"
-    --}} rel="stylesheet" type="text/css" />
+     rel="stylesheet" type="text/css" />
 <link href="{{ asset('templateAdmin/Admin/dist/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+
+
+@yield('headerScript')
 
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
