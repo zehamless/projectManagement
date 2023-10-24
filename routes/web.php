@@ -3,11 +3,11 @@
 use App\Http\Controllers\CustomerContactController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\MilestoneController;
 use App\Http\Controllers\OperationalAgendaController;
 use App\Http\Controllers\OperationalController;
 use App\Http\Controllers\OperationalExpensesController;
+use App\Http\Controllers\OperationalMaterialController;
 use App\Http\Controllers\ProductionCostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
@@ -161,10 +161,16 @@ Route::prefix('operational')->group(function () {
     Route::prefix('expense')->group(function () {
         Route::get('/get/{operational}', [OperationalExpensesController::class, 'index'])->name('operational.expense.index');
         Route::post('/store', [OperationalExpensesController::class, 'store'])->name('operational.expense.store');
-        Route::get('/{expense}/edit', [OperationalExpensesController::class, 'updateExpenseForm'])->name('operational.expense.update-form');
         Route::patch('/{expense}', [OperationalExpensesController::class, 'update'])->name('operational.expense.update');
         Route::delete('/{expense}', [OperationalExpensesController::class, 'delete'])->name('operational.expense.delete');
         Route::get('/show/{expense}', [OperationalExpensesController::class, 'show'])->name('operational.expense.show');
+    });
+    Route::prefix('material')->group(function () {
+        Route::get('/get/{operational}', [OperationalMaterialController::class, 'index'])->name('operational.material.index');
+        Route::post('/store', [OperationalMaterialController::class, 'store'])->name('operational.material.store');
+        Route::patch('/{material}', [OperationalMaterialController::class, 'update'])->name('operational.material.update');
+        Route::delete('/{material}', [OperationalMaterialController::class, 'delete'])->name('operational.material.delete');
+        Route::get('/show/{material}', [OperationalMaterialController::class, 'show'])->name('operational.material.show');
     });
     Route::prefix('technician')->group(function () {
         Route::patch('/{operational}', [OperationalController::class, 'detachTeam'])->name('operational.detach-team');
@@ -177,21 +183,11 @@ Route::prefix('operational')->group(function () {
         Route::patch('/{agenda}', [OperationalAgendaController::class, 'update'])->name('operational.agenda.update');
         Route::get('/show/{agenda}', [OperationalAgendaController::class, 'show'])->name('operational.agenda.show');
     });
-    Route::get('/preview', function(){
+    Route::get('/preview', function () {
         return view('operational.operationalDocument');
     }); //?
 });
 
-
-Route::prefix('materials')->group(function () {
-    Route::get('/', [MaterialController::class, 'index'])->name('materials.index');
-    Route::get('/create', [MaterialController::class, 'create'])->name('materials.create');
-    Route::post('/store', [MaterialController::class, 'store'])->name('materials.store');
-    Route::get('/show', [MaterialController::class, 'show'])->name('materials.show');
-    Route::get('/edit', [MaterialController::class, 'edit'])->name('materials.edit');
-    Route::get('/update', [MaterialController::class, 'update'])->name('materials.update');
-    Route::get('/delete', [MaterialController::class, 'delete'])->name('materials.delete');
-});
 
 Route::get('/projects/createMilestone', function () {
     return view('projects.createMilestone');
