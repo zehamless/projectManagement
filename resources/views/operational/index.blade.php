@@ -419,10 +419,10 @@
                 console.log($('#select-operational').val());
             }
 
-            $('.materialForm').on('submit', function (event) {
+            $('.materialsForm').on('submit', function (event) {
                 event.preventDefault();
-                if ($('.expensesForm').parsley().isValid()) {
-                    if ($(this).attr('id') == 'AddMaterial') {
+                if ($('.materialsForm').parsley().isValid()) {
+                    if ($(this).attr('id') == 'addMaterial') {
                         addMaterial();
                     } else if ($(this).attr('id') == 'updateMaterial') {
                         updateMaterial($(this).attr('data-id'));
@@ -721,6 +721,7 @@
     <script type="text/javascript">
         function getMaterials(operational) {
             let table = $('#table-material').DataTable({
+                "autoWidth": false,
                 processing: true,
                 serverSide: true,
                 responsive: true,
@@ -739,6 +740,42 @@
                     {
                         data: 'do',
                         name: 'do',
+                    },
+                    {
+                        data: 'id',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false,
+                        render: function (data) {
+                            return `
+                            <div class="btn-group btn-group-sm"
+                            style="float: none;">
+                            <button type="button"
+                            id="edit-material-${data}"
+                            data-bs-toggle="modal"
+                            data-bs-target="#add-material-modal"
+                            title="Edit Operational Material"
+                            data-id="${data}"
+                            class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                            onclick="editMaterial('${data}')"
+                            style="background-color: #3E8BFF;">
+                            <span
+                            class="mdi mdi-pencil"></span>
+                            </button>
+                            </div>
+                            <div class="btn-group btn-group-sm"
+                            style="float: none;">
+                            <button id="edit-material-${data}"
+                            title="Hapus Operational Material"
+                            type="button"
+                            onclick="deleteMaterial('${data}')"
+                            class="tabledit-edit-button btn btn-danger">
+                            <span
+                            class="mdi mdi-trash-can-outline"></span>
+                            </button>
+                            </div>
+                            `
+                        }
                     }
                 ]
             })
@@ -1113,7 +1150,7 @@
             })
                 .then(function (response) {
                     modal.find('#due-date').val(response.data[0].due_date);
-                    console.log(response.data[0].due_date)
+                    console.log(response)
                     modal.find('#description').val(response.data[0].description);
                     modal.find('#progress').val(response.data[0].status);
                     modal.find('#updateAgenda').attr("data-id", response.data[0].id)
@@ -1153,6 +1190,7 @@
                             modal.modal('hide');
                         })
                         .catch(function (error) {
+                            console.log(error)
                             swal.fire("Error!", "Please try again", "error");
                         })
                 }
@@ -1162,11 +1200,8 @@
 
     <script type="text/javascript">
 
-
-        const modal = $('#add-material-modal');
-        const operational = $('#select-operational').val();
-
         function showMaterialForm() {
+        const modal = $('#add-material-modal');
             const button = modal.find('#materialButton');
 
             $('.materialsForm').parsley().reset();
@@ -1179,6 +1214,8 @@
         }
 
         async function addMaterial() {
+            const operational = $('#select-operational').val();
+            const modal = $('#add-material-modal');
             if (!operational) {
                 swal.fire("Error!", "Please select operational", "error");
                 return;
@@ -1201,8 +1238,99 @@
             }
         }
 
+        async function updateMaterial(material) {
+            const operational = $('#select-operational').val();
+            const modal = $('#add-material-modal');
+            const doValue = modal.find('#do_number').val();
+            const memoValue = modal.find('#memo_number').val();
+            console.log(material)
+            console.log('doValue:', doValue);
+            console.log('memoValue:', memoValue);
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You will not be able to recover this action!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, update it!',
+                cancelButtonText: 'Cancel'
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    try {
+                        const response = await axios.patch("{{route('operational.material.update', '')}}" + "/" + material, {
+                            _token: "{{ csrf_token() }}",
+                            do: doValue,
+                            memo: memoValue,
+                        });
+                            Swal.fire(
+                                'Updated!',
+                                'Material has been updated.',
+                                'success'
+                            )
+                            $('#table-material').DataTable().ajax.reload();
+                            modal.modal('hide');
+                        console.log(response)
+                    } catch (error) {
+                        console.error(error);
+                    }
+                }
+            });
+        }
 
+        function editMaterial(material) {
+            const modal = $('#add-material-modal');
+            const button = modal.find('#materialButton');
+            button.innerHTML = 'Save Changes'
 
+            $('.materialsForm').parsley().reset();
+            $('.materialsForm').attr('id', 'updateMaterial');
+            $('.materialsForm').attr('data-id', material);
+            axios({
+                method: 'GET',
+                url: "{{ route('operational.material.show', '') }}" + "/" + material,
+            })
+                .then(function (response) {
+                    modal.find('#do_number').val(response.data.do);
+                    modal.find('#memo_number').val(response.data.memo);
+                    modal.find('#updateMaterial').attr("data-id", response.data.id)
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+        }
+
+        async function deleteMaterial(material) {
+            const operational = $('#select-operational').val();
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You will not be able to recover this action!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#f34e4e',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel'
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    try {
+                        const response = await axios.delete("{{route('operational.material.delete', '')}}" + "/" + material, {
+                            data: {
+                                _token: "{{ csrf_token() }}",
+                            }
+                        });
+                        //check if response is success
+                        if (response.data.success) {
+                            Swal.fire(
+                                'Deleted!',
+                                'Material has been deleted.',
+                                'success'
+                            )
+                            $('#table-material').DataTable().ajax.reload();
+                        }
+                    } catch (error) {
+                        console.error(error);
+                    }
+                }
+            });
+        }
 
     </script>
 @endsection

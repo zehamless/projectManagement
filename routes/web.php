@@ -175,7 +175,7 @@ Route::prefix('operational')->group(function () {
         Route::get('/get/{operational}', [OperationalMaterialController::class, 'index'])->name('operational.material.index');
         Route::post('/store', [OperationalMaterialController::class, 'store'])->name('operational.material.store');
         Route::patch('/{material}', [OperationalMaterialController::class, 'update'])->name('operational.material.update');
-        Route::delete('/{material}', [OperationalMaterialController::class, 'delete'])->name('operational.material.delete');
+        Route::delete('/{material}', [OperationalMaterialController::class, 'destroy'])->name('operational.material.delete');
         Route::get('/show/{material}', [OperationalMaterialController::class, 'show'])->name('operational.material.show');
     });
     Route::prefix('technician')->group(function () {

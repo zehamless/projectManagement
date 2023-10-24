@@ -30,36 +30,43 @@ class OperationalMaterialController extends Controller
             'do' => 'required',
         ]);
 
-        OperationalMaterial::create($request->validated());
+        OperationalMaterial::create($request->all());
         return response()->json([
-            'success' => "Operational Material added succescfully"
+            'success' => "Operational Material added successfully"
         ], 200);
     }
 
-    public function show(OperationalMaterial $operationalMaterial)
+    public function show(string $operationalMaterial)
     {
-        return response()->json($operationalMaterial);
+        $material = OperationalMaterial::find($operationalMaterial);
+        return response()->json($material);
     }
 
-    public function update(Request $request, OperationalMaterial $operationalMaterial)
+    public function update(Request $request, OperationalMaterial $material)
     {
         $request->validate([
             'memo' => 'required',
             'do' => 'required',
-            'status' => 'required',
         ]);
 
-        $operationalMaterial->update($request->validated());
-
+        $req = $request->all();
+        $material->update($request->all());
+        //return request as json
         return response()->json([
-            'success' => "Operational Material updated succescfully"
+            'success' => "Operational Material updated successfully",
+            'data'=> [
+                'req' => $req,
+                'operationalMaterial' => $material
+                ]
         ], 200);
     }
 
-    public function destroy(OperationalMaterial $operationalMaterial)
+    public function destroy(OperationalMaterial $material)
     {
-        $operationalMaterial->delete();
+        $material->delete();
 
-        return response()->json();
+        return response()->json([
+            'success' => "Operational Material deleted successfully"
+        ], 200);
     }
 }
