@@ -8,10 +8,10 @@ use Yajra\DataTables\Facades\DataTables;
 
 class CustomerContactController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, $id)
     {
         if ($request->ajax()) {
-            $data = CustomerContact::select('id', 'name', 'phone');
+            $data = CustomerContact::select('id', 'name', 'phone')->where("customer_id", $id);
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->toJson();
