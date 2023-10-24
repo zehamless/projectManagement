@@ -68,10 +68,11 @@
                                     <div class="d-flex flex-column mt-4">
 {{--                                    ini buat role custom--}}
                                     @foreach($roles as $role)
+                                    <div class="d-flex flex-column">
                                         <a type="button" href="{{route('setSession', ['role' => $role])}}"
                                            class="btn btn-outline-danger waves-effect mb-2 rounded-3">{{$role}}</a>
-                                    @endforeach
                                     </div>
+                                    @endforeach
 
                                     <!-- end row -->
                                 </form>

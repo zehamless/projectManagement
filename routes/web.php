@@ -3,6 +3,7 @@
 use App\Http\Controllers\CustomerContactController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\MilestoneController;
 use App\Http\Controllers\OperationalAgendaController;
 use App\Http\Controllers\OperationalController;
@@ -12,6 +13,10 @@ use App\Http\Controllers\ProductionCostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SistemPenawaran\ApprovalController;
+use App\Http\Controllers\SistemPenawaran\DashboardPenawaranController;
+use App\Http\Controllers\SistemPenawaran\MappingController;
+use App\Http\Controllers\SistemPenawaran\PenawaranController;
 use App\Http\Controllers\TopController;
 use App\Http\Controllers\UserController;
 use App\Material;
@@ -161,6 +166,7 @@ Route::prefix('operational')->group(function () {
     Route::prefix('expense')->group(function () {
         Route::get('/get/{operational}', [OperationalExpensesController::class, 'index'])->name('operational.expense.index');
         Route::post('/store', [OperationalExpensesController::class, 'store'])->name('operational.expense.store');
+        Route::get('/{expense}/edit', [OperationalExpensesController::class, 'updateExpenseForm'])->name('operational.expense.update-form');
         Route::patch('/{expense}', [OperationalExpensesController::class, 'update'])->name('operational.expense.update');
         Route::delete('/{expense}', [OperationalExpensesController::class, 'delete'])->name('operational.expense.delete');
         Route::get('/show/{expense}', [OperationalExpensesController::class, 'show'])->name('operational.expense.show');
@@ -189,6 +195,23 @@ Route::prefix('operational')->group(function () {
 });
 
 
+// routes sistem administrasi penawaran
+Route::prefix('sistemPenawaran')->group(function () {
+    Route::get('/', [DashboardPenawaranController::class, 'index'])->name('sistemPenawaran.dashboardPenawaran');
+
+    Route::prefix('penawaran')->group(function () {
+        Route::get('/', [PenawaranController::class, 'index'])->name('sistemPenawaran.penawaran.index');
+    });
+    Route::prefix('approval')->group(function () {
+        Route::get('/', [ApprovalController::class, 'index'])->name('sistemPenawaran.approval.index');
+    });
+    Route::prefix('mapping')->group(function () {
+        Route::get('/', [MappingController::class, 'index'])->name('sistemPenawaran.mapping.index');
+    });
+});
+// end routes sistem administrasi penawaran
+
+
 Route::get('/projects/createMilestone', function () {
     return view('projects.createMilestone');
 });
@@ -206,8 +229,13 @@ Route::get('calendar', function () {
     return view('calendar');
 });
 
-Route::get('approval', function () {
-    return view('approval');
+Route::get('approval/index', function () {
+    return view('approval.index');
 });
+
+
+Route::get('approval/preview', function(){
+    return view('operational.operationalDocument');
+}); //?
 
 require __DIR__ . '/auth.php';

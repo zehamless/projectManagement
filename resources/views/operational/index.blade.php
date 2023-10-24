@@ -39,7 +39,7 @@
             color: white;
         }
 
-        .row {
+        #operational-data .row {
             --ct-gutter-x: 0rem !important;
         }
     </style>
@@ -78,7 +78,7 @@
                     </div> <!-- end col -->
                 </div>
 
-                <div class="row">
+                <div id="operational-data" class="row">
                     <div class="col-12">
                         <div class="card card-nbm">
                             <div class="card-body card-nbm">
