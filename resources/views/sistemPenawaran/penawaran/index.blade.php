@@ -151,7 +151,7 @@
                                             <div class="mb-3">
                                                 <label for="customerNameLeft">Customer Name </label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="Username"
+                                                    <input type="text" class="form-control" placeholder="Name Customer"
                                                         aria-label="Username" id="customerNameLeft">
                                                 </div>
                                             </div>
@@ -163,7 +163,7 @@
                                             <div class="mb-3">
                                                 <label for="customerNameRight">Customer</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="Username"
+                                                    <input type="text" class="form-control" placeholder="PT"
                                                         aria-label="Username" id="customerNameRight">
                                                 </div>
                                             </div>
@@ -176,7 +176,7 @@
                                             <div class="mb-3">
                                                 <label for="customerNameLeft">Project Name</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="Username"
+                                                    <input type="text" class="form-control" placeholder="Nama Project"
                                                         aria-label="Username" id="customerNameLeft">
                                                 </div>
                                             </div>
@@ -188,7 +188,7 @@
                                             <div class="mb-3">
                                                 <label for="customerNameRight">No RFQ</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="Username"
+                                                    <input type="text" class="form-control" placeholder="RFQ"
                                                         aria-label="Username" id="customerNameRight">
                                                 </div>
                                             </div>
@@ -201,7 +201,7 @@
                                             <div class="mb-3">
                                                 <label for="customerNameLeft">Email</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="Username"
+                                                    <input type="text" class="form-control" placeholder="Email"
                                                         aria-label="Username" id="customerNameLeft">
                                                 </div>
                                             </div>
@@ -213,7 +213,7 @@
                                             <div class="mb-3">
                                                 <label for="customerNameRight">No.Hp</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="Username"
+                                                    <input type="text" class="form-control" placeholder="No.Handphone"
                                                         aria-label="Username" id="customerNameRight">
                                                 </div>
                                             </div>
@@ -226,7 +226,7 @@
                                             <div class="mb-3">
                                                 <label for="customerNameLeft">Tanggal Penawaran</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="Username"
+                                                    <input type="text" class="form-control" placeholder="Tanggal Penawaran"
                                                         aria-label="Username" id="customerNameLeft">
                                                 </div>
                                             </div>
@@ -238,7 +238,7 @@
                                             <div class="mb-3">
                                                 <label for="customerNameRight">MSG No</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="Username"
+                                                    <input type="text" class="form-control" placeholder="Nomor MSG"
                                                         aria-label="Username" id="customerNameRight">
                                                 </div>
                                             </div>
@@ -279,7 +279,7 @@
                                             <div class="mb-3">
                                                 <label for="customerNameLeft">Alamat</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="Username"
+                                                    <input type="text" class="form-control" placeholder="Alamat "
                                                         aria-label="Username" id="customerNameLeft">
                                                 </div>
                                             </div>
