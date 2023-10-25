@@ -33,6 +33,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 Route::post('marks-as-read/{notification}', [UserController::class, 'marksAsRead'])->name('markNotification');
 Route::get('mark-all-as-read', [UserController::class, 'marksAllAsRead'])->name('markAllNotification');
 Route::group(['prefix' => 'projects'], function () {
@@ -117,7 +118,7 @@ Route::prefix('customer')->group(function () {
 });
 
 Route::prefix('customerContact')->group(function () {
-    Route::get('/', [CustomerContactController::class, 'index'])->name('customerContact.index');
+    Route::get('/{id}', [CustomerContactController::class, 'index'])->name('customerContact.index');
     Route::get('/create', [CustomerContactController::class, 'create'])->name('customerContact.create');
     Route::post('/store', [CustomerContactController::class, 'store'])->name('customerContact.store');
     Route::get('/show/', [CustomerContactController::class, 'show'])->name('customerContact.show');
@@ -234,7 +235,7 @@ Route::get('approval/index', function () {
 });
 
 
-Route::get('approval/preview', function(){
+Route::get('approval/preview', function () {
     return view('operational.operationalDocument');
 }); //?
 
