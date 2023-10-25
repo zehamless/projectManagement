@@ -67,7 +67,9 @@
                                 </div>
                                 <p class="notify-details">
                                     {{ $notification->data['message']}}
-                                    <small class="text-muted">from {{$notification->data['created_by']}}</small>
+                                    @isset($notification->data['created_by'])
+                                        <small class="text-muted">from {{$notification->data['created_by']}}</small>
+                                    @endisset
                                 </p>
                             </a>
                             <button class="btn btn-sm btn-light mark-as-read"
