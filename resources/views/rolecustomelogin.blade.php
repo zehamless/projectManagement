@@ -64,7 +64,7 @@
                                 </div>
                                 <form action="{{ url('/') }}" class="parsley-examples">
                                     @csrf
-                                    <h4 class="text-center ">Welcome Alex, Choose your Role</h4>
+                                    <h4 class="text-center ">Welcome {{auth()->user()->first_name}}, Choose your Role</h4>
                                     <div class="d-flex flex-column mt-4">
 {{--                                    ini buat role custom--}}
                                     @foreach($roles as $role)
@@ -75,7 +75,7 @@
                                     @endforeach
 
                                     <!-- end row -->
-                                </form>
+                                    </div>
                                     <!-- end row -->
                                 </form>
 
