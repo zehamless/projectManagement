@@ -38,7 +38,7 @@
         <li class="dropdown notification-list topbar-dropdown">
             <a class="nav-link dropdown-toggle waves-effect waves-light" data-bs-toggle="dropdown" href="#"
                role="button" aria-haspopup="false" aria-expanded="false">
-                <i class="fe-bell noti-icon"></i>
+                <i class="fe-bell notify-icon"></i>
                 <span
                     class="badge bg-danger rounded-circle noti-icon-badge">{{ auth()->user()->unreadNotifications->count() ?? '0' }}</span>
             </a>
@@ -58,7 +58,7 @@
                 <div class="notify-scroll" data-simplebar>
 
                     <!-- item-->
-                    @if (auth()->user()->unread_notifications_count != 0)
+                    @if (auth()->user()->unreadNotifications->count() > 0)
                         @foreach (auth()->user()->unreadNotifications as $notification)
                             <a class="dropdown-item notify-item" href="{{ $notification->data['link'] }}">
                                 <div
@@ -139,8 +139,8 @@
                     </a>
                 </li>
 
-                <li class="{{ Request::is('operational/approval/*') ? 'menuitem-active' : ''}}">
-                    <a href="{{ route('operational.approval') }}">
+                <li class="{{ Request::is('approval/*') ? 'menuitem-active' : ''}}">
+                    <a href="{{ url('approval/index') }}">
                         <i class="mdi mdi-clipboard-check-multiple-outline"></i>
                         <span> Approval </span>
                     </a>
