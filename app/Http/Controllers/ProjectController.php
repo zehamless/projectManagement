@@ -6,7 +6,7 @@ use App\Models\Customer;
 use App\Models\CustomerContact;
 use App\Models\Project;
 use App\Models\User;
-use App\Notifications\soProjectNotification;
+use App\Notifications\projectNotification;
 use Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -136,20 +136,23 @@ class ProjectController extends Controller
         $project->expense_budget = $request->input('expense_budget');
         $project->save();
 
-        if ($so === "Nomor SO Belum diisi"){
-        //Notification
-        $projectID = $project->id;
-        $label = $project->label;
-        $name =  auth()->user()->first_name;
-        $users = User::Role(['Project Manager', 'Sales Executive'])->get();
-        \Illuminate\Support\Facades\Notification::send($users, new soProjectNotification($projectID, $label, $name));
+        if ($so === "Nomor SO Belum diisi") {
+            //Notification
+            $projectID = $project->id;
+            $label = $project->label;
+            $name = auth()->user()->first_name;
+            $users = User::Role(['Project Manager', 'Sales Executive'])->get();
+            \Illuminate\Support\Facades\Notification::send($users, new projectNotification(
+                'SO project ' . '""' . $label . '""' . ' perlu diisi',
+                $name,
+                'warning',
+                route('projects.show', $projectID)
+            ));
         }
 
         // Redirect dengan pesan sukses
         return redirect('projects')->with('success', 'Project berhasil ditambahkan');
     }
-
-
 
 
     public function show($id)
@@ -178,10 +181,6 @@ class ProjectController extends Controller
 
         return view('projects.detailProjects', compact('milestones', 'projectData', 'productionCost', 'tops', 'operationals', 'percentageDone', 'realCost', 'realService', 'topProgress', 'project'));
     }
-
-
-
-
 
 
     // Menampilkan form untuk mengedit project

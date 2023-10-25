@@ -37,8 +37,8 @@
 
         <li class="dropdown notification-list topbar-dropdown">
             <a class="nav-link dropdown-toggle waves-effect waves-light" data-bs-toggle="dropdown" href="#"
-                role="button" aria-haspopup="false" aria-expanded="false">
-                <i class="fe-bell noti-icon"></i>
+               role="button" aria-haspopup="false" aria-expanded="false">
+                <i class="fe-bell notify-icon"></i>
                 <span
                     class="badge bg-danger rounded-circle noti-icon-badge">{{ auth()->user()->unreadNotifications->count() ?? '0' }}</span>
             </a>
@@ -58,22 +58,22 @@
                 <div class="notify-scroll" data-simplebar>
 
                     <!-- item-->
-                    @if (auth()->user()->unread_notifications_count != 0)
+                    @if (auth()->user()->unreadNotifications->count() > 0)
                         @foreach (auth()->user()->unreadNotifications as $notification)
                             <a class="dropdown-item notify-item" href="{{ $notification->data['link'] }}">
                                 <div
                                     class="notify-icon {{ $notification->data['type'] === 'warning' ? 'bg-warning' : 'bg-primary' }}">
-                                    <i
-                                        class="mdi mdi-{{ $notification->data['type'] === 'warning' ? 'alert' : 'comment-account-outline' }}"></i>
+                                    <i class="mdi mdi-{{ $notification->data['type'] === 'warning' ? 'alert' : 'comment-account-outline' }}"></i>
                                 </div>
                                 <p class="notify-details">
-                                    {{ $notification->data['message'] }}
-                                    <small class="text-muted">from
-                                        {{ $notification->data['created_by'] }}</small>
+                                    {{ $notification->data['message']}}
+                                    @isset($notification->data['created_by'])
+                                        <small class="text-muted">from {{$notification->data['created_by']}}</small>
+                                    @endisset
                                 </p>
                             </a>
                             <button class="btn btn-sm btn-light mark-as-read"
-                                data-notification-id="{{ $notification->id }}">
+                                    data-notification-id="{{ $notification->id }}">
                                 <i class="fas fa-times"></i>
                             </button>
                         @endforeach
@@ -127,43 +127,42 @@
                 <li class="menu-title mt-2">Apps</li>
 
                 <li
-                    class="{{ Request::is('projects/*') || Request::is('milestone/*') || Request::is('top/*') ? 'menuitem-active' : '' }}">
+                    class="{{ Request::is('projects/*') || Request::is('milestone/*') || Request::is('top/*') ? 'menuitem-active' : ''}}">
                     <a href="{{ url('projects') }}">
                         <i class="mdi mdi-briefcase-variant-outline"></i>
                         <span> Projects </span>
                     </a>
                 </li>
 
-                <li class="{{ Request::is('operational/*') ? 'menuitem-active' : '' }}">
+                <li class="{{ (Request::is('operational/*') && !Request::is('operational/approval')) ? 'menuitem-active' : '' }}">
                     <a href="{{ url('operational') }}">
                         <i class="mdi mdi-book-clock-outline"></i>
                         <span> Operational </span>
                     </a>
                 </li>
 
-                <li class="{{ Request::is('approval/*') ? 'menuitem-active' : '' }}">
+                <li class="{{ Request::is('approval/*') ? 'menuitem-active' : ''}}">
                     <a href="{{ url('approval/index') }}">
                         <i class="mdi mdi-clipboard-check-multiple-outline"></i>
                         <span> Approval </span>
                     </a>
                 </li>
 
-                <li class="{{ Request::is('calendar/*') ? 'menuitem-active' : '' }}">
+                <li class="{{ Request::is('calendar/*') ? 'menuitem-active' : ''}}">
                     <a href="{{ url('calendar') }}">
                         <i class="mdi mdi-calendar-blank-outline"></i>
                         <span> Calendar </span>
                     </a>
                 </li>
 
-                <li
-                    class="{{ Request::is('customer/*') || Request::is('customerContact/*') ? 'menuitem-active' : '' }}">
+                <li class="{{ Request::is('customer/*') || Request::is('customerContact/*') ? 'menuitem-active' : ''}}">
                     <a href="{{ url('customer') }}">
                         <i class="mdi mdi-account-supervisor-outline"></i>
                         <span> Customers </span>
                     </a>
                 </li>
 
-                <li class="{{ Request::is('summary/*') ? 'menuitem-active' : '' }}">
+                <li class="{{ Request::is('summary/*') ? 'menuitem-active' : ''}}">
                     <a href="{{ url('summary') }}">
                         <i class="mdi mdi-bulletin-board"></i>
                         <span> Summary </span>
@@ -172,7 +171,7 @@
 
                 <li class="menu-title mt-2">Account Management</li>
 
-                <li class="{{ Request::is('admin/*') ? 'menuitem-active' : '' }}">
+                <li class="{{ Request::is('admin/*') ? 'menuitem-active' : ''}}">
                     <a href="{{ url('admin/users') }}">
                         <i class="mdi mdi-account-group-outline"></i>
                         <span> Data Akun </span>
@@ -183,7 +182,8 @@
                     <div class=" user-box text-start">
                         <div class="row px-3">
                             <div class="col-3 profile-photo-column">
-                                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                                <img
+                                    src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
                                     alt="user-img" title="Mat Helme" class="rounded img-thumbnail avatar-md">
                             </div>
                             <div class="col-7">
@@ -191,10 +191,10 @@
                                 <p class="text-muted left-user-info mb-0">Admin</p>
                             </div>
                             <div class="col-2 my-auto">
-                                <form method="POST" action="{{ route('logout') }}">
+                                <form method="POST" action="{{route('logout')}}">
                                     @csrf
                                     <button class="fe-log-out logout-font btn-logout" title="Logout System"
-                                        type="submit"></button>
+                                            type="submit"></button>
                                 </form>
                             </div>
                         </div>
@@ -213,8 +213,8 @@
 @section('pageScript')
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script type="text/javascript">
-        $(document).ready(function() {
-            $('.mark-as-read').click(function() {
+        $(document).ready(function () {
+            $('.mark-as-read').click(function () {
                 let notification_id = $(this).data('notification-id');
                 axios({
                     method: 'POST',
@@ -223,10 +223,10 @@
                         _token: '{{ csrf_token() }}',
                         notification: notification_id
                     }
-                }).then(function(response) {
+                }).then(function (response) {
                     console.log(response);
                     location.reload();
-                }).catch(function(error) {
+                }).catch(function (error) {
                     console.log(error);
                 })
             })

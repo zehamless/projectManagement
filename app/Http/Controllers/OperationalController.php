@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use PhpParser\Node\Scalar\String_;
+use Yajra\DataTables\Facades\DataTables;
 
 class OperationalController extends Controller
 {
@@ -203,5 +204,28 @@ class OperationalController extends Controller
         return response()->json([
             '200'
         ]);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function approval()
+    {
+        $operationals = Operational::with('project:id,label')->where('approved_by', null)->select('id', 'spk_number', 'project_id', 'date', 'created_by')->get();
+        if (\request()->ajax())
+        {
+        return DataTables::of($operationals)
+            ->addIndexColumn()
+            ->addColumn('approve', function ($operationals) {
+                return '<a href="' . route('operational.show', $operationals->id) . '" class="btn btn-approval btn-sm">Approve</a>';
+            })
+            ->addColumn('preview', function ($operationals) {
+                return '<a href="' . route('operational.show', $operationals->id) . '" class="btn btn-preview btn-sm">Preview</a>';
+            })
+            ->rawColumns(['approve', 'preview'])
+            ->make(true);
+        }
+//        dd($operationals);
+        return view('approval');
     }
 }

@@ -58,16 +58,16 @@
 <script>
     // Sample data (you can replace this with your own data)
     const data = [
-        { column1: '1', column2: 'SPK-1-2', column3: 'Maintenance', column4: 'admin', 
-            column5: 'Value 2', column6: '<button type="button" class="btn btn-approval btn-sm">Approve</button>', 
+        { column1: '1', column2: 'SPK-1-2', column3: 'Maintenance', column4: 'admin',
+            column5: 'Value 2', column6: '<button type="button" class="btn btn-approval btn-sm">Approve</button>',
             column7: '<a href="{{ url('approval/preview') }}" type="button" class="btn btn-success btn-sm">Preview</a>' },
 
-        { column1: '2', column2: 'SPK-2-3', column3: 'Oil Replacement', column4: 'admin', 
-            column5: 'Value 2', column6: '<button type="button" class="btn btn-approval btn-sm">Approve</button>', 
+        { column1: '2', column2: 'SPK-2-3', column3: 'Oil Replacement', column4: 'admin',
+            column5: 'Value 2', column6: '<button type="button" class="btn btn-approval btn-sm">Approve</button>',
             column7: '<a href="{{ url('approval/preview') }}" type="button" class="btn btn-success btn-sm">Preview</a>' },
-            
-        { column1: '3', column2: 'SPK-4-5', column3: 'Electric Parts', column4: 'admin', 
-            column5: 'Value 2', column6: '<button type="button" class="btn btn-approval btn-sm">Approve</button>', 
+
+        { column1: '3', column2: 'SPK-4-5', column3: 'Electric Parts', column4: 'admin',
+            column5: 'Value 2', column6: '<button type="button" class="btn btn-approval btn-sm">Approve</button>',
             column7: '<a href="{{ url('approval/preview') }}" type="button" class="btn btn-success btn-sm">Preview</a>' },
     ];
 
@@ -101,7 +101,7 @@
             scrollX: true,
         });
     });
-    
+
 
 </script>
 @endsection

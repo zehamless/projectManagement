@@ -224,6 +224,7 @@
     <link href="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-1.13.6/r-2.5.0/sc-2.2.0/sp-2.2.0/sl-1.7.0/datatables.min.css" rel="stylesheet">
 
     <script src="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-1.13.6/r-2.5.0/sc-2.2.0/sp-2.2.0/sl-1.7.0/datatables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         $(document).ready(function() {
             $('#select-roles').select2({
@@ -458,45 +459,43 @@
                     var last_name = modal.find("#last_name").val();
                     var division = modal.find("#division").val();
                     var roles = modal.find("#select-roles").val();
-                    var signature = modal.find("#signature").val();
+                    var signature = modal.find("#signature")[0].files[0];
 
-                    $.ajaxSetup({
+                    let formData = new FormData();
+                    formData.append('_method', 'PATCH');
+                    formData.append('_token', '{{csrf_token()}}')
+                    formData.append('email', email);
+                    formData.append('first_name', first_name);
+                    formData.append('last_name', last_name);
+                    formData.append('division', division);
+                    formData.append('roles', roles);
+                    if (signature) {
+                        formData.append('signature', signature);
+                    }
+                    for(var pair of formData.entries()) {
+                        console.log(pair[0]+ ', '+ pair[1]);
+                    }
+                    axios({
                         headers: {
+                            'Content-Type': 'multipart/form-data',
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                        }
-                    });
-                    // Send an AJAX request to update the user
-                    $.ajax({
-                        url: "/admin/users/" + userId, // Correct URL for PATCH request
-                        type: 'PATCH', // Use PATCH for this request
-                        data: {
-                            _token: "{{ csrf_token() }}",
-                            email: email,
-                            first_name: first_name,
-                            last_name: last_name,
-                            division: division,
-                            roles: roles,
-                            signature: signature,
                         },
-                        success: function() {
-                            modal.modal("hide");
-                            $('#datatable').DataTable().ajax.reload();
-                            swal.fire({
-                                title: "Success!",
-                                text: "User has been updated.",
-                                icon: "success",
-                            });
-                        },
-                        error: function(xhr, textStatus, errorThrown) {
-                            console.error(xhr.responseText);
-                            swal.fire({
-                                title: "Error!",
-                                text: "User failed to update.",
-                                icon: "error",
-                            });
-                        }
-                    });
-
+                        method: 'POST',
+                        url: "/admin/users/" + userId,
+                        data: formData
+                    },
+                    ).then(function(response) {
+                        console.log(response);
+                        modal.modal("hide");
+                        $('#datatable').DataTable().ajax.reload();
+                        Swal.fire(
+                            'Updated!',
+                            'Your file has been updated.',
+                            'success'
+                        )
+                    }).catch(function(error) {
+                        console.log(error);
+                    })
                 }
             })
         }

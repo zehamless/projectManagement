@@ -88,7 +88,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="mb-3 text-start">
-                                    <label for="field-1" class="form-label">Date<span class="text-danger">*</span>
+                                    <label for="due-date" class="form-label">Date<span class="text-danger">*</span>
                                     </label>
                                     <input type="date" class="form-control datepicker" id="expense-date"
                                         placeholder="date" name="expense-date" parsley-trigger="change" required>
@@ -119,7 +119,7 @@
         </div>
     </form>
     {{-- modals material utilized --}}
-    <form class="meterialForm" data-parsley-validate>
+    <form class="materialsForm" data-parsley-validate>
         <div id="add-material-modal" class="modal fade" role="dialog" aria-labelledby="myModalLabel"
             aria-hidden="true" style="overflow:hidden;">
             <div class="modal-dialog modal-dialog-centered">
@@ -158,7 +158,7 @@
                             <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">
                                 Close
                             </button>
-                            <button type="submit" class="btn btn-save waves-effect waves-light">
+                            <button type="submit" class="btn btn-save waves-effect waves-light" id="materialExpense">
                                 Save
                                 changes
                             </button>
