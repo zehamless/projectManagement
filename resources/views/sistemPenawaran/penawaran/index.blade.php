@@ -154,8 +154,9 @@
                                             <div class="mb-3">
                                                 <label for="customerNameLeft">Customer Name </label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="Name Customer"
-                                                        aria-label="Username" id="customerNameLeft">
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Name Customer" aria-label="Username"
+                                                        id="customerNameLeft">
                                                 </div>
                                             </div>
                                         </form>
@@ -229,8 +230,9 @@
                                             <div class="mb-3">
                                                 <label for="customerNameLeft">Tanggal Penawaran</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="Tanggal Penawaran"
-                                                        aria-label="Username" id="customerNameLeft">
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Tanggal Penawaran" aria-label="Username"
+                                                        id="customerNameLeft">
                                                 </div>
                                             </div>
                                         </form>
@@ -323,7 +325,7 @@
 
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                    <button type="button" class="btn btn-danger">Save changes</button>
                                 </div>
                             </div>
                         </div>
