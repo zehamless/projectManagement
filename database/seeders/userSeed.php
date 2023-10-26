@@ -3,10 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 
 class userSeed extends Seeder
 {
@@ -29,7 +26,7 @@ class userSeed extends Seeder
 //                ]);
         //generate user using UserFactory
         $this->call(RoleSeeder::class);
-        $users = User::factory()->count(20)->create();
+        $users = User::factory()->count(10)->create();
         //assign role to user
         foreach ($users as $user) {
             $user->hasroles()->attach(random_int(1, 7));
