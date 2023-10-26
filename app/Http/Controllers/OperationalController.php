@@ -207,6 +207,9 @@ class OperationalController extends Controller
         if (\request()->ajax()) {
             return DataTables::of($operationals)
                 ->addIndexColumn()
+                ->addColumn('created_by', function ($operationals) {
+                    return $operationals->creator->first_name . ' ' . $operationals->creator->last_name;
+                })
                 ->addColumn('approve', function ($operationals) {
                     return '<a href="' . route('operational.show', $operationals->id) . '" class="btn btn-approval btn-sm" type="button">Approve</a>';
                 })
