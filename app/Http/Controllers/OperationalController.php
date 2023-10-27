@@ -177,7 +177,7 @@ class OperationalController extends Controller
      */
     public function show(Operational $operational)
     {
-        $operationals = Operational::where('id', $operational->id)->with('team', 'project:id,label')->get();
+        $operationals = Operational::where('id', $operational->id)->with('team', 'project:id,label', 'creator', 'approver')->get();
         return response()->json($operationals);
     }
 
