@@ -54,7 +54,9 @@
                 <tbody>
                 <tr>
                     <td align="left">
-                        <img src="{{ asset('images/logo_trafindo_full.png') }}" height="50"/>
+                        <img
+                            src="{{'data:image/png;base64,'.base64_encode(file_get_contents(public_path('images/logo_trafindo_full.png')))}}"
+                            height="50" alt="logo"/>
                     </td>
                 </tr>
                 <tr>
@@ -272,12 +274,14 @@
                 {{-- row signature --}}
                 <tr>
                     <td>
-                        <img src="{{asset('storage/'. $operational->creator->signature)}}"
-                             width="60%" alt="">
+                        <img
+                            src="{{'data:image/png;base64,'.base64_encode(file_get_contents(public_path('storage/'. $operational->creator->signature)))}}"
+                            width="60%" alt="">
                     </td>
                     <td>
-                        <img src="{{asset('storage/'. $currentUser->signature)}}"
-                             width="60%" alt="">
+                        <img
+                            src="{{'data:image/png;base64,'.base64_encode(file_get_contents(public_path('storage/'. $currentUser->signature)))}}"
+                            width="60%" alt="">
                     </td>
                 </tr>
 
@@ -306,12 +310,6 @@
     </div>
 
 </div>
-
-
-<script>
-    // window.print()
-</script>
-
 
 </body>
 

@@ -159,7 +159,7 @@ Route::prefix('operational')->group(function () {
     Route::get('/show/{operational}', [OperationalController::class, 'show'])->name('operational.show'); //?
     Route::put('/update', [OperationalController::class, 'update'])->name('operational.update'); //~
     Route::delete('/{operational}', [OperationalController::class, 'destroy'])->name('operational.destroy');
-    Route::post('/approve/{operational}', [OperationalController::class, 'approve'])->name('operational.approve'); //~
+    Route::get('/approval/{operational}/approve', [OperationalController::class, 'approve'])->name('operational.approve'); //~
     Route::get('/approval', [OperationalController::class, 'approval'])->name('operational.approval'); //~
     Route::get('/approval/{operational}/preview', [OperationalController::class, 'preview'])->name('operational.preview');
     Route::get('/getOperational/{salesOrder}', [OperationalController::class, 'getOperational'])->name('operational.get-operational'); //? --

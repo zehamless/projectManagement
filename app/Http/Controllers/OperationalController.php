@@ -10,8 +10,8 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use PDF;
 use Yajra\DataTables\Facades\DataTables;
 
 class OperationalController extends Controller
@@ -211,7 +211,7 @@ class OperationalController extends Controller
                     return $operationals->creator->first_name . ' ' . $operationals->creator->last_name;
                 })
                 ->addColumn('approve', function ($operationals) {
-                    return '<a href="' . route('operational.show', $operationals->id) . '" class="btn btn-approval btn-sm" type="button">Approve</a>';
+                    return '<a href="' . route('operational.approve', $operationals->id) . '" class="btn btn-approval btn-sm" type="button">Approve</a>';
                 })
                 ->addColumn('preview', function ($operationals) {
                     return '<a href="' . route('operational.preview', $operationals->id) . '" class="btn btn-success btn-sm" type="button">Preview</a>';
@@ -223,19 +223,19 @@ class OperationalController extends Controller
         return view('approval');
     }
 
-    /**
-     * @param Request $request
-     * @param Operational $operational
-     * @return RedirectResponse
-     */
-    public function approve(Request $request, Operational $operational)
+    public function approve(Operational $operational)
     {
-        $request->validate([
-            'approved_by' => 'required|string',
-        ]);
-        $operational->approved_by = $request->approved_by;
+        $operational = $operational->load('project', 'team', 'agendas', 'creator');
+        $customerId = Customer::where('id', $operational->project->customer_id)->first();
+        $currentUser = auth()->user();
+        $currentDate = date('d-m-Y');
+//        $operational->approved_by = auth()->user()->id;
+        $file = PDF::loadView('operational.operationalDocument', compact('operational', 'customerId', 'currentUser', 'currentDate'));
+        $file->save('storage/operational/' . $operational->spk_number . '.pdf');
+        $operational->file = 'operational/' . $operational->spk_number . '.pdf';
+        $operational->approved_by = auth()->user()->id;
         $operational->save();
-        return redirect()->route('operational.index')->with('success', 'Operational approved successfully.');
+        return redirect()->back()->with('success', 'Operational berhasil diapprove');
     }
 
     public function preview(Operational $operational)
