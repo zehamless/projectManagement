@@ -119,7 +119,7 @@
                                             </th>
                                             <th scope="row">
                                                 <p class="title-text">File</p>
-                                                <p class="details-text" id="file">-</p>
+                                                <a class="details-text" id="file">-</a>
                                             </th>
                                         </div>
                                         <div class="col-md-6">
@@ -479,7 +479,17 @@
                         $('#date').text(operationalData.date);
                         $('#label').text(projectLabel);
                         $('#type').text(operationalData.type);
-                        $('#file').text(operationalData.file);
+                        if (operationalData.approver == null) {
+                            $('#file').text('Belum ada diapprove');
+                            $('#file').addClass('btn btn-danger disabled')
+                        } else {
+                            $('#file').text('Download File');
+                            $('#file').removeClass('btn btn-danger disabled')
+                            $('#file').addClass('btn btn-info')
+                            $('#file').attr('href', "{{ route('operational.download', '') }}" + "/" + operational);
+
+
+                        }
                         $('#description').text(operationalData.description);
                         $('#transport').text(operationalData.transportation_mode);
                         $('#vehicle').text(operationalData.vehicle_number);

@@ -210,13 +210,12 @@ class OperationalController extends Controller
                 ->addColumn('created_by', function ($operationals) {
                     return $operationals->creator->first_name . ' ' . $operationals->creator->last_name;
                 })
-                ->addColumn('approve', function ($operationals) {
-                    return '<a href="' . route('operational.approve', $operationals->id) . '" class="btn btn-approval btn-sm" type="button">Approve</a>';
+                ->addColumn('action', function ($operationals) {
+                    return '<a href="' . route('operational.approve', $operationals->id) . '" class="btn btn-approval btn-sm" type="button">Approve</a>' .
+                        '<a href="' . route('operational.download', $operationals->id) . '" class="btn btn-info btn-sm" type="button">Download</a>' .
+                        '<a href="' . route('operational.preview', $operationals->id) . '" class="btn btn-success btn-sm" type="button">Preview</a>';
                 })
-                ->addColumn('preview', function ($operationals) {
-                    return '<a href="' . route('operational.preview', $operationals->id) . '" class="btn btn-success btn-sm" type="button">Preview</a>';
-                })
-                ->rawColumns(['approve', 'preview'])
+                ->rawColumns(['action'])
                 ->make(true);
         }
 //        dd($operationals);
@@ -225,14 +224,6 @@ class OperationalController extends Controller
 
     public function approve(Operational $operational)
     {
-        $operational = $operational->load('project', 'team', 'agendas', 'creator');
-        $customerId = Customer::where('id', $operational->project->customer_id)->first();
-        $currentUser = auth()->user();
-        $currentDate = date('d-m-Y');
-//        $operational->approved_by = auth()->user()->id;
-        $file = PDF::loadView('operational.operationalDocument', compact('operational', 'customerId', 'currentUser', 'currentDate'));
-        $file->save('storage/operational/' . $operational->spk_number . '.pdf');
-        $operational->file = 'operational/' . $operational->spk_number . '.pdf';
         $operational->approved_by = auth()->user()->id;
         $operational->save();
         return redirect()->back()->with('success', 'Operational berhasil diapprove');
@@ -245,6 +236,16 @@ class OperationalController extends Controller
         $currentUser = auth()->user();
         $currentDate = date('d-m-Y');
         return view('operational.operationalDocument', compact('operational', 'customerId', 'currentUser', 'currentDate'));
+    }
+
+    public function downloadFile(Operational $operational)
+    {
+        $operational = $operational->load('project', 'team', 'agendas', 'creator');
+        $customerId = Customer::where('id', $operational->project->customer_id)->first();
+        $currentUser = auth()->user();
+        $currentDate = date('d-m-Y');
+        $file = PDF::loadView('operational.operationalDocument', compact('operational', 'customerId', 'currentUser', 'currentDate'));
+        return $file->download($operational->spk_number . '.pdf');
     }
 }
 

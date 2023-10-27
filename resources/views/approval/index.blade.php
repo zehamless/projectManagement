@@ -36,8 +36,8 @@
                                         <th>Project Label</th>
                                         <th>Created By</th>
                                         <th>Service Date</th>
-                                        <th class="text-center">Approve</th>
-                                        <th class="text-center">Preview</th>
+                                        <th class="text-center">action</th>
+                                        {{--                                        <th class="text-center">Preview</th>--}}
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -106,8 +106,7 @@
                     {data: 'project.label', name: 'label'},
                     {data: 'created_by', name: 'created_by'},
                     {data: 'date', name: 'date'},
-                    {data: 'approve', name: 'approve'},
-                    {data: 'preview', name: 'preview'},
+                    {data: 'action', name: 'action'},
                 ]
             });
         });
