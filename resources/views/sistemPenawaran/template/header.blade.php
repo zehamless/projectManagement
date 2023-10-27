@@ -93,6 +93,15 @@
     }
     /* end loader container styling */
 
+    .table-title {
+        vertical-align: middle !important;
+    }
+
+    .details-text {
+        margin-bottom: unset;
+    }
+
+
 
     /* styling profile secrtion */
     @media screen and (max-width: 768px) {
