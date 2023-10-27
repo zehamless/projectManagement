@@ -20,7 +20,6 @@ use App\Http\Controllers\SistemPenawaran\PenawaranController;
 use App\Http\Controllers\TopController;
 use App\Http\Controllers\UserController;
 use App\Material;
-use App\Models\Role;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -125,7 +124,7 @@ Route::prefix('customerContact')->group(function () {
     Route::get('/edit', [CustomerContactController::class, 'edit'])->name('customerContact.edit');
     Route::get('/update', [CustomerContactController::class, 'update'])->name('customerContact.update');
     Route::delete('/delete/{id}', [CustomerContactController::class, 'destroy'])->name('customerContact.destroy');
-    Route::get('/get-customer-contacts/{customer_id}', [CustomerContactController::class, 'getCustomerContacts'])->name('customerContact.getCustomerContact');;
+    Route::get('/get-customer-contacts/{customer_id}', [CustomerContactController::class, 'getCustomerContacts'])->name('customerContact.getCustomerContact');
 });
 
 //contoh route (post(/admin/roles)
@@ -160,8 +159,10 @@ Route::prefix('operational')->group(function () {
     Route::get('/show/{operational}', [OperationalController::class, 'show'])->name('operational.show'); //?
     Route::put('/update', [OperationalController::class, 'update'])->name('operational.update'); //~
     Route::delete('/{operational}', [OperationalController::class, 'destroy'])->name('operational.destroy');
-    Route::post('/approve/{operational}', [OperationalController::class, 'approve'])->name('operational.approve'); //~
+    Route::get('/approval/{operational}/approve', [OperationalController::class, 'approve'])->name('operational.approve'); //~
+    Route::get('/approval/download/{operational}', [OperationalController::class, 'downloadFile'])->name('operational.download'); //~
     Route::get('/approval', [OperationalController::class, 'approval'])->name('operational.approval'); //~
+    Route::get('/approval/{operational}/preview', [OperationalController::class, 'preview'])->name('operational.preview');
     Route::get('/getOperational/{salesOrder}', [OperationalController::class, 'getOperational'])->name('operational.get-operational'); //? --
     Route::get('/getTeam/{operational}', [OperationalController::class, 'getTeam'])->name('operational.get-team');
     Route::prefix('expense')->group(function () {
