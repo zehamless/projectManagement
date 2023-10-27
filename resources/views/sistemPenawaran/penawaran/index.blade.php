@@ -279,6 +279,51 @@
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <div class="col-sm-4">
+                                        <form action="">
+                                            <div class="mb-3">
+                                                <label for="inputStateLeft" class="form-label">Negara</label>
+                                                <select id="inputStateLeft" class="form-select">
+                                                    <option selected>Choose...</option>
+                                                    <option>Indonesia</option>
+                                                    <option>Amerika</option>
+                                                    <option>Sunda Empire</option>
+                                                    <option>Bekasi</option>
+                                                </select>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <form action="">
+                                            <div class="mb-3">
+                                                <label for="inputStateCenter" class="form-label">Provinsi</label>
+                                                <select id="inputStateCenter" class="form-select">
+                                                    <option selected>Choose...</option>
+                                                    <option>Sumatera Utama</option>
+                                                    <option>Sumatera Selatan</option>
+                                                    <option>Sumatera Barat</option>
+                                                    <option>Riau</option>
+                                                </select>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <form action="">
+                                            <div class="mb-3">
+                                                <label for "inputStateRight" class="form-label">Kota</label>
+                                                <select id="inputStateRight" class="form-select">
+                                                    <option selected>Choose...</option>
+                                                    <option>Surya</option>
+                                                    <option>Zahir</option>
+                                                    <option>Beruntu</option>
+                                                    <option>Ashari</option>
+                                                    <option>Tambunan</option>
+                                                </select>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-sm-6 col-xl-12">
                                         <form action="">
                                             <div class="mb-3">
@@ -291,37 +336,7 @@
                                         </form>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm-6 col-xl-6">
-                                        <form action="">
-                                            <div class="mb-3">
-                                                <label for="inputStateLeft" class="form-label">Provinsi </label>
-                                                <select id="inputStateLeft" class="form-select">
-                                                    <option selected>Choose...</option>
-                                                    <option>Sumatera Utama</option>
-                                                    <option>Sumatera Selatan</option>
-                                                    <option>Sumatera Barat</option>
-                                                    <option>Riau</option>
-                                                </select>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="col-sm-6 col-xl-6">
-                                        <form action="">
-                                            <div class="mb-3">
-                                                <label for="inputStateRight" class="form-label">Kota</label>
-                                                <select id="inputStateRight" class="form-select">
-                                                    <option selected>Choose...</option>
-                                                    <option>Surya</option>
-                                                    <option>Zahir</option>
-                                                    <option>Beruntu</option>
-                                                    <option>Ashari</option>
-                                                    <option>tambunan</option>
-                                                </select>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
+
 
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
