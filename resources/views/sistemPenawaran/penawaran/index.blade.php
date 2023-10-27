@@ -307,7 +307,7 @@
                                     <div class="col-sm-4">
                                         <form action="">
                                             <div class="mb-3">
-                                                <label for "inputStateRight" class="form-label">Kota</label>
+                                                <label for="inputStateRight" class="form-label">Kota</label>
                                                 <select id="inputStateRight" class="form-select">
                                                     <option selected>Choose...</option>
                                                     <option>Surya</option>
