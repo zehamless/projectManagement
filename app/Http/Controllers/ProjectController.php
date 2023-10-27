@@ -8,11 +8,14 @@ use App\Models\Project;
 use App\Models\User;
 use App\Notifications\projectNotification;
 use Auth;
+use Illuminate\Contracts\Pagination\Paginator as PaginationPaginator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 
 class ProjectController extends Controller
 {
@@ -157,6 +160,7 @@ class ProjectController extends Controller
 
     public function show($id)
     {
+        // Paginator::useBootstrap();
         $project = Project::with(['projectManager', 'salesExecutive'])
             ->findOrFail($id);
 
@@ -168,9 +172,9 @@ class ProjectController extends Controller
             ->first();
 
         // Ambil semua Milestone yang terkait dengan proyek ini dan urutkan berdasarkan created_at terbaru
-        $milestones = $project->milestones()->orderBy('created_at', 'asc')->get();
-        $doneMilestones = $milestones->where('progress', 'Done')->count();
-        $totalMilestones = $milestones->count();
+        $milestones = $project->milestones()->orderBy('created_at', 'asc')->paginate(3);
+        $doneMilestones = $project->milestones()->where('progress', 'Done')->count();
+        $totalMilestones = $project->milestones()->count();
         $realCost = $project->productionCost->sum('amount');
         $realService = $project->operationals->sum('amount');
         $percentageDone = $totalMilestones > 0 ? ($doneMilestones / $totalMilestones) * 100 : 0;

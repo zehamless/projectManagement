@@ -90,18 +90,19 @@
                                 <div class="table-responsive">
                                     <table class="table mb-0">
                                         <thead>
+                                            <h4 class="mb-3">{{ $customer['companyName'] }}</h4>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <th scope="row">
                                                     <p class="title-text">Customer Contacts Total</p>
-                                                    <p class="details-text"></p>
+                                                    <p class="details-text">23</p>
                                                 </th>
                                             </tr>
                                             <tr>
                                                 <th scope="row">
                                                     <p class="title-text">Related Projects Total</p>
-                                                    <p class="details-text"></p>
+                                                    <p class="details-text">10</p>
                                                 </th>
                                             </tr>
 
