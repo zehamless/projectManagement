@@ -146,50 +146,35 @@
                             </div>
                             <div class="modal-body">
                                 <div class="row">
-                                    <div class="col-sm-6 col-xl-6">
+                                    <div class="col-sm-6 col-xl-4">
                                         <form action="">
                                             <div class="mb-3">
-                                                <label for="customerNameLeft">Customer Name </label>
+                                                <label for="customerNameLeft">Project Name </label>
                                                 <div class="input-group">
                                                     <input type="text" class="form-control"
-                                                        placeholder="Name Customer" aria-label="Username"
+                                                        placeholder=" Masukan NamaProject" aria-label="Username"
                                                         id="customerNameLeft">
                                                 </div>
                                             </div>
                                         </form>
                                     </div>
-
-                                    <div class="col-sm-6 col-xl-6">
+                                    <div class="col-sm-6 col-xl-4">
                                         <form action="">
                                             <div class="mb-3">
-                                                <label for="customerNameRight">Customer</label>
+                                                <label for="customerNameRight">Judul Pekerjaan</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="PT"
+                                                    <input type="text" class="form-control" placeholder="Judul Pekerjaan"
                                                         aria-label="Username" id="customerNameRight">
                                                 </div>
                                             </div>
                                         </form>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6 col-xl-6">
-                                        <form action="">
-                                            <div class="mb-3">
-                                                <label for="customerNameLeft">Project Name</label>
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="Nama Project"
-                                                        aria-label="Username" id="customerNameLeft">
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-
-                                    <div class="col-sm-6 col-xl-6">
+                                    <div class="col-sm-6 col-xl-4">
                                         <form action="">
                                             <div class="mb-3">
                                                 <label for="customerNameRight">No RFQ</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="RFQ"
+                                                    <input type="text" class="form-control" placeholder="Masukan Nomor RFQ"
                                                         aria-label="Username" id="customerNameRight">
                                                 </div>
                                             </div>
@@ -200,9 +185,9 @@
                                     <div class="col-sm-6 col-xl-6">
                                         <form action="">
                                             <div class="mb-3">
-                                                <label for="customerNameLeft">Email</label>
+                                                <label for="customerNameLeft">Emai;</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="Email"
+                                                    <input type="text" class="form-control" placeholder="Masukan Email"
                                                         aria-label="Username" id="customerNameLeft">
                                                 </div>
                                             </div>
@@ -212,7 +197,43 @@
                                     <div class="col-sm-6 col-xl-6">
                                         <form action="">
                                             <div class="mb-3">
-                                                <label for="customerNameRight">No.Hp</label>
+                                                <label for="customerNameRight">MSG No</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" placeholder="Masukan No MSG"
+                                                        aria-label="Username" id="customerNameRight">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 col-xl-4">
+                                        <form action="">
+                                            <div class="mb-3">
+                                                <label for="customerNameLeft">Customer</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" placeholder="PT"
+                                                        aria-label="Username" id="customerNameLeft">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <div class="col-sm-6 col-xl-4">
+                                        <form action="">
+                                            <div class="mb-3">
+                                                <label for="customerNameRight">Cutomer Contact Name</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" placeholder="Masukan Nama Customer"
+                                                        aria-label="Username" id="customerNameRight">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-sm-6 col-xl-4">
+                                        <form action="">
+                                            <div class="mb-3">
+                                                <label for="customerNameRight">No.HP</label>
                                                 <div class="input-group">
                                                     <input type="text" class="form-control" placeholder="No.Handphone"
                                                         aria-label="Username" id="customerNameRight">
@@ -222,7 +243,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-6 col-xl-6">
+                                    <div class="col-sm-6 col-xl-4">
                                         <form action="">
                                             <div class="mb-3">
                                                 <label for="customerNameLeft">Tanggal Penawaran</label>
@@ -234,21 +255,7 @@
                                             </div>
                                         </form>
                                     </div>
-
-                                    <div class="col-sm-6 col-xl-6">
-                                        <form action="">
-                                            <div class="mb-3">
-                                                <label for="customerNameRight">MSG No</label>
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="Nomor MSG"
-                                                        aria-label="Username" id="customerNameRight">
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6 col-xl-6">
+                                    <div class="col-sm-6 col-xl-4">
                                         <form action="">
                                             <div class="mb-3">
                                                 <label for="inputStateLeft" class="form-label">Delivery Time </label>
@@ -262,15 +269,41 @@
                                             </div>
                                         </form>
                                     </div>
+                                    <div class="col-sm-6 col-xl-4">
+                                        <form action="">
+                                            <div class="mb-3">
+                                                <label for="customerNameLeft">Segmentasi Pasar</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Tanggal Penawaran" aria-label="Username"
+                                                        id="customerNameLeft">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-sm-6 col-xl-6">
                                         <form action="">
                                             <div class="mb-3">
-                                                <label for="inputStateRight" class="form-label">State </label>
-                                                <select id="inputStateRight" class="form-select">
-                                                    <option selected>Choose...</option>
-                                                    <option>Option 1</option>
-                                                    <option>Option 2</option>
-                                                </select>
+                                                <label for="customerNameLeft">Pelaksanaan Pekerjaan</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Masukan Pelaksanaan Pekerjaan" aria-label="Username"
+                                                        id="customerNameLeft">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-sm-6 col-xl-6">
+                                        <form action="">
+                                            <div class="mb-3">
+                                                <label for="customerNameLeft">Syarat Pembayaran</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Masukan Syarat Pembayaran" aria-label="Username"
+                                                        id="customerNameLeft">
+                                                </div>
                                             </div>
                                         </form>
                                     </div>
