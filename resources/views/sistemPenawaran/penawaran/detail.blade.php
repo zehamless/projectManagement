@@ -125,8 +125,8 @@
                                     <div class="ml-auto">
                                         <button type="button" style="width: 145px; height: 35px"
                                             class="btn btn-danger rounded mt-2 ms-2" data-toggle="modal"
-                                            data-target="#exampleModalLong">
-                                            <i class="mdi mdi-plus" title="Untuk menambahkan project"></i>Add Syarat
+                                            data-target="#syarat">
+                                            <i class="mdi mdi-plus" title="Untuk menambahkan project"></i>Add layanan
                                         </button>
                                     </div>
                                 </div>
@@ -171,7 +171,7 @@
                                         <button type="button" class="btn btn-blue btn-xs waves-effect waves-light">Edit
                                         </button>
                                         <button type="button" class="btn btn-success btn-xs waves-effect waves-light">Print
-                                            </button>
+                                        </button>
                                     </div>
                                 </div>
                                 <div class="table-responsive">
@@ -364,6 +364,15 @@
                                         </div>
                                     </div>
                                     <div class="row">
+                                        <label for="sub pelayanan">Sub Layanan</label>
+                                    </div>
+                                    <div class="ml-auto mb-2">
+                                        <button type="button" class="btn btn-danger rounded mt-2 ">
+                                            <i class="mdi mdi-plus" title="Untuk sub layanan"></i>Add
+                                        </button>
+                                    </div>
+
+                                    <div class="row">
                                         <div class="col-sm-6 col-xl-4">
                                             <form action="">
                                                 <div class="mb-3">
@@ -376,6 +385,7 @@
                                                 </div>
                                             </form>
                                         </div>
+
                                         <div class="col-sm-6 col-xl-1">
                                             <form action="">
                                                 <div class="mb-3">
@@ -413,10 +423,10 @@
                                                     </div>
                                                 </div>
                                             </form>
-                                            <div class="ms-2 mt-3" >
-
+                                            <div class="ms-2 mt-3">
                                                 <button type="button"
-                                                    class="btn btn-blue btn-xs waves-effect waves-light">Edit
+                                                    class="btn btn-blue btn-xs waves-effect waves-light"
+                                                    style="height: 35px"><i class="fa-solid fa-trash"></i>
                                                 </button>
                                             </div>
                                         </div>
@@ -426,6 +436,82 @@
                                 <div class="modal-footer gap-1">
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- modal Syarat dan Ketentuan --}}
+                    <div class="modal fade" id="syarat" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h2 class="modal-title" id="exampleModalLongTitle">Add Layanan</h2>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-md-6 col-xl-12">
+                                            <form action="">
+                                                <div class="mb-3">
+                                                    <label for="customerNameLeft">Penawaran</label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Masukan Penawaran" aria-label="Username"
+                                                            id="customerNameLeft">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="mb-1">
+                                        <label for="syarat">Syarat dan Ketentuan</label>
+                                    </div>
+                                    <div class="row ms-2">
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                Harga belum termasuk PPN
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="flexCheckChecked" checked>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Harga tidak berlakuselamar libur hari raya keagamaan dan libur nasional
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="flexCheckChecked" checked>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Harga belum termasuk PCR test bila diperlukan
+                                            </label>
+
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="flexCheckChecked" checked>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Harga belum termasuk penggantian material/sparepart trafo
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="flexCheckChecked" checked>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Harga belum termasuk alat bantu, alat berat dan helper jika diperlukan 
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                     <button type="button" class="btn btn-primary">Save changes</button>
                                 </div>
                             </div>
