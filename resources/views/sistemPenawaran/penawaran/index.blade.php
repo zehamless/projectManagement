@@ -185,7 +185,7 @@
                                     <div class="col-sm-6 col-xl-6">
                                         <form action="">
                                             <div class="mb-3">
-                                                <label for="customerNameLeft">Emai;</label>
+                                                <label for="customerNameLeft">Email</label>
                                                 <div class="input-group">
                                                     <input type="text" class="form-control" placeholder="Masukan Email"
                                                         aria-label="Username" id="customerNameLeft">
