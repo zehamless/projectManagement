@@ -212,7 +212,7 @@
                                             <div class="mb-3">
                                                 <label for="customerNameLeft">Customer</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="Masukan Nama PT"
+                                                    <input type="text" class="form-control" placeholder="PT"
                                                         aria-label="Username" id="customerNameLeft">
                                                 </div>
                                             </div>
