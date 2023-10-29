@@ -143,7 +143,7 @@
                                         <tbody>
                                             <tr class="text-center">
                                                 <td>1</td>
-                                                <td>Tiger Nixon</td>
+                                                <td>Tiger </td>
                                                 <td>
                                                     <div class="d-flex gap-1 justify-content-center">
                                                         <button type="button"
@@ -505,7 +505,7 @@
                                             <input class="form-check-input" type="checkbox" value=""
                                                 id="flexCheckChecked" checked>
                                             <label class="form-check-label" for="flexCheckChecked">
-                                                Harga belum termasuk alat bantu, alat berat dan helper jika diperlukan 
+                                                Harga belum termasuk alat bantu, alat berat dan helper jika diperlukan
                                             </label>
                                         </div>
                                     </div>
