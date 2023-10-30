@@ -38,9 +38,9 @@
         <li class="dropdown notification-list topbar-dropdown">
             <a class="nav-link dropdown-toggle waves-effect waves-light" data-bs-toggle="dropdown" href="#"
                role="button" aria-haspopup="false" aria-expanded="false">
-                <i class="fe-bell noti-icon"></i>
+                <i class="fe-bell notify-icon"></i>
                 <span
-                    class="badge bg-danger rounded-circle noti-icon-badge">{{auth()->user()->unreadNotifications->count()?? '0'}}</span>
+                    class="badge bg-danger rounded-circle noti-icon-badge">{{ auth()->user()->unreadNotifications->count() ?? '0' }}</span>
             </a>
             <div class="dropdown-menu dropdown-menu-end dropdown-lg">
 
@@ -48,7 +48,7 @@
                 <div class="dropdown-item noti-title">
                     <h5 class="m-0">
                         <span class="float-end">
-                            <a href="{{route('markAllNotification')}}" class="text-dark">
+                            <a href="{{ route('markAllNotification') }}" class="text-dark">
                                 <small>Clear All</small>
                             </a>
                         </span>Notification
@@ -58,16 +58,18 @@
                 <div class="notify-scroll" data-simplebar>
 
                     <!-- item-->
-                    @if(auth()->user()->unread_notifications_count != 0)
-                        @foreach(auth()->user()->unreadNotifications as $notification)
-                            <a class="dropdown-item notify-item" href="{{$notification->data['link']}}">
+                    @if (auth()->user()->unreadNotifications->count() > 0)
+                        @foreach (auth()->user()->unreadNotifications as $notification)
+                            <a class="dropdown-item notify-item" href="{{ $notification->data['link'] }}">
                                 <div
                                     class="notify-icon {{ $notification->data['type'] === 'warning' ? 'bg-warning' : 'bg-primary' }}">
                                     <i class="mdi mdi-{{ $notification->data['type'] === 'warning' ? 'alert' : 'comment-account-outline' }}"></i>
                                 </div>
                                 <p class="notify-details">
                                     {{ $notification->data['message']}}
-                                    <small class="text-muted">from {{$notification->data['created_by']}}</small>
+                                    @isset($notification->data['created_by'])
+                                        <small class="text-muted">from {{$notification->data['created_by']}}</small>
+                                    @endisset
                                 </p>
                             </a>
                             <button class="btn btn-sm btn-light mark-as-read"
@@ -132,7 +134,7 @@
                     </a>
                 </li>
 
-                <li class="{{ Request::is('operational/*') ? 'menuitem-active' : ''}}">
+                <li class="{{ (Request::is('operational/*') && !Request::is('operational/approval')) ? 'menuitem-active' : '' }}">
                     <a href="{{ url('operational') }}">
                         <i class="mdi mdi-book-clock-outline"></i>
                         <span> Operational </span>

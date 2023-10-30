@@ -8,6 +8,7 @@ use App\Http\Controllers\MilestoneController;
 use App\Http\Controllers\OperationalAgendaController;
 use App\Http\Controllers\OperationalController;
 use App\Http\Controllers\OperationalExpensesController;
+use App\Http\Controllers\OperationalMaterialController;
 use App\Http\Controllers\ProductionCostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
@@ -19,7 +20,6 @@ use App\Http\Controllers\SistemPenawaran\PenawaranController;
 use App\Http\Controllers\TopController;
 use App\Http\Controllers\UserController;
 use App\Material;
-use App\Models\Role;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +32,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 Route::post('marks-as-read/{notification}', [UserController::class, 'marksAsRead'])->name('markNotification');
 Route::get('mark-all-as-read', [UserController::class, 'marksAllAsRead'])->name('markAllNotification');
 Route::group(['prefix' => 'projects'], function () {
@@ -116,14 +117,14 @@ Route::prefix('customer')->group(function () {
 });
 
 Route::prefix('customerContact')->group(function () {
-    Route::get('/', [CustomerContactController::class, 'index'])->name('customerContact.index');
+    Route::get('/{id}', [CustomerContactController::class, 'index'])->name('customerContact.index');
     Route::get('/create', [CustomerContactController::class, 'create'])->name('customerContact.create');
     Route::post('/store', [CustomerContactController::class, 'store'])->name('customerContact.store');
     Route::get('/show/', [CustomerContactController::class, 'show'])->name('customerContact.show');
     Route::get('/edit', [CustomerContactController::class, 'edit'])->name('customerContact.edit');
     Route::get('/update', [CustomerContactController::class, 'update'])->name('customerContact.update');
     Route::delete('/delete/{id}', [CustomerContactController::class, 'destroy'])->name('customerContact.destroy');
-    Route::get('/get-customer-contacts/{customer_id}', [CustomerContactController::class, 'getCustomerContacts'])->name('customerContact.getCustomerContact');;
+    Route::get('/get-customer-contacts/{customer_id}', [CustomerContactController::class, 'getCustomerContacts'])->name('customerContact.getCustomerContact');
 });
 
 //contoh route (post(/admin/roles)
@@ -158,7 +159,10 @@ Route::prefix('operational')->group(function () {
     Route::get('/show/{operational}', [OperationalController::class, 'show'])->name('operational.show'); //?
     Route::put('/update', [OperationalController::class, 'update'])->name('operational.update'); //~
     Route::delete('/{operational}', [OperationalController::class, 'destroy'])->name('operational.destroy');
-    Route::post('/approve/{operational}', [OperationalController::class, 'approve'])->name('operational.approve'); //~
+    Route::get('/approval/{operational}/approve', [OperationalController::class, 'approve'])->name('operational.approve'); //~
+    Route::get('/approval/download/{operational}', [OperationalController::class, 'downloadFile'])->name('operational.download'); //~
+    Route::get('/approval', [OperationalController::class, 'approval'])->name('operational.approval'); //~
+    Route::get('/approval/{operational}/preview', [OperationalController::class, 'preview'])->name('operational.preview');
     Route::get('/getOperational/{salesOrder}', [OperationalController::class, 'getOperational'])->name('operational.get-operational'); //? --
     Route::get('/getTeam/{operational}', [OperationalController::class, 'getTeam'])->name('operational.get-team');
     Route::prefix('expense')->group(function () {
@@ -168,6 +172,13 @@ Route::prefix('operational')->group(function () {
         Route::patch('/{expense}', [OperationalExpensesController::class, 'update'])->name('operational.expense.update');
         Route::delete('/{expense}', [OperationalExpensesController::class, 'delete'])->name('operational.expense.delete');
         Route::get('/show/{expense}', [OperationalExpensesController::class, 'show'])->name('operational.expense.show');
+    });
+    Route::prefix('material')->group(function () {
+        Route::get('/get/{operational}', [OperationalMaterialController::class, 'index'])->name('operational.material.index');
+        Route::post('/store', [OperationalMaterialController::class, 'store'])->name('operational.material.store');
+        Route::patch('/{material}', [OperationalMaterialController::class, 'update'])->name('operational.material.update');
+        Route::delete('/{material}', [OperationalMaterialController::class, 'destroy'])->name('operational.material.delete');
+        Route::get('/show/{material}', [OperationalMaterialController::class, 'show'])->name('operational.material.show');
     });
     Route::prefix('technician')->group(function () {
         Route::patch('/{operational}', [OperationalController::class, 'detachTeam'])->name('operational.detach-team');
@@ -180,17 +191,9 @@ Route::prefix('operational')->group(function () {
         Route::patch('/{agenda}', [OperationalAgendaController::class, 'update'])->name('operational.agenda.update');
         Route::get('/show/{agenda}', [OperationalAgendaController::class, 'show'])->name('operational.agenda.show');
     });
-});
-
-
-Route::prefix('materials')->group(function () {
-    Route::get('/', [MaterialController::class, 'index'])->name('materials.index');
-    Route::get('/create', [MaterialController::class, 'create'])->name('materials.create');
-    Route::post('/store', [MaterialController::class, 'store'])->name('materials.store');
-    Route::get('/show', [MaterialController::class, 'show'])->name('materials.show');
-    Route::get('/edit', [MaterialController::class, 'edit'])->name('materials.edit');
-    Route::get('/update', [MaterialController::class, 'update'])->name('materials.update');
-    Route::get('/delete', [MaterialController::class, 'delete'])->name('materials.delete');
+    Route::get('/preview', function () {
+        return view('operational.operationalDocument');
+    }); //?
 });
 
 
@@ -234,7 +237,7 @@ Route::get('approval/index', function () {
 });
 
 
-Route::get('approval/preview', function(){
+Route::get('approval/preview', function () {
     return view('operational.operationalDocument');
 }); //?
 

@@ -1,3 +1,6 @@
+@section('headerScript')
+@endsection
+
 @extends('sistemPenawaran.template.index')
 
 @section('content')

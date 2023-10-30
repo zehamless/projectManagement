@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -36,6 +35,9 @@ return new class extends Migration
         Schema::table('operationals', function (Blueprint $table) {
             $table->uuid('project_id')->after('id');
             $table->foreign('project_id')->references('id')->on('projects')->cascadeOnDelete();
+            $table->foreignUuid('created_by')->references('id')->on('users');
+            $table->uuid('approved_by')->nullable();
+            $table->foreign('approved_by')->references('id')->on('users');
         });
         Schema::table('production_cost', function (Blueprint $table) {
             $table->uuid('project_id')->after('id');

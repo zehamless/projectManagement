@@ -56,14 +56,15 @@
                                     <div class="col-md-12">
                                         <h4 class="header-title mb-2">Sales Order Number</h4>
 
-                                        <select class="form-select" id="sales-order" onchange="getOperationals(this.value)">
+                                        <select class="form-select" id="sales-order"
+                                                onchange="getOperationals(this.value)">
                                             <option selected value="">Pilih Sales Order Number</option>
                                             @foreach ($salesOrder as $item)
                                                 <option value="{{ $item->id }}"
-                                                    @isset($soNumber)
+                                                        @isset($soNumber)
                                                             @if ($soNumber == $item->so)
-                                                            selected
-                                                            @endif
+                                                                selected
+                                                    @endif
                                                     @endisset>
                                                     {{ $item->so }}</option>
                                             @endforeach
@@ -86,9 +87,10 @@
                                         <div class="col-md-12 mb-3">
                                             <h4 class="header-title mb-2">Operational</h4>
                                             <select id="select-operational" class="form-select mb-2"
-                                                onchange="detailOperational(this.value, false)">
+                                                    onchange="detailOperational(this.value, false)">
                                                 @isset($spkNumber)
-                                                    <option value="{{ $spkNumber_id }}" selected>{{ $spkNumber }}</option>
+                                                    <option value="{{ $spkNumber_id }}"
+                                                            selected>{{ $spkNumber }}</option>
                                                 @else
                                                     <option selected value="">Silahkan Pilih SO</option>
                                                 @endisset
@@ -117,7 +119,7 @@
                                             </th>
                                             <th scope="row">
                                                 <p class="title-text">File</p>
-                                                <p class="details-text" id="file">-</p>
+                                                <a class="details-text" id="file">-</a>
                                             </th>
                                         </div>
                                         <div class="col-md-6">
@@ -151,25 +153,25 @@
                                                     <ul class="nav nav-tabs card-header-tabs" role="tablist">
                                                         <li class="nav-item">
                                                             <button type="button" class="nav-link active show"
-                                                                href="#work" role="tab" data-toggle="tab">Work Plan
+                                                                    href="#work" role="tab" data-toggle="tab">Work Plan
                                                             </button>
                                                         </li>
                                                         <li class="nav-item">
                                                             <button type="button" class="nav-link" role="tab"
-                                                                href="#expenses" data-toggle="tab">Operational
+                                                                    href="#expenses" data-toggle="tab">Operational
                                                                 Expenses
                                                             </button>
                                                         </li>
                                                         <li class="nav-item">
                                                             <button type="button" class="nav-link" role="tab"
-                                                                href="#material" data-toggle="tab">Material
+                                                                    href="#material" data-toggle="tab">Material
                                                                 Utilized
                                                             </button>
                                                         </li>
                                                         <li class="nav-item">
                                                             <button type="button" class="nav-link" role="tab"
-                                                                href="#technician" data-toggle="tab"
-                                                                id="technician_list">Technician
+                                                                    href="#technician" data-toggle="tab"
+                                                                    id="technician_list">Technician
                                                                 List
                                                             </button>
                                                         </li>
@@ -179,7 +181,7 @@
                                                 <div class="card-body tab-content">
                                                     {{-- isi tab work plan --}}
                                                     <div role="tabpanel" class="tab-pane fade active show"
-                                                        id="work">
+                                                         id="work">
                                                         <div class="row text-start">
                                                             <div class="col-lg-12">
                                                                 <div class="card">
@@ -190,10 +192,10 @@
                                                                             </div>
                                                                             <div class="col-sm-4 text-end">
                                                                                 <button type="button"
-                                                                                    data-bs-toggle="modal"
-                                                                                    data-bs-target="#add-work-modal"
-                                                                                    onclick="showAgendaForm()"
-                                                                                    class="btn btn-save w-md waves-effect waves-light px-4 btn-addMaterial">
+                                                                                        data-bs-toggle="modal"
+                                                                                        data-bs-target="#add-work-modal"
+                                                                                        onclick="showAgendaForm()"
+                                                                                        class="btn btn-save w-md waves-effect waves-light px-4 btn-addMaterial">
                                                                                     <i class="mdi mdi-plus"></i>Add
                                                                                     Work Plan
                                                                                 </button>
@@ -204,16 +206,16 @@
                                                                                 class="table table-striped table-hover mb-0"
                                                                                 id="table-agendas">
                                                                                 <thead>
-                                                                                    <tr>
-                                                                                        <th>#</th>
-                                                                                        <th>Description</th>
-                                                                                        <th>Due Date</th>
-                                                                                        <th>Status</th>
-                                                                                        <th class="text-center"
-                                                                                            width="140">
-                                                                                            Actions
-                                                                                        </th>
-                                                                                    </tr>
+                                                                                <tr>
+                                                                                    <th>#</th>
+                                                                                    <th>Description</th>
+                                                                                    <th>Due Date</th>
+                                                                                    <th>Status</th>
+                                                                                    <th class="text-center"
+                                                                                        width="140">
+                                                                                        Actions
+                                                                                    </th>
+                                                                                </tr>
                                                                                 </thead>
 
                                                                                 <tbody>
@@ -238,10 +240,10 @@
                                                                             </div>
                                                                             <div class="col-sm-4 text-end">
                                                                                 <button type="button"
-                                                                                    data-bs-toggle="modal"
-                                                                                    data-bs-target="#add-expenses-modal"
-                                                                                    onclick="showExpenseForm()"
-                                                                                    class="btn btn-save w-md waves-effect waves-light px-4 btn-addMaterial">
+                                                                                        data-bs-toggle="modal"
+                                                                                        data-bs-target="#add-expenses-modal"
+                                                                                        onclick="showExpenseForm()"
+                                                                                        class="btn btn-save w-md waves-effect waves-light px-4 btn-addMaterial">
                                                                                     <i class="mdi mdi-plus"></i>Add
                                                                                     Expenses
                                                                                 </button>
@@ -249,21 +251,21 @@
 
                                                                         </div>
                                                                         <div id="datatable_wrapper"
-                                                                            class="dataTables_wrapper dt-bootstrap5">
+                                                                             class="dataTables_wrapper dt-bootstrap5">
                                                                             <table
                                                                                 class="table table-striped table-hover dt-responsive table-hover table-responsive nowrap dataTable no-footer dtr-inline"
                                                                                 id="table-expenses">
                                                                                 <thead>
-                                                                                    <tr>
-                                                                                        <th>#</th>
-                                                                                        <th>Expense Date</th>
-                                                                                        <th>Expense Item</th>
-                                                                                        <th>Amount</th>
-                                                                                        <th class="text-center"
-                                                                                            width="140">
-                                                                                            Actions
-                                                                                        </th>
-                                                                                    </tr>
+                                                                                <tr>
+                                                                                    <th>#</th>
+                                                                                    <th>Expense Date</th>
+                                                                                    <th>Expense Item</th>
+                                                                                    <th>Amount</th>
+                                                                                    <th class="text-center"
+                                                                                        width="140">
+                                                                                        Actions
+                                                                                    </th>
+                                                                                </tr>
                                                                                 </thead>
                                                                                 <tbody>
                                                                                 </tbody>
@@ -287,9 +289,10 @@
                                                                             </div>
                                                                             <div class="col-sm-4 text-end">
                                                                                 <button type="button"
-                                                                                    data-bs-toggle="modal"
-                                                                                    data-bs-target="#add-material-modal"
-                                                                                    class="btn btn-save w-md waves-effect waves-light px-4 btn-addMaterial">
+                                                                                        data-bs-toggle="modal"
+                                                                                        data-bs-target="#add-material-modal"
+                                                                                        onclick="showMaterialForm()"
+                                                                                        class="btn btn-save w-md waves-effect waves-light px-4 btn-addMaterial">
                                                                                     <i class="mdi mdi-plus"></i>Add
                                                                                     Material
                                                                                 </button>
@@ -297,105 +300,20 @@
                                                                         </div>
                                                                         <div class="table-responsive">
                                                                             <table
+                                                                                id="table-material"
                                                                                 class="table table table-striped table-hover mb-0">
                                                                                 <thead>
-                                                                                    <tr>
-                                                                                        <th>#</th>
-                                                                                        <th>Operational</th>
-                                                                                        <th>Memo Number</th>
-                                                                                        <th>Delivery Order Number</th>
-                                                                                        <th class="text-center"
-                                                                                            width="140">
-                                                                                            Actions
-                                                                                        </th>
-                                                                                    </tr>
+                                                                                <tr>
+                                                                                    <th>#</th>
+                                                                                    <th>Memo Number</th>
+                                                                                    <th>Delivery Order Number</th>
+                                                                                    <th class="text-center"
+                                                                                        width="140">
+                                                                                        Actions
+                                                                                    </th>
+                                                                                </tr>
                                                                                 </thead>
                                                                                 <tbody>
-                                                                                    <tr>
-                                                                                        <th scope="row">1</th>
-                                                                                        <td>N-23009</td>
-                                                                                        <td>M223</td>
-                                                                                        <td>DO-886</td>
-                                                                                        <td class="text-center">
-                                                                                            <div class="btn-group btn-group-sm"
-                                                                                                style="float: none;">
-                                                                                                <button type="button"
-                                                                                                    data-bs-toggle="modal"
-                                                                                                    data-bs-target="#add-material-modal"
-                                                                                                    title="Edit Material"
-                                                                                                    type="button"
-                                                                                                    class="tabledit-edit-button btn btn-primary waves-effect waves-light"
-                                                                                                    style="background-color: #3E8BFF;">
-                                                                                                    <span
-                                                                                                        class="mdi mdi-pencil"></span>
-                                                                                                </button>
-                                                                                            </div>
-                                                                                            <div class="btn-group btn-group-sm"
-                                                                                                style="float: none;">
-                                                                                                <button id="delete-button"
-                                                                                                    title="Hapus Material"
-                                                                                                    type="button"
-                                                                                                    class="tabledit-edit-button btn btn-danger">
-                                                                                                    <span
-                                                                                                        class="mdi mdi-trash-can-outline"></span>
-                                                                                                </button>
-                                                                                            </div>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                    <th scope="row">2</th>
-                                                                                    <td>N-23009</td>
-                                                                                    <td>M223</td>
-                                                                                    <td>DO-886</td>
-                                                                                    <td class="text-center">
-                                                                                        <div class="btn-group btn-group-sm"
-                                                                                            style="float: none;">
-                                                                                            <button title="Edit Material"
-                                                                                                type="button"
-                                                                                                class="tabledit-edit-button btn btn-primary waves-effect waves-light"
-                                                                                                style="background-color: #3E8BFF;">
-                                                                                                <span
-                                                                                                    class="mdi mdi-pencil"></span>
-                                                                                            </button>
-                                                                                        </div>
-                                                                                        <div class="btn-group btn-group-sm"
-                                                                                            style="float: none;">
-                                                                                            <button id="delete-button"
-                                                                                                title="Hapus Material"
-                                                                                                type="button"
-                                                                                                class="tabledit-edit-button btn btn-danger">
-                                                                                                <span
-                                                                                                    class="mdi mdi-trash-can-outline"></span>
-                                                                                            </button>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    </tr>
-                                                                                    <th scope="row">3</th>
-                                                                                    <td>N-23009</td>
-                                                                                    <td>M223</td>
-                                                                                    <td>DO-886</td>
-                                                                                    <td class="text-center">
-                                                                                        <div class="btn-group btn-group-sm"
-                                                                                            style="float: none;">
-                                                                                            <button title="Edit Material"
-                                                                                                type="button"
-                                                                                                class="tabledit-edit-button btn btn-primary waves-effect waves-light"
-                                                                                                style="background-color: #3E8BFF;">
-                                                                                                <span
-                                                                                                    class="mdi mdi-pencil"></span>
-                                                                                            </button>
-                                                                                        </div>
-                                                                                        <div class="btn-group btn-group-sm"
-                                                                                            style="float: none;">
-                                                                                            <button id="delete-button"
-                                                                                                title="Hapus Material"
-                                                                                                type="button"
-                                                                                                class="tabledit-edit-button btn btn-danger">
-                                                                                                <span
-                                                                                                    class="mdi mdi-trash-can-outline"></span>
-                                                                                            </button>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    </tr>
                                                                                 </tbody>
                                                                             </table>
                                                                         </div>
@@ -417,10 +335,10 @@
                                                                             </div>
                                                                             <div class="col-sm-4 text-end">
                                                                                 <button type="button"
-                                                                                    data-bs-toggle="modal"
-                                                                                    data-bs-target="#add-technician-modal"
-                                                                                    onclick="attachTeamForm()"
-                                                                                    class="btn btn-save w-md waves-effect waves-light px-4 btn-addMaterial">
+                                                                                        data-bs-toggle="modal"
+                                                                                        data-bs-target="#add-technician-modal"
+                                                                                        onclick="attachTeamForm()"
+                                                                                        class="btn btn-save w-md waves-effect waves-light px-4 btn-addMaterial">
                                                                                     <i class="mdi mdi-plus"></i>Add
                                                                                     Technician
                                                                                 </button>
@@ -431,15 +349,15 @@
                                                                                 class="table table table-striped table-hover mb-0"
                                                                                 id="table-technician">
                                                                                 <thead>
-                                                                                    <tr>
-                                                                                        <th>#</th>
-                                                                                        <th>Name</th>
-                                                                                        <th>Division</th>
-                                                                                        <th class="text-center"
-                                                                                            width="140">
-                                                                                            Actions
-                                                                                        </th>
-                                                                                    </tr>
+                                                                                <tr>
+                                                                                    <th>#</th>
+                                                                                    <th>Name</th>
+                                                                                    <th>Division</th>
+                                                                                    <th class="text-center"
+                                                                                        width="140">
+                                                                                        Actions
+                                                                                    </th>
+                                                                                </tr>
                                                                                 </thead>
                                                                                 <tbody>
                                                                                 </tbody>
@@ -467,14 +385,14 @@
     {{-- <script src="https://kit.fontawesome.com/031855bb65.js" crossorigin="anonymous"></script> --}}
 @endsection
 @section('pageScript')
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('.agendasForm').parsley();
             $('.expensesForm').parsley();
             //if form id is addAgenda and form is valid
-            $('.agendasForm').on('submit', function(event) {
+            $('.agendasForm').on('submit', function (event) {
                 event.preventDefault();
                 if ($('.agendasForm').parsley().isValid()) {
                     if ($(this).attr('id') == 'addAgenda') {
@@ -485,7 +403,7 @@
                 }
             });
 
-            $('.expensesForm').on('submit', function(event) {
+            $('.expensesForm').on('submit', function (event) {
                 event.preventDefault();
                 if ($('.expensesForm').parsley().isValid()) {
                     if ($(this).attr('id') == 'addExpense') {
@@ -501,6 +419,17 @@
                 console.log($('#select-operational').val());
             }
 
+            $('.materialsForm').on('submit', function (event) {
+                event.preventDefault();
+                if ($('.materialsForm').parsley().isValid()) {
+                    if ($(this).attr('id') == 'addMaterial') {
+                        addMaterial();
+                    } else if ($(this).attr('id') == 'updateMaterial') {
+                        updateMaterial($(this).attr('data-id'));
+                    }
+                }
+            });
+
         })
     </script>
     <script type="text/javascript">
@@ -509,7 +438,7 @@
                 $.ajax({
                     url: `{{ route('operational.get-operational', '') }}/${salesOrder}`,
                     type: "GET",
-                    success: function(data) {
+                    success: function (data) {
                         console.log(data);
                         const selectOperational = $("#select-operational");
                         selectOperational.empty();
@@ -518,7 +447,7 @@
                             text: "Pilih Operational",
                             selected: true
                         }));
-                        data.forEach(function(value) {
+                        data.forEach(function (value) {
                             const option = new Option(value.spk_number, value.id, operational == value
                                 .id, operational == value.id);
                             selectOperational.append(option);
@@ -535,10 +464,11 @@
                 $.ajax({
                     url: "{{ route('operational.show', '') }}" + "/" + operational,
                     type: "GET",
-                    success: function(data) {
+                    success: async function (data) {
                         console.log(data);
-                        getExpenses(operational);
-                        getAgendas(operational);
+                        await getExpenses(operational);
+                        await getAgendas(operational);
+                        await getMaterials(operational);
 
                         // Get the first operational in the array.
                         const operationalData = data[0];
@@ -549,17 +479,27 @@
                         $('#date').text(operationalData.date);
                         $('#label').text(projectLabel);
                         $('#type').text(operationalData.type);
-                        $('#file').text(operationalData.file);
+                        if (operationalData.approver == null) {
+                            $('#file').text('Belum ada diapprove');
+                            $('#file').addClass('btn btn-danger disabled')
+                        } else {
+                            $('#file').text('Download File');
+                            $('#file').removeClass('btn btn-danger disabled')
+                            $('#file').addClass('btn btn-info')
+                            $('#file').attr('href', "{{ route('operational.download', '') }}" + "/" + operational);
+
+
+                        }
                         $('#description').text(operationalData.description);
                         $('#transport').text(operationalData.transportation_mode);
                         $('#vehicle').text(operationalData.vehicle_number);
-                        $('#created').text(operationalData.created_by);
-                        if (operationalData.approved == null) {
+                        $('#created').text(operationalData.creator.first_name + ' ' + operationalData.creator.last_name);
+                        if (operationalData.approver == null) {
                             $('#approved').text('Belum di Approve');
                             //text become red button
                             $('#approved').addClass('btn btn-danger disabled');
                         } else {
-                            $('#approved').text(operationalData.approved);
+                            $('#approved').text(operationalData.approver.first_name + ' ' + operationalData.approver.last_name);
                         }
                         var i = 1;
                         //check if team is empty
@@ -629,11 +569,11 @@
                             _token: "{{ csrf_token() }}",
                             user_id: user_id,
                         },
-                        success: function() {
+                        success: function () {
                             // Reload the table
                             detailOperational(operational)
                         },
-                        error: function(xhr, textStatus, errorThrown) {
+                        error: function (xhr, textStatus, errorThrown) {
                             console.error(xhr.responseText);
                             // Handle errors here if needed.
                         }
@@ -644,7 +584,7 @@
     </script>
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#select-operational').select2({
                 // placeholder: 'role',
                 // dropdownParent: $('#con-close-modal'),
@@ -655,7 +595,7 @@
         });
     </script>
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#sales-order').select2({
                 // placeholder: 'role',
                 // dropdownParent: $('#con-close-modal'),
@@ -666,7 +606,7 @@
         });
     </script>
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#select-technician').select2({
                 // placeholder: 'role',
                 // dropdownParent: $('#con-close-modal'),
@@ -675,7 +615,7 @@
                 dropdownAutoWidth: true,
                 width: '100%',
                 dropdownParent: $('#technician-parent'),
-                formatNoMatches: function() {
+                formatNoMatches: function () {
                     return "Nothing found";
                 },
             });
@@ -694,11 +634,11 @@
                 "bDestroy": true,
                 ajax: "{{ route('operational.expense.index', '') }}" + "/" + expense,
                 columns: [{
-                        data: 'DT_RowIndex',
-                        name: 'DT_RowIndex',
-                        orderable: false,
-                        searchable: false,
-                    },
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex',
+                    orderable: false,
+                    searchable: false,
+                },
                     {
                         data: 'date',
                         name: 'date'
@@ -716,7 +656,7 @@
                         name: 'action',
                         orderable: false,
                         searchable: false,
-                        render: function(data) {
+                        render: function (data) {
                             return `
                             <div class="btn-group btn-group-sm"
                             style="float: none;">
@@ -771,10 +711,10 @@
             let operationalText = $('#select-operational option:selected').text();
             console.log(operational)
             axios({
-                    method: 'GET',
-                    url: "{{ route('operational.expense.show', '') }}" + "/" + expense,
-                })
-                .then(function(response) {
+                method: 'GET',
+                url: "{{ route('operational.expense.show', '') }}" + "/" + expense,
+            })
+                .then(function (response) {
                     console.log(response);
                     modal.find('#operational-label').text(operationalText);
                     modal.find('#expense-id').val(operational);
@@ -783,9 +723,72 @@
                     modal.find('#expense-amount').val(response.data[0].amount);
                     modal.find('#updateExpense').attr("data-id", response.data[0].id)
                 })
-                .catch(function(error) {
+                .catch(function (error) {
                     console.log(error);
                 })
+        }
+    </script>
+    <script type="text/javascript">
+        function getMaterials(operational) {
+            let table = $('#table-material').DataTable({
+                "autoWidth": false,
+                processing: true,
+                serverSide: true,
+                responsive: true,
+                "bDestroy": true,
+                ajax: "{{route('operational.material.index', '')}}" + "/" + operational,
+                columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex',
+                    orderable: false,
+                    searchable: false,
+                },
+                    {
+                        data: 'memo',
+                        name: 'memo',
+                    },
+                    {
+                        data: 'do',
+                        name: 'do',
+                    },
+                    {
+                        data: 'id',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false,
+                        render: function (data) {
+                            return `
+                            <div class="btn-group btn-group-sm"
+                            style="float: none;">
+                            <button type="button"
+                            id="edit-material-${data}"
+                            data-bs-toggle="modal"
+                            data-bs-target="#add-material-modal"
+                            title="Edit Operational Material"
+                            data-id="${data}"
+                            class="tabledit-edit-button btn btn-primary waves-effect waves-light"
+                            onclick="editMaterial('${data}')"
+                            style="background-color: #3E8BFF;">
+                            <span
+                            class="mdi mdi-pencil"></span>
+                            </button>
+                            </div>
+                            <div class="btn-group btn-group-sm"
+                            style="float: none;">
+                            <button id="edit-material-${data}"
+                            title="Hapus Operational Material"
+                            type="button"
+                            onclick="deleteMaterial('${data}')"
+                            class="tabledit-edit-button btn btn-danger">
+                            <span
+                            class="mdi mdi-trash-can-outline"></span>
+                            </button>
+                            </div>
+                            `
+                        }
+                    }
+                ]
+            })
         }
     </script>
     <!-- Update Expense -->
@@ -814,7 +817,7 @@
                             amount: amount,
                             item: item,
                         },
-                    }).then(function(response) {
+                    }).then(function (response) {
                         console.log(response);
                         Swal.fire(
                             'Updated!',
@@ -823,7 +826,7 @@
                         )
                         $('#table-expenses').DataTable().ajax.reload();
                         modal.modal('hide');
-                    }).catch(function(error) {
+                    }).catch(function (error) {
                         console.log(error);
                         swal.fire("Error!", "Please try again", "error");
                     })
@@ -849,7 +852,7 @@
                         data: {
                             _token: "{{ csrf_token() }}",
                         },
-                    }).then(function(response) {
+                    }).then(function (response) {
                         console.log(response);
                         Swal.fire(
                             'Deleted!',
@@ -857,7 +860,7 @@
                             'success'
                         )
                         $('#table-expenses').DataTable().ajax.reload();
-                    }).catch(function(error) {
+                    }).catch(function (error) {
                         console.log(error);
                         swal.fire("Error!", "Please try again", "error");
                     })
@@ -904,7 +907,7 @@
                     amount: amount,
                     item: item,
                 },
-            }).then(function(response) {
+            }).then(function (response) {
                 console.log(response);
                 Swal.fire(
                     'Added!',
@@ -913,7 +916,7 @@
                 )
                 $('#table-expenses').DataTable().ajax.reload();
                 modal.modal('hide');
-            }).catch(function(error) {
+            }).catch(function (error) {
                 console.log(error);
                 swal.fire("Error!", "Please try again", "error");
             })
@@ -932,12 +935,12 @@
             $.ajax({
                 url: "{{ route('users.getTechnician', '') }}" + "/" + operational,
                 type: "GET",
-                success: function(responseData) {
+                success: function (responseData) {
                     console.log(responseData);
                     data = responseData;
                     $('#select-technician').empty();
                     $('#select-technician').append(`<option selected value="">-- Pilih Technician --</option>`);
-                    $.each(data, function(key, value) {
+                    $.each(data, function (key, value) {
                         console.log(value.first_name);
                         let option = new Option(value.first_name, value.id, false, false)
                         $('#select-technician').append(option)
@@ -945,7 +948,7 @@
                 }
             });
 
-            $('#select-technician').on('change', function() {
+            $('#select-technician').on('change', function () {
                 let selectedUserId = $(this).val();
                 var selectedUser = data.find(user => user.id == selectedUserId);
                 if (selectedUser) {
@@ -972,7 +975,7 @@
                     _token: "{{ csrf_token() }}",
                     user_id: selected,
                 },
-            }).then(function(response) {
+            }).then(function (response) {
                 console.log(response);
                 $('#add-technician-modal').modal('hide');
                 Swal.fire(
@@ -981,7 +984,7 @@
                     'success'
                 );
                 detailOperational(operational)
-            }).catch(function(error) {
+            }).catch(function (error) {
                 console.log(error);
                 swal.fire("Error!", "Please try again", "error");
             });
@@ -996,11 +999,11 @@
                 "bDestroy": true,
                 ajax: "{{ route('operational.agenda.index', '') }}" + "/" + operational,
                 columns: [{
-                        data: 'DT_RowIndex',
-                        name: 'DT_RowIndex',
-                        orderable: false,
-                        searchable: false,
-                    },
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex',
+                    orderable: false,
+                    searchable: false,
+                },
                     {
                         data: 'description',
                         name: 'description'
@@ -1018,7 +1021,7 @@
                         name: 'action',
                         orderable: false,
                         searchable: false,
-                        render: function(data) {
+                        render: function (data) {
                             return `
                             <div class="btn-group btn-group-sm"
                             style="float: none;">
@@ -1071,7 +1074,7 @@
                         data: {
                             _token: "{{ csrf_token() }}",
                         },
-                    }).then(function(response) {
+                    }).then(function (response) {
                         console.log(response);
                         Swal.fire(
                             'Deleted!',
@@ -1079,7 +1082,7 @@
                             'success'
                         )
                         $('#table-agendas').DataTable().ajax.reload();
-                    }).catch(function(error) {
+                    }).catch(function (error) {
                         console.log(error);
                         swal.fire("Error!", "Please try again", "error");
                     })
@@ -1123,18 +1126,18 @@
             }
 
             axios.post("{{ route('operational.agenda.store') }}", {
-                    _token: "{{ csrf_token() }}",
-                    operational_id: operational,
-                    due_date: dueDate,
-                    description: description,
-                    status: status
-                })
-                .then(function(response) {
+                _token: "{{ csrf_token() }}",
+                operational_id: operational,
+                due_date: dueDate,
+                description: description,
+                status: status
+            })
+                .then(function (response) {
                     Swal.fire('Added!', 'Agenda has been added.', 'success');
                     $('#table-agendas').DataTable().ajax.reload();
                     modal.modal('hide');
                 })
-                .catch(function(error) {
+                .catch(function (error) {
                     console.log(error)
                     swal.fire("Error!", "Please try again", "error");
                 });
@@ -1152,17 +1155,17 @@
             $('.agendasForm').attr('id', 'updateAgenda');
             $('.agendasForm').attr('data-id', agenda);
             axios({
-                    method: 'GET',
-                    url: "{{ route('operational.agenda.show', '') }}" + "/" + agenda,
-                })
-                .then(function(response) {
+                method: 'GET',
+                url: "{{ route('operational.agenda.show', '') }}" + "/" + agenda,
+            })
+                .then(function (response) {
                     modal.find('#due-date').val(response.data[0].due_date);
-                    console.log(response.data[0].due_date)
+                    console.log(response)
                     modal.find('#description').val(response.data[0].description);
                     modal.find('#progress').val(response.data[0].status);
                     modal.find('#updateAgenda').attr("data-id", response.data[0].id)
                 })
-                .catch(function(error) {
+                .catch(function (error) {
                     console.log(error);
                 })
         }
@@ -1178,16 +1181,16 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     axios({
-                            method: "PATCH",
-                            url: "{{ route('operational.agenda.update', '') }}" + "/" + agenda,
-                            data: {
-                                _token: "{{ csrf_token() }}",
-                                due_date: modal.find('#due-date').val(),
-                                description: modal.find('#description').val(),
-                                status: modal.find('#progress').val(),
-                            }
-                        })
-                        .then(function(response) {
+                        method: "PATCH",
+                        url: "{{ route('operational.agenda.update', '') }}" + "/" + agenda,
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            due_date: modal.find('#due-date').val(),
+                            description: modal.find('#description').val(),
+                            status: modal.find('#progress').val(),
+                        }
+                    })
+                        .then(function (response) {
                             Swal.fire(
                                 'Updated!',
                                 'Agenda has been updated.',
@@ -1196,11 +1199,148 @@
                             $('#table-agendas').DataTable().ajax.reload();
                             modal.modal('hide');
                         })
-                        .catch(function(error) {
+                        .catch(function (error) {
+                            console.log(error)
                             swal.fire("Error!", "Please try again", "error");
                         })
                 }
             })
         }
+    </script>
+
+    <script type="text/javascript">
+
+        function showMaterialForm() {
+            const modal = $('#add-material-modal');
+            const button = modal.find('#materialButton');
+
+            $('.materialsForm').parsley().reset();
+            $('.materialsForm').attr('id', 'addMaterial');
+
+            button.text('Add Material')
+
+            modal.find('#memo_number').val('');
+            modal.find('#do_number').val('')
+        }
+
+        async function addMaterial() {
+            const operational = $('#select-operational').val();
+            const modal = $('#add-material-modal');
+            if (!operational) {
+                swal.fire("Error!", "Please select operational", "error");
+                return;
+            }
+
+            let formData = new FormData();
+            formData.append('operational_id', operational);
+            formData.append('_token', '{{csrf_token()}}');
+            formData.append('do', modal.find('#do_number').val());
+            formData.append('memo', modal.find('#memo_number').val());
+
+            try {
+                const response = await axios.post("{{route('operational.material.store')}}", formData);
+                Swal.fire('Added!', 'Material has been added.', 'success');
+                $('#table-material').DataTable().ajax.reload();
+                modal.modal('hide');
+            } catch (error) {
+                console.error(error);
+                swal.fire("Error!", "Please try again", "error");
+            }
+        }
+
+        async function updateMaterial(material) {
+            const operational = $('#select-operational').val();
+            const modal = $('#add-material-modal');
+            const doValue = modal.find('#do_number').val();
+            const memoValue = modal.find('#memo_number').val();
+            console.log(material)
+            console.log('doValue:', doValue);
+            console.log('memoValue:', memoValue);
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You will not be able to recover this action!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, update it!',
+                cancelButtonText: 'Cancel'
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    try {
+                        const response = await axios.patch("{{route('operational.material.update', '')}}" + "/" + material, {
+                            _token: "{{ csrf_token() }}",
+                            do: doValue,
+                            memo: memoValue,
+                        });
+                        Swal.fire(
+                            'Updated!',
+                            'Material has been updated.',
+                            'success'
+                        )
+                        $('#table-material').DataTable().ajax.reload();
+                        modal.modal('hide');
+                        console.log(response)
+                    } catch (error) {
+                        console.error(error);
+                    }
+                }
+            });
+        }
+
+        function editMaterial(material) {
+            const modal = $('#add-material-modal');
+            const button = modal.find('#materialButton');
+            button.innerHTML = 'Save Changes'
+
+            $('.materialsForm').parsley().reset();
+            $('.materialsForm').attr('id', 'updateMaterial');
+            $('.materialsForm').attr('data-id', material);
+            axios({
+                method: 'GET',
+                url: "{{ route('operational.material.show', '') }}" + "/" + material,
+            })
+                .then(function (response) {
+                    modal.find('#do_number').val(response.data.do);
+                    modal.find('#memo_number').val(response.data.memo);
+                    modal.find('#updateMaterial').attr("data-id", response.data.id)
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+        }
+
+        async function deleteMaterial(material) {
+            const operational = $('#select-operational').val();
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You will not be able to recover this action!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#f34e4e',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel'
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    try {
+                        const response = await axios.delete("{{route('operational.material.delete', '')}}" + "/" + material, {
+                            data: {
+                                _token: "{{ csrf_token() }}",
+                            }
+                        });
+                        //check if response is success
+                        if (response.data.success) {
+                            Swal.fire(
+                                'Deleted!',
+                                'Material has been deleted.',
+                                'success'
+                            )
+                            $('#table-material').DataTable().ajax.reload();
+                        }
+                    } catch (error) {
+                        console.error(error);
+                    }
+                }
+            });
+        }
+
     </script>
 @endsection

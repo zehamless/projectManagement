@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Operational;
 use App\Models\Project;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class OperationalSeeder extends Seeder
@@ -19,6 +18,7 @@ class OperationalSeeder extends Seeder
         $users = User::whereHas('hasroles', function ($q) {
             $q->where('name', 'Technician');
         })->get()->take(5);
+        $created = User::first()->id;
         $projectId = Project::first()->id;
         $operational = Operational::create([
             'project_id' => $projectId,
@@ -30,7 +30,7 @@ class OperationalSeeder extends Seeder
             'description' => 'desc',
             'transportation_mode' => 'car',
             'vehicle_number' => 'be1088ce',
-            'created_by' => 'admin',
+            'created_by' => $created,
         ]);
         foreach ($users as $user) {
             $operational->team()->attach($user);
@@ -45,7 +45,7 @@ class OperationalSeeder extends Seeder
             'description' => 'desc',
             'transportation_mode' => 'car',
             'vehicle_number' => 'be1088ce',
-            'created_by' => 'admin',
+            'created_by' => $created,
         ]);
         foreach ($users as $user) {
             $operational1->team()->attach($user);

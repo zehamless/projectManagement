@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\Operational;
 use App\Models\Project;
-use App\Models\User;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
-use PhpParser\Node\Scalar\String_;
+use PDF;
+use Yajra\DataTables\Facades\DataTables;
 
 class OperationalController extends Controller
 {
@@ -128,7 +130,7 @@ class OperationalController extends Controller
             $operational->update($validatedData);
 
             return redirect()->route('projects.show', ['id' => $request->project_id])->with('success', 'Operational berhasil diubah.');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return back()->with('error', 'Terjadi kesalahan saat mengubah Operational: ' . $e->getMessage());
         }
     }
@@ -155,19 +157,9 @@ class OperationalController extends Controller
             }
             $operational->delete();
             return response()->json(['message' => 'Operational berhasil dihapus.']);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json(['error' => 'Terjadi kesalahan saat menghapus Operational.'], 500);
         }
-    }
-
-    public function approve(Request $request, Operational $operational)
-    {
-        $request->validate([
-            'approved_by' => 'required|string',
-        ]);
-        $operational->approved_by = $request->approved_by;
-        $operational->save();
-        return redirect()->route('operational.index')->with('success', 'Operational approved successfully.');
     }
 
     /**
@@ -185,7 +177,7 @@ class OperationalController extends Controller
      */
     public function show(Operational $operational)
     {
-        $operationals = Operational::where('id', $operational->id)->with('team', 'project:id,label')->get();
+        $operationals = Operational::where('id', $operational->id)->with('team', 'project:id,label', 'creator', 'approver')->get();
         return response()->json($operationals);
     }
 
@@ -204,4 +196,56 @@ class OperationalController extends Controller
             '200'
         ]);
     }
+
+    /**
+     * @return Application|Factory|View|\Illuminate\Foundation\Application|JsonResponse
+     * @throws Exception
+     */
+    public function approval()
+    {
+        $operationals = Operational::with('project:id,label')->where('approved_by', null)->select('id', 'spk_number', 'project_id', 'date', 'created_by')->get();
+        if (\request()->ajax()) {
+            return DataTables::of($operationals)
+                ->addIndexColumn()
+                ->addColumn('created_by', function ($operationals) {
+                    return $operationals->creator->first_name . ' ' . $operationals->creator->last_name;
+                })
+                ->addColumn('action', function ($operationals) {
+                    return '<a href="' . route('operational.approve', $operationals->id) . '" class="btn btn-approval btn-sm" type="button">Approve</a>' .
+                        '<a href="' . route('operational.download', $operationals->id) . '" class="btn btn-info btn-sm" type="button">Download</a>' .
+                        '<a href="' . route('operational.preview', $operationals->id) . '" class="btn btn-success btn-sm" type="button">Preview</a>';
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+//        dd($operationals);
+        return view('approval');
+    }
+
+    public function approve(Operational $operational)
+    {
+        $operational->approved_by = auth()->user()->id;
+        $operational->save();
+        return redirect()->back()->with('success', 'Operational berhasil diapprove');
+    }
+
+    public function preview(Operational $operational)
+    {
+        $operational = $operational->load('project', 'team', 'agendas', 'creator');
+        $customerId = Customer::where('id', $operational->project->customer_id)->first();
+        $currentUser = auth()->user();
+        $currentDate = date('d-m-Y');
+        return view('operational.operationalDocument', compact('operational', 'customerId', 'currentUser', 'currentDate'));
+    }
+
+    public function downloadFile(Operational $operational)
+    {
+        $operational = $operational->load('project', 'team', 'agendas', 'creator');
+        $customerId = Customer::where('id', $operational->project->customer_id)->first();
+        $currentUser = auth()->user();
+        $currentDate = date('d-m-Y');
+        $file = PDF::loadView('operational.operationalDocument', compact('operational', 'customerId', 'currentUser', 'currentDate'));
+        return $file->download($operational->spk_number . '.pdf');
+    }
 }
+

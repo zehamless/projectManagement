@@ -6,13 +6,16 @@ use App\Models\Customer;
 use App\Models\CustomerContact;
 use App\Models\Project;
 use App\Models\User;
-use App\Notifications\soProjectNotification;
+use App\Notifications\projectNotification;
 use Auth;
+use Illuminate\Contracts\Pagination\Paginator as PaginationPaginator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 
 class ProjectController extends Controller
 {
@@ -136,13 +139,18 @@ class ProjectController extends Controller
         $project->expense_budget = $request->input('expense_budget');
         $project->save();
 
-        if ($so === "Nomor SO Belum diisi"){
-        //Notification
-        $projectID = $project->id;
-        $label = $project->label;
-        $name =  auth()->user()->first_name;
-        $users = User::Role(['Project Manager', 'Sales Executive'])->get();
-        \Illuminate\Support\Facades\Notification::send($users, new soProjectNotification($projectID, $label, $name));
+        if ($so === "Nomor SO Belum diisi") {
+            //Notification
+            $projectID = $project->id;
+            $label = $project->label;
+            $name = auth()->user()->first_name;
+            $users = User::Role(['Project Manager', 'Sales Executive'])->get();
+            \Illuminate\Support\Facades\Notification::send($users, new projectNotification(
+                'SO project ' . '""' . $label . '""' . ' perlu diisi',
+                $name,
+                'warning',
+                route('projects.show', $projectID)
+            ));
         }
 
         // Redirect dengan pesan sukses
@@ -150,10 +158,9 @@ class ProjectController extends Controller
     }
 
 
-
-
     public function show($id)
     {
+        // Paginator::useBootstrap();
         $project = Project::with(['projectManager', 'salesExecutive'])
             ->findOrFail($id);
 
@@ -165,9 +172,9 @@ class ProjectController extends Controller
             ->first();
 
         // Ambil semua Milestone yang terkait dengan proyek ini dan urutkan berdasarkan created_at terbaru
-        $milestones = $project->milestones()->orderBy('created_at', 'asc')->get();
-        $doneMilestones = $milestones->where('progress', 'Done')->count();
-        $totalMilestones = $milestones->count();
+        $milestones = $project->milestones()->orderBy('created_at', 'asc')->paginate(3);
+        $doneMilestones = $project->milestones()->where('progress', 'Done')->count();
+        $totalMilestones = $project->milestones()->count();
         $realCost = $project->productionCost->sum('amount');
         $realService = $project->operationals->sum('amount');
         $percentageDone = $totalMilestones > 0 ? ($doneMilestones / $totalMilestones) * 100 : 0;
@@ -178,10 +185,6 @@ class ProjectController extends Controller
 
         return view('projects.detailProjects', compact('milestones', 'projectData', 'productionCost', 'tops', 'operationals', 'percentageDone', 'realCost', 'realService', 'topProgress', 'project'));
     }
-
-
-
-
 
 
     // Menampilkan form untuk mengedit project

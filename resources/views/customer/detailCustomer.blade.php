@@ -25,7 +25,7 @@
                                 </div>
 
                                 <div class="table-responsive">
-                                    <table id="dataTable" class="table mb-0">
+                                    <table id="dataTable" class="table mb-0" data-id="{{ $id }}">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
@@ -90,18 +90,19 @@
                                 <div class="table-responsive">
                                     <table class="table mb-0">
                                         <thead>
+                                            <h4 class="mb-3">{{ $customer['companyName'] }}</h4>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <th scope="row">
                                                     <p class="title-text">Customer Contacts Total</p>
-                                                    <p class="details-text"></p>
+                                                    <p class="details-text">23</p>
                                                 </th>
                                             </tr>
                                             <tr>
                                                 <th scope="row">
                                                     <p class="title-text">Related Projects Total</p>
-                                                    <p class="details-text"></p>
+                                                    <p class="details-text">10</p>
                                                 </th>
                                             </tr>
 
@@ -129,23 +130,21 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+            let id = $('#dataTable').data("id");
+            console.log(id);
             var table = $('#dataTable').DataTable({
                 autoWidth: false,
                 processing: true,
                 responsive: true,
                 serverSide: true,
                 scrollX: true,
-                ajax: "{{ route('customerContact.index', ['id' => $customer->id]) }}",
+                ajax: "{{ route('customerContact.index', '') }}" + '/' + id,
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',
                         searchable: false,
                         orderable: false
                     },
-                    // {
-                    //     data: 'customer_id',
-                    //     name: 'customer_id'
-                    // },
                     {
                         data: 'name',
                         name: 'name'

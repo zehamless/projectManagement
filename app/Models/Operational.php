@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\OperationalAgenda;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Operational extends Model
 {
     use HasFactory, HasUuids;
+
     protected $fillable = [
         'project_id',
         'date',
@@ -65,5 +65,22 @@ class Operational extends Model
     public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class);
+    }
+
+
+    /**
+     * @return BelongsTo
+     */
+    public function creator(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function approver(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'approved_by');
     }
 }

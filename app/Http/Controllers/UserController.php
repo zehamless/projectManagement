@@ -105,7 +105,7 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $users = User::find($user->id);
-//        dd($request->all());
+
         $request->validate([
             'first_name' => ['string', 'max:255'],
             'last_name' => ['nullable', 'string', 'max:255'],
@@ -116,7 +116,7 @@ class UserController extends Controller
         if ($request->hasFile('signature')) {
             \Storage::delete($user->signature);
             $file = $request->file('signature');
-            $filepath = $file->store('public/signatures');
+            $filepath = $file->store('signatures', 'public');
         }
 
         $user = $user->update([
